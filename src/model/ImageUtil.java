@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
+import model.InstaImage.InstaImage;
+import model.Pixel.ImageImpl;
 import model.Pixel.Pixel;
 import model.Pixel.PixelImpl;
 
@@ -31,9 +33,9 @@ public class ImageUtil {
    *
    * @param filename the path of the file.
    */
-  public static Pixel[][] readPPM(String filename) {
+  public static InstaImage readPPM(String filename) {
     Scanner sc;
-    Pixel pixcel;
+    Pixel pixel;
 
     try {
       sc = new Scanner(new FileInputStream(filename));
@@ -78,12 +80,12 @@ public class ImageUtil {
         double g = gRaw;
         double b = bRaw;
 //        System.out.println("Color of pixel (" + j + "," + i + "): " + r + "," + g + "," + b);
-        pixcel = new PixelImpl(r, g, b);
-        importedRaw[i][j] = pixcel;
+        pixel = new PixelImpl(r, g, b);
+        importedRaw[i][j] = pixel;
       }
     }
 
-    return importedRaw;
+    return new ImageImpl(importedRaw, width, height);
   }
 
   //demo main

@@ -44,12 +44,11 @@ public abstract class FilterImpl implements FilterOperation {
   private void process(Channel[][] channelMatrix) {
     // iterate through the channelMatrix
     for (int i = 0; i < channelMatrix.length; i++) {
-      for (int j = 0; j < channelMatrix[i].length; j++) {
+      for (int j = 0; j < channelMatrix[0].length; j++) {
         double appliedResult = 0;
         for (int k = 0; i < kernel.length; i++) {
           for (int d = 0; j < kernel[i].length; j++) {
-
-            if (k < channelMatrix.length && j < channelMatrix[k].length) {
+            if (k < channelMatrix.length && j < channelMatrix[0].length && k >=0 && d>= 0) {
               appliedResult += (channelMatrix[i][j].getValue()) * kernel[k][d];
             }
           }

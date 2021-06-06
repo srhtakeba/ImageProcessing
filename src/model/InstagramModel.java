@@ -1,5 +1,7 @@
 package model;
 
+import model.InstaImage.InstaImage;
+
 public interface InstagramModel {
 
   /**
@@ -23,4 +25,17 @@ public interface InstagramModel {
    */
   void readPPM(String filename);
 
+  /**
+   * Export the image as a {@code InstaImage} object which holds the pixel grid of the image and
+   * the proportions of the image in pixels.
+   * @return the {@code InstaImage} data of the image.
+   */
+  InstaImage exportAsInstaImage();
+
+  /**
+   * Export the image as a PPM file in string format. Holding the width, height, maximum pixel
+   * capacity, and the rgb values for each pixel.
+   * @return the String that holds the PPM file content
+   */
+  String exportAsPPM();
 }

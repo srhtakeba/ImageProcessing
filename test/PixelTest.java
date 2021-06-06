@@ -111,4 +111,9 @@ public class PixelTest {
   public void testEqualsFalse() {
     assertFalse(new PixelImpl(254, 0, 0).equals(this.red));
   }
+
+  @Test
+  public void testToString() {
+    assertEquals("R: 255 G: 0 B: 0", this.red.toString());
+  }
 }

@@ -3,14 +3,14 @@ package model.Pixel;
 import java.util.Objects;
 
 public abstract class ChannelImpl implements Channel{
-  private double value;
+  private int value;
 
   public ChannelImpl(double value) {
     this.setValue(value);
   }
 
   @Override
-  public double getValue() {
+  public int getValue() {
     return this.value;
   }
 
@@ -25,7 +25,7 @@ public abstract class ChannelImpl implements Channel{
       return;
     }
     else {
-      this.value = n;
+      this.value = (int)n;
     }
   }
 

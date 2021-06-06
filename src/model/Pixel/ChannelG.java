@@ -19,7 +19,7 @@ public class ChannelG extends ChannelImpl{
       return false;
     }
     ChannelG that = (ChannelG)o;
-    return Math.abs(that.getValue() - this.getValue()) < 0.001;
+    return that.getValue() == this.getValue();
   }
 
   @Override

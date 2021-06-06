@@ -4,7 +4,7 @@ package model.Pixel;
  * Interface to represent an 8-bit channel that holds a value for an rgb color.
  */
 public interface Channel {
-  public double getValue();
+  public int getValue();
 
   public void setValue(double n);
 

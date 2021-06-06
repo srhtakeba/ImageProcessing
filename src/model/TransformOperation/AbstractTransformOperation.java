@@ -27,9 +27,9 @@ public abstract class AbstractTransformOperation implements TransformOperation{
     for (int i=0; i<image.length;i++) {
       for (int j =0; j<image[i].length;j++) {
         Double[][] rgbMatrix = new Double[][]{
-            {image[i][j].getR().getValue()},
-            {image[i][j].getG().getValue()},
-            {image[i][j].getB().getValue()}};
+            {Double.valueOf(image[i][j].getR().getValue())},
+            {Double.valueOf(image[i][j].getG().getValue())},
+            {Double.valueOf(image[i][j].getB().getValue())}};
 
         resultMatrix = multiply(rgbMatrix);
 
