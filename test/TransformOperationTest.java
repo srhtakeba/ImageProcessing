@@ -81,4 +81,9 @@ public class TransformOperationTest {
     image2 = sepia.apply(image2);
     assertEquals(expected, image2);
   }
+
+  @Test
+  public void testBlackAndWhiteCheckerBoard() {
+
+  }
 }

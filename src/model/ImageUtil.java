@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
+import model.InstaImage.ImageImpl;
 import model.InstaImage.InstaImage;
-import model.Pixel.ImageImpl;
 import model.Pixel.Pixel;
 import model.Pixel.PixelImpl;
 

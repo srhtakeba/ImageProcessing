@@ -87,19 +87,19 @@ public class PixelTest {
   @Test
   public void testSetB() {
     this.blue.setB(100);
-    assertEquals(new ChannelG(100), this.blue.getB());
+    assertEquals(new ChannelB(100), this.blue.getB());
   }
 
   @Test
   public void testSetBNegative() {
     this.blue.setB(-50);
-    assertEquals(new ChannelG(0), this.blue.getB());
+    assertEquals(new ChannelB(0), this.blue.getB());
   }
 
   @Test
   public void testSetBOvershoot() {
     this.blue.setB(256);
-    assertEquals(new ChannelG(255), this.blue.getB());
+    assertEquals(new ChannelB(255), this.blue.getB());
   }
 
   @Test

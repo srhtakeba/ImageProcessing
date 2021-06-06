@@ -1,8 +1,7 @@
 package model.InstaImage;
 
-import model.Pixel.ImageImpl;
+
 import model.Pixel.Pixel;
-import model.Pixel.PixelImpl;
 
 public interface InstaImage {
 
