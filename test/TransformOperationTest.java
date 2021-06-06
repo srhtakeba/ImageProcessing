@@ -16,23 +16,30 @@ public class TransformOperationTest {
   private TransformOperation greyscale;
   private TransformOperation sepia;
   private Pixel[][] image;
+  private Pixel[][] image2;
 
   @Before
   public void setup() {
     greyscale = new GreyscaleOperation();
     sepia = new SepiaToneOperation();
 
-    // make a 3x3 image of just red
+    // make a 3x3 image of the same colors
     image = new Pixel[3][3];
     for(int i=0; i<3; i++) {
       for (int j=0; j<3;j++) {
         image[i][j] = new PixelImpl(100.0,20.0,50.0);
       }
     }
+
+    // make a 3x1 image of different colors
+    image2 = new Pixel[3][1];
+    image2[0][0] = new PixelImpl(25, 25, 25);
+    image2[1][0] = new PixelImpl(50, 50, 50);
+    image2[2][0] = new PixelImpl(75, 75, 75);
   }
 
   @Test
-  public void testGreyScale() {
+  public void testGreyScaleAllSame() {
     Pixel[][] expected = new Pixel[3][3];
     for(int i=0; i<3; i++) {
       for (int j=0; j<3;j++) {
@@ -40,11 +47,21 @@ public class TransformOperationTest {
       }
     }
     image = greyscale.apply(image);
-    assertEquals(image, expected);
+    assertEquals(expected, image);
   }
 
   @Test
-  public void testSepia() {
+  public void testGreyScaleDifferent() {
+    Pixel[][] expected = new Pixel[3][1];
+    expected[0][0] = new PixelImpl(25, 25, 25);
+    expected[1][0] = new PixelImpl(50, 50, 50);
+    expected[2][0] = new PixelImpl(75, 75, 75);
+    image2 = greyscale.apply(image2);
+    assertEquals(expected, image2);
+  }
+
+  @Test
+  public void testSepiaAllSame() {
     Pixel[][] expected = new Pixel[3][3];
     for(int i=0; i<3; i++) {
       for (int j=0; j<3;j++) {
@@ -52,6 +69,16 @@ public class TransformOperationTest {
       }
     }
     image = sepia.apply(image);
-    assertEquals(image, expected);
+    assertEquals(expected, image);
+  }
+
+  @Test
+  public void testSepiaDifferent() {
+    Pixel[][] expected = new Pixel[3][1];
+    expected[0][0] = new PixelImpl(33.775, 30.075, 23.425);
+    expected[1][0] = new PixelImpl(67.55, 60.15, 46.85);
+    expected[2][0] = new PixelImpl(101.325, 90.225, 70.275);
+    image2 = sepia.apply(image2);
+    assertEquals(expected, image2);
   }
 }

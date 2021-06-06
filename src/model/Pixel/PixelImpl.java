@@ -65,4 +65,9 @@ public class PixelImpl implements Pixel{
     return Objects.hash(r.getValue(), g.getValue(), b.getValue());
   }
 
+  @Override
+  public String toString() {
+    return this.r + " " + this.g + " " + this.b;
+  }
+
 }

@@ -21,4 +21,7 @@ public interface Pixel {
 
   @Override
   public int hashCode();
+
+  @Override
+  public String toString();
 }
