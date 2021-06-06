@@ -25,7 +25,8 @@ public abstract class ChannelImpl implements Channel{
       return;
     }
     else {
-      this.value = (int)n;
+      // assign this value to the rounded int value of the given double
+      this.value = (int)(n+0.5);
     }
   }
 

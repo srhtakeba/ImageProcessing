@@ -1,5 +1,8 @@
 import static org.junit.Assert.assertEquals;
 
+import model.InstaImage.ImageImpl;
+import model.InstagramModel;
+import model.InstagramModelImpl;
 import model.Pixel.Pixel;
 import model.Pixel.PixelImpl;
 import model.TransformOperation.GreyscaleOperation;
@@ -80,10 +83,5 @@ public class TransformOperationTest {
     expected[2][0] = new PixelImpl(101.325, 90.225, 70.275);
     image2 = sepia.apply(image2);
     assertEquals(expected, image2);
-  }
-
-  @Test
-  public void testBlackAndWhiteCheckerBoard() {
-
   }
 }
