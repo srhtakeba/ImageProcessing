@@ -22,7 +22,7 @@ public class InstagramModelImplTest {
 
   @Before
   public void setup() {
-    checkerBoard = new ImageImpl().makeCheckerBoard(2);
+    checkerBoard = new ImageImpl().makeCheckerBoard(3);
     modelCheckerBoard = new InstagramModelImpl(checkerBoard);
 
     rainbow = new ImageImpl().makeRainbow(3,1);

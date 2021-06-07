@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import model.FilterOperation.BlurOperation;
 import model.FilterOperation.SharpenOperation;
 import model.InstaImage.InstaImage;
@@ -12,6 +13,7 @@ import model.TransformOperation.SepiaToneOperation;
 public class InstagramModelImpl implements InstagramModel {
 
   InstaImage image;
+  List<InstaImage> log;
 
   public InstagramModelImpl(InstaImage image) {
     this.image = image;

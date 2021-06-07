@@ -16,15 +16,6 @@ public interface InstaImage {
   /**
    * Creates a Rainbow image represented in pixels.
    *
-   * @param width  width of the image
-   * @param height height of the image
-   * @return Rainbow image represented in pixels
-   */
-  public ImageImpl makeRainbow1(int width, int height);
-
-  /**
-   * Creates a Rainbow image represented in pixels.
-   *
    * @param width  width of the image, in pixels
    * @param colorHeight height of each color in the resulting rainbow image, in pixels
    * @return Rainbow image represented in pixels

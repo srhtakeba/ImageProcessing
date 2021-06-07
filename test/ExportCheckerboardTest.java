@@ -19,4 +19,13 @@ public class ExportCheckerboardTest {
     model.exportAsPPM();
   }
 
+  @Test
+  public void testImportPPMAndExport() {
+    InstagramModel flowerModel = new InstagramModelImpl();
+    model.readPPM("flower.ppm");
+    model.filter("blur");
+    model.exportAsPPM();
+
+  }
+
 }
