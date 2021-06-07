@@ -33,9 +33,8 @@ public interface InstagramModel {
   InstaImage exportAsInstaImage();
 
   /**
-   * Export the image as a PPM file in string format. Holding the width, height, maximum pixel
+   * Export the image as a PPM file. Holding the width, height, maximum pixel
    * capacity, and the rgb values for each pixel.
-   * @return the String that holds the PPM file content
    */
-  String exportAsPPM();
+  void exportAsPPM();
 }

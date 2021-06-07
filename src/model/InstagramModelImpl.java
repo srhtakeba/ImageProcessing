@@ -1,5 +1,8 @@
 package model;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import model.FilterOperation.BlurOperation;
 import model.FilterOperation.SharpenOperation;
 import model.InstaImage.InstaImage;
@@ -35,14 +38,10 @@ public class InstagramModelImpl implements InstagramModel{
 
   private void blurImage() {
     new BlurOperation().apply(image.getPixelGrid());
-    /*image = new ImageImpl(new BlurOperation().apply(image.getPixelGrid()),
-        image.getWidth(), image.getHeight());*/
   }
 
   private void sharpenImage() {
     new SharpenOperation().apply(image.getPixelGrid());
-    /*image = new ImageImpl(new SharpenOperation().apply(image.getPixelGrid()),
-        image.getWidth(), image.getHeight());*/
   }
 
   /**
@@ -66,14 +65,10 @@ public class InstagramModelImpl implements InstagramModel{
 
   private void greyscaleImage() {
     new GreyscaleOperation().apply(image.getPixelGrid());
-    /*image = new ImageImpl(new GreyscaleOperation().apply(image.getPixelGrid()),
-        image.getWidth(), image.getHeight());*/
   }
 
   private void sepiaToneImage() {
     new SepiaToneOperation().apply(image.getPixelGrid());
-    /*image = new ImageImpl(new SepiaToneOperation().apply(image.getPixelGrid()),
-        image.getWidth(), image.getHeight());*/
   }
 
   /**
@@ -87,13 +82,42 @@ public class InstagramModelImpl implements InstagramModel{
   }
 
   /**
-   * Export the image as a PPM file in string format. Holding the width, height, maximum pixel
+   * Export the image as a PPM file. Holding the width, height, maximum pixel
+   * capacity, and the rgb values for each pixel. Creates a new file, naming it instaImage.ppm,
+   * and writes the image content to it for this image.
+   *
+   * @return the String that holds the PPM file content
+   * @throws IllegalStateException if the file creation or export did not work
+   */
+  @Override
+  public void exportAsPPM() throws IllegalStateException {
+    // create the file
+    try {
+      File export = new File("out\\instaImage.ppm");
+      export.createNewFile();
+    }
+    catch (IOException e) {
+      throw new IllegalStateException("Unsuccessful file creation.");
+    }
+    // write the ppm content to the file
+    try {
+      FileWriter writer = new FileWriter("out\\instaImage.ppm");
+      writer.write(instaImageToPPMFormat());
+      writer.close();
+    }
+    catch (IOException e) {
+      throw new IllegalStateException("Unsuccessful write to file.");
+    }
+
+  }
+
+  /**
+   * Convert the image into PPM content in string format. Holding the width, height, maximum pixel
    * capacity, and the rgb values for each pixel.
    *
    * @return the String that holds the PPM file content
    */
-  @Override
-  public String exportAsPPM() {
+  private String instaImageToPPMFormat() {
     StringBuilder sb = new StringBuilder();
     sb.append("p3\n");
     sb.append(image.getWidth() + " " + image.getHeight() + "\n" + "255\n");
