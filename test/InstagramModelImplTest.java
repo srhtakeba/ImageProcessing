@@ -25,11 +25,11 @@ public class InstagramModelImplTest {
     checkerBoard = new ImageImpl().makeCheckerBoard(2);
     modelCheckerBoard = new InstagramModelImpl(checkerBoard);
 
-    rainbow = new ImageImpl().makeRainbow(3,7);
+    rainbow = new ImageImpl().makeRainbow(3,1);
     modelRainbow = new InstagramModelImpl(rainbow);
 
-    rainbow = new ImageImpl().makeRainbow(1,7);
-    modelRainbow = new InstagramModelImpl(rainbow);
+    rainbowSingleFile = new ImageImpl().makeRainbow(1,1);
+    modelRainbowSingleFile = new InstagramModelImpl(rainbowSingleFile);
   }
 
   @Test
