@@ -9,6 +9,11 @@ public abstract class ChannelImpl implements Channel{
     this.setValue(value);
   }
 
+  // copy constructor
+  public ChannelImpl(Channel c) {
+    this(c.getValue());
+  }
+
   @Override
   public int getValue() {
     return this.value;
