@@ -93,8 +93,16 @@ public class InstagramModelImpl implements InstagramModel{
   public void exportAsPPM() throws IllegalStateException {
     // create the file
     try {
+      int fileNo = 1;
       File export = new File("out\\instaImage.ppm");
-      export.createNewFile();
+      // if the file already exists, add a number at the end of the file name to create a unique one
+      // e.g. 'instaImage(1).ppm'
+      boolean creationSuccess = export.createNewFile();
+      while (!creationSuccess) {
+        export = new File("out\\instaImage(" + fileNo + ").ppm");
+        creationSuccess = export.createNewFile();
+        fileNo++;
+      }
     }
     catch (IOException e) {
       throw new IllegalStateException("Unsuccessful file creation.");
