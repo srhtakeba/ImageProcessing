@@ -6,6 +6,12 @@ import java.util.Objects;
  * Class to represent a green channel for a pixel.
  */
 public class ChannelG extends ChannelImpl{
+
+  /**
+   * Constructs a {@CODE ChannelG} object.
+   *
+   * @param value amount of Green(G) pigment.
+   */
   public ChannelG(double value) {
     super(value);
   }

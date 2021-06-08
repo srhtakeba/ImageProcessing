@@ -6,6 +6,12 @@ import java.util.Objects;
  * Class to represent a red channel for a pixel.
  */
 public class ChannelR extends ChannelImpl{
+
+  /**
+   * Constructs a {@CODE ChannelR} object.
+   *
+   * @param value amount of Red(R) pigment.
+   */
   public ChannelR(double value) {
     super(value);
   }

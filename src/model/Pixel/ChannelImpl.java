@@ -2,9 +2,17 @@ package model.Pixel;
 
 import java.util.Objects;
 
+/**
+ * Abstract class for three colors, red, green, and blue.
+ */
 public abstract class ChannelImpl implements Channel{
   private int value;
 
+  /**
+   * Constrcuts (@CODE ChannelImpl} object.
+   *
+   * @param value amount of pigment.
+   */
   public ChannelImpl(double value) {
     this.setValue(value);
   }

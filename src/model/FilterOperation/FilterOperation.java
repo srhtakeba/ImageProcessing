@@ -2,6 +2,9 @@ package model.FilterOperation;
 
 import model.Pixel.Pixel;
 
+/**
+ * Filter operation holds filters and applies to images.
+ */
 public interface FilterOperation {
 
   /**

@@ -3,6 +3,9 @@ package model.InstaImage;
 
 import model.Pixel.Pixel;
 
+/**
+ * Interface to represent a Image.
+ */
 public interface InstaImage {
 
   /**

@@ -6,27 +6,33 @@ import model.InstagramModelImpl;
 import model.Pixel.Pixel;
 import model.Pixel.PixelImpl;
 
+/**
+ * Class to represent an Image and its information.
+ */
 public class ImageImpl implements InstaImage {
 
   Pixel[][] pixelGrid;
   int width;
   int height;
 
+  /**
+   * Constructs a {@CODE ImageImpl} object to represent an Image.
+   *
+   * @param pixelGrid Represents a collection of pixel in an image.
+   * @param width     width of an image.
+   * @param height    height of an image.
+   */
   public ImageImpl(Pixel[][] pixelGrid, int width, int height) {
     this.pixelGrid = pixelGrid;
     this.width = width;
     this.height = height;
   }
 
+  /**
+   * Constructs a {@CODE ImageImpl} convenient object to represent an Image.
+   */
   public ImageImpl() {
-    // don't make anything
   }
-
-//  @Override
-//  public InstagramModelImpl loadImage(String fileName) {
-//    Pixel[][] pixel = ImageUtil.readPPM(fileName);
-//    return pixel;
-//  }
 
   /**
    * Creates a checkerboard image represented in pixels.
@@ -100,6 +106,10 @@ public class ImageImpl implements InstaImage {
     return image;
   }
 
+  /**
+   *
+   * @return A collection of pixels.
+   */
   public Pixel[][] getPixelGrid() {
     return this.pixelGrid;
   }

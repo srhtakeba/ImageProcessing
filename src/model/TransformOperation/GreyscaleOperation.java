@@ -5,6 +5,10 @@ package model.TransformOperation;
  * change the images hue so it is comprised solely of black and white shades.
  */
 public class GreyscaleOperation extends AbstractTransformOperation{
+
+  /**
+   * Constructs {@CODE GreyscaleOperation} object.
+   */
   public GreyscaleOperation() {
     super(new Double[][]{{0.2126, 0.7152, 0.0722},
         {0.2126, 0.7152, 0.0722},

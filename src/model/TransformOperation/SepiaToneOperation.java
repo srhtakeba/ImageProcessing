@@ -5,6 +5,10 @@ package model.TransformOperation;
  * change the images hue so it mimics that of an older image with a red-brown tone.
  */
 public class SepiaToneOperation extends AbstractTransformOperation{
+
+  /**
+   * Constructs {@CODE SepiaToneOperation} object.
+   */
   public SepiaToneOperation() {
     super(new Double[][]{{0.393, 0.769, 0.189},
         {0.349, 0.686, 0.168},

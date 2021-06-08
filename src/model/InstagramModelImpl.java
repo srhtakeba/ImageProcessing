@@ -80,8 +80,7 @@ public class InstagramModelImpl implements InstagramModel {
     }
   }
 
-  private void greyscaleImage() { new GreyscaleOperation().apply(image.getPixelGrid());
-  }
+  private void greyscaleImage() { new GreyscaleOperation().apply(image.getPixelGrid()); }
 
   private void sepiaToneImage() {
     new SepiaToneOperation().apply(image.getPixelGrid());
