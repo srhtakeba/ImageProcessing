@@ -3,7 +3,6 @@ package model;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 import java.util.Stack;
 import model.FilterOperation.BlurOperation;
 import model.FilterOperation.SharpenOperation;
