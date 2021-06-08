@@ -22,15 +22,15 @@ As per the interface, `InstagramModelImpl` has `filter(...)`, which will adjust 
 Note that these image processes will mutate the image, and you can not return to the past images unless you `save` the version you would like to return to. More information can be seen under 'Saving and Retrieving Images'.
 
 Examples of each operation can be seen below using the following image as an original:\
-![](example%20images/jpeg%20versions/fish.jpeg)\
+![](images/jpeg/fish.jpg)\
 Filter - Blur:\
-![fishBlur.jpeg](/example images/jpeg versions/fishBlur.jpeg)\
+![fishBlur.jpeg](images/jpeg/fishBlur.jpg)\
 Filter - Sharpen:\
-![fishSharpen.jpeg](/example images/jpeg versions/fishSharpen.jpeg)\
+![fishSharpen.jpeg](images/jpeg/fishSharpen.jpg)\
 Transform - Greyscale:\
-![fishGreyscale.jpeg](/example images/jpeg versions/fishGreyscale.jpeg)\
+![fishGreyscale.jpeg](images/jpeg/fishGreyscale.jpg)\
 Transfrom - Sepia:\
-![fishSepia.jpeg](/example images/jpeg versions/fishSepia.jpeg)
+![fishSepia.jpeg](images/jpeg/fishSepia.jpg)
  
  #### Saving and Retrieving Images
  With the methods `save()` and `retrieve()`, the client is also able to save their images to a log in the model. Once images are saved to the log, they can be retrieved. Retrieving an image means to return to the last saved image in a log. Once the client has returned to a past image, they can not go back. Note that unless the client explicitly calls the `save()` method, the image will not be saved to the log and can not be retrieved. If there is currently no image to retrieved or no image to be saved, these methods will throw `IllegalStateException`s.
@@ -42,12 +42,21 @@ Transfrom - Sepia:\
 InstaImage is an object type that holds the important information of an image. It holds the grid of `Pixel`s to represent the image, as well as a height and width
 in pixels. InstaImage can also produce and return algorithmic images such as a rainbow flag, and a black and white checkerboard. 
 
+#### Creating Programmatic Images
+`InstaImage` also provides clients with the ability to set their `InstaImage` to a programmatically created image using methods attached to `InstaImage` objects. Mainly clients can create checkerboards and rainbows.
+To create a checkerboard, clients can call `makeCheckerboard(int size)`, pass the desired pixel size of their checkerboard, and the `InstaImage` will be set to a checkerboard of pixel size X size. 
+To create a rainbow, clients can call `makeRainbow(int width, int colorHeight)` where the width is the pixel width of the resulting image, and the colorHeight is the vertical height in pixels of each color in the resulting rainbow image. 
+
 ## Pixel
-A `Pixel` holds 3 channels R, G, and B which represent the red, green, and blue components of the resulting color the pixel holds. These channels are represented with
-`Channel` objects.
+A `Pixel` holds 3 channels R, G, and B which represent the red, green, and blue components of the resulting color the pixel holds. These channels are represented with `Channel` objects. 
+`Pixel`s can be checked for equality based on the values of their corresponding R, G, and B channels. 
+Furthermore, in order to set `Pixel`s to new values, clients can use `setR(double n)`, `setG(double n)`, and `setB(double n)`. These methods will accept a double value, round it to the nearest integer, and set it to the corresponding channel value. If the given value is not within 0-255, it will be capped off at 0 if too small, and 255 if too big. `Pixel` has also overridden the `toString()` method, and a pixel is represented as a string with it's RGB values. For example, a completely red pixel would be represented as below:\
+`R: 255 G: 0 B: 0`
 
 ## Channel
-A `Channel` holds an integer value from `0-255` which represents the amount of its particular color in a pixel. There are three types of channels currently, 
-`ChannelR`, `ChannelG`, and `ChannelB`. In the case where a client attempts to set the value of a channel to any amount less than 0, it will be defaulted to 0, 
-and if a client attempts to set the value of a channel to any amount more than 255, it will be defaulted to 255. The set values for channels may take in 
-Double values, but they will round those values on a .5 basis to the nearest integer. 
+A `Channel` holds an integer value from `0-255` which represents the amount of its particular color in a pixel. 
+There are three types of channels currently, `ChannelR`, `ChannelG`, and `ChannelB`. In the case where a client attempts to set the value of a channel to any amount less than 0, it will be defaulted to 0, and if a client attempts to set the value of a channel to any amount more than 255, it will be defaulted to 255. 
+The `setValue(double n)` for `Channel`s take in double values, but they will round those values on a .5 basis to the nearest integer. 
+`Channel`s are checked for equality based on whether they are the same channel type (R, G, or B), and their values. 
+`Channel` has overriden the `toString()` method, and will be represented with their corresponding channel type, as well as the value. For example, a 125 value holding Blue channel would be represented as below:\
+`B: 125`
