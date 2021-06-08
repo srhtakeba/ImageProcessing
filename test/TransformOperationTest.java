@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import model.InstaImage.ImageImpl;
@@ -50,7 +51,7 @@ public class TransformOperationTest {
       }
     }
     image = greyscale.apply(image);
-    assertEquals(expected, image);
+    assertArrayEquals(expected, image);
   }
 
   @Test
@@ -60,7 +61,7 @@ public class TransformOperationTest {
     expected[1][0] = new PixelImpl(50, 50, 50);
     expected[2][0] = new PixelImpl(75, 75, 75);
     image2 = greyscale.apply(image2);
-    assertEquals(expected, image2);
+    assertArrayEquals(expected, image2);
   }
 
   @Test
@@ -72,7 +73,7 @@ public class TransformOperationTest {
       }
     }
     image = sepia.apply(image);
-    assertEquals(expected, image);
+    assertArrayEquals(expected, image);
   }
 
   @Test
@@ -82,6 +83,6 @@ public class TransformOperationTest {
     expected[1][0] = new PixelImpl(67.55, 60.15, 46.85);
     expected[2][0] = new PixelImpl(101.325, 90.225, 70.275);
     image2 = sepia.apply(image2);
-    assertEquals(expected, image2);
+    assertArrayEquals(expected, image2);
   }
 }

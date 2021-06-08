@@ -1,3 +1,5 @@
+import static org.junit.Assert.assertEquals;
+
 import model.InstaImage.ImageImpl;
 import model.InstaImage.InstaImage;
 import model.Pixel.Pixel;
@@ -44,7 +46,7 @@ public class ImageImplTest {
 
     image.makeCheckerBoard(3);
 
-    Assert.assertEquals(expected.toString(), image.toString());
+    assertEquals(expected.toString(), image.toString());
   }
 
   @Test
@@ -83,6 +85,6 @@ public class ImageImplTest {
 
     image.makeRainbow(3,1);
 
-    Assert.assertEquals(expected.toString(), image.toString());
+    assertEquals(expected.toString(), image.toString());
   }
 }
