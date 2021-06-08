@@ -21,7 +21,9 @@ As per the interface, `InstagramModelImpl` has `filter(...)`, which will adjust 
 `transform(String operation)` takes in the string (not case-sensitive) to represent the particular color transofmration to be applied.
 Note that these image processes will mutate the image, and you can not return to the past images unless you `save` the version you would like to return to. More information can be seen under 'Saving and Retrieving Images'.
 
-(example images have been converted to jpeg files for .md file processing) 
+##### Example Images
+(example images have been converted to jpeg files for .md file processing) \
+Source: Katsuhiko Nakanishi (Contributor to the project)\
 Examples of each operation can be seen below using the following image as an original:\
 ![](images/jpeg/fish.jpg)\
 Filter - Blur:\
