@@ -77,13 +77,8 @@ public class ImageImplTest {
 
     InstaImage expected = new ImageImpl(expectedPixelGrid, 3, 7);
 
-    image.makeRainbow(3,7);
+    image.makeRainbow(3,1);
 
     Assert.assertEquals(expected.toString(), image.toString());
-  }
-
-  @Test (expected = IllegalArgumentException.class)
-  public void testMakeRainbowException() {
-    image.makeRainbow(3, 6);
   }
 }

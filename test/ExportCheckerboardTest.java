@@ -32,6 +32,8 @@ public class ExportCheckerboardTest {
     model.readPPM("flower.ppm");
     model.filter("sharpen");
     model.exportAsPPM("flowerSharpen");
+    model.filter("sharpen");
+    model.exportAsPPM("flowerSharpen");
 
   }
 
