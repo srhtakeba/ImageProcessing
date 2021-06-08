@@ -31,10 +31,11 @@ public interface InstagramModel {
   /**
    * Export the image as a PPM file. Holding the width, height, maximum pixel
    * capacity, and the rgb values for each pixel.
+   * @param title the desired name for the resulting exported ppm file
    * @throws IllegalStateException if the file creation, export did not work, or if there is no
    *                               image to be exported.
    */
-  void exportAsPPM() throws IllegalStateException;
+  void exportAsPPM(String title) throws IllegalStateException;
 
   /**
    * Export the image as a {@code InstaImage} object which holds the pixel grid of the image and

@@ -109,16 +109,16 @@ public class InstagramModelImpl implements InstagramModel {
    * values for each pixel. Creates a new file, naming it instaImage.ppm, and writes the image
    * content to it for this image.
    *
-   * @return the String that holds the PPM file content
+   *  @param title the desired name for the resulting exported ppm file
    * @throws IllegalStateException if the file creation, export did not work, or if there is no
    *                               image to be exported.
    */
   @Override
-  public void exportAsPPM() throws IllegalStateException {
+  public void exportAsPPM(String title) throws IllegalStateException {
     if(this.image == null) {
       throw new IllegalStateException("There is not image to be exported.");
     }
-    String filename = "instaImage.ppm";
+    String filename = title + ".ppm";
     int fileNo = 1;
     // create the file
     try {
@@ -127,7 +127,7 @@ public class InstagramModelImpl implements InstagramModel {
       // e.g. 'instaImage(1).ppm'
       boolean creationSuccess = export.createNewFile();
       while (!creationSuccess) {
-        filename = "instaImage(" + fileNo + ").ppm";
+        filename = title + "(" + fileNo + ").ppm";
         export = new File(filename);
         creationSuccess = export.createNewFile();
         fileNo++;

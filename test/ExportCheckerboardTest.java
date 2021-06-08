@@ -11,19 +11,19 @@ public class ExportCheckerboardTest {
   @Test
   public void testExportPPM() {
     model = new InstagramModelImpl(checkerboard);
-    model.exportAsPPM();
+    model.exportAsPPM("checkerboard");
     model.filter("blur");
-    model.exportAsPPM();
+    model.exportAsPPM("checkerboardBlur");
     model.filter("sharpen");
-    model.exportAsPPM();
+    model.exportAsPPM("checkerboardSharpen");
   }
 
   @Test
   public void testExportRainbowPPM() {
     model = new InstagramModelImpl(new ImageImpl().makeRainbow(30, 70));
-    model.exportAsPPM();
+    model.exportAsPPM("rainbow");
     model.filter("sharpen");
-    model.exportAsPPM();
+    model.exportAsPPM("rainbowSharpen");
   }
 
   @Test
@@ -31,7 +31,7 @@ public class ExportCheckerboardTest {
     InstagramModel flowerModel = new InstagramModelImpl();
     model.readPPM("flower.ppm");
     model.filter("sharpen");
-    model.exportAsPPM();
+    model.exportAsPPM("flowerSharpen");
 
   }
 
