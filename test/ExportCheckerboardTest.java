@@ -28,7 +28,7 @@ public class ExportCheckerboardTest {
   public void testImportPPMAndExport() {
     InstagramModel flowerModel = new InstagramModelImpl();
     model.readPPM("flower.ppm");
-    model.filter("blur");
+    model.filter("blurr");
     model.exportAsPPM();
 
   }

@@ -107,6 +107,7 @@ public class ImageImpl implements InstaImage {
   }
 
   /**
+   * Returns A collection of pixels.
    *
    * @return A collection of pixels.
    */
