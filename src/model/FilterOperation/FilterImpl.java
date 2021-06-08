@@ -73,9 +73,27 @@ public abstract class FilterImpl implements FilterOperation {
         // iterate through the kernel
         for (int k = 0; k < kernel.length; k++) {
           for (int d = 0; d < kernel[k].length; d++) {
-
             int kDiff = i - k;
             int dDiff = j - d;
+            if(k<kernelHalf) {
+              kDiff = i - k;
+            }
+            else if(k == kernelHalf) {
+              kDiff = i;
+            }
+            else {
+              kDiff = k + i;
+            }
+            if(d<kernelHalf) {
+              dDiff = j - d;
+            }
+            else if(k == kernelHalf) {
+              dDiff = j;
+            }
+            else {
+              dDiff = j + d;
+            }
+
 
             // checking the bounds
             if ((kDiff < channelMatrix.length)
@@ -83,7 +101,7 @@ public abstract class FilterImpl implements FilterOperation {
                 && (dDiff < channelMatrix[i].length)
                 && (dDiff >= 0)) {
 
-              // Kernel needs to be centred
+              // Kernel needs to centred
               appliedResult += (channelMatrix[kDiff][dDiff].getValue()) * kernel[k][d];
             }
           }

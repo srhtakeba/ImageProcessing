@@ -29,7 +29,6 @@ public class ExportCheckerboardTest {
     InstagramModel flowerModel = new InstagramModelImpl();
     model.readPPM("flower.ppm");
     model.filter("blur");
-    //model.filter("sharpen");
     model.exportAsPPM();
 
   }
