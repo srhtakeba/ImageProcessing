@@ -22,15 +22,15 @@ As per the interface, `InstagramModelImpl` has `filter(...)`, which will adjust 
 Note that these image processes will mutate the image, and you can not return to the past images unless you `save` the version you would like to return to. More information can be seen under 'Saving and Retrieving Images'.
 
 Examples of each operation can be seen below using the following image as an original:\
-![fish](/fish.ppm)\
+![fish.jpeg](/example images/jpeg versions/fish.jpeg)\
 Filter - Blur:\
-![fishBlur](/fishBlur.ppm)\
+![fishBlur.jpeg](/example images/jpeg versions/fishBlur.jpeg)\
 Filter - Sharpen:\
-![fishSharpen](/fishSharpen.ppm)\
+![fishSharpen.jpeg](/example images/jpeg versions/fishSharpen.jpeg)\
 Transform - Greyscale:\
-![fishGreyscale](/fishGreyscale.ppm)\
+![fishGreyscale.jpeg](/example images/jpeg versions/fishGreyscale.jpeg)\
 Transfrom - Sepia:\
-![fishSepia](/fishSepia.ppm)
+![fishSepia.jpeg](/example images/jpeg versions/fishSepia.jpeg)
  
  #### Saving and Retrieving Images
  With the methods `save()` and `retrieve()`, the client is also able to save their images to a log in the model. Once images are saved to the log, they can be retrieved. Retrieving an image means to return to the last saved image in a log. Once the client has returned to a past image, they can not go back. Note that unless the client explicitly calls the `save()` method, the image will not be saved to the log and can not be retrieved. If there is currently no image to retrieved or no image to be saved, these methods will throw `IllegalStateException`s.
