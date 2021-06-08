@@ -29,7 +29,6 @@ public class ChannelR extends ChannelImpl{
   }
 
   @Override
-  // use 1 for red code
   public int hashCode() {
     return Objects.hash(this.getValue(), 1);
   }

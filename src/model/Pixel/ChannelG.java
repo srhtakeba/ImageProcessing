@@ -29,7 +29,6 @@ public class ChannelG extends ChannelImpl{
   }
 
   @Override
-  // use 2 for green code
   public int hashCode() {
     return Objects.hash(this.getValue(), 2);
   }

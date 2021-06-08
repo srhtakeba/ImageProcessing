@@ -61,11 +61,6 @@ public class PixelImpl implements Pixel{
     this.b.setValue(n);
   }
 
-  /**
-   * Check for pixel equality based on the rgb values.
-   * @param o the object to be checked for equality.
-   * @return does the given object equal this pixel?
-   */
   @Override
   public boolean equals(Object o) {
     if(this == o) {
@@ -78,19 +73,11 @@ public class PixelImpl implements Pixel{
     return this.r.equals(that.r) && this.g.equals(that.g) && this.b.equals(that.b);
   }
 
-  /**
-   * Returns a hash code for this pixel.
-   * @return the hash code for this pixel calculated from rgb values.
-   */
   @Override
   public int hashCode() {
     return Objects.hash(r.getValue(), g.getValue(), b.getValue());
   }
 
-  /**
-   * Produce a string representation of this pixel.
-   * @return a string containing this pixels r,g, and b values.
-   */
   @Override
   public String toString() {
     return this.r + " " + this.g + " " + this.b;

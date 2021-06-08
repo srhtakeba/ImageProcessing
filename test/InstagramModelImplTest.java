@@ -9,6 +9,7 @@ import model.Pixel.PixelImpl;
 import org.junit.Before;
 import org.junit.Test;
 
+
 public class InstagramModelImplTest {
 
   private InstagramModel modelCheckerBoard;
