@@ -29,7 +29,6 @@ public class ChannelB extends ChannelImpl{
   }
 
   @Override
-  // use 3 for blue code
   public int hashCode() {
     return Objects.hash(this.getValue(), 3);
   }

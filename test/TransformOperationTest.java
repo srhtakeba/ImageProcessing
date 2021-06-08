@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * A class to hold tests for a color transformation to be performed on an image representation
+ * Test class for TransformOperation: testing the performance on an image representation
  * of a 2DArray of {@code Pixel}.
  */
 public class TransformOperationTest {

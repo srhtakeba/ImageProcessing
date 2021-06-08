@@ -6,6 +6,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test class for ImageImpl: unit tests to ensure that image can correctly represent
+ * expected pixels inside the image.
+ */
 public class ImageImplTest {
   private InstaImage image;
   private Pixel[][] pixelGrid;

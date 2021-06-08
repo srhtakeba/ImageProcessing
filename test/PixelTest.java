@@ -10,6 +10,11 @@ import model.Pixel.PixelImpl;
 import org.junit.Before;
 import org.junit.Test;
 
+
+/**
+ * Test class for Pixel: unit tests to ensure that Pixel which consist of Red, Blue, and Green's
+ * value correctly represents the expected values.
+ */
 public class PixelTest {
   private Pixel red;
   private Pixel green;
@@ -116,4 +121,5 @@ public class PixelTest {
   public void testToString() {
     assertEquals("R: 255 G: 0 B: 0", this.red.toString());
   }
+
 }

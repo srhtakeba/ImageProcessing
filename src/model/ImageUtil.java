@@ -27,7 +27,6 @@ public class ImageUtil{
     this.importedImage = importedImage;
   }
 
-
   /**
    * Read an image file in the PPM format and print the colors.
    *
@@ -63,14 +62,13 @@ public class ImageUtil{
       System.out.println("Invalid PPM file: plain RAW file should begin with P3");
       throw new IllegalArgumentException("Invalid PPM file: plain RAW file should begin with P3");
     }
-    int width = sc.nextInt();
 
-//    System.out.println("Width of image: " + width);
+    int width = sc.nextInt();
     int height = sc.nextInt();
-//    System.out.println("Height of image: " + height);
+
+    // Keeping it just in case. Maximum value of a color in this file (usually 256)
     int maxValue = sc.nextInt();
-//    System.out.println("Maximum value of a color in this file (usually 256): " + maxValue);
-//    importedRaw = new int[width][height];
+
     Pixel[][] importedRaw = new Pixel[width][height];
 
     for (int i = 0; i < height; i++) {
@@ -81,7 +79,6 @@ public class ImageUtil{
         double r = rRaw;
         double g = gRaw;
         double b = bRaw;
-//        System.out.println("Color of pixel (" + j + "," + i + "): " + r + "," + g + "," + b);
         pixel = new PixelImpl(r, g, b);
         importedRaw[i][j] = pixel;
       }
@@ -97,9 +94,8 @@ public class ImageUtil{
     if (args.length > 0) {
       filename = args[0];
     } else {
-      filename = "/Users/katsuhikonakanishi/Desktop/CS3500/hw5/src/Koala.ppm";
+      filename = "filename";
     }
-
     ImageUtil.readPPM(filename);
   }
 

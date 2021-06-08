@@ -32,11 +32,12 @@ public class InstagramModelImpl implements InstagramModel {
    * Given a String token to represent an operation, perform that filter operation on this
    * InstagramModel's image.
    *
-   * @param operation String token to represent operation
+   * @param operation String token to represent operation.
    * @throws IllegalStateException if the model holds no image to be processed.
+   * @throws IllegalArgumentException if the given filter operation is invalid.
    */
   @Override
-  public void filter(String operation) throws IllegalStateException {
+  public void filter(String operation) throws IllegalStateException, IllegalArgumentException {
     if(this.image == null) {
       throw new IllegalStateException("There is no image to be filtered.");
     }
@@ -48,7 +49,7 @@ public class InstagramModelImpl implements InstagramModel {
         sharpenImage();
         break;
       default:
-        break;
+        throw new IllegalArgumentException("Given filter operation is invalid.");
     }
   }
 
@@ -64,11 +65,12 @@ public class InstagramModelImpl implements InstagramModel {
    * Given a String token to represent an operation, perform that color transformation on this
    * InstagramModel's image.
    *
-   * @param operation String token to represent operation
-   * @throws IllegalStateException if the model holds no image to be processed
+   * @param operation String token to represent operation.
+   * @throws IllegalStateException if the model holds no image to be processed.
+   * @throws IllegalArgumentException if the given transform operation is invalid.
    */
   @Override
-  public void transform(String operation) throws IllegalStateException {
+  public void transform(String operation) throws IllegalStateException, IllegalArgumentException {
     if(this.image == null) {
       throw new IllegalStateException("There is no image to be transformed.");
     }
@@ -80,7 +82,7 @@ public class InstagramModelImpl implements InstagramModel {
         sepiaToneImage();
         break;
       default:
-        break;
+        throw new IllegalArgumentException("Given transform operation is invalid.");
     }
   }
 

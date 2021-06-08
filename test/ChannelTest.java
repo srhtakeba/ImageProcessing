@@ -9,6 +9,10 @@ import model.Pixel.ChannelR;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test class for Channel: unit tests to ensure that Channel, Red, Blue, and Green's value
+ * can be correctly changed and give its holding value.
+ */
 public class ChannelTest {
   private Channel r;
   private Channel g;
