@@ -4,7 +4,7 @@ package model.TransformOperation;
  * Class to represent a greyscale color transformation on an image. A Greyscale transformation will
  * change the images hue so it is comprised solely of black and white shades.
  */
-public class GreyscaleOperation extends AbstractTransformOperation{
+public class GreyscaleOperation extends AbstractTransformOperation {
 
   /**
    * Constructs {@CODE GreyscaleOperation} object.

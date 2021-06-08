@@ -1,9 +1,9 @@
 package model.FilterOperation;
 
 /**
- *  Class to represent a Blur kernel filter.
+ * Class to represent a Blur kernel filter.
  */
-public class SharpenOperation extends FilterImpl{
+public class SharpenOperation extends FilterImpl {
 
   /**
    * Constructs {@CODE BlurOperation} kernel object.

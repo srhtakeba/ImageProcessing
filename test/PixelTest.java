@@ -16,6 +16,7 @@ import org.junit.Test;
  * value correctly represents the expected values.
  */
 public class PixelTest {
+
   private Pixel red;
   private Pixel green;
   private Pixel blue;
@@ -25,8 +26,8 @@ public class PixelTest {
   public void setup() {
     this.red = new PixelImpl(255.0, 0.0, 0.0);
     this.green = new PixelImpl(0, 255.0, 0.0);
-    this.blue = new PixelImpl(0,0,255);
-    this.brown = new PixelImpl(100,100,100);
+    this.blue = new PixelImpl(0, 0, 255);
+    this.brown = new PixelImpl(100, 100, 100);
   }
 
   @Test

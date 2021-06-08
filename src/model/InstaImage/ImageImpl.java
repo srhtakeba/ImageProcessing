@@ -1,8 +1,5 @@
 package model.InstaImage;
 
-import model.ImageUtil;
-import model.InstaImage.InstaImage;
-import model.InstagramModelImpl;
 import model.Pixel.Pixel;
 import model.Pixel.PixelImpl;
 
@@ -57,7 +54,7 @@ public class ImageImpl implements InstaImage {
    */
   @Override
   public ImageImpl makeRainbow(int width, int colorHeight) {
-    Pixel[][] pixel = new Pixel[colorHeight*7][width];
+    Pixel[][] pixel = new Pixel[colorHeight * 7][width];
 
     int range = colorHeight;
 
@@ -90,19 +87,12 @@ public class ImageImpl implements InstaImage {
     }
     this.pixelGrid = pixel;
     this.width = width;
-    this.height = colorHeight*7;
+    this.height = colorHeight * 7;
     ImageImpl image = new ImageImpl(pixel, width, height);
     return image;
   }
 
   public Pixel[][] getPixelGrid() {
-//    Pixel[][] copy = new Pixel[this.getHeight()][this.getWidth()];
-//    for(int i=0;i<getHeight();i++) {
-//      for(int j=0;j<getWidth();j++) {
-//        copy[i][j] = new PixelImpl(pixelGrid[i][j]);
-//      }
-//    }
-//    return copy;
     return this.pixelGrid;
   }
 

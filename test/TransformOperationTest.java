@@ -1,9 +1,5 @@
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 
-import model.InstaImage.ImageImpl;
-import model.InstagramModel;
-import model.InstagramModelImpl;
 import model.Pixel.Pixel;
 import model.Pixel.PixelImpl;
 import model.TransformOperation.GreyscaleOperation;
@@ -13,10 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test class for TransformOperation: testing the performance on an image representation
- * of a 2DArray of {@code Pixel}.
+ * Test class for TransformOperation: testing the performance on an image representation of a
+ * 2DArray of {@code Pixel}.
  */
 public class TransformOperationTest {
+
   private TransformOperation greyscale;
   private TransformOperation sepia;
   private Pixel[][] image;
@@ -29,9 +26,9 @@ public class TransformOperationTest {
 
     // make a 3x3 image of the same colors
     image = new Pixel[3][3];
-    for(int i=0; i<3; i++) {
-      for (int j=0; j<3;j++) {
-        image[i][j] = new PixelImpl(100.0,20.0,50.0);
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        image[i][j] = new PixelImpl(100.0, 20.0, 50.0);
       }
     }
 
@@ -45,9 +42,9 @@ public class TransformOperationTest {
   @Test
   public void testGreyScaleAllSame() {
     Pixel[][] expected = new Pixel[3][3];
-    for(int i=0; i<3; i++) {
-      for (int j=0; j<3;j++) {
-        expected[i][j] = new PixelImpl(39.174,39.174,39.174);
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        expected[i][j] = new PixelImpl(39.174, 39.174, 39.174);
       }
     }
     image = greyscale.apply(image);
@@ -67,9 +64,9 @@ public class TransformOperationTest {
   @Test
   public void testSepiaAllSame() {
     Pixel[][] expected = new Pixel[3][3];
-    for(int i=0; i<3; i++) {
-      for (int j=0; j<3;j++) {
-        expected[i][j] = new PixelImpl(64.13,57.02,44.43);
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        expected[i][j] = new PixelImpl(64.13, 57.02, 44.43);
       }
     }
     image = sepia.apply(image);

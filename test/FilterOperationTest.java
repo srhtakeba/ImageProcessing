@@ -1,7 +1,6 @@
 
 
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 
 import model.FilterOperation.BlurOperation;
 import model.FilterOperation.FilterOperation;
@@ -13,10 +12,11 @@ import org.junit.Test;
 
 
 /**
- * Test class for FilterOperation: testing the performance on an image representation
- * of a 2DArray of {@code Pixel}.
+ * Test class for FilterOperation: testing the performance on an image representation of a 2DArray
+ * of {@code Pixel}.
  */
 public class FilterOperationTest {
+
   private FilterOperation blur;
   private FilterOperation sharpen;
 
@@ -30,9 +30,9 @@ public class FilterOperationTest {
 
     // make a 3x3 image of the same colors
     image = new Pixel[3][3];
-    for(int i=0; i<3; i++) {
-      for (int j=0; j<3;j++) {
-        image[i][j] = new PixelImpl(100.0,20.0,50.0);
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        image[i][j] = new PixelImpl(100.0, 20.0, 50.0);
       }
     }
 

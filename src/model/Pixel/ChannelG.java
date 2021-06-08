@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Class to represent a green channel for a pixel.
  */
-public class ChannelG extends ChannelImpl{
+public class ChannelG extends ChannelImpl {
 
   /**
    * Constructs a {@CODE ChannelG} object.
@@ -21,10 +21,10 @@ public class ChannelG extends ChannelImpl{
     if (this == o) {
       return true;
     }
-    if(!(o instanceof ChannelG)) {
+    if (!(o instanceof ChannelG)) {
       return false;
     }
-    ChannelG that = (ChannelG)o;
+    ChannelG that = (ChannelG) o;
     return that.getValue() == this.getValue();
   }
 

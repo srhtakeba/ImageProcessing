@@ -3,18 +3,19 @@ package model.Pixel;
 import java.util.Objects;
 
 /**
- * Represents a pixel in an image. Each pixel has 3 channels to represent the three base colors
- * it is comprised of. These channels represent red, green, and blue. Each channel holds a value
- * from 0-255, to represent how much of that color is included in this pixel.
+ * Represents a pixel in an image. Each pixel has 3 channels to represent the three base colors it
+ * is comprised of. These channels represent red, green, and blue. Each channel holds a value from
+ * 0-255, to represent how much of that color is included in this pixel.
  */
-public class PixelImpl implements Pixel{
+public class PixelImpl implements Pixel {
+
   private final Channel r;
   private final Channel g;
   private final Channel b;
 
   /**
-   * Conctructs a {@CODE PixelImpl} object, and creates {@CODE ChannelR},
-   * {@CODE ChannelG}, {@CODE ChannelB}.
+   * Conctructs a {@CODE PixelImpl} object, and creates {@CODE ChannelR}, {@CODE ChannelG}, {@CODE
+   * ChannelB}.
    *
    * @param r amount of Red(R) pigment.
    * @param g amount of Green(G) pigment.
@@ -63,13 +64,13 @@ public class PixelImpl implements Pixel{
 
   @Override
   public boolean equals(Object o) {
-    if(this == o) {
+    if (this == o) {
       return true;
     }
-    if(!(o instanceof PixelImpl)) {
+    if (!(o instanceof PixelImpl)) {
       return false;
     }
-    PixelImpl that = (PixelImpl)o;
+    PixelImpl that = (PixelImpl) o;
     return this.r.equals(that.r) && this.g.equals(that.g) && this.b.equals(that.b);
   }
 

@@ -4,24 +4,24 @@ import model.InstaImage.ImageImpl;
 import model.InstaImage.InstaImage;
 import model.Pixel.Pixel;
 import model.Pixel.PixelImpl;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test class for ImageImpl: unit tests to ensure that image can correctly represent
- * expected pixels inside the image.
+ * Test class for ImageImpl: unit tests to ensure that image can correctly represent expected pixels
+ * inside the image.
  */
 public class ImageImplTest {
+
   private InstaImage image;
   private Pixel[][] pixelGrid;
 
   @Before
   public void setup() {
     pixelGrid = new Pixel[3][3];
-    for(int i=0; i<3; i++) {
-      for (int j=0; j<3;j++) {
-        pixelGrid[i][j] = new PixelImpl(100.0,20.0,50.0);
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        pixelGrid[i][j] = new PixelImpl(100.0, 20.0, 50.0);
       }
     }
 
@@ -31,17 +31,17 @@ public class ImageImplTest {
   @Test
   public void testMakeCheckerBoardOdd() {
     Pixel[][] expectedPixelGrid = new Pixel[3][3];
-    expectedPixelGrid[0][0] = new PixelImpl(255,255,255);
-    expectedPixelGrid[0][1] = new PixelImpl(0,0,0);
-    expectedPixelGrid[0][2] = new PixelImpl(255,255,255);
+    expectedPixelGrid[0][0] = new PixelImpl(255, 255, 255);
+    expectedPixelGrid[0][1] = new PixelImpl(0, 0, 0);
+    expectedPixelGrid[0][2] = new PixelImpl(255, 255, 255);
 
-    expectedPixelGrid[1][0] = new PixelImpl(0,0,0);
-    expectedPixelGrid[1][1] = new PixelImpl(255,255,255);
-    expectedPixelGrid[1][2] = new PixelImpl(0,0,0);
+    expectedPixelGrid[1][0] = new PixelImpl(0, 0, 0);
+    expectedPixelGrid[1][1] = new PixelImpl(255, 255, 255);
+    expectedPixelGrid[1][2] = new PixelImpl(0, 0, 0);
 
-    expectedPixelGrid[2][0] = new PixelImpl(255,255,255);
-    expectedPixelGrid[2][1] = new PixelImpl(0,0,0);
-    expectedPixelGrid[2][2] = new PixelImpl(255,255,255);
+    expectedPixelGrid[2][0] = new PixelImpl(255, 255, 255);
+    expectedPixelGrid[2][1] = new PixelImpl(0, 0, 0);
+    expectedPixelGrid[2][2] = new PixelImpl(255, 255, 255);
     InstaImage expected = new ImageImpl(expectedPixelGrid, 3, 3);
 
     image.makeCheckerBoard(3);
@@ -53,9 +53,9 @@ public class ImageImplTest {
   public void testMakeRainbowOdd() {
     Pixel[][] expectedPixelGrid = new Pixel[7][3];
     // red row
-    expectedPixelGrid[0][0] = new PixelImpl(255,0,0);
-    expectedPixelGrid[0][1] = new PixelImpl(255,0,0);
-    expectedPixelGrid[0][2] = new PixelImpl(255,0,0);
+    expectedPixelGrid[0][0] = new PixelImpl(255, 0, 0);
+    expectedPixelGrid[0][1] = new PixelImpl(255, 0, 0);
+    expectedPixelGrid[0][2] = new PixelImpl(255, 0, 0);
     // orange row
     expectedPixelGrid[1][0] = new PixelImpl(255, 165, 0);
     expectedPixelGrid[1][1] = new PixelImpl(255, 165, 0);
@@ -83,7 +83,7 @@ public class ImageImplTest {
 
     InstaImage expected = new ImageImpl(expectedPixelGrid, 3, 7);
 
-    image.makeRainbow(3,1);
+    image.makeRainbow(3, 1);
 
     assertEquals(expected.toString(), image.toString());
   }

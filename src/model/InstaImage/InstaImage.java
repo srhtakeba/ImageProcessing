@@ -19,7 +19,7 @@ public interface InstaImage {
   /**
    * Creates a Rainbow image represented in pixels.
    *
-   * @param width  width of the image, in pixels
+   * @param width       width of the image, in pixels
    * @param colorHeight height of each color in the resulting rainbow image, in pixels
    * @return Rainbow image represented in pixels
    */
@@ -27,18 +27,21 @@ public interface InstaImage {
 
   /**
    * Getter method for the pixel grid of this image.
+   *
    * @return the pixel grid.
    */
   public Pixel[][] getPixelGrid();
 
   /**
    * Getter method for the width of this image.
+   *
    * @return int value width of this image in pixels.
    */
   public int getWidth();
 
   /**
    * Getter method for the height of this image.
+   *
    * @return int value height of this image in pixels.
    */
   public int getHeight();

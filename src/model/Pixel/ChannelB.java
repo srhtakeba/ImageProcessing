@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Class to represent a blue channel for a pixel.
  */
-public class ChannelB extends ChannelImpl{
+public class ChannelB extends ChannelImpl {
 
   /**
    * Constructs a {@CODE ChannelB} object.
@@ -21,10 +21,10 @@ public class ChannelB extends ChannelImpl{
     if (this == o) {
       return true;
     }
-    if(!(o instanceof ChannelB)) {
+    if (!(o instanceof ChannelB)) {
       return false;
     }
-    ChannelB that = (ChannelB)o;
+    ChannelB that = (ChannelB) o;
     return that.getValue() == this.getValue();
   }
 

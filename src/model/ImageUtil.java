@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
@@ -15,11 +13,11 @@ import model.Pixel.PixelImpl;
  * This class contains utility methods to read a PPM image from file and simply print its contents.
  * Feel free to change this method as required.
  */
-public class ImageUtil{
+public class ImageUtil {
 
   int cols;
   int rows;
-  int[][] importedImage = new int[cols][rows];
+  int[][] importedImage;
 
   public ImageUtil(int cols, int rows, int[][] importedImage) {
     this.cols = cols;

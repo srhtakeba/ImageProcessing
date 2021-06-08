@@ -1,11 +1,11 @@
 package model.Pixel;
 
-import java.util.Objects;
 
 /**
  * Abstract class for three colors, red, green, and blue.
  */
-public abstract class ChannelImpl implements Channel{
+public abstract class ChannelImpl implements Channel {
+
   private int value;
 
   /**
@@ -29,17 +29,16 @@ public abstract class ChannelImpl implements Channel{
 
   @Override
   public void setValue(double n) {
-    if(n<0) {
+    if (n < 0) {
       this.value = 0;
       return;
     }
-    if(n>255) {
+    if (n > 255) {
       this.value = 255;
       return;
-    }
-    else {
+    } else {
       // assign this value to the rounded int value of the given double
-      this.value = (int)(n+0.5);
+      this.value = (int) (n + 0.5);
     }
   }
 

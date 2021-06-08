@@ -33,12 +33,12 @@ public class InstagramModelImpl implements InstagramModel {
    * InstagramModel's image.
    *
    * @param operation String token to represent operation.
-   * @throws IllegalStateException if the model holds no image to be processed.
+   * @throws IllegalStateException    if the model holds no image to be processed.
    * @throws IllegalArgumentException if the given filter operation is invalid.
    */
   @Override
   public void filter(String operation) throws IllegalStateException, IllegalArgumentException {
-    if(this.image == null) {
+    if (this.image == null) {
       throw new IllegalStateException("There is no image to be filtered.");
     }
     switch (operation.toUpperCase()) {
@@ -66,12 +66,12 @@ public class InstagramModelImpl implements InstagramModel {
    * InstagramModel's image.
    *
    * @param operation String token to represent operation.
-   * @throws IllegalStateException if the model holds no image to be processed.
+   * @throws IllegalStateException    if the model holds no image to be processed.
    * @throws IllegalArgumentException if the given transform operation is invalid.
    */
   @Override
   public void transform(String operation) throws IllegalStateException, IllegalArgumentException {
-    if(this.image == null) {
+    if (this.image == null) {
       throw new IllegalStateException("There is no image to be transformed.");
     }
     switch (operation.toUpperCase()) {
@@ -86,7 +86,9 @@ public class InstagramModelImpl implements InstagramModel {
     }
   }
 
-  private void greyscaleImage() { new GreyscaleOperation().apply(image.getPixelGrid()); }
+  private void greyscaleImage() {
+    new GreyscaleOperation().apply(image.getPixelGrid());
+  }
 
   private void sepiaToneImage() {
     new SepiaToneOperation().apply(image.getPixelGrid());
@@ -103,8 +105,7 @@ public class InstagramModelImpl implements InstagramModel {
   public void readPPM(String filename) throws IllegalArgumentException {
     try {
       this.image = ImageUtil.readPPM(filename);
-    }
-    catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException(e.getMessage());
     }
   }
@@ -114,13 +115,13 @@ public class InstagramModelImpl implements InstagramModel {
    * values for each pixel. Creates a new file, naming it instaImage.ppm, and writes the image
    * content to it for this image.
    *
-   *  @param title the desired name for the resulting exported ppm file
+   * @param title the desired name for the resulting exported ppm file
    * @throws IllegalStateException if the file creation, export did not work, or if there is no
    *                               image to be exported.
    */
   @Override
   public void exportAsPPM(String title) throws IllegalStateException {
-    if(this.image == null) {
+    if (this.image == null) {
       throw new IllegalStateException("There is not image to be exported.");
     }
     String filename = title + ".ppm";
@@ -204,18 +205,19 @@ public class InstagramModelImpl implements InstagramModel {
 
   /**
    * Save the current image to this model's log.
+   *
    * @throws IllegalStateException if there is no image to be saved
    */
   @Override
   public void save() throws IllegalStateException {
-    if(this.image == null) {
+    if (this.image == null) {
       throw new IllegalStateException("No image to be saved.");
     }
     int copyHeight = this.image.getHeight();
     int copyWidth = this.image.getWidth();
     Pixel[][] copy = new Pixel[copyHeight][copyWidth];
-    for(int i=0;i<copyHeight;i++) {
-      for(int j=0;j<copyWidth;j++) {
+    for (int i = 0; i < copyHeight; i++) {
+      for (int j = 0; j < copyWidth; j++) {
         copy[i][j] = new PixelImpl(this.image.getPixelGrid()[i][j]);
       }
     }
@@ -225,11 +227,12 @@ public class InstagramModelImpl implements InstagramModel {
 
   /**
    * Return to the last saved image in this model's log. You can not undo a retrieve.
+   *
    * @throws IllegalStateException if there is no image to be retrieved
    */
   @Override
   public void retrieve() {
-    if(this.log.size() <= 0) {
+    if (this.log.size() <= 0) {
       throw new IllegalStateException("No image to be retrieved.");
     }
     InstaImage prev = exportAsInstaImage();
