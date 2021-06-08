@@ -1,12 +1,14 @@
 package model.FilterOperation;
 
 import model.Pixel.Channel;
-import model.Pixel.ChannelImpl;
 import model.Pixel.Pixel;
 
+/**
+ * FilterImpl holds kernel and apply kernel to images.
+ */
 public abstract class FilterImpl implements FilterOperation {
 
-  private final Double[][] kernel; // the kernel of this specific Filter operation
+  private final Double[][] kernel;
 
   FilterImpl(Double[][] kernel) {
     this.kernel = kernel;
@@ -53,46 +55,56 @@ public abstract class FilterImpl implements FilterOperation {
    * @param channelMatrix the channel to be processed.
    */
   private void process(Channel[][] channelMatrix) {
-    Double[][] copy = new Double[channelMatrix.length][channelMatrix[0].length];
-    for (int i = 0; i < channelMatrix.length; i++) {
-      for (int j = 0; j < channelMatrix[0].length; j++) {
-        copy[i][j] = Double.valueOf(channelMatrix[i][j].getValue());
-      }
-    }
+//    Double[][] copy = new Double[channelMatrix.length][channelMatrix[0].length];
+//    for (int i = 0; i < channelMatrix.length; i++) {
+//      for (int j = 0; j < channelMatrix[0].length; j++) {
+//        copy[i][j] = Double.valueOf(channelMatrix[i][j].getValue());
+//      }
+//    }
 
     int kernelHalf = (int) kernel.length / 2;
+    int kernelCenter = (int) kernel.length / 2;
+
     // iterate through the channelMatrix
     for (int i = 0; i < channelMatrix.length; i++) {
-      for (int j = 0; j < channelMatrix[0].length; j++) {
+      for (int j = 0; j < channelMatrix[i].length; j++) {
         double appliedResult = 0;
-        for (int k = 0; k < kernel.length; k++) {
-          for (int d = 0; d < kernel[0].length; d++) {
-            int kDiff = (kernel.length - i) - k;
-            int dDiff = (kernel[0].length - j) - d;
-            if ((kDiff < kernel.length) && (kDiff >= 0) && (dDiff < kernel[0].length) && (dDiff
-                >= 0)) {
-              int channelSurroundiIndex;
-              int channelSurroundjIndex;
-              if (k > kernelHalf) {
-                channelSurroundiIndex = k - kernelHalf + i;
-              } else if (k == kernelHalf) {
-                channelSurroundiIndex = i;
-              } else {
-                channelSurroundiIndex = i - kernelHalf - k;
-              }
-              if (d > kernelHalf) {
-                channelSurroundjIndex = d - kernelHalf + j;
-              } else if (d == kernelHalf) {
-                channelSurroundjIndex = j;
-              } else {
-                channelSurroundjIndex = j - kernelHalf - d;
-              }
 
-              appliedResult +=
-                  (copy[channelSurroundiIndex][channelSurroundjIndex]) * kernel[k][d];
+        // iterate through the kernel
+        for (int k = 0; k < kernel.length; k++) {
+          for (int d = 0; d < kernel[k].length; d++) {
+            int kDiff = i - k;
+            int dDiff = j - d;
+            if(k<kernelHalf) {
+              kDiff = i - k;
+            }
+            else if(k == kernelHalf) {
+              kDiff = i;
+            }
+            else {
+              kDiff = k + i;
+            }
+            if(d<kernelHalf) {
+              dDiff = j - d;
+            }
+            else if(k == kernelHalf) {
+              dDiff = j;
+            }
+            else {
+              dDiff = j + d;
+            }
+
+
+            // checking the bounds
+            if ((kDiff < channelMatrix.length)
+                && (kDiff >= 0)
+                && (dDiff < channelMatrix[i].length)
+                && (dDiff >= 0)) {
+
+              // Kernel needs to centred
+              appliedResult += (channelMatrix[kDiff][dDiff].getValue()) * kernel[k][d];
             }
           }
-
         }
         channelMatrix[i][j].setValue(appliedResult);
       }
