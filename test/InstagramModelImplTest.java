@@ -219,7 +219,4 @@ public class InstagramModelImplTest {
 
     assertEquals(expected.toString(), modelRainbowSingleFile.exportAsInstaImage().toString());
   }
-
-
-
 }

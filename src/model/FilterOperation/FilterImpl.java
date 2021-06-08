@@ -18,7 +18,7 @@ public abstract class FilterImpl implements FilterOperation {
    * Apply this filter operation to the given image by using the kernel specific to this filter
    * operation, and 'layering' it over the given image.
    *
-   * @param image the image to be filtered.
+   * @param image the pixel grid to be filtered.
    * @return the filtered image.
    */
   @Override
@@ -74,20 +74,17 @@ public abstract class FilterImpl implements FilterOperation {
           for (int d = 0; d < kernel[k].length; d++) {
             int kDiff = i;
             int dDiff = j;
-            if(k<kernelHalf) {
+            if (k < kernelHalf) {
               kDiff = i - k;
-            }
-            else if(k > kernelHalf) {
+            } else if (k > kernelHalf) {
               kDiff = k + i;
             }
 
-            if(d<kernelHalf) {
+            if (d < kernelHalf) {
               dDiff = j - d;
-            }
-            else if(d > kernelHalf) {
+            } else if (d > kernelHalf) {
               dDiff = j + d;
             }
-
 
             // checking the bounds
             if ((kDiff < channelMatrix.length)
@@ -95,8 +92,6 @@ public abstract class FilterImpl implements FilterOperation {
                 && (dDiff < channelMatrix[i].length)
                 && (dDiff >= 0)) {
 
-              // Kernel needs to centred
-              //appliedResult += (channelMatrix[kDiff][dDiff].getValue()) * kernel[k][d];
               appliedResult += (copy[kDiff][dDiff]) * kernel[k][d];
             }
           }

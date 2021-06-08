@@ -22,11 +22,6 @@ public class ImageImpl implements InstaImage {
     // don't make anything
   }
 
-//  @Override
-//  public InstagramModelImpl loadImage(String fileName) {
-//    Pixel[][] pixel = ImageUtil.readPPM(fileName);
-//    return pixel;
-//  }
 
   /**
    * Creates a checkerboard image represented in pixels.
@@ -101,6 +96,13 @@ public class ImageImpl implements InstaImage {
   }
 
   public Pixel[][] getPixelGrid() {
+//    Pixel[][] copy = new Pixel[this.getHeight()][this.getWidth()];
+//    for(int i=0;i<getHeight();i++) {
+//      for(int j=0;j<getWidth();j++) {
+//        copy[i][j] = new PixelImpl(pixelGrid[i][j]);
+//      }
+//    }
+//    return copy;
     return this.pixelGrid;
   }
 

@@ -19,7 +19,7 @@ public class PixelImpl implements Pixel{
   }
 
   // copy constructor
-  public PixelImpl(PixelImpl source) {
+  public PixelImpl(Pixel source) {
     this(source.getR().getValue(), source.getG().getValue(), source.getB().getValue());
   }
 

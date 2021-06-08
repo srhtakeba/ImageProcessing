@@ -52,4 +52,16 @@ public interface InstagramModel {
    * @throws IllegalArgumentException if the given image is null
    */
   void readInstaImage(InstaImage image) throws IllegalArgumentException;
+
+  /**
+   * Save the current image to this model's log.
+   * @throws IllegalStateException if there is no image to be saved
+   */
+  void save() throws IllegalStateException;
+
+  /**
+   * Return to the last saved image in this model's log. You can not undo a retrieve.
+   * @throws IllegalStateException if there is no image to be retrieved
+   */
+  void retrieve() throws IllegalStateException;
 }
