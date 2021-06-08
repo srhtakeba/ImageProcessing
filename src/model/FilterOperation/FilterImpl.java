@@ -83,7 +83,7 @@ public abstract class FilterImpl implements FilterOperation {
                 && (dDiff < channelMatrix[i].length)
                 && (dDiff >= 0)) {
 
-              // Kernel needs to centred
+              // Kernel needs to be centred
               appliedResult += (channelMatrix[kDiff][dDiff].getValue()) * kernel[k][d];
             }
           }
