@@ -22,7 +22,7 @@ As per the interface, `InstagramModelImpl` has `filter(...)`, which will adjust 
 Note that these image processes will mutate the image, and you can not return to the past images unless you `save` the version you would like to return to. More information can be seen under 'Saving and Retrieving Images'.
 
 Examples of each operation can be seen below using the following image as an original:\
-![fish.jpeg](/example images/jpeg versions/fish.jpeg)\
+![](example%20images/jpeg%20versions/fish.jpeg)\
 Filter - Blur:\
 ![fishBlur.jpeg](/example images/jpeg versions/fishBlur.jpeg)\
 Filter - Sharpen:\
