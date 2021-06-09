@@ -67,7 +67,7 @@ public interface InstagramModel {
    *
    * @throws IllegalStateException if there is no image to be saved
    */
-  void save() throws IllegalStateException;
+  void save() throws IllegalStateException;//
 
   /**
    * Return to the last saved image in this model's log. You can not undo a retrieve.
