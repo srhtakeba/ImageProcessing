@@ -4,15 +4,21 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Stack;
-import model.filterOperation.BlurOperation;
-import model.filterOperation.SharpenOperation;
-import model.instaImage.ImageImpl;
-import model.instaImage.InstaImage;
+import model.filter.BlurOperation;
+import model.filter.SharpenOperation;
+import model.image.ImageImpl;
+import model.image.InstaImage;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
-import model.transformOperation.GreyscaleOperation;
-import model.transformOperation.SepiaToneOperation;
+import model.transform.GreyscaleOperation;
+import model.transform.SepiaToneOperation;
 
+/**
+ * An implementation of {@code InstagramModel} that uses the {@code InstaImage} object type to
+ * represent its images. Clients are able to save and retrieve their images as they process them
+ * using the given processing methods filter and transform. Currently images can be exported as PPM
+ * files or {@code InstaImage} objects. Same types apply for importing images.
+ */
 public class InstagramModelImpl implements InstagramModel {
 
   InstaImage image;
@@ -190,7 +196,7 @@ public class InstagramModelImpl implements InstagramModel {
   }
 
   /**
-   * Given the {@code InstaImage} object, read the image into the model for processing
+   * Given the {@code InstaImage} object, read the image into the model for processing.
    *
    * @param image the image to be read into this model
    * @throws IllegalArgumentException if the given image is null

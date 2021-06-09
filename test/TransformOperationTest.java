@@ -2,9 +2,9 @@ import static org.junit.Assert.assertArrayEquals;
 
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
-import model.transformOperation.GreyscaleOperation;
-import model.transformOperation.SepiaToneOperation;
-import model.transformOperation.TransformOperation;
+import model.transform.GreyscaleOperation;
+import model.transform.SepiaToneOperation;
+import model.transform.TransformOperation;
 import org.junit.Before;
 import org.junit.Test;
 

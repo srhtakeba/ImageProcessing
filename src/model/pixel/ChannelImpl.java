@@ -42,12 +42,28 @@ public abstract class ChannelImpl implements Channel {
     }
   }
 
+  /**
+   * Checks the given object with this {@code ChannelImpl} for equality.
+   *
+   * @param o the object to be compared to
+   * @return does this {@code ChannelImpl} equal the given object?
+   */
   @Override
   public abstract boolean equals(Object o);
 
+  /**
+   * Produces the hash code for this {@code ChannelImpl} object.
+   *
+   * @return the hash code for this object.
+   */
   @Override
   public abstract int hashCode();
 
+  /**
+   * Produces a {@code String} representation for this {@code ChannelImpl}.
+   *
+   * @return the {@code String} representation
+   */
   @Override
   public abstract String toString();
 }

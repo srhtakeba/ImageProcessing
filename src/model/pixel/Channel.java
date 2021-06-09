@@ -17,12 +17,28 @@ public interface Channel {
    */
   public void setValue(double n);
 
+  /**
+   * Checks the given object with this {@code Channel} for equality.
+   *
+   * @param o the object to be compared to
+   * @return does this {@code Channel} equal the given object?
+   */
   @Override
   public boolean equals(Object o);
 
+  /**
+   * Produces the hash code for this {@code Channel} object.
+   *
+   * @return the hash code for this object.
+   */
   @Override
   public int hashCode();
 
+  /**
+   * Produces a {@code String} representation for this {@code Channel}.
+   *
+   * @return the {@code String} representation
+   */
   @Override
   public String toString();
 }

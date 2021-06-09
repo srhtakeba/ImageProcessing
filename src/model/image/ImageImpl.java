@@ -1,20 +1,36 @@
-package model.instaImage;
+package model.image;
 
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 
+/**
+ * A subclass of {@code InstaImage} that uses the {@code Pixel} type to represent the pixels in the
+ * image. An {@code ImageImpl} holds a pixel grid and a width and height. Clients can also generate
+ * programmatic images using the built-in methods which will override the current pixelGrid, width,
+ * and height of the {@code ImageImpl}.
+ */
 public class ImageImpl implements InstaImage {
 
   Pixel[][] pixelGrid;
   int width;
   int height;
 
+  /**
+   * Constructs a {@code ImageImpl} object.
+   *
+   * @param pixelGrid a {@code 2DArray} of {@code Pixel} holding all the pixels for the image.
+   * @param width     the width of the image in pixels.
+   * @param height    the height of the image in pixels.
+   */
   public ImageImpl(Pixel[][] pixelGrid, int width, int height) {
     this.pixelGrid = pixelGrid;
     this.width = width;
     this.height = height;
   }
 
+  /**
+   * Convenience constructor for {@code ImageImpl} objects.
+   */
   public ImageImpl() {
     // don't make anything
   }
@@ -92,18 +108,38 @@ public class ImageImpl implements InstaImage {
     return image;
   }
 
+  /**
+   * Getter method for the pixel grid of this image.
+   *
+   * @return the pixel grid.
+   */
   public Pixel[][] getPixelGrid() {
     return this.pixelGrid;
   }
 
+  /**
+   * Getter method for the width of this image.
+   *
+   * @return int value width of this image in pixels.
+   */
   public int getWidth() {
     return this.width;
   }
 
+  /**
+   * Getter method for the height of this image.
+   *
+   * @return int value height of this image in pixels.
+   */
   public int getHeight() {
     return this.height;
   }
 
+  /**
+   * Produces a {@code String} representation for this {@code InstaImage}.
+   *
+   * @return the {@code String} representation
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();

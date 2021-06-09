@@ -1,4 +1,4 @@
-package model.transformOperation;
+package model.transform;
 
 import model.pixel.Pixel;
 

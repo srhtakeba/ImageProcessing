@@ -10,49 +10,65 @@ public interface Pixel {
    *
    * @return the R channel with the value.
    */
-  public Channel getR();
+  Channel getR();
 
   /**
    * Get the G channel for this pixel. Not the actual channel itself, but a copy of it.
    *
    * @return the G channel with the value.
    */
-  public Channel getG();
+  Channel getG();
 
   /**
    * Get the B channel for this pixel. Not the actual channel itself, but a copy of it.
    *
    * @return the B channel with the value.
    */
-  public Channel getB();
+  Channel getB();
 
   /**
    * Set the R channel value for this pixel.
    *
    * @param n the new r value for this pixel.
    */
-  public void setR(double n);
+  void setR(double n);
 
   /**
    * Set the G channel value for this pixel.
    *
    * @param n the new g value for this pixel.
    */
-  public void setG(double n);
+  void setG(double n);
 
   /**
    * Set the B channel value for this pixel.
    *
    * @param n the new b value for this pixel.
    */
-  public void setB(double n);
+  void setB(double n);
 
+  /**
+   * Checks the given object with this {@code Pixel} for equality.
+   *
+   * @param o the object to be compared to
+   * @return does this {@code Pixel} equal the given object?
+   */
   @Override
-  public boolean equals(Object o);
+  boolean equals(Object o);
 
+  /**
+   * Produces the hash code for this {@code Pixel} object.
+   *
+   * @return the hash code for this object.
+   */
   @Override
-  public int hashCode();
+  int hashCode();
 
+  /**
+   * Produces a {@code String} representation for this {@code Pixel}.
+   *
+   * @return the {@code String} representation
+   */
   @Override
-  public String toString();
+  String toString();
 }

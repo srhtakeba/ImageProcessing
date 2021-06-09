@@ -27,21 +27,57 @@ public class ChannelTest {
   }
 
   @Test
-  public void testSetValue() {
+  public void testSetValueR() {
     this.r.setValue(200);
     assertEquals(200, this.r.getValue(), 0.001);
   }
 
   @Test
-  public void testSetValueNegative() {
+  public void testSetValueNegativeR() {
     this.r.setValue(-5);
     assertEquals(0, this.r.getValue(), 0.001);
   }
 
   @Test
-  public void testSetValueOvershoot() {
+  public void testSetValueOvershootR() {
     this.r.setValue(300);
     assertEquals(255, this.r.getValue(), 0.001);
+  }
+
+  @Test
+  public void testSetValueG() {
+    this.g.setValue(200);
+    assertEquals(200, this.g.getValue(), 0.001);
+  }
+
+  @Test
+  public void testSetValueNegativeG() {
+    this.g.setValue(-5);
+    assertEquals(0, this.g.getValue(), 0.001);
+  }
+
+  @Test
+  public void testSetValueOvershootG() {
+    this.g.setValue(300);
+    assertEquals(255, this.g.getValue(), 0.001);
+  }
+
+  @Test
+  public void testSetValueB() {
+    this.b.setValue(200);
+    assertEquals(200, this.b.getValue(), 0.001);
+  }
+
+  @Test
+  public void testSetValueNegativeB() {
+    this.b.setValue(-5);
+    assertEquals(0, this.b.getValue(), 0.001);
+  }
+
+  @Test
+  public void testSetValueOvershootB() {
+    this.b.setValue(300);
+    assertEquals(255, this.b.getValue(), 0.001);
   }
 
   @Test

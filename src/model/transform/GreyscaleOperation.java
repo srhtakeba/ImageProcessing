@@ -1,4 +1,4 @@
-package model.transformOperation;
+package model.transform;
 
 /**
  * Class to represent a greyscale color transformation on an image. A Greyscale transformation will
@@ -7,7 +7,7 @@ package model.transformOperation;
 public class GreyscaleOperation extends AbstractTransformOperation {
 
   /**
-   * Constructs {@CODE GreyscaleOperation} object.
+   * Constructs {@code GreyscaleOperation} object.
    */
   public GreyscaleOperation() {
     super(new Double[][]{{0.2126, 0.7152, 0.0722},

@@ -1,7 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
-import model.instaImage.ImageImpl;
-import model.instaImage.InstaImage;
+import model.image.ImageImpl;
+import model.image.InstaImage;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 import org.junit.Before;
@@ -14,17 +14,9 @@ import org.junit.Test;
 public class ImageImplTest {
 
   private InstaImage image;
-  private Pixel[][] pixelGrid;
 
   @Before
   public void setup() {
-    pixelGrid = new Pixel[3][3];
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 3; j++) {
-        pixelGrid[i][j] = new PixelImpl(100.0, 20.0, 50.0);
-      }
-    }
-
     image = new ImageImpl();
   }
 

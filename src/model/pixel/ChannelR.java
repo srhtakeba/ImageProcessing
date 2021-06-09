@@ -16,6 +16,12 @@ public class ChannelR extends ChannelImpl {
     super(value);
   }
 
+  /**
+   * Checks the given object with this {@code ChannelR} for equality.
+   *
+   * @param o the object to be compared to
+   * @return does this {@code ChannelR} equal the given object?
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -28,11 +34,21 @@ public class ChannelR extends ChannelImpl {
     return that.getValue() == this.getValue();
   }
 
+  /**
+   * Produces the hash code for this {@code ChannelR} object.
+   *
+   * @return the hash code for this object.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(this.getValue(), 1);
   }
 
+  /**
+   * Produces a {@code String} representation for this {@code ChannelR}.
+   *
+   * @return the {@code String} representation
+   */
   @Override
   public String toString() {
     return "R: " + this.getValue();

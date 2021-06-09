@@ -1,4 +1,4 @@
-package model.transformOperation;
+package model.transform;
 
 /**
  * Class to represent a sepia color transformation on an image. A Sepia transformation will change
@@ -7,7 +7,7 @@ package model.transformOperation;
 public class SepiaToneOperation extends AbstractTransformOperation {
 
   /**
-   * Constructs {@CODE SepiaToneOperation} object.
+   * Constructs {@code SepiaToneOperation} object.
    */
   public SepiaToneOperation() {
     super(new Double[][]{{0.393, 0.769, 0.189},

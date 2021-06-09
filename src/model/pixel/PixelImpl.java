@@ -32,36 +32,72 @@ public class PixelImpl implements Pixel {
     this(source.getR().getValue(), source.getG().getValue(), source.getB().getValue());
   }
 
+  /**
+   * Get the R channel for this pixel. Not the actual channel itself, but a copy of it.
+   *
+   * @return the R channel with the value.
+   */
   @Override
   public Channel getR() {
     return new ChannelR(this.r.getValue());
   }
 
+  /**
+   * Get the G channel for this pixel. Not the actual channel itself, but a copy of it.
+   *
+   * @return the G channel with the value.
+   */
   @Override
   public Channel getG() {
     return new ChannelG(this.g.getValue());
   }
 
+  /**
+   * Get the B channel for this pixel. Not the actual channel itself, but a copy of it.
+   *
+   * @return the B channel with the value.
+   */
   @Override
   public Channel getB() {
     return new ChannelB(this.b.getValue());
   }
 
+  /**
+   * Set the R channel value for this pixel.
+   *
+   * @param n the new r value for this pixel.
+   */
   @Override
   public void setR(double n) {
     this.r.setValue(n);
   }
 
+  /**
+   * Set the G channel value for this pixel.
+   *
+   * @param n the new g value for this pixel.
+   */
   @Override
   public void setG(double n) {
     this.g.setValue(n);
   }
 
+  /**
+   * Set the B channel value for this pixel.
+   *
+   * @param n the new b value for this pixel.
+   */
   @Override
   public void setB(double n) {
     this.b.setValue(n);
   }
 
+  /**
+   * Checks the given object with this {@code PixelImpl} for equality.
+   *
+   * @param o the object to be compared to
+   * @return does this {@code PixelImpl} equal the given object?
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -74,11 +110,21 @@ public class PixelImpl implements Pixel {
     return this.r.equals(that.r) && this.g.equals(that.g) && this.b.equals(that.b);
   }
 
+  /**
+   * Produces the hash code for this {@code PixelImpl} object.
+   *
+   * @return the hash code for this object.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(r.getValue(), g.getValue(), b.getValue());
   }
 
+  /**
+   * Produces a {@code String} representation for this {@code PixelImpl}.
+   *
+   * @return the {@code String} representation
+   */
   @Override
   public String toString() {
     return this.r + " " + this.g + " " + this.b;

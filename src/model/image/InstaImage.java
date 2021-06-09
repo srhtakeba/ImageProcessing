@@ -1,5 +1,4 @@
-package model.instaImage;
-
+package model.image;
 
 import model.pixel.Pixel;
 
@@ -14,7 +13,7 @@ public interface InstaImage {
    * @param size size of the board
    * @return checkerboard image represented in pixels
    */
-  public ImageImpl makeCheckerBoard(int size);
+  ImageImpl makeCheckerBoard(int size);
 
   /**
    * Creates a Rainbow image represented in pixels.
@@ -23,27 +22,36 @@ public interface InstaImage {
    * @param colorHeight height of each color in the resulting rainbow image, in pixels
    * @return Rainbow image represented in pixels
    */
-  public ImageImpl makeRainbow(int width, int colorHeight);
+  ImageImpl makeRainbow(int width, int colorHeight);
 
   /**
    * Getter method for the pixel grid of this image.
    *
    * @return the pixel grid.
    */
-  public Pixel[][] getPixelGrid();
+  Pixel[][] getPixelGrid();
 
   /**
    * Getter method for the width of this image.
    *
    * @return int value width of this image in pixels.
    */
-  public int getWidth();
+  int getWidth();
 
   /**
    * Getter method for the height of this image.
    *
    * @return int value height of this image in pixels.
    */
-  public int getHeight();
+  int getHeight();
+
+  /**
+   * Produces a {@code String} representation for this {@code InstaImage}.
+   *
+   * @return the {@code String} representation
+   */
+  @Override
+  public String toString();
+
 
 }

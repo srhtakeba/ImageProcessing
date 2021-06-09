@@ -1,4 +1,4 @@
-package model.filterOperation;
+package model.filter;
 
 import model.pixel.Channel;
 import model.pixel.Pixel;

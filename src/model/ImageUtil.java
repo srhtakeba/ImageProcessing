@@ -3,8 +3,8 @@ package model;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
-import model.instaImage.ImageImpl;
-import model.instaImage.InstaImage;
+import model.image.ImageImpl;
+import model.image.InstaImage;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 
@@ -18,12 +18,6 @@ public class ImageUtil {
   int cols;
   int rows;
   int[][] importedImage;
-
-  public ImageUtil(int cols, int rows, int[][] importedImage) {
-    this.cols = cols;
-    this.rows = rows;
-    this.importedImage = importedImage;
-  }
 
   /**
    * Read an image file in the PPM format and print the colors.
@@ -85,7 +79,11 @@ public class ImageUtil {
     return new ImageImpl(importedRaw, width, height);
   }
 
-  //demo main
+  /**
+   * Demo main method.
+   *
+   * @param args system inputs.
+   */
   public static void main(String[] args) {
     String filename;
 

@@ -2,9 +2,9 @@
 
 import static org.junit.Assert.assertArrayEquals;
 
-import model.filterOperation.BlurOperation;
-import model.filterOperation.FilterOperation;
-import model.filterOperation.SharpenOperation;
+import model.filter.BlurOperation;
+import model.filter.FilterOperation;
+import model.filter.SharpenOperation;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 import org.junit.Before;

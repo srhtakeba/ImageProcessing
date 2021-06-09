@@ -1,7 +1,11 @@
 package model;
 
-import model.instaImage.InstaImage;
+import model.image.InstaImage;
 
+/**
+ * Interface to represent a model that can take in images and process them by changing quality or
+ * colors patterns.
+ */
 public interface InstagramModel {
 
   /**
@@ -51,7 +55,7 @@ public interface InstagramModel {
   InstaImage exportAsInstaImage() throws IllegalStateException;
 
   /**
-   * Given the {@code InstaImage} object, read the image into the model for processing
+   * Given the {@code InstaImage} object, read the image into the model for processing.
    *
    * @param image the image to be read into this model
    * @throws IllegalArgumentException if the given image is null

@@ -1,7 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
-import model.instaImage.ImageImpl;
-import model.instaImage.InstaImage;
+import model.image.ImageImpl;
+import model.image.InstaImage;
 import model.InstagramModel;
 import model.InstagramModelImpl;
 import model.pixel.Pixel;
@@ -9,27 +9,26 @@ import model.pixel.PixelImpl;
 import org.junit.Before;
 import org.junit.Test;
 
-
+/**
+ * Class to hold tests for {@code InstagramModelImpl}.
+ */
 public class InstagramModelImplTest {
 
   private InstagramModel modelCheckerBoard;
-  private InstaImage checkerBoard;
 
   private InstagramModel modelRainbow;
-  private InstaImage rainbow;
 
   private InstagramModel modelRainbowSingleFile;
-  private InstaImage rainbowSingleFile;
 
   @Before
   public void setup() {
-    checkerBoard = new ImageImpl().makeCheckerBoard(3);
+    InstaImage checkerBoard = new ImageImpl().makeCheckerBoard(3);
     modelCheckerBoard = new InstagramModelImpl(checkerBoard);
 
-    rainbow = new ImageImpl().makeRainbow(3, 1);
+    InstaImage rainbow = new ImageImpl().makeRainbow(3, 1);
     modelRainbow = new InstagramModelImpl(rainbow);
 
-    rainbowSingleFile = new ImageImpl().makeRainbow(1, 1);
+    InstaImage rainbowSingleFile = new ImageImpl().makeRainbow(1, 1);
     modelRainbowSingleFile = new InstagramModelImpl(rainbowSingleFile);
   }
 
