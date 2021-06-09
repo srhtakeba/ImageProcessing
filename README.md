@@ -30,7 +30,7 @@ Note that these image processes will mutate the image, and you can not return to
 Source: Katsuhiko Nakanishi (Contributor to the project)\
 Note: the picture examples shown on this README.md are higher quality versions of the images included in the examplePPM folder due to the photos being too large.\
 Examples of each operation can be seen below using the following image as an original:\
-![](images/jpeg/fish.jpg)\
+![](images/originals/fishLowest.jpg)\
 Filter - Blur:\
 ![](images/jpeg/fishBlur.jpg)\
 Filter - Sharpen:\
@@ -78,7 +78,7 @@ Again, all images shown in this README.md are jpeg images so that they show up, 
 Using the following image as an original, here are the results of applying certain filters and transformations, some in combination.\
 Source: Katsuhiko Nakanishi (Contributor to the project)\
 Note: the picture examples shown on this README.md are higher quality versions of the images included in the examplePPM folder due to the photos being too large.\
-![](images/originals/canyonLowQuality.jpg)\
+![](images/originals/canyonLowest.jpg)\
 Filter - Blur:\
 ![](images/jpeg/canyonBlur.jpg)\
 Transform - Sharpen:\
