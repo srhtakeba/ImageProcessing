@@ -198,6 +198,30 @@ public class InstagramModelImplTest {
   }
 
   @Test
+  public void testBlurAndGreyscaleRainbow() {
+    modelRainbowSingleFile.filter("blur");
+    modelRainbowSingleFile.transform("greyscale");
+    Pixel[][] expectedPixelGrid = new Pixel[7][1];
+    // red row
+    expectedPixelGrid[0][0] = new PixelImpl(35, 35, 35);
+    // orange row
+    expectedPixelGrid[1][0] = new PixelImpl(79, 79, 79);
+    // yellow row
+    expectedPixelGrid[2][0] = new PixelImpl(103, 103, 103);
+    // green row
+    expectedPixelGrid[3][0] = new PixelImpl(78, 78, 78);
+    // blue row
+    expectedPixelGrid[4][0] = new PixelImpl(31, 31, 31);
+    // indigo row
+    expectedPixelGrid[5][0] = new PixelImpl(29, 29, 29);
+    // violet row
+    expectedPixelGrid[6][0] = new PixelImpl(44, 44, 44);
+    InstaImage expected = new ImageImpl(expectedPixelGrid, 1, 7);
+
+    assertEquals(expected.toString(), modelRainbowSingleFile.exportAsInstaImage().toString());
+  }
+
+  @Test
   public void testSharpenRainbow() {
     modelRainbowSingleFile.filter("sharpen");
     Pixel[][] expectedPixelGrid = new Pixel[7][1];
