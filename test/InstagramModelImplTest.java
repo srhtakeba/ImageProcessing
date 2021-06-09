@@ -269,70 +269,50 @@ public class InstagramModelImplTest {
     assertEquals(expected.toString(), modelRainbowSingleFile.exportAsInstaImage().toString());
   }
 
-  @Test (expected = IllegalStateException.class)
+  @Test(expected = IllegalStateException.class)
   public void testRetrieveNoImageException() {
     InstagramModel model = new InstagramModelImpl();
     model.retrieve();
   }
 
-  @Test (expected = IllegalStateException.class)
+  @Test(expected = IllegalStateException.class)
   public void testSaveNoImageException() {
     InstagramModel model = new InstagramModelImpl();
     model.save();
   }
 
-  @Test (expected = IllegalStateException.class)
+  @Test(expected = IllegalStateException.class)
   public void testBlurNoImageException() {
     InstagramModel model = new InstagramModelImpl();
     model.filter("bLuR");
   }
 
-  @Test (expected = IllegalStateException.class)
+  @Test(expected = IllegalStateException.class)
   public void testSharpenNoImageException() {
     InstagramModel model = new InstagramModelImpl();
     model.filter("SHARPEN");
   }
 
-  @Test (expected = IllegalStateException.class)
+  @Test(expected = IllegalStateException.class)
   public void testGreyscaleNoImageException() {
     InstagramModel model = new InstagramModelImpl();
     model.transform("greyscale");
   }
 
-  @Test (expected = IllegalStateException.class)
+  @Test(expected = IllegalStateException.class)
   public void testSepiaNoImageException() {
     InstagramModel model = new InstagramModelImpl();
     model.transform("sepia");
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testFilterInvalidArgument() {
     modelCheckerBoard.transform("mattify");
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testTransformInvalidArgument() {
     modelRainbow.transform("vibrant");
   }
-
-//  @Test
-//  public void testExecute() {
-//    InstagramModel model = new InstagramModelImpl();
-//    model.readPPM("examplesPPM/fish.ppm");
-//    model.save();
-//    model.filter("blur");
-//    model.exportAsPPM("fishBlur");
-//    model.retrieve();
-//    model.save();
-//    model.filter("sharpen");
-//    model.exportAsPPM("fishSharpen");
-//    model.retrieve();
-//    model.save();
-//    model.transform("greyscale");
-//    model.exportAsPPM("fishGreyscale");
-//    model.retrieve();
-//    model.save();
-//    model.transform("sepia");
-//    model.exportAsPPM("fishSepia");
-//  }
+  
 }
