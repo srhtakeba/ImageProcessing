@@ -1,6 +1,6 @@
 package model;
 
-import model.InstaImage.InstaImage;
+import model.instaImage.InstaImage;
 
 public interface InstagramModel {
 

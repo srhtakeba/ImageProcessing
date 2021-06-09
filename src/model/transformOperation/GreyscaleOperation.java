@@ -1,4 +1,4 @@
-package model.TransformOperation;
+package model.transformOperation;
 
 /**
  * Class to represent a greyscale color transformation on an image. A Greyscale transformation will

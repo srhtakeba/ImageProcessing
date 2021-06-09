@@ -1,6 +1,6 @@
-package model.TransformOperation;
+package model.transformOperation;
 
-import model.Pixel.Pixel;
+import model.pixel.Pixel;
 
 /**
  * A class to represent the operations of a color transformation of an image. A color transformation

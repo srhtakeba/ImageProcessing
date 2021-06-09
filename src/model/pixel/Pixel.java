@@ -1,4 +1,4 @@
-package model.Pixel;
+package model.pixel;
 
 /**
  * Interface to represent a pixel with three-color channels.

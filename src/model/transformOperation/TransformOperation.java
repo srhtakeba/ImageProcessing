@@ -1,6 +1,6 @@
-package model.TransformOperation;
+package model.transformOperation;
 
-import model.Pixel.Pixel;
+import model.pixel.Pixel;
 
 /**
  * Class to represent a operation that can be performed on an image which uses a 2DArray of {@code

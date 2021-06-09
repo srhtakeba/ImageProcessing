@@ -2,10 +2,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import model.Pixel.Channel;
-import model.Pixel.ChannelB;
-import model.Pixel.ChannelG;
-import model.Pixel.ChannelR;
+import model.pixel.Channel;
+import model.pixel.ChannelB;
+import model.pixel.ChannelG;
+import model.pixel.ChannelR;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,10 +1,10 @@
 import static org.junit.Assert.assertArrayEquals;
 
-import model.Pixel.Pixel;
-import model.Pixel.PixelImpl;
-import model.TransformOperation.GreyscaleOperation;
-import model.TransformOperation.SepiaToneOperation;
-import model.TransformOperation.TransformOperation;
+import model.pixel.Pixel;
+import model.pixel.PixelImpl;
+import model.transformOperation.GreyscaleOperation;
+import model.transformOperation.SepiaToneOperation;
+import model.transformOperation.TransformOperation;
 import org.junit.Before;
 import org.junit.Test;
 

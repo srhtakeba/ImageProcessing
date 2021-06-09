@@ -4,14 +4,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Stack;
-import model.FilterOperation.BlurOperation;
-import model.FilterOperation.SharpenOperation;
-import model.InstaImage.ImageImpl;
-import model.InstaImage.InstaImage;
-import model.Pixel.Pixel;
-import model.Pixel.PixelImpl;
-import model.TransformOperation.GreyscaleOperation;
-import model.TransformOperation.SepiaToneOperation;
+import model.filterOperation.BlurOperation;
+import model.filterOperation.SharpenOperation;
+import model.instaImage.ImageImpl;
+import model.instaImage.InstaImage;
+import model.pixel.Pixel;
+import model.pixel.PixelImpl;
+import model.transformOperation.GreyscaleOperation;
+import model.transformOperation.SepiaToneOperation;
 
 public class InstagramModelImpl implements InstagramModel {
 

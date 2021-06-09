@@ -3,10 +3,10 @@ package model;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
-import model.InstaImage.ImageImpl;
-import model.InstaImage.InstaImage;
-import model.Pixel.Pixel;
-import model.Pixel.PixelImpl;
+import model.instaImage.ImageImpl;
+import model.instaImage.InstaImage;
+import model.pixel.Pixel;
+import model.pixel.PixelImpl;
 
 
 /**

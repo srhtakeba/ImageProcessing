@@ -1,4 +1,4 @@
-package model.TransformOperation;
+package model.transformOperation;
 
 /**
  * Class to represent a sepia color transformation on an image. A Sepia transformation will change

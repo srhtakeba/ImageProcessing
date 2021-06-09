@@ -1,4 +1,4 @@
-package model.Pixel;
+package model.pixel;
 
 /**
  * Interface to represent an 8-bit channel that holds a value for an rgb color.

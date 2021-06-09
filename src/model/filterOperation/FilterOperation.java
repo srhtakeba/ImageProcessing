@@ -1,6 +1,6 @@
-package model.FilterOperation;
+package model.filterOperation;
 
-import model.Pixel.Pixel;
+import model.pixel.Pixel;
 
 /**
  * Filter operation holds filters and applies to images.

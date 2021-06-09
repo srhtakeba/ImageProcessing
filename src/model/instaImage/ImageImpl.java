@@ -1,7 +1,7 @@
-package model.InstaImage;
+package model.instaImage;
 
-import model.Pixel.Pixel;
-import model.Pixel.PixelImpl;
+import model.pixel.Pixel;
+import model.pixel.PixelImpl;
 
 public class ImageImpl implements InstaImage {
 

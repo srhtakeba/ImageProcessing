@@ -1,7 +1,7 @@
-package model.InstaImage;
+package model.instaImage;
 
 
-import model.Pixel.Pixel;
+import model.pixel.Pixel;
 
 /**
  * Interface to represent a Image.

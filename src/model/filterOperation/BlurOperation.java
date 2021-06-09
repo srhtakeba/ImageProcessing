@@ -1,4 +1,4 @@
-package model.FilterOperation;
+package model.filterOperation;
 
 /**
  * Class to represent a Blur kernel filter.

@@ -1,7 +1,7 @@
-package model.FilterOperation;
+package model.filterOperation;
 
-import model.Pixel.Channel;
-import model.Pixel.Pixel;
+import model.pixel.Channel;
+import model.pixel.Pixel;
 
 /**
  * FilterImpl holds kernel and apply kernel to images.
