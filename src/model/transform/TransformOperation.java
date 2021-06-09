@@ -1,5 +1,6 @@
 package model.transform;
 
+import model.image.InstaImage;
 import model.pixel.Pixel;
 
 /**
@@ -13,9 +14,9 @@ public interface TransformOperation {
    * Apply this color transformation to the given image by using the transform matrix specific to
    * this color transformation, and multiplying it against the given {@code Pixel[][]} image.
    *
-   * @param image the image to be transformed.
+   * @param pixelGrid the pixel grid to be transformed.
    * @return the transformed image.
    */
-  public Pixel[][] apply(Pixel[][] image);
+  InstaImage apply(Pixel[][] pixelGrid);
 
 }

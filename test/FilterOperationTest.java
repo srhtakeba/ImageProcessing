@@ -5,6 +5,8 @@ import static org.junit.Assert.assertArrayEquals;
 import model.filter.BlurOperation;
 import model.filter.FilterOperation;
 import model.filter.SharpenOperation;
+import model.image.ImageImpl;
+import model.image.InstaImage;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 import org.junit.Before;
@@ -20,8 +22,8 @@ public class FilterOperationTest {
   private FilterOperation blur;
   private FilterOperation sharpen;
 
-  private Pixel[][] image;
-  private Pixel[][] image2;
+  private Pixel[][] grid;
+  private Pixel[][] grid2;
 
   @Before
   public void setup() {
@@ -29,18 +31,18 @@ public class FilterOperationTest {
     sharpen = new SharpenOperation();
 
     // make a 3x3 image of the same colors
-    image = new Pixel[3][3];
+    grid = new Pixel[3][3];
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
-        image[i][j] = new PixelImpl(100.0, 20.0, 50.0);
+        grid[i][j] = new PixelImpl(100.0, 20.0, 50.0);
       }
     }
 
     // make a 3x1 image of different colors
-    image2 = new Pixel[3][1];
-    image2[0][0] = new PixelImpl(25, 25, 25);
-    image2[1][0] = new PixelImpl(50, 50, 50);
-    image2[2][0] = new PixelImpl(75, 75, 75);
+    grid2 = new Pixel[3][1];
+    grid2[0][0] = new PixelImpl(25, 25, 25);
+    grid2[1][0] = new PixelImpl(50, 50, 50);
+    grid2[2][0] = new PixelImpl(75, 75, 75);
   }
 
   @Test
@@ -57,8 +59,9 @@ public class FilterOperationTest {
     expected[2][0] = new PixelImpl(75, 15, 38);
     expected[2][1] = new PixelImpl(56, 11, 28);
     expected[2][2] = new PixelImpl(56, 11, 28);
-    image = blur.apply(image);
-    assertArrayEquals(expected, image);
+    InstaImage image = new ImageImpl(grid, 3, 3);
+    grid = blur.apply(grid).getPixelGrid();
+    assertArrayEquals(expected, grid);
   }
 
   @Test
@@ -67,8 +70,9 @@ public class FilterOperationTest {
     expected[0][0] = new PixelImpl(28, 28, 28);
     expected[1][0] = new PixelImpl(28, 28, 28);
     expected[2][0] = new PixelImpl(42, 42, 42);
-    image2 = blur.apply(image2);
-    assertArrayEquals(expected, image2);
+    InstaImage image2 = new ImageImpl(grid2, 1, 3);
+    grid2 = blur.apply(grid).getPixelGrid();
+    assertArrayEquals(expected, grid2);
   }
 
   @Test
@@ -85,8 +89,9 @@ public class FilterOperationTest {
     expected[2][0] = new PixelImpl(75, 15, 38);
     expected[2][1] = new PixelImpl(113, 23, 56);
     expected[2][2] = new PixelImpl(113, 23, 56);
-    image = sharpen.apply(image);
-    assertArrayEquals(expected, image);
+    InstaImage image = new ImageImpl(grid, 3, 3);
+    grid = blur.apply(grid).getPixelGrid();
+    assertArrayEquals(expected, grid);
   }
 
   @Test
@@ -95,8 +100,9 @@ public class FilterOperationTest {
     expected[0][0] = new PixelImpl(16, 16, 16);
     expected[1][0] = new PixelImpl(34, 34, 34);
     expected[2][0] = new PixelImpl(53, 53, 53);
-    image2 = sharpen.apply(image2);
-    assertArrayEquals(expected, image2);
+    InstaImage image2 = new ImageImpl(grid2, 1, 3);
+    grid2 = blur.apply(grid).getPixelGrid();
+    assertArrayEquals(expected, grid2);
   }
 
 }

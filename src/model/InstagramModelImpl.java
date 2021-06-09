@@ -60,11 +60,11 @@ public class InstagramModelImpl implements InstagramModel {
   }
 
   private void blurImage() {
-    new BlurOperation().apply(image.getPixelGrid());
+    this.image = new BlurOperation().apply(image.getPixelGrid());
   }
 
   private void sharpenImage() {
-    new SharpenOperation().apply(image.getPixelGrid());
+    this.image = new SharpenOperation().apply(image.getPixelGrid());
   }
 
   /**
@@ -93,11 +93,13 @@ public class InstagramModelImpl implements InstagramModel {
   }
 
   private void greyscaleImage() {
-    new GreyscaleOperation().apply(image.getPixelGrid());
+
+    this.image = new GreyscaleOperation().apply(image.getPixelGrid());
   }
 
   private void sepiaToneImage() {
-    new SepiaToneOperation().apply(image.getPixelGrid());
+
+    this.image = new SepiaToneOperation().apply(image.getPixelGrid());
   }
 
   /**
@@ -192,7 +194,15 @@ public class InstagramModelImpl implements InstagramModel {
     if (this.image == null) {
       throw new IllegalStateException("There is not image to be exported.");
     }
-    return this.image;
+    int copyHeight = this.image.getHeight();
+    int copyWidth = this.image.getWidth();
+    Pixel[][] copy = new Pixel[copyHeight][copyWidth];
+    for (int i = 0; i < copyHeight; i++) {
+      for (int j = 0; j < copyWidth; j++) {
+        copy[i][j] = new PixelImpl(this.image.getPixelGrid()[i][j]);
+      }
+    }
+    return new ImageImpl(copy, copyWidth, copyHeight);
   }
 
   /**

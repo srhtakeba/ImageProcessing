@@ -114,7 +114,15 @@ public class ImageImpl implements InstaImage {
    * @return the pixel grid.
    */
   public Pixel[][] getPixelGrid() {
-    return this.pixelGrid;
+    Pixel[][] copy = new Pixel[height][width];
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        // use PixelImpl copy constructor
+        copy[i][j] = new PixelImpl(pixelGrid[i][j]);
+      }
+    }
+    return copy;
+    //return this.pixelGrid;
   }
 
   /**

@@ -1,6 +1,9 @@
 package model.transform;
 
+import model.image.ImageImpl;
+import model.image.InstaImage;
 import model.pixel.Pixel;
+import model.pixel.PixelImpl;
 
 /**
  * A class to represent the operations of a color transformation of an image. A color transformation
@@ -18,27 +21,32 @@ public abstract class AbstractTransformOperation implements TransformOperation {
    * Apply this color transformation to the given image by using the transform matrix specific to
    * this color transformation, and multiplying it against the given {@code Pixel[][]} image.
    *
-   * @param image the image to be transformed.
+   * @param pixelGrid the pixel grid to be transformed.
    * @return the transformed image.
    */
   @Override
-  public Pixel[][] apply(Pixel[][] image) {
+  public InstaImage apply(Pixel[][] pixelGrid) {
     Double[][] resultMatrix;
-    for (int i = 0; i < image.length; i++) {
-      for (int j = 0; j < image[i].length; j++) {
+    Pixel[][] resultGrid = new Pixel[pixelGrid.length][pixelGrid[0].length];
+    for (int i = 0; i < pixelGrid.length; i++) {
+      for (int j = 0; j < pixelGrid[i].length; j++) {
         Double[][] rgbMatrix = new Double[][]{
-            {Double.valueOf(image[i][j].getR().getValue())},
-            {Double.valueOf(image[i][j].getG().getValue())},
-            {Double.valueOf(image[i][j].getB().getValue())}};
+            {Double.valueOf(pixelGrid[i][j].getR().getValue())},
+            {Double.valueOf(pixelGrid[i][j].getG().getValue())},
+            {Double.valueOf(pixelGrid[i][j].getB().getValue())}};
 
         resultMatrix = multiply(rgbMatrix);
 
-        image[i][j].setR(resultMatrix[0][0]);
-        image[i][j].setG(resultMatrix[1][0]);
-        image[i][j].setB(resultMatrix[2][0]);
+//        pixelGrid[i][j].setR(resultMatrix[0][0]);
+//        pixelGrid[i][j].setG(resultMatrix[1][0]);
+//        pixelGrid[i][j].setB(resultMatrix[2][0]);
+        resultGrid[i][j] = new PixelImpl(resultMatrix[0][0],
+            resultMatrix[1][0], resultMatrix[2][0]);
       }
     }
-    return image;
+
+    InstaImage resultImage = new ImageImpl(resultGrid, resultGrid.length, resultGrid[0].length);
+    return resultImage;
   }
 
   /**

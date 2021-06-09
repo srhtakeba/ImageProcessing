@@ -47,7 +47,7 @@ public class TransformOperationTest {
         expected[i][j] = new PixelImpl(39.174, 39.174, 39.174);
       }
     }
-    image = greyscale.apply(image);
+    image = greyscale.apply(image).getPixelGrid();
     assertArrayEquals(expected, image);
   }
 
@@ -57,7 +57,7 @@ public class TransformOperationTest {
     expected[0][0] = new PixelImpl(25, 25, 25);
     expected[1][0] = new PixelImpl(50, 50, 50);
     expected[2][0] = new PixelImpl(75, 75, 75);
-    image2 = greyscale.apply(image2);
+    image2 = greyscale.apply(image2).getPixelGrid();
     assertArrayEquals(expected, image2);
   }
 
@@ -69,7 +69,7 @@ public class TransformOperationTest {
         expected[i][j] = new PixelImpl(64.13, 57.02, 44.43);
       }
     }
-    image = sepia.apply(image);
+    image = sepia.apply(image).getPixelGrid();
     assertArrayEquals(expected, image);
   }
 
@@ -79,7 +79,7 @@ public class TransformOperationTest {
     expected[0][0] = new PixelImpl(33.775, 30.075, 23.425);
     expected[1][0] = new PixelImpl(67.55, 60.15, 46.85);
     expected[2][0] = new PixelImpl(101.325, 90.225, 70.275);
-    image2 = sepia.apply(image2);
+    image2 = sepia.apply(image2).getPixelGrid();
     assertArrayEquals(expected, image2);
   }
 }

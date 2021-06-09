@@ -1,5 +1,6 @@
 package model.filter;
 
+import model.image.InstaImage;
 import model.pixel.Pixel;
 
 /**
@@ -14,5 +15,5 @@ public interface FilterOperation {
    * @param image the image to be filtered.
    * @return the filtered image.
    */
-  public Pixel[][] apply(Pixel[][] image);
+  InstaImage apply(Pixel[][] image);
 }
