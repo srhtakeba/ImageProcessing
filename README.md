@@ -71,3 +71,16 @@ The `setValue(double n)` for `Channel`s take in double values, but they will rou
 `Channel`s are checked for equality based on whether they are the same channel type (R, G, or B), and their values. 
 `Channel` has overriden the `toString()` method, and will be represented with their corresponding channel type, as well as the value. For example, a 125 value holding Blue channel would be represented as below:\
 `B: 125`
+
+## Additional Examples
+Again, all images shown in this README.md are jpeg images so that they show up, however the ppm images used with the `InstagramModel` application can be found in the `images/ppm` folder.
+Using the following image as an original, here are the results of applying certain filters and transformations, some in combination.\
+![](images/jpeg/canyon.jpg)\
+Filter - Blur:\
+![](images/jpeg/canyonBlur.jpg)\
+Filter - Blur and Sepia:\
+![](images/jpeg/canyonBlurAndSepia.jpg)\
+Transform - Sharpen:\
+![](images/jpeg/canyonSharpen.jpg)\
+Transfrom - Sharpen and Greyscale:\
+![](images/jpeg/canyonSharpenAndGreyscale.jpg)
