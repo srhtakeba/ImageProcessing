@@ -1,6 +1,10 @@
 # ImageProcessing
 OOD Image Processing Instagram Model
 
+## The Model Diagram
+Our total model looks like this in a diagram. (Built using IntelliJ)\
+![](images/InstagramModelDiagram.png)\
+
 ## The model interface
 Our model, of the interface `InstagramModel`, includes features to import images of `InstaImage` types, as well as PPM file names. Once an image has been imported
 into the model, the client can choose to filter the image with the options of `blur` and `sharpen`. On top of this, they can also choose to color transform the
