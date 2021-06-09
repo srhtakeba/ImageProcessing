@@ -314,4 +314,25 @@ public class InstagramModelImplTest {
   public void testTransformInvalidArgument() {
     modelRainbow.transform("vibrant");
   }
+
+//  @Test
+//  public void testExecute() {
+//    InstagramModel model = new InstagramModelImpl();
+//    model.readPPM("examplesPPM/fish.ppm");
+//    model.save();
+//    model.filter("blur");
+//    model.exportAsPPM("fishBlur");
+//    model.retrieve();
+//    model.save();
+//    model.filter("sharpen");
+//    model.exportAsPPM("fishSharpen");
+//    model.retrieve();
+//    model.save();
+//    model.transform("greyscale");
+//    model.exportAsPPM("fishGreyscale");
+//    model.retrieve();
+//    model.save();
+//    model.transform("sepia");
+//    model.exportAsPPM("fishSepia");
+//  }
 }
