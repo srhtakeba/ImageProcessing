@@ -25,7 +25,8 @@ public interface InstaImage {
   ImageImpl makeRainbow(int width, int colorHeight);
 
   /**
-   * Getter method for the pixel grid of this image.
+   * Getter method for the pixel grid of this image. Returns a copy of the pixel grid, not a
+   * reference to the pixel grid itself.
    *
    * @return the pixel grid.
    */

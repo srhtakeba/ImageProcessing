@@ -9,7 +9,7 @@ public abstract class ChannelImpl implements Channel {
   private int value;
 
   /**
-   * Constrcuts (@CODE ChannelImpl} object.
+   * Constrcuts (@code ChannelImpl} object.
    *
    * @param value amount of pigment.
    */

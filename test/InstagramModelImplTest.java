@@ -290,25 +290,4 @@ public class InstagramModelImplTest {
   public void testTransformInvalidArgument() {
     modelRainbow.transform("vibrant");
   }
-
-  @Test
-  public void testExecute() {
-    InstagramModel model = new InstagramModelImpl();
-    model.readPPM("examplesPPM/canyon.ppm");
-    model.save();
-    model.filter("blur");
-    model.exportAsPPM("canyonBlur");
-    model.retrieve();
-    model.save();
-    model.filter("sharpen");
-    model.exportAsPPM("canyonSharpen");
-    model.retrieve();
-    model.save();
-    model.transform("greyscale");
-    model.exportAsPPM("canyonGreyscale");
-    model.retrieve();
-    model.save();
-    model.transform("sepia");
-    model.exportAsPPM("canyonSepia");
-  }
 }

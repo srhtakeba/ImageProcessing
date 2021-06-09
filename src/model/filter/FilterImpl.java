@@ -10,7 +10,8 @@ import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 
 /**
- * FilterImpl holds kernel and apply kernel to images.
+ * FilterImpl holds kernels and applies kernel to images in order to alter their appearance. Kernel
+ * application will change the RGB values of the pixels to do so.
  */
 public abstract class FilterImpl implements FilterOperation {
 
@@ -84,16 +85,14 @@ public abstract class FilterImpl implements FilterOperation {
           for (int d = 0; d < kernel[k].length; d++) {
             int kBound = i;
             int dBound = j;
-            if(k<kernelHalf) {
-              kBound = i - (kernelHalf -k);
-            }
-            else if (k > kernelHalf) {
+            if (k < kernelHalf) {
+              kBound = i - (kernelHalf - k);
+            } else if (k > kernelHalf) {
               kBound = i + (k - kernelHalf);
             }
-            if(d<kernelHalf) {
+            if (d < kernelHalf) {
               dBound = j - (kernelHalf - d);
-            }
-            else if (d > kernelHalf) {
+            } else if (d > kernelHalf) {
               dBound = j + (d - kernelHalf);
             }
 

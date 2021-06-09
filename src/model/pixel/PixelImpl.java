@@ -14,7 +14,7 @@ public class PixelImpl implements Pixel {
   private final Channel b;
 
   /**
-   * Conctructs a {@CODE PixelImpl} object, and creates {@CODE ChannelR}, {@CODE ChannelG}, {@CODE
+   * Conctructs a {@code PixelImpl} object, and creates {@code ChannelR}, {@code ChannelG}, {@code
    * ChannelB}.
    *
    * @param r amount of Red(R) pigment.

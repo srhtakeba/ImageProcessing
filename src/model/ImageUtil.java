@@ -15,10 +15,6 @@ import model.pixel.PixelImpl;
  */
 public class ImageUtil {
 
-  int cols;
-  int rows;
-  int[][] importedImage;
-
   /**
    * Read an image file in the PPM format and print the colors.
    *

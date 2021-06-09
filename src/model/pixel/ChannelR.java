@@ -8,7 +8,7 @@ import java.util.Objects;
 public class ChannelR extends ChannelImpl {
 
   /**
-   * Constructs a {@CODE ChannelR} object.
+   * Constructs a {@code ChannelR} object.
    *
    * @param value amount of Red(R) pigment.
    */

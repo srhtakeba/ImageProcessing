@@ -10,12 +10,12 @@ public interface Channel {
    *
    * @return amount of the pigment.
    */
-  public int getValue();
+  int getValue();
 
   /**
    * Set a new amount of the pigment.
    */
-  public void setValue(double n);
+  void setValue(double n);
 
   /**
    * Checks the given object with this {@code Channel} for equality.
@@ -24,7 +24,7 @@ public interface Channel {
    * @return does this {@code Channel} equal the given object?
    */
   @Override
-  public boolean equals(Object o);
+  boolean equals(Object o);
 
   /**
    * Produces the hash code for this {@code Channel} object.
@@ -32,7 +32,7 @@ public interface Channel {
    * @return the hash code for this object.
    */
   @Override
-  public int hashCode();
+  int hashCode();
 
   /**
    * Produces a {@code String} representation for this {@code Channel}.
@@ -40,5 +40,5 @@ public interface Channel {
    * @return the {@code String} representation
    */
   @Override
-  public String toString();
+  String toString();
 }

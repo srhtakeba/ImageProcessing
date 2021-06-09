@@ -1,10 +1,11 @@
 package model.filter;
 
 import model.image.InstaImage;
-import model.pixel.Pixel;
 
 /**
- * Filter operation holds filters and applies to images.
+ * Filter operation holds filters and applies to images. Filters will be applied using kernel
+ * application, which alters the RGB values of the pixels to change the resulting appearance of the
+ * image.
  */
 public interface FilterOperation {
 

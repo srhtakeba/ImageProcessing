@@ -8,7 +8,7 @@ import java.util.Objects;
 public class ChannelB extends ChannelImpl {
 
   /**
-   * Constructs a {@CODE ChannelB} object.
+   * Constructs a {@code ChannelB} object.
    *
    * @param value amount of Blue(B) pigment.
    */

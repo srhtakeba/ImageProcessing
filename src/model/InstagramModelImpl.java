@@ -9,7 +9,6 @@ import model.filter.SharpenOperation;
 import model.image.ImageImpl;
 import model.image.InstaImage;
 import model.pixel.Pixel;
-import model.pixel.PixelImpl;
 import model.transform.GreyscaleOperation;
 import model.transform.SepiaToneOperation;
 

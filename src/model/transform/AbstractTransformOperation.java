@@ -41,9 +41,6 @@ public abstract class AbstractTransformOperation implements TransformOperation {
 
         resultMatrix = multiply(rgbMatrix);
 
-//        pixelGrid[i][j].setR(resultMatrix[0][0]);
-//        pixelGrid[i][j].setG(resultMatrix[1][0]);
-//        pixelGrid[i][j].setB(resultMatrix[2][0]);
         resultGrid[i][j] = new PixelImpl(resultMatrix[0][0],
             resultMatrix[1][0], resultMatrix[2][0]);
       }
