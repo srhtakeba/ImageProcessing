@@ -19,17 +19,21 @@ public abstract class AbstractTransformOperation implements TransformOperation {
 
   /**
    * Apply this color transformation to the given image by using the transform matrix specific to
-   * this color transformation, and multiplying it against the given {@code Pixel[][]} image.
+   * this color transformation, and multiplying it against the given {@code InstaImage} image.
    *
-   * @param pixelGrid the pixel grid to be transformed.
+   * @param image the {@code InstaImage} to be transformed.
    * @return the transformed image.
    */
   @Override
-  public InstaImage apply(Pixel[][] pixelGrid) {
+  public InstaImage apply(InstaImage image) {
+    Pixel[][] pixelGrid = image.getPixelGrid();
+    int height = image.getHeight();
+    int width = image.getWidth();
+
     Double[][] resultMatrix;
-    Pixel[][] resultGrid = new Pixel[pixelGrid.length][pixelGrid[0].length];
-    for (int i = 0; i < pixelGrid.length; i++) {
-      for (int j = 0; j < pixelGrid[i].length; j++) {
+    Pixel[][] resultGrid = new Pixel[height][width];
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
         Double[][] rgbMatrix = new Double[][]{
             {Double.valueOf(pixelGrid[i][j].getR().getValue())},
             {Double.valueOf(pixelGrid[i][j].getG().getValue())},
@@ -45,7 +49,7 @@ public abstract class AbstractTransformOperation implements TransformOperation {
       }
     }
 
-    InstaImage resultImage = new ImageImpl(resultGrid, resultGrid.length, resultGrid[0].length);
+    InstaImage resultImage = new ImageImpl(resultGrid, width, height);
     return resultImage;
   }
 

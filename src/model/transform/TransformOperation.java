@@ -12,11 +12,11 @@ public interface TransformOperation {
 
   /**
    * Apply this color transformation to the given image by using the transform matrix specific to
-   * this color transformation, and multiplying it against the given {@code Pixel[][]} image.
+   * this color transformation, and multiplying it against the given {@code InstaImage} image.
    *
-   * @param pixelGrid the pixel grid to be transformed.
+   * @param image the {@code InstaImage} to be transformed.
    * @return the transformed image.
    */
-  InstaImage apply(Pixel[][] pixelGrid);
+  InstaImage apply(InstaImage image);
 
 }

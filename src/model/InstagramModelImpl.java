@@ -60,11 +60,11 @@ public class InstagramModelImpl implements InstagramModel {
   }
 
   private void blurImage() {
-    this.image = new BlurOperation().apply(image.getPixelGrid());
+    this.image = new BlurOperation().apply(image);
   }
 
   private void sharpenImage() {
-    this.image = new SharpenOperation().apply(image.getPixelGrid());
+    this.image = new SharpenOperation().apply(image);
   }
 
   /**
@@ -93,13 +93,11 @@ public class InstagramModelImpl implements InstagramModel {
   }
 
   private void greyscaleImage() {
-
-    this.image = new GreyscaleOperation().apply(image.getPixelGrid());
+    this.image = new GreyscaleOperation().apply(image);
   }
 
   private void sepiaToneImage() {
-
-    this.image = new SepiaToneOperation().apply(image.getPixelGrid());
+    this.image = new SepiaToneOperation().apply(image);
   }
 
   /**
@@ -167,14 +165,17 @@ public class InstagramModelImpl implements InstagramModel {
    * @return the String that holds the PPM file content
    */
   private String instaImageToPPMFormat() {
+    Pixel[][] pixelGrid = image.getPixelGrid();
+    int height = image.getHeight();
+    int width = image.getWidth();
     StringBuilder sb = new StringBuilder();
     sb.append("P3\n");
-    sb.append(image.getWidth() + " " + image.getHeight() + "\n" + "255\n");
-    for (int i = 0; i < image.getHeight(); i++) {
-      for (int j = 0; j < image.getWidth(); j++) {
-        String r = image.getPixelGrid()[i][j].getR().toString();
-        String g = image.getPixelGrid()[i][j].getG().toString();
-        String b = image.getPixelGrid()[i][j].getB().toString();
+    sb.append(width + " " + height + "\n" + "255\n");
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        String r = pixelGrid[i][j].getR().toString();
+        String g = pixelGrid[i][j].getG().toString();
+        String b = pixelGrid[i][j].getB().toString();
         sb.append(r + " " + g + " " + b + "\n");
       }
     }
@@ -196,12 +197,7 @@ public class InstagramModelImpl implements InstagramModel {
     }
     int copyHeight = this.image.getHeight();
     int copyWidth = this.image.getWidth();
-    Pixel[][] copy = new Pixel[copyHeight][copyWidth];
-    for (int i = 0; i < copyHeight; i++) {
-      for (int j = 0; j < copyWidth; j++) {
-        copy[i][j] = new PixelImpl(this.image.getPixelGrid()[i][j]);
-      }
-    }
+    Pixel[][] copy = this.image.getPixelGrid();
     return new ImageImpl(copy, copyWidth, copyHeight);
   }
 
@@ -231,12 +227,7 @@ public class InstagramModelImpl implements InstagramModel {
     }
     int copyHeight = this.image.getHeight();
     int copyWidth = this.image.getWidth();
-    Pixel[][] copy = new Pixel[copyHeight][copyWidth];
-    for (int i = 0; i < copyHeight; i++) {
-      for (int j = 0; j < copyWidth; j++) {
-        copy[i][j] = new PixelImpl(this.image.getPixelGrid()[i][j]);
-      }
-    }
+    Pixel[][] copy = this.image.getPixelGrid();
     this.log.push(new ImageImpl(copy, copyWidth,
         copyHeight));
   }

@@ -1,5 +1,7 @@
 import static org.junit.Assert.assertArrayEquals;
 
+import model.image.ImageImpl;
+import model.image.InstaImage;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 import model.transform.GreyscaleOperation;
@@ -16,8 +18,8 @@ public class TransformOperationTest {
 
   private TransformOperation greyscale;
   private TransformOperation sepia;
-  private Pixel[][] image;
-  private Pixel[][] image2;
+  private Pixel[][] grid;
+  private Pixel[][] grid2;
 
   @Before
   public void setup() {
@@ -25,18 +27,18 @@ public class TransformOperationTest {
     sepia = new SepiaToneOperation();
 
     // make a 3x3 image of the same colors
-    image = new Pixel[3][3];
+    grid = new Pixel[3][3];
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
-        image[i][j] = new PixelImpl(100.0, 20.0, 50.0);
+        grid[i][j] = new PixelImpl(100.0, 20.0, 50.0);
       }
     }
 
     // make a 3x1 image of different colors
-    image2 = new Pixel[3][1];
-    image2[0][0] = new PixelImpl(25, 25, 25);
-    image2[1][0] = new PixelImpl(50, 50, 50);
-    image2[2][0] = new PixelImpl(75, 75, 75);
+    grid2 = new Pixel[3][1];
+    grid2[0][0] = new PixelImpl(25, 25, 25);
+    grid2[1][0] = new PixelImpl(50, 50, 50);
+    grid2[2][0] = new PixelImpl(75, 75, 75);
   }
 
   @Test
@@ -47,8 +49,10 @@ public class TransformOperationTest {
         expected[i][j] = new PixelImpl(39.174, 39.174, 39.174);
       }
     }
-    image = greyscale.apply(image).getPixelGrid();
-    assertArrayEquals(expected, image);
+    InstaImage image = new ImageImpl(grid, 3, 3);
+    image = greyscale.apply(image);
+    grid = image.getPixelGrid();
+    assertArrayEquals(expected, grid);
   }
 
   @Test
@@ -57,8 +61,10 @@ public class TransformOperationTest {
     expected[0][0] = new PixelImpl(25, 25, 25);
     expected[1][0] = new PixelImpl(50, 50, 50);
     expected[2][0] = new PixelImpl(75, 75, 75);
-    image2 = greyscale.apply(image2).getPixelGrid();
-    assertArrayEquals(expected, image2);
+    InstaImage image2 = new ImageImpl(grid2, 1, 3);
+    image2 = greyscale.apply(image2);
+    grid2 = image2.getPixelGrid();
+    assertArrayEquals(expected, grid2);
   }
 
   @Test
@@ -69,8 +75,10 @@ public class TransformOperationTest {
         expected[i][j] = new PixelImpl(64.13, 57.02, 44.43);
       }
     }
-    image = sepia.apply(image).getPixelGrid();
-    assertArrayEquals(expected, image);
+    InstaImage image = new ImageImpl(grid, 3, 3);
+    image = sepia.apply(image);
+    grid = image.getPixelGrid();
+    assertArrayEquals(expected, grid);
   }
 
   @Test
@@ -79,7 +87,9 @@ public class TransformOperationTest {
     expected[0][0] = new PixelImpl(33.775, 30.075, 23.425);
     expected[1][0] = new PixelImpl(67.55, 60.15, 46.85);
     expected[2][0] = new PixelImpl(101.325, 90.225, 70.275);
-    image2 = sepia.apply(image2).getPixelGrid();
-    assertArrayEquals(expected, image2);
+    InstaImage image2 = new ImageImpl(grid2, 1, 3);
+    image2 = sepia.apply(image2);
+    grid2 = image2.getPixelGrid();
+    assertArrayEquals(expected, grid2);
   }
 }

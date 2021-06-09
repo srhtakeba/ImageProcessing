@@ -109,7 +109,8 @@ public class ImageImpl implements InstaImage {
   }
 
   /**
-   * Getter method for the pixel grid of this image.
+   * Getter method for the pixel grid of this image. Returns a copy of the pixel grid, not a
+   * reference to the pixel grid itself.
    *
    * @return the pixel grid.
    */
@@ -122,7 +123,6 @@ public class ImageImpl implements InstaImage {
       }
     }
     return copy;
-    //return this.pixelGrid;
   }
 
   /**
@@ -160,6 +160,4 @@ public class ImageImpl implements InstaImage {
     }
     return sb.toString();
   }
-
-
 }

@@ -24,16 +24,20 @@ public abstract class FilterImpl implements FilterOperation {
    * Apply this filter operation to the given image by using the kernel specific to this filter
    * operation, and 'layering' it over the given image.
    *
-   * @param pixelGrid the pixel grid to be filtered.
+   * @param image the {@code InstaImage} to be filtered.
    * @return the filtered image.
    */
   @Override
-  public InstaImage apply(Pixel[][] pixelGrid) {
-    Channel[][] imageR = new Channel[pixelGrid.length][pixelGrid[0].length];
-    Channel[][] imageG = new Channel[pixelGrid.length][pixelGrid[0].length];
-    Channel[][] imageB = new Channel[pixelGrid.length][pixelGrid[0].length];
-    for (int i = 0; i < pixelGrid.length; i++) {
-      for (int j = 0; j < pixelGrid[i].length; j++) {
+  public InstaImage apply(InstaImage image) {
+    Pixel[][] pixelGrid = image.getPixelGrid();
+    int height = image.getHeight();
+    int width = image.getWidth();
+
+    Channel[][] imageR = new Channel[height][width];
+    Channel[][] imageG = new Channel[height][width];
+    Channel[][] imageB = new Channel[height][width];
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
         imageR[i][j] = new ChannelR(pixelGrid[i][j].getR().getValue());
         imageG[i][j] = new ChannelG(pixelGrid[i][j].getG().getValue());
         imageB[i][j] = new ChannelB(pixelGrid[i][j].getB().getValue());
@@ -43,18 +47,14 @@ public abstract class FilterImpl implements FilterOperation {
     process(imageG);
     process(imageB);
 
-    Pixel[][] returnGrid = new PixelImpl[pixelGrid.length][pixelGrid[0].length];
-    for (int i = 0; i < pixelGrid.length; i++) {
-      for (int j = 0; j < pixelGrid[i].length; j++) {
-//        image[i][j].setR(imageR[i][j].getValue());
-//        image[i][j].setG(imageG[i][j].getValue());
-//        image[i][j].setB(imageB[i][j].getValue());
-
+    Pixel[][] returnGrid = new PixelImpl[height][width];
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < image.getWidth(); j++) {
         returnGrid[i][j] = new PixelImpl(imageR[i][j].getValue(),
             imageG[i][j].getValue(), imageB[i][j].getValue());
       }
     }
-    InstaImage returnImage = new ImageImpl(returnGrid, pixelGrid.length, pixelGrid[0].length);
+    InstaImage returnImage = new ImageImpl(returnGrid, width, height);
     return returnImage;
   }
 
@@ -82,27 +82,28 @@ public abstract class FilterImpl implements FilterOperation {
         // iterate through the kernel
         for (int k = 0; k < kernel.length; k++) {
           for (int d = 0; d < kernel[k].length; d++) {
-            int kDiff = i;
-            int dDiff = j;
-            if (k < kernelHalf) {
-              kDiff = i - k;
-            } else if (k > kernelHalf) {
-              kDiff = k + i;
+            int kBound = i;
+            int dBound = j;
+            if(k<kernelHalf) {
+              kBound = i - (kernelHalf -k);
             }
-
-            if (d < kernelHalf) {
-              dDiff = j - d;
-            } else if (d > kernelHalf) {
-              dDiff = j + d;
+            else if (k > kernelHalf) {
+              kBound = i + (k - kernelHalf);
+            }
+            if(d<kernelHalf) {
+              dBound = j - (kernelHalf - d);
+            }
+            else if (d > kernelHalf) {
+              dBound = j + (d - kernelHalf);
             }
 
             // checking the bounds
-            if ((kDiff < channelMatrix.length)
-                && (kDiff >= 0)
-                && (dDiff < channelMatrix[i].length)
-                && (dDiff >= 0)) {
+            if ((kBound < channelMatrix.length)
+                && (kBound >= 0)
+                && (dBound < channelMatrix[i].length)
+                && (dBound >= 0)) {
 
-              appliedResult += (copyValues[kDiff][dDiff]) * kernel[k][d];
+              appliedResult += (copyValues[kBound][dBound]) * kernel[k][d];
             }
           }
         }
