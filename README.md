@@ -3,7 +3,7 @@ OOD Image Processing Instagram Model
 
 ## The Model Diagram
 Our total model looks like this in a diagram. (Built using IntelliJ)\
-![](images/InstagramModelDiagram.png)\
+![](classDiagram.png)\
 
 ## The model interface
 Our model, of the interface `InstagramModel`, includes features to import images of `InstaImage` types, as well as PPM file names. Once an image has been imported
