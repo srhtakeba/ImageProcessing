@@ -219,4 +219,75 @@ public class InstagramModelImplTest {
 
     assertEquals(expected.toString(), modelRainbowSingleFile.exportAsInstaImage().toString());
   }
+
+  @Test
+  public void testSharpenRainbowRetrieveOriginal() {
+    modelRainbowSingleFile.save();
+    modelRainbowSingleFile.filter("sharpen");
+    modelRainbowSingleFile.retrieve();
+    Pixel[][] expectedPixelGrid = new Pixel[7][1];
+    // red row
+    expectedPixelGrid[0][0] = new PixelImpl(255, 0, 0);
+    // orange row
+    expectedPixelGrid[1][0] = new PixelImpl(255, 165, 0);
+    // yellow row
+    expectedPixelGrid[2][0] = new PixelImpl(255, 255, 0);
+    // green row
+    expectedPixelGrid[3][0] = new PixelImpl(0, 255, 0);
+    // blue row
+    expectedPixelGrid[4][0] = new PixelImpl(0, 0, 255);
+    // indigo row
+    expectedPixelGrid[5][0] = new PixelImpl(75, 0, 130);
+    // violet row
+    expectedPixelGrid[6][0] = new PixelImpl(238, 130, 238);
+    InstaImage expected = new ImageImpl(expectedPixelGrid, 1, 7);
+
+    assertEquals(expected.toString(), modelRainbowSingleFile.exportAsInstaImage().toString());
+  }
+
+  @Test (expected = IllegalStateException.class)
+  public void testRetrieveNoImageException() {
+    InstagramModel model = new InstagramModelImpl();
+    model.retrieve();
+  }
+
+  @Test (expected = IllegalStateException.class)
+  public void testSaveNoImageException() {
+    InstagramModel model = new InstagramModelImpl();
+    model.save();
+  }
+
+  @Test (expected = IllegalStateException.class)
+  public void testBlurNoImageException() {
+    InstagramModel model = new InstagramModelImpl();
+    model.filter("bLuR");
+  }
+
+  @Test (expected = IllegalStateException.class)
+  public void testSharpenNoImageException() {
+    InstagramModel model = new InstagramModelImpl();
+    model.filter("SHARPEN");
+  }
+
+  @Test (expected = IllegalStateException.class)
+  public void testGreyscaleNoImageException() {
+    InstagramModel model = new InstagramModelImpl();
+    model.transform("greyscale");
+  }
+
+  @Test (expected = IllegalStateException.class)
+  public void testSepiaNoImageException() {
+    InstagramModel model = new InstagramModelImpl();
+    model.transform("sepia");
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testFilterInvalidArgument() {
+    modelCheckerBoard.transform("mattify");
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testTransformInvalidArgument() {
+    modelRainbow.transform("vibrant");
+  }
 }
