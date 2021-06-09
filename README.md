@@ -75,12 +75,12 @@ The `setValue(double n)` for `Channel`s take in double values, but they will rou
 ## Additional Examples
 Again, all images shown in this README.md are jpeg images so that they show up, however the ppm images used with the `InstagramModel` application can be found in the `images/ppm` folder.
 Using the following image as an original, here are the results of applying certain filters and transformations, some in combination.\
-![](images/jpeg/canyon.jpg)\
+![](images/originals/canyonLowQuality.jpg)\
 Filter - Blur:\
 ![](images/jpeg/canyonBlur.jpg)\
-Filter - Blur and Sepia:\
-![](images/jpeg/canyonBlurAndSepia.jpg)\
 Transform - Sharpen:\
 ![](images/jpeg/canyonSharpen.jpg)\
-Transfrom - Sharpen and Greyscale:\
-![](images/jpeg/canyonSharpenAndGreyscale.jpg)
+Transfrom - Greyscale:\
+![](images/jpeg/canyonGreyscale.jpg)
+Transfrom - Sepia:\
+![](images/jpeg/canyonSepia.jpg)
