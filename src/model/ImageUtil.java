@@ -61,7 +61,7 @@ public class ImageUtil {
     // Keeping it just in case. Maximum value of a color in this file (usually 256)
     int maxValue = sc.nextInt();
 
-    Pixel[][] importedRaw = new Pixel[width][height];
+    Pixel[][] importedRaw = new Pixel[height][width];
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
