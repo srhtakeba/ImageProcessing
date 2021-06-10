@@ -138,6 +138,30 @@ public class InstagramModelImplTest {
   }
 
   @Test
+  public void testGreyscaleTwiceRainbow() {
+    modelRainbowSingleFile.transform("greyscale");
+    modelRainbowSingleFile.transform("greyscale");
+    Pixel[][] expectedPixelGrid = new Pixel[7][1];
+    // red row
+    expectedPixelGrid[0][0] = new PixelImpl(54, 54, 54);
+    // orange row
+    expectedPixelGrid[1][0] = new PixelImpl(172, 172, 172);
+    // yellow row
+    expectedPixelGrid[2][0] = new PixelImpl(237, 237, 237);
+    // green row
+    expectedPixelGrid[3][0] = new PixelImpl(182, 182, 182);
+    // blue row
+    expectedPixelGrid[4][0] = new PixelImpl(18, 18, 18);
+    // indigo row
+    expectedPixelGrid[5][0] = new PixelImpl(25, 25, 25);
+    // violet row
+    expectedPixelGrid[6][0] = new PixelImpl(161, 161, 161);
+    InstaImage expected = new ImageImpl(expectedPixelGrid, 1, 7);
+
+    assertEquals(expected.toString(), modelRainbowSingleFile.exportAsInstaImage().toString());
+  }
+
+  @Test
   public void testSepiaRainbow() {
     modelRainbow.transform("Sepia");
     Pixel[][] expectedPixelGrid = new Pixel[7][3];
@@ -175,6 +199,54 @@ public class InstagramModelImplTest {
   }
 
   @Test
+  public void testSepiaTwiceRainbow() {
+    modelRainbowSingleFile.transform("sepia");
+    modelRainbowSingleFile.transform("sepia");
+    Pixel[][] expectedPixelGrid = new Pixel[7][1];
+    // red row
+    expectedPixelGrid[0][0] = new PixelImpl(121, 108, 84);
+    // orange row
+    expectedPixelGrid[1][0] = new PixelImpl(255, 244, 190);
+    // yellow row
+    expectedPixelGrid[2][0] = new PixelImpl(255, 255, 233);
+    // green row
+    expectedPixelGrid[3][0] = new PixelImpl(237, 211, 165);
+    // blue row
+    expectedPixelGrid[4][0] = new PixelImpl(58, 52, 40);
+    // indigo row
+    expectedPixelGrid[5][0] = new PixelImpl(65, 58, 45);
+    // violet row
+    expectedPixelGrid[6][0] = new PixelImpl(255, 255, 200);
+    InstaImage expected = new ImageImpl(expectedPixelGrid, 1, 7);
+
+    assertEquals(expected.toString(), modelRainbowSingleFile.exportAsInstaImage().toString());
+  }
+
+  @Test
+  public void testSepiaSharpenRainbow() {
+    modelRainbowSingleFile.transform("sepia");
+    modelRainbowSingleFile.filter("sharpen");
+    Pixel[][] expectedPixelGrid = new Pixel[7][1];
+    // red row
+    expectedPixelGrid[0][0] = new PixelImpl(125, 108, 83);
+    // orange row
+    expectedPixelGrid[1][0] = new PixelImpl(255, 255, 209);
+    // yellow row
+    expectedPixelGrid[2][0] = new PixelImpl(255, 255, 255);
+    // green row
+    expectedPixelGrid[3][0] = new PixelImpl(237, 218, 172);
+    // blue row
+    expectedPixelGrid[4][0] = new PixelImpl(49, 40, 30);
+    // indigo row
+    expectedPixelGrid[5][0] = new PixelImpl(101, 90, 70);
+    // violet row
+    expectedPixelGrid[6][0] = new PixelImpl(246, 219, 170);
+    InstaImage expected = new ImageImpl(expectedPixelGrid, 1, 7);
+
+    assertEquals(expected.toString(), modelRainbowSingleFile.exportAsInstaImage().toString());
+  }
+
+  @Test
   public void testBlurRainbow() {
     modelRainbowSingleFile.filter("blur");
     Pixel[][] expectedPixelGrid = new Pixel[7][1];
@@ -192,6 +264,30 @@ public class InstagramModelImplTest {
     expectedPixelGrid[5][0] = new PixelImpl(49, 16, 94);
     // violet row
     expectedPixelGrid[6][0] = new PixelImpl(69, 33, 76);
+    InstaImage expected = new ImageImpl(expectedPixelGrid, 1, 7);
+
+    assertEquals(expected.toString(), modelRainbowSingleFile.exportAsInstaImage().toString());
+  }
+
+  @Test
+  public void testBlurTwiceRainbow() {
+    modelRainbowSingleFile.filter("blur");
+    modelRainbowSingleFile.filter("blur");
+    Pixel[][] expectedPixelGrid = new Pixel[7][1];
+    // red row
+    expectedPixelGrid[0][0] = new PixelImpl(40, 14, 0);
+    // orange row
+    expectedPixelGrid[1][0] = new PixelImpl(56, 35, 0);
+    // yellow row
+    expectedPixelGrid[2][0] = new PixelImpl(44, 50, 4);
+    // green row
+    expectedPixelGrid[3][0] = new PixelImpl(21, 43, 18);
+    // blue row
+    expectedPixelGrid[4][0] = new PixelImpl(12, 22, 36);
+    // indigo row
+    expectedPixelGrid[5][0] = new PixelImpl(22, 12, 43);
+    // violet row
+    expectedPixelGrid[6][0] = new PixelImpl(23, 10, 31);
     InstaImage expected = new ImageImpl(expectedPixelGrid, 1, 7);
 
     assertEquals(expected.toString(), modelRainbowSingleFile.exportAsInstaImage().toString());
@@ -239,6 +335,30 @@ public class InstagramModelImplTest {
     expectedPixelGrid[5][0] = new PixelImpl(135, 1, 253);
     // violet row
     expectedPixelGrid[6][0] = new PixelImpl(255, 130, 239);
+    InstaImage expected = new ImageImpl(expectedPixelGrid, 1, 7);
+
+    assertEquals(expected.toString(), modelRainbowSingleFile.exportAsInstaImage().toString());
+  }
+
+  @Test
+  public void testSharpenTwiceRainbow() {
+    modelRainbowSingleFile.filter("sharpen");
+    modelRainbowSingleFile.filter("sharpen");
+    Pixel[][] expectedPixelGrid = new Pixel[7][1];
+    // red row
+    expectedPixelGrid[0][0] = new PixelImpl(255, 26, 0);
+    // orange row
+    expectedPixelGrid[1][0] = new PixelImpl(255, 231, 0);
+    // yellow row
+    expectedPixelGrid[2][0] = new PixelImpl(255, 255, 0);
+    // green row
+    expectedPixelGrid[3][0] = new PixelImpl(38, 255, 80);
+    // blue row
+    expectedPixelGrid[4][0] = new PixelImpl(0, 32, 255);
+    // indigo row
+    expectedPixelGrid[5][0] = new PixelImpl(196, 6, 255);
+    // violet row
+    expectedPixelGrid[6][0] = new PixelImpl(255, 128, 255);
     InstaImage expected = new ImageImpl(expectedPixelGrid, 1, 7);
 
     assertEquals(expected.toString(), modelRainbowSingleFile.exportAsInstaImage().toString());
