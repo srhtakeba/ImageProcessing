@@ -1,13 +1,6 @@
 package model.filter;
 
-import model.image.ImageImpl;
 import model.image.InstaImage;
-import model.pixel.Channel;
-import model.pixel.ChannelB;
-import model.pixel.ChannelG;
-import model.pixel.ChannelR;
-import model.pixel.Pixel;
-import model.pixel.PixelImpl;
 
 /**
  * FilterImpl holds kernels and applies kernel to images in order to alter their appearance. Kernel

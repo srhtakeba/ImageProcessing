@@ -1,9 +1,6 @@
 package model.transform;
 
-import model.image.ImageImpl;
 import model.image.InstaImage;
-import model.pixel.Pixel;
-import model.pixel.PixelImpl;
 
 /**
  * A class to represent the operations of a color transformation of an image. A color transformation
