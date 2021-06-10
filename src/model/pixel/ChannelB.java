@@ -43,14 +43,4 @@ public class ChannelB extends ChannelImpl {
   public int hashCode() {
     return Objects.hash(this.getValue(), 3);
   }
-
-  /**
-   * Produces a {@code String} representation for this {@code ChannelB}.
-   *
-   * @return the {@code String} representation
-   */
-  @Override
-  public String toString() {
-    return "B: " + this.getValue();
-  }
 }

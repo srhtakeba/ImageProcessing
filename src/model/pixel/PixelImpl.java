@@ -127,7 +127,7 @@ public class PixelImpl implements Pixel {
    */
   @Override
   public String toString() {
-    return this.r + " " + this.g + " " + this.b;
+    return "R: " + this.r + " " + "G: " + this.g + " " + "B: " + this.b;
   }
 
 }

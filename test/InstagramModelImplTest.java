@@ -434,5 +434,25 @@ public class InstagramModelImplTest {
   public void testTransformInvalidArgument() {
     modelRainbow.transform("vibrant");
   }
-  
+
+  // tests for importing and exporting images
+  @Test
+  public void testReadExportPPM() {
+    InstagramModel model = new InstagramModelImpl();
+    modelCheckerBoard.exportAsPPM("checkerboardReadTest");
+    model.readPPM("checkerboardReadTest.ppm");
+    assertEquals(model.exportAsInstaImage().toString(),
+        modelCheckerBoard.exportAsInstaImage().toString());
+  }
+
+  @Test
+  public void testReadExportInstaImage() {
+    InstaImage image = new ImageImpl().makeRainbow(4,5);
+    InstagramModel model = new InstagramModelImpl();
+    model.readInstaImage(image);
+    model.save();
+    model.transform("greyscale");
+    model.retrieve();
+    assertEquals(image.toString(), model.exportAsInstaImage().toString());
+  }
 }

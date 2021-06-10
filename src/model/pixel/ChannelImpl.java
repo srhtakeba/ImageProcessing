@@ -31,11 +31,9 @@ public abstract class ChannelImpl implements Channel {
   public void setValue(double n) {
     if (n < 0) {
       this.value = 0;
-      return;
     }
-    if (n > 255) {
+    else if (n > 255) {
       this.value = 255;
-      return;
     } else {
       // assign this value to the rounded int value of the given double
       this.value = (int) (n + 0.5);
@@ -65,5 +63,7 @@ public abstract class ChannelImpl implements Channel {
    * @return the {@code String} representation
    */
   @Override
-  public abstract String toString();
+  public String toString() {
+    return "" + this.getValue();
+  }
 }
