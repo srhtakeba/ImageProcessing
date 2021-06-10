@@ -9,7 +9,7 @@ public abstract class ChannelImpl implements Channel {
   private int value;
 
   /**
-   * Constrcuts (@code ChannelImpl} object.
+   * Constructs {@code ChannelImpl} object.
    *
    * @param value amount of pigment.
    */
@@ -17,7 +17,10 @@ public abstract class ChannelImpl implements Channel {
     this.setValue(value);
   }
 
-  // copy constructor
+  /**
+   * Constructs a copy of the given {@code ChannelImpl} object.
+   * @param c the given {@code ChannelImpl} object.
+   */
   public ChannelImpl(Channel c) {
     this(c.getValue());
   }
