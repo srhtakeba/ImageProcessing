@@ -29,15 +29,15 @@ Note that these image processes will mutate the image, and you can not return to
 (example images have been converted to jpeg files for .md file processing) \
 Source: Katsuhiko Nakanishi (Contributor to the project)\
 Examples of each operation can be seen below using the following image as an original:\
-![](images/originals/fishLowest.jpg)\
+![fishLowest.jpg](images/originals/fishLowest.jpg)\
 Filter - Blur:\
-![](images/jpeg/fishBlur.jpg)\
+![fishBlur.jpg](images/jpeg/fishBlur.jpg)\
 Filter - Sharpen:\
-![](images/jpeg/fishSharpen.jpg)\
+![fishSharpen.jpg](images/jpeg/fishSharpen.jpg)\
 Transform - Greyscale:\
-![](images/jpeg/fishGreyscale.jpg)\
+![fishGreyscale.jpg](images/jpeg/fishGreyscale.jpg)\
 Transfrom - Sepia:\
-![](images/jpeg/fishSepia.jpg)
+![fishSepia.jpg](images/jpeg/fishSepia.jpg)
  
  #### Saving and Retrieving Images
  With the methods `save()` and `retrieve()`, the client is also able to save their images to a log in the model. Once images are saved to the log, they can be retrieved. Retrieving an image means to return to the last saved image in a log. Once the client has returned to a past image, they can not go back. Note that unless the client explicitly calls the `save()` method, the image will not be saved to the log and can not be retrieved. If there is currently no image to retrieved or no image to be saved, these methods will throw `IllegalStateException`s.
@@ -76,12 +76,12 @@ The `setValue(double n)` for `Channel`s take in double values, but they will rou
 Again, all images shown in this README.md are jpeg images so that they show up, however the ppm images used with the `InstagramModel` application can be found in the `images/ppm` folder.
 Using the following image as an original, here are the results of applying certain filters and transformations, some in combination.\
 Source: Katsuhiko Nakanishi (Contributor to the project)\
-![](images/originals/canyonLowest.jpg)\
+![canyonLowest.jpg](images/originals/canyonLowest.jpg)\
 Filter - Blur:\
-![](images/jpeg/canyonBlur.jpg)\
+![canyonBlur.jpg](images/jpeg/canyonBlur.jpg)\
 Transform - Sharpen:\
-![](images/jpeg/canyonSharpen.jpg)\
+![canyonSharpen.jpg](images/jpeg/canyonSharpen.jpg)\
 Transfrom - Greyscale:\
-![](images/jpeg/canyonGreyscale.jpg)\
+![canyonGreyscale.jpg](images/jpeg/canyonGreyscale.jpg)\
 Transfrom - Sepia:\
-![](images/jpeg/canyonSepia.jpg)
+![canyonSepia.jpg](images/jpeg/canyonSepia.jpg)
