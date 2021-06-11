@@ -4,15 +4,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Stack;
-import model.filter.BlurOperation;
-import model.filter.FilterOperation;
-import model.filter.SharpenOperation;
-import model.image.ImageImpl;
-import model.image.InstaImage;
+import model.filter.*;
+import model.image.*;
 import model.pixel.Pixel;
-import model.transform.GreyscaleOperation;
-import model.transform.SepiaToneOperation;
-import model.transform.TransformOperation;
+import model.transform.*;
 
 /**
  * An implementation of {@code InstagramModel} that uses the {@code InstaImage} object type to
@@ -27,7 +22,7 @@ public class InstagramModelImpl implements InstagramModel {
 
   public InstagramModelImpl(InstaImage image) {
     this.image = image;
-    this.log = new Stack<InstaImage>();
+    this.log = new Stack<>();
   }
 
   // convenience constructor
@@ -159,13 +154,13 @@ public class InstagramModelImpl implements InstagramModel {
     int width = image.getWidth();
     StringBuilder sb = new StringBuilder();
     sb.append("P3\n");
-    sb.append(width + " " + height + "\n" + "255\n");
+    sb.append(width).append(" ").append(height).append("\n").append("255\n");
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
         String r = pixelGrid[i][j].getR().toString();
         String g = pixelGrid[i][j].getG().toString();
         String b = pixelGrid[i][j].getB().toString();
-        sb.append(r + " " + g + " " + b + "\n");
+        sb.append(r).append(" ").append(g).append(" ").append(b).append("\n");
       }
     }
 
