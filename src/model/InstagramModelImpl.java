@@ -5,12 +5,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Stack;
 import model.filter.BlurOperation;
+import model.filter.FilterOperation;
 import model.filter.SharpenOperation;
 import model.image.ImageImpl;
 import model.image.InstaImage;
 import model.pixel.Pixel;
 import model.transform.GreyscaleOperation;
 import model.transform.SepiaToneOperation;
+import model.transform.TransformOperation;
 
 /**
  * An implementation of {@code InstagramModel} that uses the {@code InstaImage} object type to
@@ -43,27 +45,21 @@ public class InstagramModelImpl implements InstagramModel {
    */
   @Override
   public void filter(String operation) throws IllegalStateException, IllegalArgumentException {
+    FilterOperation filterOperation;
     if (this.image == null) {
       throw new IllegalStateException("There is no image to be filtered.");
     }
     switch (operation.toUpperCase()) {
       case "BLUR":
-        blurImage();
+        filterOperation = new BlurOperation();
         break;
       case "SHARPEN":
-        sharpenImage();
+        filterOperation = new SharpenOperation();
         break;
       default:
         throw new IllegalArgumentException("Given filter operation is invalid.");
     }
-  }
-
-  private void blurImage() {
-    this.image = new BlurOperation().apply(image);
-  }
-
-  private void sharpenImage() {
-    this.image = new SharpenOperation().apply(image);
+    this.image = filterOperation.apply(image);
   }
 
   /**
@@ -76,27 +72,21 @@ public class InstagramModelImpl implements InstagramModel {
    */
   @Override
   public void transform(String operation) throws IllegalStateException, IllegalArgumentException {
+    TransformOperation transformOperation;
     if (this.image == null) {
       throw new IllegalStateException("There is no image to be transformed.");
     }
     switch (operation.toUpperCase()) {
       case "GREYSCALE":
-        greyscaleImage();
+        transformOperation = new GreyscaleOperation();
         break;
       case "SEPIA":
-        sepiaToneImage();
+        transformOperation = new SepiaToneOperation();
         break;
       default:
         throw new IllegalArgumentException("Given transform operation is invalid.");
     }
-  }
-
-  private void greyscaleImage() {
-    this.image = new GreyscaleOperation().apply(image);
-  }
-
-  private void sepiaToneImage() {
-    this.image = new SepiaToneOperation().apply(image);
+    this.image = transformOperation.apply(image);
   }
 
   /**
