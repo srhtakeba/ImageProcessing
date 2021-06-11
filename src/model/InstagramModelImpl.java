@@ -4,16 +4,22 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Stack;
-import model.filter.*;
-import model.image.*;
+import model.filter.BlurOperation;
+import model.filter.FilterOperation;
+import model.filter.SharpenOperation;
+import model.image.ImageImpl;
+import model.image.InstaImage;
 import model.pixel.Pixel;
-import model.transform.*;
+import model.transform.GreyscaleOperation;
+import model.transform.SepiaToneOperation;
+import model.transform.TransformOperation;
 
 /**
  * An implementation of {@code InstagramModel} that uses the {@code InstaImage} object type to
  * represent its images. Clients are able to save and retrieve their images as they process them
  * using the given processing methods filter and transform. Currently images can be exported as PPM
- * files or {@code InstaImage} objects. Same types apply for importing images.
+ * files or {@code InstaImage} objects. Same types apply for importing images. This particular
+ * model uses the {@code ImageImpl} subclass of {@code InstaImage} for exporting images.
  */
 public class InstagramModelImpl implements InstagramModel {
 
