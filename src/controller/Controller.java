@@ -5,6 +5,7 @@ import controller.command.Current;
 import controller.command.Export;
 import controller.command.Filter;
 import controller.command.InstagramLayerCommand;
+import controller.command.InstagramLayerCommandFactory;
 import controller.command.Read;
 import controller.command.Remove;
 import controller.command.Transform;
@@ -31,27 +32,28 @@ public class Controller implements IController {
     while (scan.hasNext()) {
       String curr = scan.next();
       try {
+        String next = scan.next();
         switch (curr) {
           case "new":
-            cmd = new CreateLayer(scan.next());
+            cmd = InstagramLayerCommandFactory.create("create", next);
             break;
           case "remove":
-            cmd = new Remove(scan.next());
+            cmd = InstagramLayerCommandFactory.create("remove", next);
             break;
           case "read":
-            cmd = new Read(scan.next());
+            cmd = InstagramLayerCommandFactory.create("read", next);
             break;
           case "current":
-            cmd = new Current(scan.next());
+            cmd = InstagramLayerCommandFactory.create("current", next);
             break;
           case "transform":
-            cmd = new Transform(scan.next());
+            cmd = InstagramLayerCommandFactory.create("transform", next);
             break;
           case "filter":
-            cmd = new Filter(scan.next());
+            cmd = InstagramLayerCommandFactory.create("filter", next);
             break;
           case "export":
-            cmd = new Export(scan.next());
+            cmd = InstagramLayerCommandFactory.create("export", next);
             break;
           default:
             break;

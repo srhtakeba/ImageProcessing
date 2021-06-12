@@ -6,12 +6,12 @@ import java.io.InputStreamReader;
 
 public class MainInstagram {
   /**
-   * Runs a game of SimpleFreecellModel using a SimpleFreecellController in the console.
    *
    * @param args command line input.
    */
   public static void main(String[] args) {
     Readable in = new InputStreamReader(System.in);
+    //Readable in = new FileInputStream("script.txt");
     IController controller = new Controller(in);
     controller.go();
   }
