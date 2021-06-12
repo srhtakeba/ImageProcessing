@@ -12,7 +12,7 @@ import org.junit.Test;
  * inside the image.
  */
 public class ImageImplTest {
-
+  //
   private InstaImage image;
 
   @Before

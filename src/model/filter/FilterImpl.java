@@ -7,7 +7,7 @@ import model.image.InstaImage;
  * application will change the RGB values of the pixels to do so.
  */
 public abstract class FilterImpl implements FilterOperation {
-
+  //
   private final Double[][] kernel;
 
   FilterImpl(Double[][] kernel) {

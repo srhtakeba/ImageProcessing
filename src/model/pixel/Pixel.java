@@ -4,7 +4,7 @@ package model.pixel;
  * Interface to represent a pixel with three-color channels.
  */
 public interface Pixel {
-
+//
   /**
    * Get the R channel for this pixel. Not the actual channel itself, but a copy of it.
    *

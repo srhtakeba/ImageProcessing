@@ -13,7 +13,7 @@ import org.junit.Test;
  * Class to hold tests for {@code InstagramModelImpl}.
  */
 public class InstagramModelImplTest {
-
+  //
   private InstagramModel modelCheckerBoard;
 
   private InstagramModel modelRainbow;

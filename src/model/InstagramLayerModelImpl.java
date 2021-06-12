@@ -50,7 +50,7 @@ ASSIGNMENT 6 NOTES:
  */
 
 public class InstagramLayerModelImpl extends InstagramModelImpl implements InstagramLayerModel {
-
+  //
   HashMap<String, InstaImage> layerMap;
   String currentLayer;
 

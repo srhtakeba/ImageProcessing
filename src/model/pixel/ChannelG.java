@@ -6,7 +6,7 @@ import java.util.Objects;
  * Class to represent a green channel for a pixel.
  */
 public class ChannelG extends ChannelImpl {
-
+//
   /**
    * Constructs a {@code ChannelG} object.
    *

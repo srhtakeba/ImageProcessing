@@ -3,7 +3,7 @@ package controller.command;
 import model.InstagramLayerModel;
 
 public class Remove implements InstagramLayerCommand {
-
+//
   String str;
 
   public Remove(String str) {

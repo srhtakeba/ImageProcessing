@@ -15,7 +15,7 @@ import org.junit.Test;
  * 2DArray of {@code Pixel}.
  */
 public class TransformOperationTest {
-
+  //
   private TransformOperation greyscale;
   private TransformOperation sepia;
   private Pixel[][] grid;

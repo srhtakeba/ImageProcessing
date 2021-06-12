@@ -16,7 +16,7 @@ import org.junit.Test;
  * value correctly represents the expected values.
  */
 public class PixelTest {
-
+  //
   private Pixel red;
   private Pixel green;
   private Pixel blue;

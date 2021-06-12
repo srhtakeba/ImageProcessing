@@ -16,7 +16,7 @@ import model.InstagramModel;
 import model.InstagramModelImpl;
 
 public class Controller implements IController {
-
+  //
   Readable in;
   InstagramLayerModel model;
 

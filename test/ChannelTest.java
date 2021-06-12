@@ -14,7 +14,7 @@ import org.junit.Test;
  * correctly changed and give its holding value.
  */
 public class ChannelTest {
-
+  //
   private Channel r;
   private Channel g;
   private Channel b;

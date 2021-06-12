@@ -18,7 +18,7 @@ import org.junit.Test;
  * of {@code Pixel}.
  */
 public class FilterOperationTest {
-
+  //
   private FilterOperation blur;
   private FilterOperation sharpen;
 

@@ -6,7 +6,7 @@ import java.util.Objects;
  * Class to represent a red channel for a pixel.
  */
 public class ChannelR extends ChannelImpl {
-
+//
   /**
    * Constructs a {@code ChannelR} object.
    *
