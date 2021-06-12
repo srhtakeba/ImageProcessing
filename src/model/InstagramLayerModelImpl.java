@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -118,13 +119,13 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
         exportImage.setRGB(j, i, currentColor.getRGB());
       }
     }
-    String[] fileName = filepath.split(".");
+    String[] fileName = filepath.split("\\.");
     // check that there was a dot in the file path
     if(fileName.length<2) {
       throw new IllegalArgumentException("Invalid file. Must include '.--' extension");
     }
     try {
-      ImageIO.write(exportImage, fileName[1], new File(fileName[0]));
+      ImageIO.write(exportImage, fileName[1], new File(filepath));
     }
     catch (IOException ioe) {
       throw new IllegalStateException("Writing to the file failed.");
@@ -133,6 +134,11 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
 
   @Override
   public void read(String filepath) throws IllegalStateException {
+    String[] fileParts = filepath.split("\\.");
+    if(fileParts[1].equals("ppm")) {
+      this.readPPM(filepath);
+      return;
+    }
     BufferedImage imported;
     try {
       imported = ImageIO.read(new File(filepath));
@@ -152,6 +158,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
         importedPGrid[i][j] = new PixelImpl(r,g,b);
       }
     }
+    this.image = new ImageImpl(importedPGrid, width, height);
   }
 
   /**

@@ -12,7 +12,7 @@ public class Filter implements InstagramLayerCommand {
 
   @Override
   public void go(InstagramLayerModel model) {
-    model.transform(str);
+    model.filter(str);
   }
 
 }

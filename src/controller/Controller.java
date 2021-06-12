@@ -31,7 +31,7 @@ public class Controller implements IController {
 
     while (scan.hasNext()) {
       String curr = scan.next();
-      try {
+//      try {
         String next = scan.next();
         switch (curr) {
           case "new":
@@ -61,9 +61,9 @@ public class Controller implements IController {
         if (cmd != null) {
           cmd.go(model);
         }
-      } catch (InputMismatchException ime) {
-        System.out.println("Bad length to " + curr);
-      }
+//      } catch (InputMismatchException ime) {
+//        System.out.println("Bad length to " + curr);
+//      }
     }
   }
 
