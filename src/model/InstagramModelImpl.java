@@ -23,7 +23,7 @@ ASSIGNMENT 6 NOTES:
         - or we could use new Color(int r, int g, int b).getRGB(), which would do the same
     - Use getWriterFormatNames() to get the list of string format names. Seems like Strings such as
       "jpeg" can be used.
-    - Use File(String pathname)
+    - Use new File(String pathname)
 - to READ files:
   - Use ImageIO.read(File input) which returns a BufferedImage
     - Again, use new File(String pathname)
