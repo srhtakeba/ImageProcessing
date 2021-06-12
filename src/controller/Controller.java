@@ -12,8 +12,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import model.InstagramLayerModel;
 import model.InstagramLayerModelImpl;
-import model.InstagramModel;
-import model.InstagramModelImpl;
 
 public class Controller implements IController {
   //
