@@ -31,7 +31,7 @@ ASSIGNMENT 6 NOTES:
   - Construct a new Color(img.getRGB(int x, int y)).getR() etc to get the individual rgb values
     as ints.
 - Possible view SYNTAX codes:
-  - 'new' + 'layer_name' to create a new layer
+  - 'new' + 'layer_name' to Create a new layer
   - 'remove' + 'layer_name' to remove a layer
   - 'read' + 'file_name' + '.' + 'formatName' to load images
   - 'export' + 'file_name' + '.' + 'formatName' to save as a file
@@ -42,7 +42,7 @@ ASSIGNMENT 6 NOTES:
 
 /** TO DO:
  * - Make a controller that can pass data onto the model for file writing and stuff
- * - Make a view (only has to be text-based) that can do like choose between
+ * - Make a controller (only has to be text-based) that can do like choose between
  *    1) Write interactively
  *    2) Load a command file
  *   And then it would read the commands from the user and make layers and all this stuff
@@ -158,10 +158,10 @@ public class InstagramModelImpl implements InstagramModel {
     }
     String filename = title + ".ppm";
     int fileNo = 1;
-    // create the file
+    // Create the file
     try {
       File export = new File(filename);
-      // if the file already exists, add a number at the end of the file name to create a unique one
+      // if the file already exists, add a number at the end of the file name to Create a unique one
       // e.g. 'instaImage(1).ppm'
       boolean creationSuccess = export.createNewFile();
       while (!creationSuccess) {

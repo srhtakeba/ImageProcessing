@@ -17,7 +17,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
   HashMap<String, InstaImage> layerMap;
   String currentLayer;
 
-  InstagramLayerModelImpl() {
+  public InstagramLayerModelImpl() {
     super();
     this.layerMap = new HashMap<>();
     this.currentLayer = "";

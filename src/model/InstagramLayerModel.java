@@ -2,7 +2,7 @@ package model;
 
 import java.io.IOException;
 
-public interface InstagramLayerModel {
+public interface InstagramLayerModel extends InstagramModel {
   /**
    * Adds a new layer to this model, with the given name.
    * @param layerName title for the new layer
