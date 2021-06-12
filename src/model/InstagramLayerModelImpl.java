@@ -37,6 +37,12 @@ ASSIGNMENT 6 NOTES:
   - 'filter' + 'blur'/'sharpen' to filter
   - 'transform' + 'sepia'/'greyscale' to transform
   - 'current' + 'layer_name' to work on a specific layer
+- GOOD LINKS:
+  - https://docs.oracle.com/javase/7/docs/api/javax/imageio/ImageIO.html#write(java.awt.image.RenderedImage,%20java.lang.String,%20java.io.File)
+  - https://docs.oracle.com/javase/7/docs/api/java/io/File.html#File(java.lang.String)
+  - https://docs.oracle.com/javase/7/docs/api/java/awt/image/BufferedImage.html#getRGB(int,%20int)
+  - https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html
+  - https://docs.oracle.com/javase/7/docs/api/java/io/FileInputStream.html
  */
 
 /** TO DO:

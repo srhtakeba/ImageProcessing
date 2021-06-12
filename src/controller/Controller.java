@@ -1,14 +1,7 @@
 package controller;
 
-import controller.command.CreateLayer;
-import controller.command.Current;
-import controller.command.Export;
-import controller.command.Filter;
 import controller.command.InstagramLayerCommand;
 import controller.command.InstagramLayerCommandFactory;
-import controller.command.Read;
-import controller.command.Remove;
-import controller.command.Transform;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import model.InstagramLayerModel;
