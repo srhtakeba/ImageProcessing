@@ -24,17 +24,25 @@ ASSIGNMENT 6 NOTES:
     - Use getWriterFormatNames() to get the list of string format names. Seems like Strings such as
       "jpeg" can be used.
     - Use File(String pathname)
-- to READ files
+- to READ files:
   - Use ImageIO.read(File input) which returns a BufferedImage
     - Again, use new File(String pathname)
   - From the resulting BufferedImage, .getHeight(), .getWidth(), .getRGB(int x, int y)
   - Construct a new Color(img.getRGB(int x, int y)).getR() etc to get the individual rgb values
     as ints.
+- Possible view SYNTAX codes:
+  - 'new' + 'layer_name' to create a new layer
+  - 'remove' + 'layer_name' to remove a layer
+  - 'read' + 'file_name' + '.' + 'formatName' to load images
+  - 'export' + 'file_name' + '.' + 'formatName' to save as a file
+  - 'filter' + 'blur'/'sharpen' to filter
+  - 'transform' + 'sepia'/'greyscale' to transform
+  - 'current' + 'layer_name' to work on a specific layer
  */
 
 /** TO DO:
  * - Make a controller that can pass data onto the model for file writing and stuff
- * - Make a view that can do like choose between
+ * - Make a view (only has to be text-based) that can do like choose between
  *    1) Write interactively
  *    2) Load a command file
  *   And then it would read the commands from the user and make layers and all this stuff
