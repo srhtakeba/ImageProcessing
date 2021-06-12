@@ -5,7 +5,7 @@ package model.transform;
  * the images hue so it mimics that of an older image with a red-brown tone.
  */
 public class SepiaToneOperation extends AbstractTransformOperation {
-//
+
   /**
    * Constructs {@code SepiaToneOperation} object.
    */

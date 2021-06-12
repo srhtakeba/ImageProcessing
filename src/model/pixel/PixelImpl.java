@@ -8,7 +8,7 @@ import java.util.Objects;
  * 0-255, to represent how much of that color is included in this pixel.
  */
 public class PixelImpl implements Pixel {
-  //
+
   private final Channel r;
   private final Channel g;
   private final Channel b;

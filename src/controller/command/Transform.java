@@ -3,7 +3,7 @@ package controller.command;
 import model.InstagramLayerModel;
 
 public class Transform implements InstagramLayerCommand {
-  //
+
   String str;
 
   public Transform(String str) {

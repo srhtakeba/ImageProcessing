@@ -7,7 +7,7 @@ import model.image.InstaImage;
  * colors patterns.
  */
 public interface InstagramModel {
-//
+
   /**
    * Given a String token to represent an operation, perform that filter operation on this
    * InstagramModel's image.

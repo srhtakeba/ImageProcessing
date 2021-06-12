@@ -22,7 +22,7 @@ import model.transform.TransformOperation;
  * model uses the {@code ImageImpl} subclass of {@code InstaImage} for exporting images.
  */
 public class InstagramModelImpl implements InstagramModel {
-  //
+
   InstaImage image;
   Stack<InstaImage> log;
 

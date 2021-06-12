@@ -5,7 +5,7 @@ package model.filter;
  * appear to be less in-focus, and lower in quality.
  */
 public class BlurOperation extends FilterImpl {
-//
+
   /**
    * Constructs {@code BlurOperation} kernel object.
    */

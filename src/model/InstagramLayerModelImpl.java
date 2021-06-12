@@ -2,7 +2,6 @@ package model;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -50,7 +49,7 @@ ASSIGNMENT 6 NOTES:
  */
 
 public class InstagramLayerModelImpl extends InstagramModelImpl implements InstagramLayerModel {
-  //
+
   HashMap<String, InstaImage> layerMap;
   String currentLayer;
 

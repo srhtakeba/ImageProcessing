@@ -5,7 +5,7 @@ package model.transform;
  * change the images hue so it is comprised solely of black and white shades.
  */
 public class GreyscaleOperation extends AbstractTransformOperation {
-//
+
   /**
    * Constructs {@code GreyscaleOperation} object.
    */

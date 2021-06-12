@@ -7,7 +7,7 @@ import model.image.InstaImage;
  * only changes the hue of each pixel according to the specific transformation to be applied.
  */
 public abstract class AbstractTransformOperation implements TransformOperation {
-  //
+
   Double[][] transformMatrix;
 
   public AbstractTransformOperation(Double[][] matrix) {

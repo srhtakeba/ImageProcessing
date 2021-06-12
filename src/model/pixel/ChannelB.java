@@ -6,7 +6,7 @@ import java.util.Objects;
  * Class to represent a blue channel for a pixel.
  */
 public class ChannelB extends ChannelImpl {
-//
+
   /**
    * Constructs a {@code ChannelB} object.
    *

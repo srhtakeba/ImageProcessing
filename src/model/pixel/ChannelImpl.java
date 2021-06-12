@@ -5,7 +5,7 @@ package model.pixel;
  * Abstract class for three colors, red, green, and blue.
  */
 public abstract class ChannelImpl implements Channel {
-  //
+
   private int value;
 
   /**

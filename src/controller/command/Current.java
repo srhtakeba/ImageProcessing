@@ -3,7 +3,7 @@ package controller.command;
 import model.InstagramLayerModel;
 
 public class Current implements InstagramLayerCommand {
-//
+
   String str;
 
   public Current(String str) {

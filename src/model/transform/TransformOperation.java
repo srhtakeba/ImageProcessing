@@ -8,7 +8,7 @@ import model.image.InstaImage;
  * will change the hue of each pixel in the image.
  */
 public interface TransformOperation {
-//
+
   /**
    * Apply this color transformation to the given image by using the transform matrix specific to
    * this color transformation, and multiplying it against the given {@code InstaImage} image.

@@ -6,7 +6,7 @@ import model.pixel.Pixel;
  * Interface to represent a Image.
  */
 public interface InstaImage {
-//
+
   /**
    * Creates a checkerboard image represented in pixels.
    *

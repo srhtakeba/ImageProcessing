@@ -6,7 +6,7 @@ package model.filter;
  * the image, making them more harsh.
  */
 public class SharpenOperation extends FilterImpl {
-//
+
   /**
    * Constructs {@code SharpenOperation} kernel object.
    */
