@@ -1,6 +1,8 @@
 package model;
 
-public interface InstagramLayerModel extends InstagramModel {
+import java.io.IOException;
+
+public interface InstagramLayerModel {
   /**
    * Adds a new layer to this model, with the given name.
    * @param layerName title for the new layer
@@ -25,5 +27,7 @@ public interface InstagramLayerModel extends InstagramModel {
    * '.---' extensions to specify the file format.
    * @param filepath the file path for the export.
    */
-  void exportImage(String filepath);
+  void exportImage(String filepath) throws IOException;
+
+  void read(String filepath) throws IOException;
 }
