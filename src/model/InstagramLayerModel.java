@@ -27,7 +27,7 @@ public interface InstagramLayerModel extends InstagramModel {
    * '.---' extensions to specify the file format.
    * @param filepath the file path for the export.
    */
-  void exportImage(String filepath) throws IOException;
+  void exportImage(String filepath) throws IllegalStateException;
 
-  void read(String filepath) throws IOException;
+  void read(String filepath) throws IllegalStateException;
 }
