@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -64,6 +65,8 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
 
   NavigableMap<String, InstaImage> layerMap;
   String currentLayer;
+  private Integer width;
+  private Integer height;
 
   public InstagramLayerModelImpl() {
     super();
@@ -119,38 +122,38 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void exportImage(String filepath) throws IllegalStateException {
+    BufferedImage base = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
+    Graphics g = base.getGraphics();
+
 
     for (String key : layerMap.navigableKeySet()) {
       InstaImage imgTemp = layerMap.get(key);
 
-      BufferedImage exportImage = new BufferedImage(imgTemp.getWidth(), imgTemp.getHeight(),
+      BufferedImage currentImage = new BufferedImage(imgTemp.getWidth(), imgTemp.getHeight(),
           BufferedImage.TYPE_INT_RGB);
-      Pixel[][] exportPixelGrid = imgTemp.getPixelGrid();
+      Pixel[][] currentPixelGrid = imgTemp.getPixelGrid();
 
       for (int i = 0; i < this.image.getHeight(); i++) {
         for (int j = 0; j < this.image.getWidth(); j++) {
-          Pixel currentPixel = exportPixelGrid[i][j];
+          Pixel currentPixel = currentPixelGrid[i][j];
           Color currentColor = new Color(currentPixel.getR().getValue(),
               currentPixel.getG().getValue(), currentPixel.getB().getValue());
 
-          exportImage.setRGB(j, i, currentColor.getRGB());
+          currentImage.setRGB(j, i, currentColor.getRGB());
         }
       }
 
-//    Graphics g = exportImage.getGraphics();
-//    g.drawImage(a, 0, 0, null);
-//    g.drawImage(b, 0, 0, null);
-
-      String[] fileName = filepath.split("\\.");
-      // check that there was a dot in the file path
-      if (fileName.length < 2) {
-        throw new IllegalArgumentException("Invalid file. Must include '.--' extension");
-      }
-      try {
-        ImageIO.write(exportImage, fileName[1], new File(filepath));
-      } catch (IOException ioe) {
-        throw new IllegalStateException("Writing to the file failed.");
-      }
+    g.drawImage(currentImage, 0, 0, null);
+    }
+    String[] fileName = filepath.split("\\.");
+    // check that there was a dot in the file path
+    if (fileName.length < 2) {
+      throw new IllegalArgumentException("Invalid file. Must include '.--' extension");
+    }
+    try {
+      ImageIO.write(base, fileName[1], new File(filepath));
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Writing to the file failed.");
     }
   }
 
@@ -180,15 +183,14 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
       }
     }
     this.image = new ImageImpl(importedPGrid, width, height);
+    if(this.width == null ) {
+      this.width = width;
+    }
+    if(this.height == null ) {
+      this.height = height;
+    }
 
-    String topMostImageName = layerMap.lastEntry().getKey();
-    InstaImage topMostImage = layerMap.lastEntry().getValue();
-
-    topMostImage = this.image;
-
-    layerMap.put(topMostImageName, topMostImage);
-
-
+    layerMap.put(this.currentLayer, this.image);
   }
 
   /**
