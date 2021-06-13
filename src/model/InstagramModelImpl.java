@@ -1,18 +1,6 @@
 package model;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Stack;
-import model.filter.BlurOperation;
-import model.filter.FilterOperation;
-import model.filter.SharpenOperation;
-import model.image.ImageImpl;
-import model.image.InstaImage;
-import model.pixel.Pixel;
-import model.transform.GreyscaleOperation;
-import model.transform.SepiaToneOperation;
-import model.transform.TransformOperation;
+
 /*
 ASSIGNMENT 6 NOTES:
 - To WRITE to files:
@@ -49,6 +37,20 @@ ASSIGNMENT 6 NOTES:
  * - We need to be careful about separating all of these things
  * - Make a new model interface that extends InstagramModel that adds the layer feature.
  */
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Stack;
+import model.filter.BlurOperation;
+import model.filter.FilterOperation;
+import model.filter.SharpenOperation;
+import model.image.ImageImpl;
+import model.image.InstaImage;
+import model.pixel.Pixel;
+import model.transform.GreyscaleOperation;
+import model.transform.SepiaToneOperation;
+import model.transform.TransformOperation;
 
 /**
  * An implementation of {@code InstagramModel} that uses the {@code InstaImage} object type to

@@ -9,9 +9,13 @@ import org.junit.Test;
 
 public class ControllerTest {
 
-  Readable in = new StringReader("new first\n" + "new second\n"
-      + "current first\n" + "read images/originals/canyonLowest.jpg\n"
-      + "transform greyscale\n" + "current second\n"
+//  Readable in = new StringReader("new first\n" + "new second\n"
+//      + "current first\n" + "read images/originals/canyonLowest.jpg\n"
+//      + "transform greyscale\n" + "current second\n"
+//      + "read images/originals/canyonTransparent.png\n"
+//      + "export blurrcaaaaa.png");
+
+  Readable in = new StringReader("new first\n" + "new second\n" + "current second\n"
       + "read images/originals/canyonTransparent.png\n"
       + "export blurrcaaaaa.png");
 

@@ -1,17 +1,6 @@
 package model;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.NavigableMap;
-import java.util.TreeMap;
-import javax.imageio.ImageIO;
-import model.image.ImageImpl;
-import model.image.InstaImage;
-import model.pixel.Pixel;
-import model.pixel.PixelImpl;
+
 
 /*
 ASSIGNMENT 6 NOTES:
@@ -46,6 +35,20 @@ ASSIGNMENT 6 NOTES:
   - https://docs.oracle.com/javase/7/docs/api/java/io/FileInputStream.html
  */
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.NavigableMap;
+import java.util.TreeMap;
+import javax.imageio.ImageIO;
+import model.image.ImageImpl;
+import model.image.InstaImage;
+import model.pixel.Pixel;
+import model.pixel.PixelImpl;
+
 /**
  * TO DO: - Make a controller that can pass data onto the model for file writing and stuff - Make a
  * view (only has to be text-based) that can do like choose between 1) Write interactively 2) Load a
@@ -74,9 +77,8 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void addLayer(String layerName) {
-    Pixel[][] emptyGrid = new PixelImpl[0][0];
-    InstaImage layer = new ImageImpl(emptyGrid, 0, 0);
-    layerMap.put(layerName, layer);
+    //InstaImage layer = new ImageImpl();
+    layerMap.put(layerName, null);
   }
 
   /**
@@ -116,16 +118,18 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
   @Override
   public void exportImage(String filepath) throws IllegalStateException {
     BufferedImage base = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
-    Graphics g = base.getGraphics();
-
+    Graphics2D g = base.createGraphics();
 
     for (String key : layerMap.navigableKeySet()) {
       InstaImage imgTemp = layerMap.get(key);
 
-      BufferedImage currentImage = convert(imgTemp);
+      if(!(imgTemp == null)) {
+        BufferedImage currentImage = convert(imgTemp);
 
-      g.drawImage(currentImage, 0, 0, null);
+        g.drawImage(currentImage, 0, 0, null);
+      }
     }
+    g.dispose();
 
     String[] fileName = filepath.split("\\.");
     // check that there was a dot in the file path

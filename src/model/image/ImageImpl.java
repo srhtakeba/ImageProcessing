@@ -1,5 +1,6 @@
 package model.image;
 
+
 import model.pixel.Channel;
 import model.pixel.ChannelB;
 import model.pixel.ChannelG;
