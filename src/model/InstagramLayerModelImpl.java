@@ -39,6 +39,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -276,26 +277,30 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void save(String dirName) throws IllegalStateException {
-    File mainText = new File(dirName + "/main.txt");
+    File directory = new File(dirName);
     // make the new directory
-    boolean creationSuccess = mainText.mkdir();
+    boolean creationSuccess = directory.mkdir();
     if(!creationSuccess) {
       throw new IllegalStateException("Making the new directory failed.");
     }
+    File mainText = new File(dirName + "/main.txt");
     // writing the script for the main file
     StringBuilder mainSB = new StringBuilder();
     for (String key : layerMap.navigableKeySet()) {
       InstaImage imgTemp = layerMap.get(key);
-      mainSB.append("new ").append(key);
+      mainSB.append("new ").append(key).append("\n");
 
       if (!(imgTemp == null)) {
-        mainSB.append("read ").append(key).append(".png");
+        mainSB.append("read ");
+        mainSB.append(dirName).append("/");
+        mainSB.append(key).append(".png").append("\n");
       }
     }
     // writing to the main file
     try {
-      FileWriter writer = new FileWriter(mainText);
+      BufferedWriter writer = new BufferedWriter(new FileWriter(mainText));
       writer.write(mainSB.toString());
+      writer.close();
     }
     catch (IOException ioe) {
       throw new IllegalStateException("Writing to the file failed.");
