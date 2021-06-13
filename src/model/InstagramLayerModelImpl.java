@@ -6,9 +6,16 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 import javax.imageio.ImageIO;
 import model.image.ImageImpl;
 import model.image.InstaImage;
+import model.pixel.Channel;
+import model.pixel.ChannelB;
+import model.pixel.ChannelG;
+import model.pixel.ChannelR;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 
@@ -45,24 +52,22 @@ ASSIGNMENT 6 NOTES:
   - https://docs.oracle.com/javase/7/docs/api/java/io/FileInputStream.html
  */
 
-/** TO DO:
- * - Make a controller that can pass data onto the model for file writing and stuff
- * - Make a view (only has to be text-based) that can do like choose between
- *    1) Write interactively
- *    2) Load a command file
- *   And then it would read the commands from the user and make layers and all this stuff
- * - We need to be careful about separating all of these things
- * - Make a new model interface that extends InstagramModel that adds the layer feature.
+/**
+ * TO DO: - Make a controller that can pass data onto the model for file writing and stuff - Make a
+ * view (only has to be text-based) that can do like choose between 1) Write interactively 2) Load a
+ * command file And then it would read the commands from the user and make layers and all this stuff
+ * - We need to be careful about separating all of these things - Make a new model interface that
+ * extends InstagramModel that adds the layer feature.
  */
 
 public class InstagramLayerModelImpl extends InstagramModelImpl implements InstagramLayerModel {
 
-  HashMap<String, InstaImage> layerMap;
+  NavigableMap<String, InstaImage> layerMap;
   String currentLayer;
 
   public InstagramLayerModelImpl() {
     super();
-    this.layerMap = new HashMap<>();
+    this.layerMap = new TreeMap<String, InstaImage>();
     this.currentLayer = "";
   }
 
@@ -85,7 +90,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void removeLayer(String layerName) throws IllegalArgumentException {
-    if(!layerMap.containsKey(layerName)) {
+    if (!layerMap.containsKey(layerName)) {
       throw new IllegalArgumentException("The layer with the provided name does not exist.");
     }
     layerMap.remove(layerName);
@@ -98,7 +103,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void setCurrentLayer(String layerName) throws IllegalArgumentException {
-    if(!layerMap.containsKey(layerName)) {
+    if (!layerMap.containsKey(layerName)) {
       throw new IllegalArgumentException("The layer with the provided name does not exist.");
     }
     this.image = layerMap.get(layerName);
@@ -114,57 +119,76 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void exportImage(String filepath) throws IllegalStateException {
-    BufferedImage exportImage = new BufferedImage(this.image.getWidth(), this.image.getHeight(),
-        BufferedImage.TYPE_INT_RGB);
-    Pixel[][] exportPixelGrid = this.image.getPixelGrid();
-    for(int i=0;i<this.image.getHeight();i++) {
-      for(int j=0;j<this.image.getWidth();j++) {
-        Pixel currentPixel = exportPixelGrid[i][j];
-        Color currentColor = new Color(currentPixel.getR().getValue(),
-            currentPixel.getG().getValue(), currentPixel.getB().getValue());
-        exportImage.setRGB(j, i, currentColor.getRGB());
+
+    for (String key : layerMap.navigableKeySet()) {
+      InstaImage imgTemp = layerMap.get(key);
+
+      BufferedImage exportImage = new BufferedImage(imgTemp.getWidth(), imgTemp.getHeight(),
+          BufferedImage.TYPE_INT_RGB);
+      Pixel[][] exportPixelGrid = imgTemp.getPixelGrid();
+
+      for (int i = 0; i < this.image.getHeight(); i++) {
+        for (int j = 0; j < this.image.getWidth(); j++) {
+          Pixel currentPixel = exportPixelGrid[i][j];
+          Color currentColor = new Color(currentPixel.getR().getValue(),
+              currentPixel.getG().getValue(), currentPixel.getB().getValue());
+
+          exportImage.setRGB(j, i, currentColor.getRGB());
+        }
       }
-    }
-    String[] fileName = filepath.split("\\.");
-    // check that there was a dot in the file path
-    if(fileName.length<2) {
-      throw new IllegalArgumentException("Invalid file. Must include '.--' extension");
-    }
-    try {
-      ImageIO.write(exportImage, fileName[1], new File(filepath));
-    }
-    catch (IOException ioe) {
-      throw new IllegalStateException("Writing to the file failed.");
+
+//    Graphics g = exportImage.getGraphics();
+//    g.drawImage(a, 0, 0, null);
+//    g.drawImage(b, 0, 0, null);
+
+      String[] fileName = filepath.split("\\.");
+      // check that there was a dot in the file path
+      if (fileName.length < 2) {
+        throw new IllegalArgumentException("Invalid file. Must include '.--' extension");
+      }
+      try {
+        ImageIO.write(exportImage, fileName[1], new File(filepath));
+      } catch (IOException ioe) {
+        throw new IllegalStateException("Writing to the file failed.");
+      }
     }
   }
 
   @Override
   public void read(String filepath) throws IllegalStateException {
     String[] fileParts = filepath.split("\\.");
-    if(fileParts[1].equals("ppm")) {
+    if (fileParts[1].equals("ppm")) {
       this.readPPM(filepath);
       return;
     }
     BufferedImage imported;
     try {
       imported = ImageIO.read(new File(filepath));
-    }
-    catch (IOException ioe) {
+    } catch (IOException ioe) {
       throw new IllegalStateException("Reading from the file failed.");
     }
     int width = imported.getWidth();
     int height = imported.getHeight();
     Pixel[][] importedPGrid = new Pixel[height][width];
-    for(int i=0;i<height;i++) {
-      for(int j=0;j<width;j++) {
-        Color currentColor = new Color(imported.getRGB(j,i));
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        Color currentColor = new Color(imported.getRGB(j, i));
         int r = currentColor.getRed();
         int g = currentColor.getGreen();
         int b = currentColor.getBlue();
-        importedPGrid[i][j] = new PixelImpl(r,g,b);
+        importedPGrid[i][j] = new PixelImpl(r, g, b);
       }
     }
     this.image = new ImageImpl(importedPGrid, width, height);
+
+    String topMostImageName = layerMap.lastEntry().getKey();
+    InstaImage topMostImage = layerMap.lastEntry().getValue();
+
+    topMostImage = this.image;
+
+    layerMap.put(topMostImageName, topMostImage);
+
+
   }
 
   /**
@@ -192,4 +216,39 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     super.transform(operation);
     this.layerMap.replace(currentLayer, this.image);
   }
+
+//  /**
+//   * Helper method to calcurate the average.
+//   *
+//   * @return a PixelImpl containing the average RGB value.
+//   */
+//  private InstaImage rgbAverage() {
+//    int rVal = 0;
+//    int gVal = 0;
+//    int bVal = 0;
+//    int count = 0;
+//
+////    Pixel rgb;
+//
+////    Channel[][] imageR = new Channel[height][width];
+////    Channel[][] imageG = new Channel[height][width];
+////    Channel[][] imageB = new Channel[height][width];
+//    for (String key: layerMap.keySet()) {
+//      InstaImage imgTemp = layerMap.get(key);
+//      Pixel[][] pixcelGridTemp = imgTemp.getPixelGrid();
+//
+//      for (int i = 0; i < imgTemp.getHeight(); i++) {
+//        for (int j = 0; j < imgTemp.getWidth(); j++) {
+//          rVal += pixcelGridTemp[i][j].getR().getValue();
+//          gVal += pixcelGridTemp[i][j].getG().getValue();
+//          bVal += pixcelGridTemp[i][j].getB().getValue();
+//        }
+//      }
+//      count += 1;
+//    }
+//    Pixel rgbAveraged = new PixelImpl((rVal / count), (gVal / count), (bVal / count));
+//
+//    return new ImageImpl(rgbAveraged, 0, 0);
+
+
 }

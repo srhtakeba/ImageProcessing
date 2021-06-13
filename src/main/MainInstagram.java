@@ -2,6 +2,7 @@ package main;
 
 import controller.Controller;
 import controller.IController;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 public class MainInstagram {
@@ -14,6 +15,7 @@ public class MainInstagram {
     //Readable in = new FileInputStream("script.txt");
     IController controller = new Controller(in);
     controller.go();
+
   }
 
 }

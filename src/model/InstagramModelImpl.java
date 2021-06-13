@@ -13,6 +13,42 @@ import model.pixel.Pixel;
 import model.transform.GreyscaleOperation;
 import model.transform.SepiaToneOperation;
 import model.transform.TransformOperation;
+/*
+ASSIGNMENT 6 NOTES:
+- To WRITE to files:
+  - Use ImageIO.write(RenderedImage im, String formatName, File output)
+    - Use BufferedImage(int width, int height, TYPE_INT_RGB).setRGB(int x, int y, int rgb)
+      Where BufferedImage is a child class of RenderedImage and int rgb is a merged integer.
+      We would use ((red<<16)|(green<<8)|blue) to convert our rgb values into a merged int.
+        - or we could use new Color(int r, int g, int b).getRGB(), which would do the same
+    - Use getWriterFormatNames() to get the list of string format names. Seems like Strings such as
+      "jpeg" can be used.
+    - Use new File(String pathname)
+- to READ files:
+  - Use ImageIO.read(File input) which returns a BufferedImage
+    - Again, use new File(String pathname)
+  - From the resulting BufferedImage, .getHeight(), .getWidth(), .getRGB(int x, int y)
+  - Construct a new Color(img.getRGB(int x, int y)).getR() etc to get the individual rgb values
+    as ints.
+- Possible view SYNTAX codes:
+  - 'new' + 'layer_name' to Create a new layer
+  - 'remove' + 'layer_name' to remove a layer
+  - 'read' + 'file_name' + '.' + 'formatName' to load images
+  - 'export' + 'file_name' + '.' + 'formatName' to save as a file
+  - 'filter' + 'blur'/'sharpen' to filter
+  - 'transform' + 'sepia'/'greyscale' to transform
+  - 'current' + 'layer_name' to work on a specific layer
+ */
+
+/** TO DO:
+ * - Make a controller that can pass data onto the model for file writing and stuff
+ * - Make a controller (only has to be text-based) that can do like choose between
+ *    1) Write interactively
+ *    2) Load a command file
+ *   And then it would read the commands from the user and make layers and all this stuff
+ * - We need to be careful about separating all of these things
+ * - Make a new model interface that extends InstagramModel that adds the layer feature.
+ */
 
 /**
  * An implementation of {@code InstagramModel} that uses the {@code InstaImage} object type to
