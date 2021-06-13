@@ -123,7 +123,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     for (String key : layerMap.navigableKeySet()) {
       InstaImage imgTemp = layerMap.get(key);
 
-      if(!(imgTemp == null)) {
+      if (!(imgTemp == null)) {
         BufferedImage currentImage = convert(imgTemp);
 
         g.drawImage(currentImage, 0, 0, null);
@@ -145,6 +145,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
 
   /**
    * Converts the given InstaImage to a BufferedImage.
+   *
    * @param img the {@code InstaImage} to be converted
    * @return a {@code BufferedImage} object that represents the given InstaImage
    */
@@ -166,7 +167,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
   }
 
   @Override
-  public void read(String filepath) throws IllegalStateException {
+  public void read(String filepath) throws IllegalStateException, IllegalArgumentException {
     String[] fileParts = filepath.split("\\.");
     if (fileParts[1].equals("ppm")) {
       this.readPPM(filepath);
@@ -190,13 +191,19 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
         importedPGrid[i][j] = new PixelImpl(r, g, b);
       }
     }
-    this.image = new ImageImpl(importedPGrid, width, height);
-    if(this.width == null ) {
+    // check if this is the first image to be imported
+    if (this.width == null) {
       this.width = width;
     }
-    if(this.height == null ) {
+    if (this.height == null) {
       this.height = height;
     }
+    // if it isn't, check that the new imported image is of the same proportions as the current
+    // proportions of this model
+    if (this.height != height || this.width != width) {
+      throw new IllegalArgumentException("The given image is of invalid proportions.");
+    }
+    this.image = new ImageImpl(importedPGrid, width, height);
 
     layerMap.put(this.currentLayer, this.image);
   }
