@@ -1,0 +1,4 @@
+new first
+read myhappycanyon/first.png
+new second
+read myhappycanyon/second.png

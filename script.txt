@@ -1,0 +1,10 @@
+new first
+current first 
+read images/originals/canyonLowest.jpg
+export mycanyon.jpg
+new second
+current second 
+read images/originals/canyonLowest.jpg
+transform greyscale
+export mygreycanyon.jpg
+save myhappycanyon
