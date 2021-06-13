@@ -284,22 +284,10 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
       throw new IllegalStateException("Making the new directory failed.");
     }
     File mainText = new File(dirName + "/main.txt");
-    // writing the script for the main file
-    StringBuilder mainSB = new StringBuilder();
-    for (String key : layerMap.navigableKeySet()) {
-      InstaImage imgTemp = layerMap.get(key);
-      mainSB.append("new ").append(key).append("\n");
-
-      if (!(imgTemp == null)) {
-        mainSB.append("read ");
-        mainSB.append(dirName).append("/");
-        mainSB.append(key).append(".png").append("\n");
-      }
-    }
     // writing to the main file
     try {
       BufferedWriter writer = new BufferedWriter(new FileWriter(mainText));
-      writer.write(mainSB.toString());
+      writer.write(getMainTextString(dirName));
       writer.close();
     }
     catch (IOException ioe) {
@@ -316,5 +304,24 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     setCurrentLayer(curTemp);
   }
 
+  /**
+   * Returns the content to be written in the main text file when this project is saved.
+   * @param dirName the name of the project directory
+   * @return the string content for the main file
+   */
+  private String getMainTextString(String dirName) {
+    // writing the script for the main file
+    StringBuilder mainSB = new StringBuilder();
+    for (String key : layerMap.navigableKeySet()) {
+      InstaImage imgTemp = layerMap.get(key);
+      mainSB.append("new ").append(key).append("\n");
 
+      if (!(imgTemp == null)) {
+        mainSB.append("read ");
+        mainSB.append(dirName).append("/");
+        mainSB.append(key).append(".png").append("\n");
+      }
+    }
+    return mainSB.toString();
+  }
 }
