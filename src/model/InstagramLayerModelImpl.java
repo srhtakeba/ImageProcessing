@@ -2,21 +2,14 @@ package model;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 import javax.imageio.ImageIO;
 import model.image.ImageImpl;
 import model.image.InstaImage;
-import model.pixel.Channel;
-import model.pixel.ChannelB;
-import model.pixel.ChannelG;
-import model.pixel.ChannelR;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 
@@ -129,22 +122,11 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     for (String key : layerMap.navigableKeySet()) {
       InstaImage imgTemp = layerMap.get(key);
 
-      BufferedImage currentImage = new BufferedImage(imgTemp.getWidth(), imgTemp.getHeight(),
-          BufferedImage.TYPE_INT_RGB);
-      Pixel[][] currentPixelGrid = imgTemp.getPixelGrid();
+      BufferedImage currentImage = convert(imgTemp);
 
-      for (int i = 0; i < this.image.getHeight(); i++) {
-        for (int j = 0; j < this.image.getWidth(); j++) {
-          Pixel currentPixel = currentPixelGrid[i][j];
-          Color currentColor = new Color(currentPixel.getR().getValue(),
-              currentPixel.getG().getValue(), currentPixel.getB().getValue());
-
-          currentImage.setRGB(j, i, currentColor.getRGB());
-        }
-      }
-
-    g.drawImage(currentImage, 0, 0, null);
+      g.drawImage(currentImage, 0, 0, null);
     }
+
     String[] fileName = filepath.split("\\.");
     // check that there was a dot in the file path
     if (fileName.length < 2) {
@@ -155,6 +137,28 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     } catch (IOException ioe) {
       throw new IllegalStateException("Writing to the file failed.");
     }
+  }
+
+  /**
+   * Converts the given InstaImage to a BufferedImage.
+   * @param img the {@code InstaImage} to be converted
+   * @return a {@code BufferedImage} object that represents the given InstaImage
+   */
+  private BufferedImage convert(InstaImage img) {
+    BufferedImage result = new BufferedImage(img.getWidth(), img.getHeight(),
+        BufferedImage.TYPE_INT_RGB);
+    Pixel[][] currentPixelGrid = img.getPixelGrid();
+
+    for (int i = 0; i < img.getHeight(); i++) {
+      for (int j = 0; j < img.getWidth(); j++) {
+        Pixel currentPixel = currentPixelGrid[i][j];
+        Color currentColor = new Color(currentPixel.getR().getValue(),
+            currentPixel.getG().getValue(), currentPixel.getB().getValue());
+
+        result.setRGB(j, i, currentColor.getRGB());
+      }
+    }
+    return result;
   }
 
   @Override
