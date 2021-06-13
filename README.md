@@ -45,6 +45,27 @@ Transfrom - Sepia:\
  #### Importing and Exporting From `InstagramModelImpl`
  Currently, `InstagramModelImpl` supports two types of image representations: `InstaImage` and PPM images. In order to import a PPM image, the client can pass to the `readPPM(String filename)` the filename / path of their image, relative to the position of the model in the file system. Similarly, `exportAsPPM(String title)` allows the client to export the current image in the model to a PPM file, and provides the client to choose the title of the file as well. If the file name already exists, a (n) number will be attached to the end of the file name to indicate that it is the nth file to be named that title in the directory. Images can also be imported as `InstaImage` through `readInstaImage(InstaImage image)` where the client can directly pass the model an `InstaImage`, as well as export the current model image with `exportAsInstaImage()`.
 
+### InstagramLayerModel & InstagramLayerModelImpl
+`InstagramLayerModel` adds layering functionality to the model above. It allows clients to add multiple
+layers to a project, export/import to them separately, work on them separately, as well as save 
+a project as a multi-layered image.\
+#### A multi-layered image
+A multi-layered image is essentially a folder containing `.png` files of all layers in the project,
+as well as a main.txt text file that has the ability to rebuild the project of layers with the given
+names from the images in the project file.\
+#### Working on layers
+Each layer can be worked on as per specified above in the `InstagramModelImpl` behavior.\
+#### Exporting layers
+Layers can be exported separately by specifying which current layer you are working on, and then providing
+a name of the image to be exported. The name of the image must include a '.---' extension to 
+specify the type of image to be exported. The image may be exported as 'jpeg' or 'png' files, not 
+just restricted to PPM files as `InstagramModelImpl` is. 
+#### Importing images
+Images of all types can be imported to `InstagramLayerModel` objects. The filepath must be specified
+and the image will be converted to a `InstaImage` within `InstagramLayerModelImpl` so it can be processed
+as per the `InstagramModel` interface.
+
+
 ## InstaImage
 InstaImage is an object type that holds the important information of an image. It holds the grid of `Pixel`s to represent the image, as well as a height and width
 in pixels. InstaImage can also produce and return algorithmic images such as a rainbow flag, and a black and white checkerboard. 
