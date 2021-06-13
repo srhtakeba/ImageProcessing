@@ -46,7 +46,8 @@ public interface InstagramLayerModel extends InstagramModel {
   /**
    * Saves this model's multi-layered image into a new folder with the exports for each image,
    * plus a text file that organizes those images.
+   * @param dirName the name for the directory of this project.
    * @throws IllegalStateException
    */
-  void save() throws IllegalStateException;
+  void save(String dirName) throws IllegalStateException;
 }

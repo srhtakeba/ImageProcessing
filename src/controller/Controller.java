@@ -48,6 +48,8 @@ public class Controller implements IController {
           case "export":
             cmd = InstagramLayerCommandFactory.create("export", next);
             break;
+          case "save":
+            cmd = InstagramLayerCommandFactory.create("save", next);
           default:
             break;
         }

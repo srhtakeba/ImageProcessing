@@ -18,6 +18,8 @@ public class InstagramLayerCommandFactory {
         return new Transform(next);
       case "filter":
         return new Filter(next);
+      case "save":
+        return new Save(next);
       default:
         return null;
     }

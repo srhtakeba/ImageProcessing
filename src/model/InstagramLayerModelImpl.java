@@ -40,6 +40,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.NavigableMap;
 import java.util.TreeMap;
@@ -117,27 +118,27 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void exportImage(String filepath) throws IllegalStateException {
-    BufferedImage base = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
-    Graphics2D g = base.createGraphics();
-
-    for (String key : layerMap.navigableKeySet()) {
-      InstaImage imgTemp = layerMap.get(key);
-
-      if (!(imgTemp == null)) {
-        BufferedImage currentImage = convert(imgTemp);
-
-        g.drawImage(currentImage, 0, 0, null);
-      }
-    }
-    g.dispose();
-
+//    BufferedImage base = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
+//    Graphics2D g = base.createGraphics();
+//
+//    for (String key : layerMap.navigableKeySet()) {
+//      InstaImage imgTemp = layerMap.get(key);
+//
+//      if (!(imgTemp == null)) {
+//        BufferedImage currentImage = convert(imgTemp);
+//
+//        g.drawImage(currentImage, 0, 0, null);
+//      }
+//    }
+//    g.dispose();
+    BufferedImage currentImage = convert(this.image);
     String[] fileName = filepath.split("\\.");
     // check that there was a dot in the file path
     if (fileName.length < 2) {
       throw new IllegalArgumentException("Invalid file. Must include '.--' extension");
     }
     try {
-      ImageIO.write(base, fileName[1], new File(filepath));
+      ImageIO.write(currentImage, fileName[1], new File(filepath));
     } catch (IOException ioe) {
       throw new IllegalStateException("Writing to the file failed.");
     }
@@ -266,6 +267,49 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
 //    Pixel rgbAveraged = new PixelImpl((rVal / count), (gVal / count), (bVal / count));
 //
 //    return new ImageImpl(rgbAveraged, 0, 0);
+
+  /**
+   * Saves this model's multi-layered image into a new folder with the exports for each image,
+   * plus a text file that organizes those images.
+   * @param dirName the name for the directory of this project.
+   * @throws IllegalStateException
+   */
+  @Override
+  public void save(String dirName) throws IllegalStateException {
+    File mainText = new File(dirName + "/main.txt");
+    // make the new directory
+    boolean creationSuccess = mainText.mkdir();
+    if(!creationSuccess) {
+      throw new IllegalStateException("Making the new directory failed.");
+    }
+    // writing the script for the main file
+    StringBuilder mainSB = new StringBuilder();
+    for (String key : layerMap.navigableKeySet()) {
+      InstaImage imgTemp = layerMap.get(key);
+      mainSB.append("new ").append(key);
+
+      if (!(imgTemp == null)) {
+        mainSB.append("read ").append(key).append(".png");
+      }
+    }
+    // writing to the main file
+    try {
+      FileWriter writer = new FileWriter(mainText);
+      writer.write(mainSB.toString());
+    }
+    catch (IOException ioe) {
+      throw new IllegalStateException("Writing to the file failed.");
+    }
+
+    // export each layer to the new directory
+    String curTemp = new String(currentLayer);
+    for (String key : layerMap.navigableKeySet()) {
+      setCurrentLayer(key);
+      exportImage(dirName+"/"+key+".png");
+    }
+    // set the current layer back to what it was before the iteration
+    setCurrentLayer(curTemp);
+  }
 
 
 }
