@@ -298,10 +298,12 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     String curTemp = new String(currentLayer);
     for (String key : layerMap.navigableKeySet()) {
       setCurrentLayer(key);
-      exportImage(dirName+"/"+key+".png");
+      if (!(this.image == null)) {
+        exportImage(dirName + "/" + key + ".png");
+      }
     }
     // set the current layer back to what it was before the iteration
-    setCurrentLayer(curTemp);
+    // setCurrentLayer(curTemp);
   }
 
   /**

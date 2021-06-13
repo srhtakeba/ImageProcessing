@@ -18,7 +18,7 @@ public class MainInstagram {
     //Readable in = new InputStreamReader(System.in);
     Readable in;
     try {
-      File script = new File("script.txt");
+      File script = new File("scriptGreySepia.txt");
       InputStream inStream = new FileInputStream(script);
       in = new InputStreamReader(inStream);
     } catch (IOException e) {
