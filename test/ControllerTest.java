@@ -32,10 +32,6 @@ public class ControllerTest {
     testOne.go();
 
     assertEquals("", out.toString());
-    StringBuilder logModel = new StringBuilder();
-    StringBuilder logImage = new StringBuilder();
-
-
   }
 
 
