@@ -1,7 +1,17 @@
 package controller.command;
 
+/**
+ * Factory class to create classes which can send commands.
+ */
 public class InstagramLayerCommandFactory {
 
+  /**
+   * Factory method to create classes which can send commands.
+   *
+   * @param cmd the name of the command
+   * @param next specifier of the command
+   * @return different classes which can send commands
+   */
   public static InstagramLayerCommand create(String cmd, String next) {
     switch(cmd) {
       case "create":

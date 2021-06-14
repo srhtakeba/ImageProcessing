@@ -4,6 +4,9 @@ import controller.Controller;
 import controller.IController;
 import java.io.InputStreamReader;
 
+/**
+ * Class to represents
+ */
 public class MainInstagram {
   /**
    *
