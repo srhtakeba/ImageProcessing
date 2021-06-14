@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import model.InstagramLayerModel;
@@ -39,6 +38,44 @@ public class Controller implements IController {
     Scanner scan = new Scanner(this.in);
     this.model = new InstagramLayerModelImpl();
     sendMessage("Welcome to OOD Instagram.\n");
+    loadPreviousProject(scan);
+
+    // Choose the interaction
+    sendMessage("Would you like to\n 1) Use interactive. \n 2) Use a script.\n");
+    sendMessage("Please type choice 1 or 2\n");
+    Scanner input = new Scanner("");
+    int choice = scan.nextInt();
+    switch (choice) {
+      case 1:
+        input = new Scanner(this.in);
+        sendMessage("Begin interaction. Refer to USEME.md for detailed instructions.\n");
+        break;
+      case 2:
+        sendMessage("Please input the filepath to the script.\n");
+        String filepath = scan.next();
+        File script = new File(filepath);
+        try {
+          InputStream inStream = new FileInputStream(script);
+          input = new Scanner(inStream);
+        }
+        catch (FileNotFoundException e) {
+          sendMessage("The given file was not found.");
+        }
+        break;
+      default:
+        sendMessage("Invalid choice. Type 1 or 2.\n");
+        return;
+    }
+
+    readCommands(input);
+  }
+
+  /**
+   * Prompts the client if they would like to re-open an existing {@code InstagramLayerModelImpl}
+   * project.
+   * @param scan the scanner that holds the user input.
+   */
+  private void loadPreviousProject(Scanner scan) {
     // Option to load an old project
     sendMessage("Would you like to open an existing project?\n");
     sendMessage("Type Y or N.\n");
@@ -61,36 +98,13 @@ public class Controller implements IController {
         //ignore
         break;
     }
-
-    // Choose the interaction
-    sendMessage("Would you like to\n 1) Use interactive. \n 2) Use a script.\n");
-    sendMessage("Please type choice 1 or 2\n");
-    Scanner input = new Scanner("");
-    int choice = scan.nextInt();
-    switch (choice) {
-      case 1:
-        input = new Scanner(this.in);
-        break;
-      case 2:
-        sendMessage("Please input the filepath to the script.\n");
-        String filepath = scan.next();
-        File script = new File(filepath);
-        try {
-          InputStream inStream = new FileInputStream(script);
-          input = new Scanner(inStream);
-        }
-        catch (FileNotFoundException e) {
-          sendMessage("The given file was not found.");
-        }
-        break;
-      default:
-        sendMessage("Invalid choice. Type 1 or 2.\n");
-        return;
-    }
-
-    readCommands(input);
   }
 
+  /**
+   * Sends a message to this MVC program's view.
+   * @param message the message to be send to the view.
+   * @throws IllegalStateException if there is an I/O Exception.
+   */
   private void sendMessage(String message) throws IllegalStateException {
     try {
       view.renderMessage(message);
