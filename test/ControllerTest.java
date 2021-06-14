@@ -19,18 +19,18 @@ public class ControllerTest {
       + "read images/originals/canyonLowest.jpg\n" + "transform greyscale\n"
       + "current second\n" + "read images/originals/canyonLowest.jpg\n"
       + "save dirrrrrrr");
-
-  @Test
-  public void test() {
-    //Readable in = new FileInputStream("x.txt");
-    IController testOne = new Controller(in);
-    testOne.go();
-
-    StringBuilder logModel = new StringBuilder();
-    StringBuilder logImage = new StringBuilder();
-
-
-  }
+//
+//  @Test
+//  public void test() {
+//    //Readable in = new FileInputStream("x.txt");
+//    IController testOne = new Controller(in);
+//    testOne.go();
+//
+//    StringBuilder logModel = new StringBuilder();
+//    StringBuilder logImage = new StringBuilder();
+//
+//
+//  }
 
 
 }

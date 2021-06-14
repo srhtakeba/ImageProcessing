@@ -1,0 +1,6 @@
+new first
+read tofutofutofu/first.png
+new second
+read tofutofutofu/second.png
+new third
+read tofutofutofu/third.png
