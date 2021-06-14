@@ -317,6 +317,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     for (String key : layerMap.navigableKeySet()) {
       InstaImage imgTemp = layerMap.get(key);
       mainSB.append("new ").append(key).append("\n");
+      mainSB.append("current ").append(key).append("\n");
 
       if (!(imgTemp == null)) {
         mainSB.append("read ");
