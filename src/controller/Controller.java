@@ -80,23 +80,18 @@ public class Controller implements IController {
     sendMessage("Would you like to open an existing project?\n");
     sendMessage("Type Y or N.\n");
     String open = scan.next();
-    switch (open.toUpperCase()) {
-      case "Y":
-        sendMessage("Please type the directory path of the project.\n");
-        String projectPath = scan.next() + "/main.txt";
-        File script = new File(projectPath);
-        try {
-          InputStream inStream = new FileInputStream(script);
-          Scanner project = new Scanner(inStream);
-          readCommands(project);
-        }
-        catch (FileNotFoundException e) {
-          sendMessage("The given file was not found.");
-        }
-        break;
-      default:
-        //ignore
-        break;
+    if(open.equalsIgnoreCase("Y")) {
+      sendMessage("Please type the directory path of the project.\n");
+      String projectPath = scan.next() + "/main.txt";
+      File script = new File(projectPath);
+      try {
+        InputStream inStream = new FileInputStream(script);
+        Scanner project = new Scanner(inStream);
+        readCommands(project);
+      }
+      catch (FileNotFoundException e) {
+        sendMessage("The given file was not found.");
+      }
     }
   }
 
