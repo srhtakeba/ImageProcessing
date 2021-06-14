@@ -1,48 +1,14 @@
 package model;
 
-
-
-/*
-ASSIGNMENT 6 NOTES:
-- To WRITE to files:
-  - Use ImageIO.write(RenderedImage im, String formatName, File output)
-    - Use BufferedImage(int width, int height, TYPE_INT_RGB).setRGB(int x, int y, int rgb)
-      Where BufferedImage is a child class of RenderedImage and int rgb is a merged integer.
-      We would use ((red<<16)|(green<<8)|blue) to convert our rgb values into a merged int.
-        - or we could use new Color(int r, int g, int b).getRGB(), which would do the same
-    - Use getWriterFormatNames() to get the list of string format names. Seems like Strings such as
-      "jpeg" can be used.
-    - Use new File(String pathname)
-- to READ files:
-  - Use ImageIO.read(File input) which returns a BufferedImage
-    - Again, use new File(String pathname)
-  - From the resulting BufferedImage, .getHeight(), .getWidth(), .getRGB(int x, int y)
-  - Construct a new Color(img.getRGB(int x, int y)).getR() etc to get the individual rgb values
-    as ints.
-- Possible view SYNTAX codes:
-  - 'new' + 'layer_name' to create a new layer
-  - 'remove' + 'layer_name' to remove a layer
-  - 'read' + 'file_name' + '.' + 'formatName' to load images
-  - 'export' + 'file_name' + '.' + 'formatName' to save as a file
-  - 'filter' + 'blur'/'sharpen' to filter
-  - 'transform' + 'sepia'/'greyscale' to transform
-  - 'current' + 'layer_name' to work on a specific layer
-- GOOD LINKS:
-  - https://docs.oracle.com/javase/7/docs/api/javax/imageio/ImageIO.html#write(java.awt.image.RenderedImage,%20java.lang.String,%20java.io.File)
-  - https://docs.oracle.com/javase/7/docs/api/java/io/File.html#File(java.lang.String)
-  - https://docs.oracle.com/javase/7/docs/api/java/awt/image/BufferedImage.html#getRGB(int,%20int)
-  - https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html
-  - https://docs.oracle.com/javase/7/docs/api/java/io/FileInputStream.html
- */
-
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 import javax.imageio.ImageIO;
@@ -52,13 +18,14 @@ import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 
 /**
- * TO DO: - Make a controller that can pass data onto the model for file writing and stuff - Make a
- * view (only has to be text-based) that can do like choose between 1) Write interactively 2) Load a
- * command file And then it would read the commands from the user and make layers and all this stuff
- * - We need to be careful about separating all of these things - Make a new model interface that
- * extends InstagramModel that adds the layer feature.
+ * This is a class to represent an Image Processing application that works similarly to
+ * {@code InstagramModelImpl} but adds layer functionality. Users can add layers and work on them
+ * individually as well export them as individual image files. This model supports exporting
+ * not just as PPM files but also png and jpg files. As well exporting png and jpg files, this model
+ * can also read png and jpg files. Projects are saved as 'multi-layered images', where there is a
+ * main folder/directory, holding the images for each layer as a png image and a 'main.txt' script
+ * file that can rebuild a project.
  */
-
 public class InstagramLayerModelImpl extends InstagramModelImpl implements InstagramLayerModel {
 
   NavigableMap<String, InstaImage> layerMap;
@@ -119,7 +86,6 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void exportImage(String filepath) throws IllegalStateException {
-
     BufferedImage currentImage = convert(this.image);
     String[] fileName = filepath.split("\\.");
     // check that there was a dot in the file path
@@ -224,14 +190,54 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     this.layerMap.replace(currentLayer, this.image);
   }
 
+//  /**
+//   * Helper method to calcurate the average.
+//   *
+//   * @return a PixelImpl containing the average RGB value.
+//   */
+//  private InstaImage rgbAverage() {
+//    int rVal = 0;
+//    int gVal = 0;
+//    int bVal = 0;
+//    int count = 0;
+//
+////    Pixel rgb;
+//
+////    Channel[][] imageR = new Channel[height][width];
+////    Channel[][] imageG = new Channel[height][width];
+////    Channel[][] imageB = new Channel[height][width];
+//    for (String key: layerMap.keySet()) {
+//      InstaImage imgTemp = layerMap.get(key);
+//      Pixel[][] pixcelGridTemp = imgTemp.getPixelGrid();
+//
+//      for (int i = 0; i < imgTemp.getHeight(); i++) {
+//        for (int j = 0; j < imgTemp.getWidth(); j++) {
+//          rVal += pixcelGridTemp[i][j].getR().getValue();
+//          gVal += pixcelGridTemp[i][j].getG().getValue();
+//          bVal += pixcelGridTemp[i][j].getB().getValue();
+//        }
+//      }
+//      count += 1;
+//    }
+//    Pixel rgbAveraged = new PixelImpl((rVal / count), (gVal / count), (bVal / count));
+//
+//    return new ImageImpl(rgbAveraged, 0, 0);
+
   /**
    * Saves this model's multi-layered image into a new folder with the exports for each image,
-   * plus a text file that organizes those images.
+   * plus a text file that organizes those images. If a directory with the name already exists,
+   * this will override that directory with the contents of this model.
    * @param dirName the name for the directory of this project.
    * @throws IllegalStateException
    */
   @Override
   public void save(String dirName) throws IllegalStateException {
+    // check if the directory/project with the same name already exists
+    Path path = Paths.get(dirName);
+    if(Files.exists(path) && Files.isDirectory(path)) {
+      File exists = new File(dirName);
+      deleteDirectory(exists);
+    }
     File directory = new File(dirName);
     // make the new directory
     boolean creationSuccess = directory.mkdir();
@@ -257,8 +263,6 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
         exportImage(dirName + "/" + key + ".png");
       }
     }
-    // set the current layer back to what it was before the iteration
-    // setCurrentLayer(curTemp);
   }
 
   /**
@@ -281,5 +285,21 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
       }
     }
     return mainSB.toString();
+  }
+
+  /**
+   * Empties and deletes the existing directory.
+   * @param dir the directory to be emptied
+   */
+  private void deleteDirectory(File dir) {
+    File[] files = dir.listFiles();
+    // if the file is just a file, not a directory, it will not have contents
+    if(files != null) {
+      for(File f : files) {
+        deleteDirectory(f);
+      }
+    }
+    // delete the directory
+    dir.delete();
   }
 }

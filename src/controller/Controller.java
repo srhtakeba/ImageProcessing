@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import model.InstagramLayerModel;
@@ -39,28 +38,7 @@ public class Controller implements IController {
     Scanner scan = new Scanner(this.in);
     this.model = new InstagramLayerModelImpl();
     sendMessage("Welcome to OOD Instagram.\n");
-    // Option to load an old project
-    sendMessage("Would you like to open an existing project?\n");
-    sendMessage("Type Y or N.\n");
-    String open = scan.next();
-    switch (open.toUpperCase()) {
-      case "Y":
-        sendMessage("Please type the directory path of the project.\n");
-        String projectPath = scan.next();
-        File script = new File(projectPath);
-        try {
-          InputStream inStream = new FileInputStream(script);
-          Scanner project = new Scanner(inStream);
-          readCommands(project);
-        }
-        catch (FileNotFoundException e) {
-          sendMessage("The given file was not found.");
-        }
-        break;
-      default:
-        //ignore
-        break;
-    }
+    loadPreviousProject(scan);
 
     // Choose the interaction
     sendMessage("Would you like to\n 1) Use interactive. \n 2) Use a script.\n");
@@ -70,6 +48,7 @@ public class Controller implements IController {
     switch (choice) {
       case 1:
         input = new Scanner(this.in);
+        sendMessage("Begin interaction. Refer to USEME.md for detailed instructions.\n");
         break;
       case 2:
         sendMessage("Please input the filepath to the script.\n");
@@ -91,6 +70,41 @@ public class Controller implements IController {
     readCommands(input);
   }
 
+  /**
+   * Prompts the client if they would like to re-open an existing {@code InstagramLayerModelImpl}
+   * project.
+   * @param scan the scanner that holds the user input.
+   */
+  private void loadPreviousProject(Scanner scan) {
+    // Option to load an old project
+    sendMessage("Would you like to open an existing project?\n");
+    sendMessage("Type Y or N.\n");
+    String open = scan.next();
+    switch (open.toUpperCase()) {
+      case "Y":
+        sendMessage("Please type the directory path of the project.\n");
+        String projectPath = scan.next() + "/main.txt";
+        File script = new File(projectPath);
+        try {
+          InputStream inStream = new FileInputStream(script);
+          Scanner project = new Scanner(inStream);
+          readCommands(project);
+        }
+        catch (FileNotFoundException e) {
+          sendMessage("The given file was not found.");
+        }
+        break;
+      default:
+        //ignore
+        break;
+    }
+  }
+
+  /**
+   * Sends a message to this MVC program's view.
+   * @param message the message to be send to the view.
+   * @throws IllegalStateException if there is an I/O Exception.
+   */
   private void sendMessage(String message) throws IllegalStateException {
     try {
       view.renderMessage(message);

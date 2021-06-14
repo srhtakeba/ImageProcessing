@@ -64,6 +64,12 @@ just restricted to PPM files as `InstagramModelImpl` is.
 Images of all types can be imported to `InstagramLayerModel` objects. The filepath must be specified
 and the image will be converted to a `InstaImage` within `InstagramLayerModelImpl` so it can be processed
 as per the `InstagramModel` interface.
+#### Saving your project
+Not only can image files of various types be exported from each layer of an `InstagramLayerModelImpl`,
+but you can also save an entire project, that may be reopened later on. Saving of a project saves this 
+model as a 'multi-layered image'. Essentially, the model will create a new directory with the given name,
+and save each layer of the model in there (if it has an image) as a png image file. It will also build
+a main.txt text file that can be used to re-open the Instagram project. 
 
 
 ## InstaImage
