@@ -46,7 +46,7 @@ public class Controller implements IController {
     switch (open.toUpperCase()) {
       case "Y":
         sendMessage("Please type the directory path of the project.\n");
-        String projectPath = scan.next() + "/main.txt";
+        String projectPath = scan.next();
         File script = new File(projectPath);
         try {
           InputStream inStream = new FileInputStream(script);

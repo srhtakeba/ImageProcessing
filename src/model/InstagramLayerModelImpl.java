@@ -119,19 +119,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void exportImage(String filepath) throws IllegalStateException {
-//    BufferedImage base = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
-//    Graphics2D g = base.createGraphics();
-//
-//    for (String key : layerMap.navigableKeySet()) {
-//      InstaImage imgTemp = layerMap.get(key);
-//
-//      if (!(imgTemp == null)) {
-//        BufferedImage currentImage = convert(imgTemp);
-//
-//        g.drawImage(currentImage, 0, 0, null);
-//      }
-//    }
-//    g.dispose();
+
     BufferedImage currentImage = convert(this.image);
     String[] fileName = filepath.split("\\.");
     // check that there was a dot in the file path
@@ -235,39 +223,6 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     super.transform(operation);
     this.layerMap.replace(currentLayer, this.image);
   }
-
-//  /**
-//   * Helper method to calcurate the average.
-//   *
-//   * @return a PixelImpl containing the average RGB value.
-//   */
-//  private InstaImage rgbAverage() {
-//    int rVal = 0;
-//    int gVal = 0;
-//    int bVal = 0;
-//    int count = 0;
-//
-////    Pixel rgb;
-//
-////    Channel[][] imageR = new Channel[height][width];
-////    Channel[][] imageG = new Channel[height][width];
-////    Channel[][] imageB = new Channel[height][width];
-//    for (String key: layerMap.keySet()) {
-//      InstaImage imgTemp = layerMap.get(key);
-//      Pixel[][] pixcelGridTemp = imgTemp.getPixelGrid();
-//
-//      for (int i = 0; i < imgTemp.getHeight(); i++) {
-//        for (int j = 0; j < imgTemp.getWidth(); j++) {
-//          rVal += pixcelGridTemp[i][j].getR().getValue();
-//          gVal += pixcelGridTemp[i][j].getG().getValue();
-//          bVal += pixcelGridTemp[i][j].getB().getValue();
-//        }
-//      }
-//      count += 1;
-//    }
-//    Pixel rgbAveraged = new PixelImpl((rVal / count), (gVal / count), (bVal / count));
-//
-//    return new ImageImpl(rgbAveraged, 0, 0);
 
   /**
    * Saves this model's multi-layered image into a new folder with the exports for each image,
