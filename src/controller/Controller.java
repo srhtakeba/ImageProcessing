@@ -48,7 +48,8 @@ public class Controller implements IController {
     switch (choice) {
       case 1:
         input = new Scanner(this.in);
-        sendMessage("Begin interaction. Refer to USEME.md for detailed instructions.\n");
+        sendMessage("Begin interaction. Refer to USEME.md for detailed instructions. "
+            + "Type Q/q to quit at anytime.\n");
         break;
       case 2:
         sendMessage("Please input the filepath to the script.\n");
@@ -68,6 +69,7 @@ public class Controller implements IController {
     }
 
     readCommands(input);
+    sendMessage("Program has been quit.\n");
   }
 
   /**
@@ -90,7 +92,7 @@ public class Controller implements IController {
         readCommands(project);
       }
       catch (FileNotFoundException e) {
-        sendMessage("The given file was not found.");
+        sendMessage("The given file was not found. A new project will be created.\n");
       }
     }
   }
@@ -117,6 +119,9 @@ public class Controller implements IController {
     InstagramLayerCommand cmd = null;
     while (scan.hasNext()) {
       String curr = scan.next();
+      if(curr.equalsIgnoreCase("q")) {
+        break;
+      }
       try {
         String next = scan.next();
         switch (curr) {
