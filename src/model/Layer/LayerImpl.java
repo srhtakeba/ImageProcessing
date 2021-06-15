@@ -24,6 +24,9 @@ public class LayerImpl implements Layer{
 
   @Override
   public InstaImage getImage() {
+    if(this.image == null) {
+      return null;
+    }
     return new ImageImpl(this.image);
   }
 

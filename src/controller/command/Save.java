@@ -61,7 +61,7 @@ public class Save implements InstagramLayerCommand {
         throw new IllegalArgumentException("Invalid file. Must include '.--' extension");
       }
       try {
-        ImageIO.write(currentImage, fileName[1], new File(this.str));
+        ImageIO.write(currentImage, fileName[1], new File(filepath));
       } catch (IOException ioe) {
         throw new IllegalStateException("Writing to the file failed.");
       }

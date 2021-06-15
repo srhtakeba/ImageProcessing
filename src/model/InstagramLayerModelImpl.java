@@ -107,7 +107,12 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     if (!layerMap.containsKey(layerName)) {
       throw new IllegalArgumentException("The layer with the provided name does not exist.");
     }
-    this.image = layerMap.get(layerName).getImage();
+    if(layerMap.get(layerName).getImage() != null) {
+      this.image = layerMap.get(layerName).getImage();
+    }
+    else {
+      this.image = null;
+    }
     this.currentLayer = layerName;
   }
 
