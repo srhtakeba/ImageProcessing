@@ -55,6 +55,15 @@ public interface InstagramLayerModel extends InstagramModel {
   void exportImage(String filepath) throws IllegalStateException;
 
   /**
+   * Exports the visible image in this model and exports as a BufferedImage. Since only the
+   * visible layers will be included in the 'visible image', this techinically returns the image
+   * that represents the top most visible layer in the model.
+   *
+   * @return the top most visible layer in this model
+   */
+  BufferedImage exportImage();
+
+  /**
    * Reads the given image to the current layer, converting it to an {@code InstaImage}.
    *
    * @param filepath the file path for the import

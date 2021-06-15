@@ -1,5 +1,9 @@
 package controller.command;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import model.InstagramLayerModel;
 
 /**
@@ -20,7 +24,18 @@ public class Export implements InstagramLayerCommand {
 
   @Override
   public void go(InstagramLayerModel model) {
-    model.exportImage(str);
+    BufferedImage currentImage = model.exportImage();
+    String[] fileName = this.str.split("\\.");
+    // check that there was a dot in the file path
+    if (fileName.length < 2) {
+      throw new IllegalArgumentException("Invalid file. Must include '.--' extension");
+    }
+    try {
+      ImageIO.write(currentImage, fileName[1], new File(this.str));
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Writing to the file failed.");
+    }
+//    model.exportImage(str);
   }
 
 }

@@ -147,6 +147,32 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
   }
 
   /**
+   * Exports the visible image in this model and exports as a BufferedImage. Since only the
+   * visible layers will be included in the 'visible image', this techinically returns the image
+   * that represents the top most visible layer in the model.
+   *
+   * @return the top most visible layer in this model
+   */
+  @Override
+  public BufferedImage exportImage() {
+    //BufferedImage currentImage = convert(this.image);
+    BufferedImage base = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
+    Graphics2D g = base.createGraphics();
+    BufferedImage currentImage = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
+    for (String key : layerMap.navigableKeySet()) {
+      InstaImage imgTemp = layerMap.get(key);
+
+      if(!(imgTemp == null)) { // and if the layer is visible...
+        currentImage = convert(imgTemp);
+
+        g.drawImage(currentImage, 0, 0, null);
+      }
+    }
+    g.dispose();
+    return currentImage;
+  }
+
+  /**
    * Converts the given InstaImage to a BufferedImage.
    *
    * @param img the {@code InstaImage} to be converted
