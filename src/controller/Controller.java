@@ -148,6 +148,13 @@ public class Controller implements IController {
             break;
           case "save":
             cmd = InstagramLayerCommandFactory.create("save", next);
+            break;
+          case "visible":
+            cmd = InstagramLayerCommandFactory.create("visible", next);
+            break;
+          case "invisible":
+            cmd = InstagramLayerCommandFactory.create("invisible", next);
+            break;
           default:
             break;
         }

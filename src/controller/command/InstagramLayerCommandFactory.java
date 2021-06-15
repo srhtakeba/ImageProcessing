@@ -30,6 +30,10 @@ public class InstagramLayerCommandFactory {
         return new Filter(next);
       case "save":
         return new Save(next);
+      case "visible":
+        return new Visible(next);
+      case "invisible":
+        return new Invisible(next);
       default:
         return null;
     }

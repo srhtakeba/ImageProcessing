@@ -40,6 +40,14 @@ public class ImageImpl implements InstaImage {
     // don't make anything
   }
 
+  /**
+   * Copy constructor for {@code ImageImpl} objects.
+   * @param source the source of this copy {@code ImageImpl}.
+   */
+  public ImageImpl(InstaImage source) {
+    this(source.getPixelGrid(), source.getWidth(), source.getHeight());
+  }
+
 
   /**
    * Creates a checkerboard image represented in pixels.

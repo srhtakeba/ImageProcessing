@@ -1,6 +1,8 @@
 package model;
 
 import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.NavigableMap;
 
 public interface InstagramLayerModel extends InstagramModel {
 
@@ -45,33 +47,13 @@ public interface InstagramLayerModel extends InstagramModel {
   void setCurrentLayer(String layerName);
 
   /**
-   * Exports the final image, blending the layers, to a file with the given filepath name. If the
-   * file already exists, this method will over write it. The file path must also include the '.---'
-   * extensions to specify the file format.
-   *
-   * @param filepath the file path for the export.
-   * @throws IllegalStateException if writing to the file fails
-   */
-  void exportImage(String filepath) throws IllegalStateException;
-
-  /**
-   * Exports the visible image in this model and exports as a BufferedImage. Since only the
-   * visible layers will be included in the 'visible image', this techinically returns the image
-   * that represents the top most visible layer in the model.
+   * Exports the visible image in this model and exports as a BufferedImage. Since only the visible
+   * layers will be included in the 'visible image', this techinically returns the image that
+   * represents the top most visible layer in the model.
    *
    * @return the top most visible layer in this model
    */
   BufferedImage exportImage();
-
-  /**
-   * Reads the given image to the current layer, converting it to an {@code InstaImage}.
-   *
-   * @param filepath the file path for the import
-   * @throws IllegalStateException    if reading from the file fails
-   * @throws IllegalArgumentException if the proportions of the given image are not compatible with
-   *                                  the current model.
-   */
-  void read(String filepath) throws IllegalStateException, IllegalArgumentException;
 
   /**
    * Reads the given image to the current layer, converting it to an {@code InstaImage}.
@@ -84,11 +66,19 @@ public interface InstagramLayerModel extends InstagramModel {
   void read(BufferedImage imported) throws IllegalStateException, IllegalArgumentException;
 
   /**
-   * Saves this model's multi-layered image into a new folder with the exports for each image, plus
-   * a text file that organizes those images.
+   * Returns the content to be written in the main text file when this project is saved.
    *
-   * @param dirName the name for the directory of this project.
-   * @throws IllegalStateException
+   * @param dirName the name of the project directory
+   * @return the string content for the main file
    */
-  void save(String dirName) throws IllegalStateException;
+  String getMainTextString(String dirName);
+
+  /**
+   * Returns a navigable map of all layers in this model to be saved as {@code BufferedImage}s and
+   * their corresponding filepaths.
+   *
+   * @param dirName the directory that these files will end up in.
+   * @return the map containing all layers and their file paths
+   */
+  NavigableMap<String, BufferedImage> allLayersSave(String dirName);
 }

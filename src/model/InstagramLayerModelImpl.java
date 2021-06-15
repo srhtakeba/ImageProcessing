@@ -13,6 +13,8 @@ import java.nio.file.Paths;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 import javax.imageio.ImageIO;
+import model.Layer.Layer;
+import model.Layer.LayerImpl;
 import model.image.ImageImpl;
 import model.image.InstaImage;
 import model.pixel.Pixel;
@@ -29,14 +31,14 @@ import model.pixel.PixelImpl;
  */
 public class InstagramLayerModelImpl extends InstagramModelImpl implements InstagramLayerModel {
 
-  NavigableMap<String, InstaImage> layerMap;
+  NavigableMap<String, Layer> layerMap;
   String currentLayer;
   private Integer width;
   private Integer height;
 
   public InstagramLayerModelImpl() {
     super();
-    this.layerMap = new TreeMap<String, InstaImage>();
+    this.layerMap = new TreeMap<String, Layer>();
     this.currentLayer = "";
   }
 
@@ -48,7 +50,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
   @Override
   public void addLayer(String layerName) {
     //InstaImage layer = new ImageImpl();
-    layerMap.put(layerName, null);
+    layerMap.put(layerName, new LayerImpl());
   }
 
   /**
@@ -77,8 +79,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     if (!layerMap.containsKey(layerName)) {
       throw new IllegalArgumentException("The layer with the provided name does not exist.");
     }
-    InstaImage layer = layerMap.get(layerName);
-    // layer.makeInvisible();
+    layerMap.get(layerName).makeInvisible();
   }
 
   /**
@@ -93,8 +94,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     if (!layerMap.containsKey(layerName)) {
       throw new IllegalArgumentException("The layer with the provided name does not exist.");
     }
-    InstaImage layer = layerMap.get(layerName);
-    // layer.makeVisible();
+    layerMap.get(layerName).makeVisible();
   }
 
   /**
@@ -107,44 +107,10 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     if (!layerMap.containsKey(layerName)) {
       throw new IllegalArgumentException("The layer with the provided name does not exist.");
     }
-    this.image = layerMap.get(layerName);
+    this.image = layerMap.get(layerName).getImage();
     this.currentLayer = layerName;
   }
 
-  /**
-   * Exports the final image, blending the layers, to a file with the given filepath name. If the
-   * file already exists, this method will over write it. The file path must also include the '.---'
-   * extensions to specify the file format.
-   *
-   * @param filepath the file path for the export.
-   */
-  @Override
-  public void exportImage(String filepath) throws IllegalStateException {
-    //BufferedImage currentImage = convert(this.image);
-    BufferedImage base = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
-    Graphics2D g = base.createGraphics();
-    BufferedImage currentImage = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
-    for (String key : layerMap.navigableKeySet()) {
-      InstaImage imgTemp = layerMap.get(key);
-
-      if(!(imgTemp == null)) { // and if the layer is visible...
-        currentImage = convert(imgTemp);
-
-        g.drawImage(currentImage, 0, 0, null);
-      }
-    }
-    g.dispose();
-    String[] fileName = filepath.split("\\.");
-    // check that there was a dot in the file path
-    if (fileName.length < 2) {
-      throw new IllegalArgumentException("Invalid file. Must include '.--' extension");
-    }
-    try {
-      ImageIO.write(currentImage, fileName[1], new File(filepath));
-    } catch (IOException ioe) {
-      throw new IllegalStateException("Writing to the file failed.");
-    }
-  }
 
   /**
    * Exports the visible image in this model and exports as a BufferedImage. Since only the
@@ -160,9 +126,10 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     Graphics2D g = base.createGraphics();
     BufferedImage currentImage = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
     for (String key : layerMap.navigableKeySet()) {
-      InstaImage imgTemp = layerMap.get(key);
+      Layer currentLayer = layerMap.get(key);
+      InstaImage imgTemp = currentLayer.getImage();
 
-      if(!(imgTemp == null)) { // and if the layer is visible...
+      if((imgTemp != null) && currentLayer.getVisibility()) {
         currentImage = convert(imgTemp);
 
         g.drawImage(currentImage, 0, 0, null);
@@ -193,48 +160,6 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
       }
     }
     return result;
-  }
-
-  @Override
-  public void read(String filepath) throws IllegalStateException, IllegalArgumentException {
-    String[] fileParts = filepath.split("\\.");
-    if (fileParts[1].equals("ppm")) {
-      this.readPPM(filepath);
-      return;
-    }
-    BufferedImage imported;
-    try {
-      imported = ImageIO.read(new File(filepath));
-    } catch (IOException ioe) {
-      throw new IllegalStateException("Reading from the file failed.");
-    }
-    int width = imported.getWidth();
-    int height = imported.getHeight();
-    Pixel[][] importedPGrid = new Pixel[height][width];
-    for (int i = 0; i < height; i++) {
-      for (int j = 0; j < width; j++) {
-        Color currentColor = new Color(imported.getRGB(j, i));
-        int r = currentColor.getRed();
-        int g = currentColor.getGreen();
-        int b = currentColor.getBlue();
-        importedPGrid[i][j] = new PixelImpl(r, g, b);
-      }
-    }
-    // check if this is the first image to be imported
-    if (this.width == null) {
-      this.width = width;
-    }
-    if (this.height == null) {
-      this.height = height;
-    }
-    // if it isn't, check that the new imported image is of the same proportions as the current
-    // proportions of this model
-    if (this.height != height || this.width != width) {
-      throw new IllegalArgumentException("The given image is of invalid proportions.");
-    }
-    this.image = new ImageImpl(importedPGrid, width, height);
-
-    layerMap.put(this.currentLayer, this.image);
   }
 
   /**
@@ -272,8 +197,9 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
       throw new IllegalArgumentException("The given image is of invalid proportions.");
     }
     this.image = new ImageImpl(importedPGrid, width, height);
+    layerMap.get(this.currentLayer).setImage(this.image);
 
-    layerMap.put(this.currentLayer, this.image);
+    //layerMap.put(this.currentLayer, this.image);
   }
 
   /**
@@ -286,7 +212,8 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
   @Override
   public void filter(String operation) throws IllegalStateException {
     super.filter(operation);
-    this.layerMap.replace(currentLayer, this.image);
+    //this.layerMap.replace(currentLayer, this.image);
+    this.layerMap.get(currentLayer).setImage(this.image);
   }
 
   /**
@@ -299,7 +226,8 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
   @Override
   public void transform(String operation) throws IllegalStateException {
     super.transform(operation);
-    this.layerMap.replace(currentLayer, this.image);
+    //this.layerMap.replace(currentLayer, this.image);
+    this.layerMap.get(currentLayer).setImage(this.image);
   }
 
 //  /**
@@ -335,46 +263,18 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
 //
 //    return new ImageImpl(rgbAveraged, 0, 0);
 
-  /**
-   * Saves this model's multi-layered image into a new folder with the exports for each image, plus
-   * a text file that organizes those images. If a directory with the name already exists, this will
-   * override that directory with the contents of this model.
-   *
-   * @param dirName the name for the directory of this project.
-   * @throws IllegalStateException
-   */
   @Override
-  public void save(String dirName) throws IllegalStateException {
-    // check if the directory/project with the same name already exists
-    Path path = Paths.get(dirName);
-    if (Files.exists(path) && Files.isDirectory(path)) {
-      File exists = new File(dirName);
-      deleteDirectory(exists);
-    }
-    File directory = new File(dirName);
-    // make the new directory
-    boolean creationSuccess = directory.mkdir();
-    if (!creationSuccess) {
-      throw new IllegalStateException("Making the new directory failed.");
-    }
-    File mainText = new File(dirName + "/main.txt");
-    // writing to the main file
-    try {
-      BufferedWriter writer = new BufferedWriter(new FileWriter(mainText));
-      writer.write(getMainTextString(dirName));
-      writer.close();
-    } catch (IOException ioe) {
-      throw new IllegalStateException("Writing to the file failed.");
-    }
-
+  public NavigableMap<String, BufferedImage> allLayersSave(String dirName) {
+    NavigableMap<String, BufferedImage> allLayers = new TreeMap<String, BufferedImage>();
     // export each layer to the new directory
     String curTemp = new String(currentLayer);
     for (String key : layerMap.navigableKeySet()) {
-      setCurrentLayer(key);
-      if (!(this.image == null)) {
-        exportImage(dirName + "/" + key + ".png");
+      if (!(layerMap.get(key).getImage() == null)) {
+        BufferedImage currentImage = convert(layerMap.get(key).getImage());
+        allLayers.put(dirName + "/" + key + ".png", currentImage);
       }
     }
+    return allLayers;
   }
 
   /**
@@ -383,11 +283,12 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    * @param dirName the name of the project directory
    * @return the string content for the main file
    */
-  private String getMainTextString(String dirName) {
+  @Override
+  public String getMainTextString(String dirName) {
     // writing the script for the main file
     StringBuilder mainSB = new StringBuilder();
     for (String key : layerMap.navigableKeySet()) {
-      InstaImage imgTemp = layerMap.get(key);
+      InstaImage imgTemp = layerMap.get(key).getImage();
       mainSB.append("new ").append(key).append("\n");
       mainSB.append("current ").append(key).append("\n");
 
@@ -400,20 +301,4 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     return mainSB.toString();
   }
 
-  /**
-   * Empties and deletes the existing directory.
-   *
-   * @param dir the directory to be emptied
-   */
-  private void deleteDirectory(File dir) {
-    File[] files = dir.listFiles();
-    // if the file is just a file, not a directory, it will not have contents
-    if (files != null) {
-      for (File f : files) {
-        deleteDirectory(f);
-      }
-    }
-    // delete the directory
-    dir.delete();
-  }
 }

@@ -1,5 +1,15 @@
 package controller.command;
 
+import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.NavigableMap;
+import javax.imageio.ImageIO;
 import model.InstagramLayerModel;
 
 /**
@@ -20,7 +30,59 @@ public class Save implements InstagramLayerCommand {
 
   @Override
   public void go(InstagramLayerModel model) {
-    model.save(str);
+  // check if the directory/project with the same name already exists
+    Path path = Paths.get(this.str);
+    if (Files.exists(path) && Files.isDirectory(path)) {
+      File exists = new File(this.str);
+      deleteDirectory(exists);
+    }
+    File directory = new File(this.str);
+    // make the new directory
+    boolean creationSuccess = directory.mkdir();
+    if (!creationSuccess) {
+      throw new IllegalStateException("Making the new directory failed.");
+    }
+    File mainText = new File(this.str + "/main.txt");
+    // writing to the main file
+    try {
+      BufferedWriter writer = new BufferedWriter(new FileWriter(mainText));
+      writer.write(model.getMainTextString(this.str));
+      writer.close();
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Writing to the file failed.");
+    }
+
+    NavigableMap<String, BufferedImage> allLayers = model.allLayersSave(this.str);
+    for(String filepath : allLayers.navigableKeySet()) {
+      BufferedImage currentImage = allLayers.get(filepath);
+      String[] fileName = filepath.split("\\.");
+      // check that there was a dot in the file path
+      if (fileName.length < 2) {
+        throw new IllegalArgumentException("Invalid file. Must include '.--' extension");
+      }
+      try {
+        ImageIO.write(currentImage, fileName[1], new File(this.str));
+      } catch (IOException ioe) {
+        throw new IllegalStateException("Writing to the file failed.");
+      }
+    }
+  }
+
+  /**
+   * Empties and deletes the existing directory.
+   *
+   * @param dir the directory to be emptied
+   */
+  private void deleteDirectory(File dir) {
+    File[] files = dir.listFiles();
+    // if the file is just a file, not a directory, it will not have contents
+    if (files != null) {
+      for (File f : files) {
+        deleteDirectory(f);
+      }
+    }
+    // delete the directory
+    dir.delete();
   }
 
 }
