@@ -1,5 +1,9 @@
 package controller.command;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import model.InstagramLayerModel;
 
 /**
@@ -20,7 +24,18 @@ public class Read implements InstagramLayerCommand {
 
   @Override
   public void go(InstagramLayerModel model) {
-    model.read(str);
+    String[] fileParts = this.str.split("\\.");
+    if (fileParts[1].equals("ppm")) {
+      model.readPPM(this.str);
+      return;
+    }
+    BufferedImage imported;
+    try {
+      imported = ImageIO.read(new File(this.str));
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Reading from the file failed.");
+    }
+    model.read(imported);
   }
 
 }
