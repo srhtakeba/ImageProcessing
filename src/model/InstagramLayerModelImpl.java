@@ -117,8 +117,12 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    * @return the top most visible layer in this model
    */
   @Override
-  public BufferedImage exportImage() {
-    //BufferedImage currentImage = convert(this.image);
+  public BufferedImage exportImage() throws IllegalStateException {
+    for(String key : layerMap.navigableKeySet()) {
+      if(layerMap.get(key).getImage() == null) {
+        throw new IllegalStateException("No images to be exported.");
+      }
+    }
     BufferedImage base = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
     Graphics2D g = base.createGraphics();
     BufferedImage currentImage = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
@@ -163,12 +167,11 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    * Reads the given image to the current layer, converting it to an {@code InstaImage}.
    *
    * @param imported the image to be imported
-   * @throws IllegalStateException    if reading from the image fails
    * @throws IllegalArgumentException if the proportions of the given image are not compatible with
    *                                  the current model.
    */
   @Override
-  public void read(BufferedImage imported) throws IllegalStateException, IllegalArgumentException {
+  public void read(BufferedImage imported) throws IllegalArgumentException {
     int width = imported.getWidth();
     int height = imported.getHeight();
     Pixel[][] importedPGrid = new Pixel[height][width];
@@ -195,8 +198,6 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     }
     this.image = new ImageImpl(importedPGrid, width, height);
     layerMap.get(this.currentLayer).setImage(this.image);
-
-    //layerMap.put(this.currentLayer, this.image);
   }
 
   /**

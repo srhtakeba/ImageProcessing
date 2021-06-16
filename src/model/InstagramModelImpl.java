@@ -156,7 +156,7 @@ public class InstagramModelImpl implements InstagramModel {
   @Override
   public void exportAsPPM(String title) throws IllegalStateException {
     if (this.image == null) {
-      throw new IllegalStateException("There is not image to be exported.");
+      throw new IllegalStateException("There is no image to be exported.");
     }
     String filename = title + ".ppm";
     int fileNo = 1;

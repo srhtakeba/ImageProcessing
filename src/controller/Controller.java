@@ -43,7 +43,6 @@ public class Controller implements IController {
     // Choose the interaction
     sendMessage("Would you like to\n 1) Use interactive. \n 2) Use a script.\n");
     sendMessage("Please type choice 1 or 2\n");
-    //Scanner input = new Scanner("");
     int choice = scan.nextInt();
     switch (choice) {
       case 1:

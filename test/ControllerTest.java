@@ -178,5 +178,63 @@ public class ControllerTest {
     assertEquals(expected.toString(), out.toString());
   }
 
+  @Test
+  public void testMessageBadTransform() throws IOException {
+    Readable input = new StringReader("N\n 1\n new first\n new second\n new third\n current first\n "
+        + "read images/originals/canyonLowest.jpg\n transform blue\n q\n");
+    StringBuilder expected = new StringBuilder();
+    expected.append("Welcome to OOD Instagram.\n");
+    expected.append("Would you like to open an existing project?\n");
+    expected.append("Type Y or N.\n");
+    expected.append("Would you like to\n 1) Use interactive. \n 2) Use a script.\n");
+    expected.append("Please type choice 1 or 2\n");
+    expected.append("Begin interaction. Refer to USEME.md for detailed instructions. "
+        + "Type Q/q to quit at anytime.\n");
+    expected.append("Bad input: Given transform operation is invalid.\n");
+    expected.append("Program has been quit.\n");
+    IController testOne = new Controller(input,out);
+    testOne.go();
+
+    assertEquals(expected.toString(), out.toString());
+  }
+
+  @Test
+  public void testMessageBadFilter() throws IOException {
+    Readable input = new StringReader("N\n 1\n new first\n new second\n new third\n current first\n "
+        + "read images/originals/canyonLowest.jpg\n filter blue\n q\n");
+    StringBuilder expected = new StringBuilder();
+    expected.append("Welcome to OOD Instagram.\n");
+    expected.append("Would you like to open an existing project?\n");
+    expected.append("Type Y or N.\n");
+    expected.append("Would you like to\n 1) Use interactive. \n 2) Use a script.\n");
+    expected.append("Please type choice 1 or 2\n");
+    expected.append("Begin interaction. Refer to USEME.md for detailed instructions. "
+        + "Type Q/q to quit at anytime.\n");
+    expected.append("Bad input: Given filter operation is invalid.\n");
+    expected.append("Program has been quit.\n");
+    IController testOne = new Controller(input,out);
+    testOne.go();
+
+    assertEquals(expected.toString(), out.toString());
+  }
+
+  @Test
+  public void testMessageEmptyLayerExportAsPPM() throws IOException {
+    Readable input = new StringReader("N\n 1\n new first\n new second\n new third\n export foo.ppm\n q\n");
+    StringBuilder expected = new StringBuilder();
+    expected.append("Welcome to OOD Instagram.\n");
+    expected.append("Would you like to open an existing project?\n");
+    expected.append("Type Y or N.\n");
+    expected.append("Would you like to\n 1) Use interactive. \n 2) Use a script.\n");
+    expected.append("Please type choice 1 or 2\n");
+    expected.append("Begin interaction. Refer to USEME.md for detailed instructions. "
+        + "Type Q/q to quit at anytime.\n");
+    expected.append("System error: No images to be exported.\n");
+    expected.append("Program has been quit.\n");
+    IController testOne = new Controller(input,out);
+    testOne.go();
+
+    assertEquals(expected.toString(), out.toString());
+  }
 
 }
