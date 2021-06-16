@@ -1,9 +1,0 @@
-new first
-current first
-read tofutofutofu/first.png
-new second
-current second
-read tofutofutofu/second.png
-new third
-current third
-read tofutofutofu/third.png
