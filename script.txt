@@ -7,4 +7,12 @@ current second
 read images/originals/canyonLowest.jpg
 transform greyscale
 remove second
+new third
+current third
+read images/originals/canyonLowest.jpg
+filter blur
+invisible third
+export noBlurMyCanyon.jpg
+visible third
+export withBlurMyCanyon.png
 save myhappycanyon
