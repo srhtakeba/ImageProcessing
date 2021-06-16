@@ -43,11 +43,10 @@ public class Controller implements IController {
     // Choose the interaction
     sendMessage("Would you like to\n 1) Use interactive. \n 2) Use a script.\n");
     sendMessage("Please type choice 1 or 2\n");
-    Scanner input = new Scanner("");
+    //Scanner input = new Scanner("");
     int choice = scan.nextInt();
     switch (choice) {
       case 1:
-        input = new Scanner(this.in);
         sendMessage("Begin interaction. Refer to USEME.md for detailed instructions. "
             + "Type Q/q to quit at anytime.\n");
         break;
@@ -57,7 +56,7 @@ public class Controller implements IController {
         File script = new File(filepath);
         try {
           InputStream inStream = new FileInputStream(script);
-          input = new Scanner(inStream);
+          scan = new Scanner(inStream);
         }
         catch (FileNotFoundException e) {
           sendMessage("The given file was not found.");
@@ -68,7 +67,7 @@ public class Controller implements IController {
         return;
     }
 
-    readCommands(input);
+    readCommands(scan);
     sendMessage("Program has been quit.\n");
   }
 

@@ -5,6 +5,7 @@ export mycanyon.jpg
 new second
 current second 
 read images/originals/fishLowest.jpg
+q
 transform greyscale
 remove second
 save myhappycanyon
