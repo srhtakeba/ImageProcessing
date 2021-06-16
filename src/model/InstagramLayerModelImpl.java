@@ -115,6 +115,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    * that represents the top most visible layer in the model.
    *
    * @return the top most visible layer in this model
+   * @throws IllegalStateException if there are no images imported yet to export
    */
   @Override
   public BufferedImage exportImage() throws IllegalStateException {
@@ -210,7 +211,6 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
   @Override
   public void filter(String operation) throws IllegalStateException {
     super.filter(operation);
-    //this.layerMap.replace(currentLayer, this.image);
     this.layerMap.get(currentLayer).setImage(this.image);
   }
 
@@ -224,7 +224,6 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
   @Override
   public void transform(String operation) throws IllegalStateException {
     super.transform(operation);
-    //this.layerMap.replace(currentLayer, this.image);
     this.layerMap.get(currentLayer).setImage(this.image);
   }
 
@@ -298,5 +297,4 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     }
     return mainSB.toString();
   }
-
 }

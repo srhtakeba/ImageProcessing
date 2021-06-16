@@ -22,8 +22,12 @@ public class Read implements InstagramLayerCommand {
     this.str = str;
   }
 
+  /**
+   * @param model {@code InstagramLayerModel} which holds image processing functions
+   * @throws IllegalStateException if reading from the file fails
+   */
   @Override
-  public void go(InstagramLayerModel model) {
+  public void go(InstagramLayerModel model) throws IllegalStateException {
     String[] fileParts = this.str.split("\\.");
     if (fileParts[1].equals("ppm")) {
       model.readPPM(this.str);

@@ -237,4 +237,24 @@ public class ControllerTest {
     assertEquals(expected.toString(), out.toString());
   }
 
+  @Test
+  public void testMessageBadExportName() throws IOException {
+    Readable input = new StringReader("N\n 1\n new first\n new second\n new third\n current first\n "
+        + "read images/originals/canyonLowest.jpg\n export foofoofoo\n q\n");
+    StringBuilder expected = new StringBuilder();
+    expected.append("Welcome to OOD Instagram.\n");
+    expected.append("Would you like to open an existing project?\n");
+    expected.append("Type Y or N.\n");
+    expected.append("Would you like to\n 1) Use interactive. \n 2) Use a script.\n");
+    expected.append("Please type choice 1 or 2\n");
+    expected.append("Begin interaction. Refer to USEME.md for detailed instructions. "
+        + "Type Q/q to quit at anytime.\n");
+    expected.append("Bad input: Invalid file. Must include '.--' extension\n");
+    expected.append("Program has been quit.\n");
+    IController testOne = new Controller(input,out);
+    testOne.go();
+
+    assertEquals(expected.toString(), out.toString());
+  }
+
 }

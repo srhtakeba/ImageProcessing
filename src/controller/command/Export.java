@@ -22,14 +22,20 @@ public class Export implements InstagramLayerCommand {
     this.str = str;
   }
 
+  /**
+   *
+   * @param model {code InstagramLayerModel} which holds image processing functions
+   * @throws IllegalArgumentException if the fileName given is invalid
+   * @throws IllegalStateException if writing to the file fails
+   */
   @Override
   public void go(InstagramLayerModel model) {
-    BufferedImage currentImage = model.exportImage();
     String[] fileName = this.str.split("\\.");
     // check that there was a dot in the file path
     if (fileName.length < 2) {
       throw new IllegalArgumentException("Invalid file. Must include '.--' extension");
     }
+    BufferedImage currentImage = model.exportImage();
     try {
       ImageIO.write(currentImage, fileName[1], new File(this.str));
     } catch (IOException ioe) {
