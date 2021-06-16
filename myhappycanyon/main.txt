@@ -1,3 +1,0 @@
-new first
-current first
-read myhappycanyon/first.png

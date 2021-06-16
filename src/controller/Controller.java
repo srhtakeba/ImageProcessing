@@ -124,40 +124,10 @@ public class Controller implements IController {
       }
       try {
         String next = scan.next();
-        switch (curr) {
-          case "new":
-            cmd = InstagramLayerCommandFactory.create("create", next);
-            break;
-          case "remove":
-            cmd = InstagramLayerCommandFactory.create("remove", next);
-            break;
-          case "read":
-            cmd = InstagramLayerCommandFactory.create("read", next);
-            break;
-          case "current":
-            cmd = InstagramLayerCommandFactory.create("current", next);
-            break;
-          case "transform":
-            cmd = InstagramLayerCommandFactory.create("transform", next);
-            break;
-          case "filter":
-            cmd = InstagramLayerCommandFactory.create("filter", next);
-            break;
-          case "export":
-            cmd = InstagramLayerCommandFactory.create("export", next);
-            break;
-          case "save":
-            cmd = InstagramLayerCommandFactory.create("save", next);
-            break;
-          case "visible":
-            cmd = InstagramLayerCommandFactory.create("visible", next);
-            break;
-          case "invisible":
-            cmd = InstagramLayerCommandFactory.create("invisible", next);
-            break;
-          default:
-            break;
+        if(curr.equalsIgnoreCase("q")) {
+          break;
         }
+        cmd = InstagramLayerCommandFactory.create(curr, next);
         if (cmd != null) {
           cmd.go(model);
         }

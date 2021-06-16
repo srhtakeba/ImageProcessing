@@ -30,20 +30,9 @@ public class Save implements InstagramLayerCommand {
 
   @Override
   public void go(InstagramLayerModel model) {
-  // check if the directory/project with the same name already exists
-    Path path = Paths.get(this.str);
-    if (Files.exists(path) && Files.isDirectory(path)) {
-      File exists = new File(this.str);
-      deleteDirectory(exists);
-    }
-    File directory = new File(this.str);
-    // make the new directory
-    boolean creationSuccess = directory.mkdir();
-    if (!creationSuccess) {
-      throw new IllegalStateException("Making the new directory failed.");
-    }
-    File mainText = new File(this.str + "/main.txt");
+    constructDirectory(this.str);
     // writing to the main file
+    File mainText = new File(this.str + "/main.txt");
     try {
       BufferedWriter writer = new BufferedWriter(new FileWriter(mainText));
       writer.write(model.getMainTextString(this.str));
@@ -52,8 +41,9 @@ public class Save implements InstagramLayerCommand {
       throw new IllegalStateException("Writing to the file failed.");
     }
 
+    // write each image to the new directory
     NavigableMap<String, BufferedImage> allLayers = model.allLayersSave(this.str);
-    for(String filepath : allLayers.navigableKeySet()) {
+    for (String filepath : allLayers.navigableKeySet()) {
       BufferedImage currentImage = allLayers.get(filepath);
       String[] fileName = filepath.split("\\.");
       // check that there was a dot in the file path
@@ -65,6 +55,27 @@ public class Save implements InstagramLayerCommand {
       } catch (IOException ioe) {
         throw new IllegalStateException("Writing to the file failed.");
       }
+    }
+  }
+
+  /**
+   * Check if the directory with the given name already exists, empty it if it does. If not,
+   * construct a new directory with the given name.
+   *
+   * @param dirName the name of the directory.
+   */
+  private void constructDirectory(String dirName) {
+    // check if the directory/project with the same name already exists
+    Path path = Paths.get(dirName);
+    if (Files.exists(path) && Files.isDirectory(path)) {
+      File exists = new File(dirName);
+      deleteDirectory(exists);
+    }
+    File directory = new File(dirName);
+    // make the new directory
+    boolean creationSuccess = directory.mkdir();
+    if (!creationSuccess) {
+      throw new IllegalStateException("Making the new directory failed.");
     }
   }
 
@@ -84,5 +95,4 @@ public class Save implements InstagramLayerCommand {
     // delete the directory
     dir.delete();
   }
-
 }

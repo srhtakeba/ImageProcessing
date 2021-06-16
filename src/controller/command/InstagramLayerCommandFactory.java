@@ -14,7 +14,7 @@ public class InstagramLayerCommandFactory {
    */
   public static InstagramLayerCommand create(String cmd, String next) {
     switch(cmd) {
-      case "create":
+      case "new":
         return new CreateLayer(next);
       case "remove":
         return new Remove(next);
