@@ -81,4 +81,4 @@ script.txt, which is a file included in this zip folder, shows the following ope
 - export the top most visible layer as a jpg called 'greyscaleMyFish.jpg'
 - remove the layer 'third'
 - export the top most visible layer as a png called 'withBlurMyFish.png'
-- override and resave this project in a directory called 'myfish'
+- override and re-save this project in a directory called 'myfish'
