@@ -1,6 +1,0 @@
-new first
-current first
-read dirrrrrrr/first.png
-new second
-current second
-read dirrrrrrr/second.png

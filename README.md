@@ -112,3 +112,33 @@ Transfrom - Greyscale:\
 ![canyonGreyscale.jpg](images/jpeg/canyonGreyscale.jpg)\
 Transfrom - Sepia:\
 ![canyonSepia.jpg](images/jpeg/canyonSepia.jpg)
+
+## How to run the program
+Instructions on how to run our program through the view and controller is listed and explained
+in the USEME.md. Please refer to that file. 
+
+## Design / Model Changes
+We moved exporting and reading external images and files from the model to the controller.
+We figured this was necessary to keep all I/O operations completely separate from the model.
+
+## Assumptions
+We assume that people will initially interact with the model before sending in a script. Therefore,
+even when sending in a script of commands, the user must tell the controller that it will be doing that.
+We also assume that the user understands that the file paths sent to the controller must be sent with 
+the understanding that the paths originate from where this application is held. For example, if a photo
+is in the same directory as this program, it would just need the file name, not any directory paths.
+
+When old projects are to be reopened: 
+* They can not be moved from their position in directories since they were saved.
+* The location of the application/jar can not be moved since last used. 
+If the above is not followed:
+* The application will be unable to open the contents of the project, even if it can successfully
+find the project directory, since the main.txt that will do the reopening of the project is built
+based on the old directory path.  
+
+
+## Limitations
+Although not included in the requirements, it was hinted at in the beginning of the assignment. This
+application currently does not handle semi-transparent images (where you would be able to see) the
+layer below if the layer above's image had a hole in it. Also, we have not fully implemented blending yet
+so that is also a slight limitation. (Again, not part of the requirements for this assignment.)

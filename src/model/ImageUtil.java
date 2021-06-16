@@ -75,21 +75,21 @@ public class ImageUtil {
     return new ImageImpl(importedRaw, width, height);
   }
 
-  /**
-   * Demo main method.
-   *
-   * @param args system inputs.
-   */
-  public static void main(String[] args) {
-    String filename;
-
-    if (args.length > 0) {
-      filename = args[0];
-    } else {
-      filename = "filename";
-    }
-    ImageUtil.readPPM(filename);
-  }
+//  /**
+//   * Demo main method.
+//   *
+//   * @param args system inputs.
+//   */
+//  public static void main(String[] args) {
+//    String filename;
+//
+//    if (args.length > 0) {
+//      filename = args[0];
+//    } else {
+//      filename = "filename";
+//    }
+//    ImageUtil.readPPM(filename);
+//  }
 
 }
 
