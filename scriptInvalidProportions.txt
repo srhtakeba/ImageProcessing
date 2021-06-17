@@ -1,10 +1,10 @@
 new first
 current first 
-read images/originals/canyonLowest.jpg
+read res/images/originals/canyonLowest.jpg
 export mycanyon.jpg
 new second
 current second 
-read images/originals/fishLowest.jpg
+read res/images/originals/fishLowest.jpg
 q
 transform greyscale
 remove second

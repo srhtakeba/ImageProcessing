@@ -188,7 +188,7 @@ public class ControllerTest {
   public void testMessageBadTransform() throws IOException {
     Readable input = new StringReader(
         "N\n 1\n new first\n new second\n new third\n current first\n "
-            + "read images/originals/canyonLowest.jpg\n transform blue\n q\n");
+            + "read res/images/originals/canyonLowest.jpg\n transform blue\n q\n");
     StringBuilder expected = new StringBuilder();
     expected.append("Welcome to OOD Instagram.\n");
     expected.append("Would you like to open an existing project?\n");
@@ -209,7 +209,7 @@ public class ControllerTest {
   public void testMessageBadFilter() throws IOException {
     Readable input = new StringReader(
         "N\n 1\n new first\n new second\n new third\n current first\n "
-            + "read images/originals/canyonLowest.jpg\n filter blue\n q\n");
+            + "read res/images/originals/canyonLowest.jpg\n filter blue\n q\n");
     StringBuilder expected = new StringBuilder();
     expected.append("Welcome to OOD Instagram.\n");
     expected.append("Would you like to open an existing project?\n");
@@ -250,7 +250,7 @@ public class ControllerTest {
   public void testMessageBadExportName() throws IOException {
     Readable input = new StringReader(
         "N\n 1\n new first\n new second\n new third\n current first\n "
-            + "read images/originals/canyonLowest.jpg\n export foofoofoo\n q\n");
+            + "read res/images/originals/canyonLowest.jpg\n export foofoofoo\n q\n");
     StringBuilder expected = new StringBuilder();
     expected.append("Welcome to OOD Instagram.\n");
     expected.append("Would you like to open an existing project?\n");
