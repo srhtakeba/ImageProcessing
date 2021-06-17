@@ -14,6 +14,15 @@ import model.InstagramLayerModelImpl;
 import view.InstagramTextView;
 import view.InstagramView;
 
+/**
+ * A class to represent a controller for an OOD instagram program whose model is an
+ * {@code InstagramLayerModel}. The controller allows functionality to interact with the model
+ * as well as does the I/O for reading and exporting to external files. The view is a text view
+ * that can be connected to a console or any other appendable. Users can interact with the controller
+ * and choose to send in a script to the application rather than continue to use the interactive
+ * feature. Users can also choose to reload a previous project, in which the controller will read
+ * from that external directory and load it back into the model.
+ */
 public class Controller implements IController {
 
   private Readable in;

@@ -23,6 +23,7 @@ public class Export implements InstagramLayerCommand {
   }
 
   /**
+   * This go() method for Export will convert a BufferedImage, sent from the model, to a file.
    *
    * @param model {code InstagramLayerModel} which holds image processing functions
    * @throws IllegalArgumentException if the fileName given is invalid

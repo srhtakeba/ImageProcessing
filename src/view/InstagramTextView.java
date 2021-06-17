@@ -2,10 +2,19 @@ package view;
 
 import java.io.IOException;
 
+/**
+ * Represents a text view for {@code InstagramLayerModel} and {@code IController}. Will simply
+ * render messagaes to a given appendable.
+ */
 public class InstagramTextView implements InstagramView {
   private Appendable ap;
 
 
+  /**
+   * Constructor to create a {@code InstagramTextView} object.
+   * @param ap the appendable to append messages to
+   * @throws IllegalArgumentException
+   */
   public InstagramTextView(Appendable ap) throws IllegalArgumentException {
     if(ap == null) {
       throw new IllegalArgumentException("The appendable can not be null.");
