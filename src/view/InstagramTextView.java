@@ -7,7 +7,7 @@ import java.io.IOException;
  * render messagaes to a given appendable.
  */
 public class InstagramTextView implements InstagramView {
-  private Appendable ap;
+  private final Appendable ap;
 
 
   /**

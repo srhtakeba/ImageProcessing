@@ -7,7 +7,7 @@ import model.InstagramLayerModel;
  */
 public class Remove implements InstagramLayerCommand {
 
-  String str;
+  private final String str;
 
   /**
    * Constructs {@code Remove} object.

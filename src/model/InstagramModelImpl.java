@@ -61,8 +61,8 @@ import model.transform.TransformOperation;
  */
 public class InstagramModelImpl implements InstagramModel {
 
-  InstaImage image;
-  Stack<InstaImage> log;
+  protected InstaImage image;
+  protected Stack<InstaImage> log;
 
   public InstagramModelImpl(InstaImage image) {
     this.image = image;

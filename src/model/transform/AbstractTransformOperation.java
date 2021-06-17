@@ -8,7 +8,7 @@ import model.image.InstaImage;
  */
 public abstract class AbstractTransformOperation implements TransformOperation {
 
-  Double[][] transformMatrix;
+  private final Double[][] transformMatrix;
 
   public AbstractTransformOperation(Double[][] matrix) {
     this.transformMatrix = matrix;

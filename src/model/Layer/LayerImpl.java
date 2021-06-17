@@ -7,8 +7,8 @@ import model.image.InstaImage;
  * Class to represent layer which consist of {@code InstaImage}.
  */
 public class LayerImpl implements Layer{
-  InstaImage image;
-  boolean isVisible;
+  private InstaImage image;
+  private boolean isVisible;
 
 //  public LayerImpl(InstaImage image, boolean isVisible) {
 //    this.image = image;

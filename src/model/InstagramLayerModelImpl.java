@@ -23,8 +23,8 @@ import model.pixel.PixelImpl;
  */
 public class InstagramLayerModelImpl extends InstagramModelImpl implements InstagramLayerModel {
 
-  NavigableMap<String, Layer> layerMap;
-  String currentLayer;
+  private NavigableMap<String, Layer> layerMap;
+  private String currentLayer;
   private Integer width;
   private Integer height;
 

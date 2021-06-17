@@ -7,7 +7,7 @@ import model.InstagramLayerModel;
  */
 public class Transform implements InstagramLayerCommand {
 
-  String str;
+  private final String str;
 
   /**
    * Constructs {@code Transform} object.
