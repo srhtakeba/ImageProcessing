@@ -3,20 +3,27 @@ package model.Layer;
 import model.image.ImageImpl;
 import model.image.InstaImage;
 
+/**
+ * Class to represent layer which consist of {@code InstaImage}.
+ */
 public class LayerImpl implements Layer{
   InstaImage image;
   boolean isVisible;
 
-  public LayerImpl(InstaImage image, boolean isVisible) {
-    this.image = image;
-    this.isVisible = isVisible;
-  }
+//  public LayerImpl(InstaImage image, boolean isVisible) {
+//    this.image = image;
+//    this.isVisible = isVisible;
+//  }
+//
+//
+//  public LayerImpl(InstaImage image) {
+//    this.image = image;
+//    this.isVisible = true;
+//  }
 
-  public LayerImpl(InstaImage image) {
-    this.image = image;
-    this.isVisible = true;
-  }
-
+  /**
+   * Constructs a {@code LayerImpl} object.
+   */
   public LayerImpl() {
     this.image = null;
     this.isVisible = true;

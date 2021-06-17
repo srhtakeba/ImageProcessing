@@ -122,7 +122,7 @@ public class Controller implements IController {
    * Reads commands to operate an {@code InstagramLayerModel} from the given scanner object.
    * @param scan the scanner object to read commands from.
    */
-  public void readCommands(Scanner scan) {
+  private void readCommands(Scanner scan) {
     InstagramLayerCommand cmd = null;
     while (scan.hasNext()) {
       String curr = scan.next();

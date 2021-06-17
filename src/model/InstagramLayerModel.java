@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.NavigableMap;
 
+/**
+ * Interface to represent InstagramLayerModel which holds layer functionality.
+ */
 public interface InstagramLayerModel extends InstagramModel {
 
   /**

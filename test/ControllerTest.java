@@ -268,26 +268,5 @@ public class ControllerTest {
   }
 
 
-  @Test
-  public void testMessageNonExistentPastProjectFile1() throws IOException {
-    in = new StringReader(
-        "Y\n" + "/Users/katsuhikonakanishi/Desktop/CS3500/ImageProcessing/tofutofutofu\n" + "1\n"
-            + "q\n");
-    StringBuilder expected = new StringBuilder();
-    expected.append("Welcome to OOD Instagram.\n");
-    expected.append("Would you like to open an existing project?\n");
-    expected.append("Type Y or N.\n");
-    expected.append("Please type the directory path of the project.\n");
-    expected.append("Would you like to\n 1) Use interactive. \n 2) Use a script.\n");
-    expected.append("Please type choice 1 or 2\n");
-    expected.append("Begin interaction. Refer to USEME.md for detailed instructions. "
-        + "Type Q/q to quit at anytime.\n");
-    expected.append("Program has been quit.\n");
-    IController testOne = new Controller(in, out);
-    testOne.go();
-
-    assertEquals(expected.toString(), out.toString());
-  }
-
 
 }
