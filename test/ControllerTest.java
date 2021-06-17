@@ -278,6 +278,7 @@ public class ControllerTest {
     expected.append("Would you like to open an existing project?\n");
     expected.append("Type Y or N.\n");
     expected.append("Please type the directory path of the project.\n");
+    expected.append("The given file was not found. A new project will be created.\n");
     expected.append("Would you like to\n 1) Use interactive. \n 2) Use a script.\n");
     expected.append("Please type choice 1 or 2\n");
     expected.append("Begin interaction. Refer to USEME.md for detailed instructions. "

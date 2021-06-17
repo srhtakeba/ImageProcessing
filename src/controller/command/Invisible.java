@@ -7,7 +7,7 @@ import model.InstagramLayerModel;
  */
 public class Invisible implements InstagramLayerCommand {
 
-  String str;
+  private final String str;
 
   /**
    * Constructs {@code Filter} object.

@@ -7,7 +7,7 @@ import model.InstagramLayerModel;
  */
 public class CreateLayer implements InstagramLayerCommand {
 
-  String str;
+  private final String str;
 
   /**
    * Constructs {code CreateLayer} object.

@@ -17,7 +17,7 @@ import model.InstagramLayerModel;
  */
 public class Save implements InstagramLayerCommand {
 
-  String str;
+  private final String str;
 
   /**
    * Constructs {@code Save} object.

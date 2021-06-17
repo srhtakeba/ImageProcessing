@@ -7,7 +7,7 @@ import model.InstagramLayerModel;
  */
 public class Current implements InstagramLayerCommand {
 
-  String str;
+  private final String str;
 
   /**
    * Constructs {code Current} object.

@@ -7,7 +7,7 @@ import model.InstagramLayerModel;
  */
 public class Visible implements InstagramLayerCommand {
 
-  String str;
+  private final String str;
 
   /**
    * Constructs {@code Filter} object.

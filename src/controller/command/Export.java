@@ -11,7 +11,7 @@ import model.InstagramLayerModel;
  */
 public class Export implements InstagramLayerCommand {
 
-  String str;
+  private final String str;
 
   /**
    * Constructs {@code Export} object.

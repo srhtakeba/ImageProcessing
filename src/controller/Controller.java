@@ -25,9 +25,9 @@ import view.InstagramView;
  */
 public class Controller implements IController {
 
-  private Readable in;
-  private Appendable out;
-  protected InstagramLayerModel model;
+  private final Readable in;
+  private final Appendable out;
+  private InstagramLayerModel model;
   private InstagramView view;
 
   public Controller(Readable in, Appendable out) {

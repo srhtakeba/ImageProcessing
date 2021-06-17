@@ -16,9 +16,9 @@ import model.pixel.PixelImpl;
  */
 public class ImageImpl implements InstaImage {
 
-  Pixel[][] pixelGrid;
-  int width;
-  int height;
+  private Pixel[][] pixelGrid;
+  private int width;
+  private int height;
 
   /**
    * Constructs a {@code ImageImpl} object.

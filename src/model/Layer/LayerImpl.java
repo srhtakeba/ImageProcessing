@@ -4,8 +4,8 @@ import model.image.ImageImpl;
 import model.image.InstaImage;
 
 public class LayerImpl implements Layer{
-  InstaImage image;
-  boolean isVisible;
+  private InstaImage image;
+  private boolean isVisible;
 
   public LayerImpl(InstaImage image, boolean isVisible) {
     this.image = image;
