@@ -16,10 +16,10 @@ import view.InstagramView;
 
 public class Controller implements IController {
 
-  Readable in;
-  Appendable out;
-  InstagramLayerModel model;
-  InstagramView view;
+  private Readable in;
+  private Appendable out;
+  protected InstagramLayerModel model;
+  private InstagramView view;
 
   public Controller(Readable in, Appendable out) {
     if(in == null) {
