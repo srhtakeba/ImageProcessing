@@ -13,7 +13,8 @@ import org.junit.Test;
  * Class to hold tests for {@code InstagramModelImpl}.
  */
 public class InstagramModelImplTest {
-  //
+
+
   private InstagramModel modelCheckerBoard;
 
   private InstagramModel modelRainbow;
@@ -447,7 +448,7 @@ public class InstagramModelImplTest {
 
   @Test
   public void testReadExportInstaImage() {
-    InstaImage image = new ImageImpl().makeRainbow(4,5);
+    InstaImage image = new ImageImpl().makeRainbow(4, 5);
     InstagramModel model = new InstagramModelImpl();
     model.readInstaImage(image);
     model.save();

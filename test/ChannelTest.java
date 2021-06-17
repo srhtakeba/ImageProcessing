@@ -1,6 +1,5 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 import model.pixel.Channel;
 import model.pixel.ChannelB;
@@ -14,7 +13,8 @@ import org.junit.Test;
  * correctly changed and give its holding value.
  */
 public class ChannelTest {
-  //
+
+
   private Channel r;
   private Channel g;
   private Channel b;
@@ -82,17 +82,17 @@ public class ChannelTest {
 
   @Test
   public void testEqualsTrue() {
-    assertTrue(this.r.equals(new ChannelR(50)));
+    assertEquals(this.r, new ChannelR(50));
   }
 
   @Test
   public void testEqualsFalseDiffValue() {
-    assertFalse(this.r.equals(new ChannelR(51)));
+    assertNotEquals(this.r, new ChannelR(51));
   }
 
   @Test
   public void testEqualsFalseSameValueDiffColor() {
-    assertFalse(this.r.equals(this.b));
+    assertNotEquals(this.r, this.b);
   }
 
 }

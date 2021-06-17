@@ -25,6 +25,7 @@ public class Read implements InstagramLayerCommand {
   /**
    * This go() method for Read will convert a file path to a BufferedImage, and then send that to
    * the model for processing.
+   *
    * @param model {@code InstagramLayerModel} which holds image processing functions
    * @throws IllegalStateException if reading from the file fails
    */

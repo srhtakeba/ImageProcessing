@@ -1,4 +1,4 @@
-package model.Layer;
+package model.layer;
 
 import model.image.InstaImage;
 

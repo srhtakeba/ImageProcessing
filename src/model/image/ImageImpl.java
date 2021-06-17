@@ -42,6 +42,7 @@ public class ImageImpl implements InstaImage {
 
   /**
    * Copy constructor for {@code ImageImpl} objects.
+   *
    * @param source the source of this copy {@code ImageImpl}.
    */
   public ImageImpl(InstaImage source) {
@@ -306,10 +307,6 @@ public class ImageImpl implements InstaImage {
     }
     return result;
   }
-
-
-
-
 
 
 }

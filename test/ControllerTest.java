@@ -9,12 +9,6 @@ import org.junit.Test;
 
 public class ControllerTest {
 
-//  Readable in = new StringReader("new first\n" + "new second\n"
-//      + "current first\n" + "read images/originals/canyonLowest.jpg\n"
-//      + "transform greyscale\n" + "current second\n"
-//      + "read images/originals/canyonTransparent.png\n"
-//      + "export blurrcaaaaa.png");
-
   Readable in;
   Appendable out;
 
@@ -25,7 +19,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testMessageNonExistentPastProjectFile() throws IOException {
+  public void testMessageNonExistentPastProjectFile() {
     in = new StringReader("Y\n" + "fakepackagename\n" + "1\n" + "q\n");
     StringBuilder expected = new StringBuilder();
     expected.append("Welcome to OOD Instagram.\n");
@@ -45,7 +39,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testMessageNonExistentLayerNameCurrent() throws IOException {
+  public void testMessageNonExistentLayerNameCurrent() {
     Readable input = new StringReader(
         "N\n 1\n new first\n new second\n new third\n current fourth\n q\n");
     StringBuilder expected = new StringBuilder();
@@ -65,7 +59,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testMessageNonExistentLayerNameRemove() throws IOException {
+  public void testMessageNonExistentLayerNameRemove() {
     Readable input = new StringReader(
         "N\n 1\n new first\n new second\n new third\n remove fourth\n q\n");
     StringBuilder expected = new StringBuilder();
@@ -85,7 +79,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testMessageNonExistentLayerNameInvisible() throws IOException {
+  public void testMessageNonExistentLayerNameInvisible() {
     Readable input = new StringReader(
         "N\n 1\n new first\n new second\n new third\n invisible fourth\n q\n");
     StringBuilder expected = new StringBuilder();
@@ -105,7 +99,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testMessageNonExistentLayerNameVisible() throws IOException {
+  public void testMessageNonExistentLayerNameVisible() {
     Readable input = new StringReader(
         "N\n 1\n new first\n new second\n new third\n visible fourth\n q\n");
     StringBuilder expected = new StringBuilder();
@@ -125,7 +119,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testMessageInvalidProportions() throws IOException {
+  public void testMessageInvalidProportions() {
     Readable input = new StringReader("N\n 2\n scriptInvalidProportions.txt\n");
     StringBuilder expected = new StringBuilder();
     expected.append("Welcome to OOD Instagram.\n");
@@ -143,7 +137,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testMessageEmptyLayerFilter() throws IOException {
+  public void testMessageEmptyLayerFilter() {
     Readable input = new StringReader(
         "N\n 1\n new first\n new second\n new third\n current second\n "
             + "filter blur\n q\n");
@@ -164,7 +158,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testMessageEmptyLayerTransform() throws IOException {
+  public void testMessageEmptyLayerTransform() {
     Readable input = new StringReader(
         "N\n 1\n new first\n new second\n new third\n current second\n "
             + "transform sepia\n q\n");
@@ -185,7 +179,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testMessageBadTransform() throws IOException {
+  public void testMessageBadTransform() {
     Readable input = new StringReader(
         "N\n 1\n new first\n new second\n new third\n current first\n "
             + "read res/images/originals/canyonLowest.jpg\n transform blue\n q\n");
@@ -206,7 +200,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testMessageBadFilter() throws IOException {
+  public void testMessageBadFilter() {
     Readable input = new StringReader(
         "N\n 1\n new first\n new second\n new third\n current first\n "
             + "read res/images/originals/canyonLowest.jpg\n filter blue\n q\n");
@@ -227,7 +221,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testMessageEmptyLayerExportAsPPM() throws IOException {
+  public void testMessageEmptyLayerExportAsPPM() {
     Readable input = new StringReader(
         "N\n 1\n new first\n new second\n new third\n export foo.ppm\n q\n");
     StringBuilder expected = new StringBuilder();
@@ -247,7 +241,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testMessageBadExportName() throws IOException {
+  public void testMessageBadExportName() {
     Readable input = new StringReader(
         "N\n 1\n new first\n new second\n new third\n current first\n "
             + "read res/images/originals/canyonLowest.jpg\n export foofoofoo\n q\n");
@@ -266,7 +260,6 @@ public class ControllerTest {
 
     assertEquals(expected.toString(), out.toString());
   }
-
 
 
 }

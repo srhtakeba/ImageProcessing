@@ -1,6 +1,5 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 import model.pixel.ChannelB;
 import model.pixel.ChannelG;
@@ -16,7 +15,7 @@ import org.junit.Test;
  * value correctly represents the expected values.
  */
 public class PixelTest {
-  //
+
   private Pixel red;
   private Pixel green;
   private Pixel blue;
@@ -110,12 +109,12 @@ public class PixelTest {
 
   @Test
   public void testEqualsTrue() {
-    assertTrue(new PixelImpl(255, 0, 0).equals(this.red));
+    assertEquals(new PixelImpl(255, 0, 0), this.red);
   }
 
   @Test
   public void testEqualsFalse() {
-    assertFalse(new PixelImpl(254, 0, 0).equals(this.red));
+    assertNotEquals(new PixelImpl(254, 0, 0), this.red);
   }
 
   @Test

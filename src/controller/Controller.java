@@ -15,26 +15,26 @@ import view.InstagramTextView;
 import view.InstagramView;
 
 /**
- * A class to represent a controller for an OOD instagram program whose model is an
- * {@code InstagramLayerModel}. The controller allows functionality to interact with the model
- * as well as does the I/O for reading and exporting to external files. The view is a text view
- * that can be connected to a console or any other appendable. Users can interact with the controller
- * and choose to send in a script to the application rather than continue to use the interactive
- * feature. Users can also choose to reload a previous project, in which the controller will read
- * from that external directory and load it back into the model.
+ * A class to represent a controller for an OOD instagram program whose model is an {@code
+ * InstagramLayerModel}. The controller allows functionality to interact with the model as well as
+ * does the I/O for reading and exporting to external files. The view is a text view that can be
+ * connected to a console or any other appendable. Users can interact with the controller and choose
+ * to send in a script to the application rather than continue to use the interactive feature. Users
+ * can also choose to reload a previous project, in which the controller will read from that
+ * external directory and load it back into the model.
  */
 public class Controller implements IController {
 
   private final Readable in;
   private final Appendable out;
   private InstagramLayerModel model;
-  private InstagramView view;
+  private final InstagramView view;
 
   public Controller(Readable in, Appendable out) {
-    if(in == null) {
+    if (in == null) {
       throw new IllegalArgumentException("Null Readable is invalid.");
     }
-    if(out == null) {
+    if (out == null) {
       throw new IllegalArgumentException("Null Appendable is invalid.");
     }
     this.out = out;
@@ -65,8 +65,7 @@ public class Controller implements IController {
         try {
           InputStream inStream = new FileInputStream(script);
           scan = new Scanner(inStream);
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
           sendMessage("The given file was not found.");
         }
         break;
@@ -82,6 +81,7 @@ public class Controller implements IController {
   /**
    * Prompts the client if they would like to re-open an existing {@code InstagramLayerModelImpl}
    * project.
+   *
    * @param scan the scanner that holds the user input.
    */
   private void loadPreviousProject(Scanner scan) {
@@ -89,7 +89,7 @@ public class Controller implements IController {
     sendMessage("Would you like to open an existing project?\n");
     sendMessage("Type Y or N.\n");
     String open = scan.next();
-    if(open.equalsIgnoreCase("Y")) {
+    if (open.equalsIgnoreCase("Y")) {
       sendMessage("Please type the directory path of the project.\n");
       String projectPath = scan.next() + "/main.txt";
       File script = new File(projectPath);
@@ -97,8 +97,7 @@ public class Controller implements IController {
         InputStream inStream = new FileInputStream(script);
         Scanner project = new Scanner(inStream);
         readCommands(project);
-      }
-      catch (FileNotFoundException e) {
+      } catch (FileNotFoundException e) {
         sendMessage("The given file was not found. A new project will be created.\n");
       }
     }
@@ -106,32 +105,33 @@ public class Controller implements IController {
 
   /**
    * Sends a message to this MVC program's view.
+   *
    * @param message the message to be send to the view.
    * @throws IllegalStateException if there is an I/O Exception.
    */
   private void sendMessage(String message) throws IllegalStateException {
     try {
       view.renderMessage(message);
-    }
-    catch (IOException ioe) {
+    } catch (IOException ioe) {
       throw new IllegalStateException("Sending to the view failed.");
     }
   }
 
   /**
    * Reads commands to operate an {@code InstagramLayerModel} from the given scanner object.
+   *
    * @param scan the scanner object to read commands from.
    */
   private void readCommands(Scanner scan) {
     InstagramLayerCommand cmd = null;
     while (scan.hasNext()) {
       String curr = scan.next();
-      if(curr.equalsIgnoreCase("q")) {
+      if (curr.equalsIgnoreCase("q")) {
         break;
       }
       try {
         String next = scan.next();
-        if(curr.equalsIgnoreCase("q")) {
+        if (curr.equalsIgnoreCase("q")) {
           break;
         }
         cmd = InstagramLayerCommandFactory.create(curr, next);
@@ -139,13 +139,11 @@ public class Controller implements IController {
           cmd.go(model);
         }
       } catch (InputMismatchException ime) {
-        sendMessage("Bad length to " + curr+ "\n");
-      }
-      catch (IllegalArgumentException iae) {
+        sendMessage("Bad length to " + curr + "\n");
+      } catch (IllegalArgumentException iae) {
         sendMessage("Bad input: " + iae.getMessage() + "\n");
-      }
-      catch (IllegalStateException ise) {
-        sendMessage("System error: " + ise.getMessage()+ "\n");
+      } catch (IllegalStateException ise) {
+        sendMessage("System error: " + ise.getMessage() + "\n");
       }
     }
   }

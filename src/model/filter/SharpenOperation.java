@@ -1,9 +1,9 @@
 package model.filter;
 
 /**
- * Class to represent a Sharpen kernel filter. Application of this filter will cause the image
- * to look more 'loud' and vibrant. This could also be described as adding definition to edges in
- * the image, making them more harsh.
+ * Class to represent a Sharpen kernel filter. Application of this filter will cause the image to
+ * look more 'loud' and vibrant. This could also be described as adding definition to edges in the
+ * image, making them more harsh.
  */
 public class SharpenOperation extends FilterImpl {
 

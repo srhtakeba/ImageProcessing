@@ -3,8 +3,8 @@ package view;
 import java.io.IOException;
 
 /**
- * Represents a view for {@code InstagramLayerModel} and {@code IController}. Will simply
- * render messagaes to a given appendable.
+ * Represents a view for {@code InstagramLayerModel} and {@code IController}. Will simply render
+ * messagaes to a given appendable.
  */
 public interface InstagramView {
 

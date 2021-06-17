@@ -27,7 +27,7 @@ public class Export implements InstagramLayerCommand {
    *
    * @param model {code InstagramLayerModel} which holds image processing functions
    * @throws IllegalArgumentException if the fileName given is invalid
-   * @throws IllegalStateException if writing to the file fails
+   * @throws IllegalStateException    if writing to the file fails
    */
   @Override
   public void go(InstagramLayerModel model) {

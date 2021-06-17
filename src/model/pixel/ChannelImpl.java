@@ -19,6 +19,7 @@ public abstract class ChannelImpl implements Channel {
 
   /**
    * Constructs a copy of the given {@code ChannelImpl} object.
+   *
    * @param c the given {@code ChannelImpl} object.
    */
   public ChannelImpl(Channel c) {
@@ -34,8 +35,7 @@ public abstract class ChannelImpl implements Channel {
   public void setValue(double n) {
     if (n < 0) {
       this.value = 0;
-    }
-    else if (n > 255) {
+    } else if (n > 255) {
       this.value = 255;
     } else {
       // assign this value to the rounded int value of the given double

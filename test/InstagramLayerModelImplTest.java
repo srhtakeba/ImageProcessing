@@ -1,4 +1,3 @@
-import static org.junit.Assert.*;
 
 import model.InstagramModel;
 import model.InstagramModelImpl;
@@ -25,7 +24,4 @@ public class InstagramLayerModelImplTest {
     InstaImage rainbowSingleFile = new ImageImpl().makeRainbow(1, 1);
     modelRainbowSingleFile = new InstagramModelImpl(rainbowSingleFile);
   }
-
-
-
 }

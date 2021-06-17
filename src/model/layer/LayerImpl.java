@@ -1,4 +1,4 @@
-package model.Layer;
+package model.layer;
 
 import model.image.ImageImpl;
 import model.image.InstaImage;
@@ -6,20 +6,10 @@ import model.image.InstaImage;
 /**
  * Class to represent layer which consist of {@code InstaImage}.
  */
-public class LayerImpl implements Layer{
+public class LayerImpl implements Layer {
+
   private InstaImage image;
   private boolean isVisible;
-
-//  public LayerImpl(InstaImage image, boolean isVisible) {
-//    this.image = image;
-//    this.isVisible = isVisible;
-//  }
-//
-//
-//  public LayerImpl(InstaImage image) {
-//    this.image = image;
-//    this.isVisible = true;
-//  }
 
   /**
    * Constructs a {@code LayerImpl} object.
@@ -31,7 +21,7 @@ public class LayerImpl implements Layer{
 
   @Override
   public InstaImage getImage() {
-    if(this.image == null) {
+    if (this.image == null) {
       return null;
     }
     return new ImageImpl(this.image);
@@ -44,14 +34,14 @@ public class LayerImpl implements Layer{
 
   @Override
   public void makeVisible() {
-    if(!isVisible) {
+    if (!isVisible) {
       isVisible = true;
     }
   }
 
   @Override
   public void makeInvisible() {
-    if(isVisible) {
+    if (isVisible) {
       isVisible = false;
     }
   }

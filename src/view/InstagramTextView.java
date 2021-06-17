@@ -7,16 +7,18 @@ import java.io.IOException;
  * render messagaes to a given appendable.
  */
 public class InstagramTextView implements InstagramView {
+
   private final Appendable ap;
 
 
   /**
    * Constructor to create a {@code InstagramTextView} object.
+   *
    * @param ap the appendable to append messages to
-   * @throws IllegalArgumentException
+   * @throws IllegalArgumentException if given a null Appendable object
    */
   public InstagramTextView(Appendable ap) throws IllegalArgumentException {
-    if(ap == null) {
+    if (ap == null) {
       throw new IllegalArgumentException("The appendable can not be null.");
     }
     this.ap = ap;

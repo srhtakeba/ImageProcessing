@@ -5,8 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.NavigableMap;
 import java.util.TreeMap;
-import model.Layer.Layer;
-import model.Layer.LayerImpl;
+import model.layer.Layer;
+import model.layer.LayerImpl;
 import model.image.ImageImpl;
 import model.image.InstaImage;
 import model.pixel.Pixel;
@@ -23,14 +23,14 @@ import model.pixel.PixelImpl;
  */
 public class InstagramLayerModelImpl extends InstagramModelImpl implements InstagramLayerModel {
 
-  private NavigableMap<String, Layer> layerMap;
+  private final NavigableMap<String, Layer> layerMap;
   private String currentLayer;
   private Integer width;
   private Integer height;
 
   public InstagramLayerModelImpl() {
     super();
-    this.layerMap = new TreeMap<String, Layer>();
+    this.layerMap = new TreeMap<>();
     this.currentLayer = "";
   }
 
@@ -99,10 +99,9 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     if (!layerMap.containsKey(layerName)) {
       throw new IllegalArgumentException("The layer with the provided name does not exist.");
     }
-    if(layerMap.get(layerName).getImage() != null) {
+    if (layerMap.get(layerName).getImage() != null) {
       this.image = layerMap.get(layerName).getImage();
-    }
-    else {
+    } else {
       this.image = null;
     }
     this.currentLayer = layerName;
@@ -110,28 +109,29 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
 
 
   /**
-   * Exports the visible image in this model and exports as a BufferedImage. Since only the
-   * visible layers will be included in the 'visible image', this techinically returns the image
-   * that represents the top most visible layer in the model.
+   * Exports the visible image in this model and exports as a BufferedImage. Since only the visible
+   * layers will be included in the 'visible image', this techinically returns the image that
+   * represents the top most visible layer in the model.
    *
    * @return the top most visible layer in this model
    * @throws IllegalStateException if there are no images imported yet to export
    */
   @Override
   public BufferedImage exportImage() throws IllegalStateException {
-    for(String key : layerMap.navigableKeySet()) {
-      if(layerMap.get(key).getImage() == null) {
+    for (String key : layerMap.navigableKeySet()) {
+      if (layerMap.get(key).getImage() == null) {
         throw new IllegalStateException("No images to be exported.");
       }
     }
     BufferedImage base = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
     Graphics2D g = base.createGraphics();
-    BufferedImage currentImage = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
+    BufferedImage currentImage = new BufferedImage(this.width, this.height,
+        BufferedImage.TYPE_INT_RGB);
     for (String key : layerMap.navigableKeySet()) {
       Layer currentLayer = layerMap.get(key);
       InstaImage imgTemp = currentLayer.getImage();
 
-      if((imgTemp != null) && currentLayer.getVisibility()) {
+      if ((imgTemp != null) && currentLayer.getVisibility()) {
         currentImage = convert(imgTemp);
 
         g.drawImage(currentImage, 0, 0, null);
@@ -262,9 +262,8 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
 
   @Override
   public NavigableMap<String, BufferedImage> allLayersSave(String dirName) {
-    NavigableMap<String, BufferedImage> allLayers = new TreeMap<String, BufferedImage>();
+    NavigableMap<String, BufferedImage> allLayers = new TreeMap<>();
     // export each layer to the new directory
-    String curTemp = new String(currentLayer);
     for (String key : layerMap.navigableKeySet()) {
       if (!(layerMap.get(key).getImage() == null)) {
         BufferedImage currentImage = convert(layerMap.get(key).getImage());

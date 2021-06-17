@@ -27,5 +27,4 @@ public abstract class FilterImpl implements FilterOperation {
   }
 
 
-
 }

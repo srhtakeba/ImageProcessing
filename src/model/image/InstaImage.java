@@ -56,6 +56,7 @@ public interface InstaImage {
 
   /**
    * Produces a filtered version of this {@code InstaImage} using the given filter kernel.
+   *
    * @param kernel the kernel to be used to filter over this image.
    * @return the filtered version of this image.
    */
@@ -64,7 +65,9 @@ public interface InstaImage {
   /**
    * Produces a color transformed version of this {@code InstaImage} using the given transformation
    * matrix.
-   * @param tMatrix the matrix to be multiplied over this images pixel matrix to color transform it.
+   *
+   * @param tMatrix the matrix to be multiplied over this images pixel matrix to color transform
+   *                it.
    * @return the transformed version of this image
    */
   InstaImage transform(Double[][] tMatrix);
