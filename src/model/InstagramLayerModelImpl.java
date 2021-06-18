@@ -32,6 +32,9 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
   private Integer width;
   private Integer height;
 
+  /**
+   * Constructs a new {@code InstagramLayerModelImpl} object.
+   */
   public InstagramLayerModelImpl() {
     super();
     this.layerMap = new TreeMap<>();
@@ -128,10 +131,15 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public BufferedImage exportImage() throws IllegalStateException {
+    boolean allNull = true;
     for (String key : layerMap.navigableKeySet()) {
-      if (layerMap.get(key).getImage() == null) {
-        throw new IllegalStateException("No images to be exported.");
+      if (layerMap.get(key).getImage() != null) {
+        allNull = false;
+        break;
       }
+    }
+    if(allNull) {
+      throw new IllegalStateException("No images to be exported.");
     }
     BufferedImage base = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
     Graphics2D g = base.createGraphics();
@@ -263,7 +271,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
       mainSB.append("new ").append(key).append("\n");
       mainSB.append("current ").append(key).append("\n");
 
-      if (!(imgTemp == null)) {
+      if (imgTemp != null) {
         mainSB.append("read ");
         mainSB.append(dirName).append("/");
         mainSB.append(key).append(".png").append("\n");
@@ -284,7 +292,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     NavigableMap<String, BufferedImage> allLayers = new TreeMap<>();
     // export each layer to the new directory
     for (String key : layerMap.navigableKeySet()) {
-      if (!(layerMap.get(key).getImage() == null)) {
+      if (layerMap.get(key).getImage() != null) {
         BufferedImage currentImage = convert(layerMap.get(key).getImage());
         allLayers.put(dirName + "/" + key + ".png", currentImage);
       }

@@ -19,7 +19,7 @@ public class Current implements InstagramLayerCommand {
   }
 
   @Override
-  public void go(InstagramLayerModel model) {
+  public void dispatchCommand(InstagramLayerModel model) {
     model.setCurrentLayer(str);
   }
 

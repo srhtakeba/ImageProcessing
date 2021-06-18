@@ -19,7 +19,7 @@ public class Filter implements InstagramLayerCommand {
   }
 
   @Override
-  public void go(InstagramLayerModel model) {
+  public void dispatchCommand(InstagramLayerModel model) {
     model.filter(str);
   }
 

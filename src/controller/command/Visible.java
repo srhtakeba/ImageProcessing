@@ -19,7 +19,7 @@ public class Visible implements InstagramLayerCommand {
   }
 
   @Override
-  public void go(InstagramLayerModel model) {
+  public void dispatchCommand(InstagramLayerModel model) {
     model.makeLayerVisible(str);
   }
 

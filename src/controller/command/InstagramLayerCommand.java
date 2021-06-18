@@ -12,6 +12,6 @@ public interface InstagramLayerCommand {
    *
    * @param model {code InstagramLayerModel} which holds image processing functions
    */
-  void go(InstagramLayerModel model);
+  void dispatchCommand(InstagramLayerModel model);
 
 }

@@ -26,10 +26,14 @@ import view.InstagramView;
 public class Controller implements IController {
 
   private final Readable in;
-  private final Appendable out;
   private InstagramLayerModel model;
   private final InstagramView view;
 
+  /**
+   * Creates a {@code Controller} object.
+   * @param in the input stream for this controller
+   * @param out the output stream that the view will render to.
+   */
   public Controller(Readable in, Appendable out) {
     if (in == null) {
       throw new IllegalArgumentException("Null Readable is invalid.");
@@ -37,13 +41,12 @@ public class Controller implements IController {
     if (out == null) {
       throw new IllegalArgumentException("Null Appendable is invalid.");
     }
-    this.out = out;
     this.in = in;
     this.view = new InstagramTextView(out);
   }
 
   @Override
-  public void go() {
+  public void dispatchController() {
     Scanner scan = new Scanner(this.in);
     this.model = new InstagramLayerModelImpl();
     sendMessage("Welcome to OOD Instagram.\n");
@@ -136,7 +139,7 @@ public class Controller implements IController {
         }
         cmd = InstagramLayerCommandFactory.create(curr, next);
         if (cmd != null) {
-          cmd.go(model);
+          cmd.dispatchCommand(model);
         }
       } catch (InputMismatchException ime) {
         sendMessage("Bad length to " + curr + "\n");

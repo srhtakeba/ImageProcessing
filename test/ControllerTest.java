@@ -1,12 +1,15 @@
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 import controller.Controller;
 import controller.IController;
-import java.io.IOException;
 import java.io.StringReader;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Tests to ensure the functionality of {@code Controller}.
+ */
 public class ControllerTest {
 
   Readable in;
@@ -33,7 +36,7 @@ public class ControllerTest {
         + "Type Q/q to quit at anytime.\n");
     expected.append("Program has been quit.\n");
     IController testOne = new Controller(in, out);
-    testOne.go();
+    testOne.dispatchController();
 
     assertEquals(expected.toString(), out.toString());
   }
@@ -53,7 +56,7 @@ public class ControllerTest {
     expected.append("Bad input: The layer with the provided name does not exist.\n");
     expected.append("Program has been quit.\n");
     IController testOne = new Controller(input, out);
-    testOne.go();
+    testOne.dispatchController();
 
     assertEquals(expected.toString(), out.toString());
   }
@@ -73,7 +76,7 @@ public class ControllerTest {
     expected.append("Bad input: The layer with the provided name does not exist.\n");
     expected.append("Program has been quit.\n");
     IController testOne = new Controller(input, out);
-    testOne.go();
+    testOne.dispatchController();
 
     assertEquals(expected.toString(), out.toString());
   }
@@ -93,7 +96,7 @@ public class ControllerTest {
     expected.append("Bad input: The layer with the provided name does not exist.\n");
     expected.append("Program has been quit.\n");
     IController testOne = new Controller(input, out);
-    testOne.go();
+    testOne.dispatchController();
 
     assertEquals(expected.toString(), out.toString());
   }
@@ -113,7 +116,7 @@ public class ControllerTest {
     expected.append("Bad input: The layer with the provided name does not exist.\n");
     expected.append("Program has been quit.\n");
     IController testOne = new Controller(input, out);
-    testOne.go();
+    testOne.dispatchController();
 
     assertEquals(expected.toString(), out.toString());
   }
@@ -131,7 +134,7 @@ public class ControllerTest {
     expected.append("Bad input: The given image is of invalid proportions.\n");
     expected.append("Program has been quit.\n");
     IController testOne = new Controller(input, out);
-    testOne.go();
+    testOne.dispatchController();
 
     assertEquals(expected.toString(), out.toString());
   }
@@ -152,7 +155,7 @@ public class ControllerTest {
     expected.append("System error: There is no image to be filtered.\n");
     expected.append("Program has been quit.\n");
     IController testOne = new Controller(input, out);
-    testOne.go();
+    testOne.dispatchController();
 
     assertEquals(expected.toString(), out.toString());
   }
@@ -173,7 +176,7 @@ public class ControllerTest {
     expected.append("System error: There is no image to be transformed.\n");
     expected.append("Program has been quit.\n");
     IController testOne = new Controller(input, out);
-    testOne.go();
+    testOne.dispatchController();
 
     assertEquals(expected.toString(), out.toString());
   }
@@ -194,7 +197,7 @@ public class ControllerTest {
     expected.append("Bad input: Given transform operation is invalid.\n");
     expected.append("Program has been quit.\n");
     IController testOne = new Controller(input, out);
-    testOne.go();
+    testOne.dispatchController();
 
     assertEquals(expected.toString(), out.toString());
   }
@@ -215,7 +218,7 @@ public class ControllerTest {
     expected.append("Bad input: Given filter operation is invalid.\n");
     expected.append("Program has been quit.\n");
     IController testOne = new Controller(input, out);
-    testOne.go();
+    testOne.dispatchController();
 
     assertEquals(expected.toString(), out.toString());
   }
@@ -235,7 +238,7 @@ public class ControllerTest {
     expected.append("System error: No images to be exported.\n");
     expected.append("Program has been quit.\n");
     IController testOne = new Controller(input, out);
-    testOne.go();
+    testOne.dispatchController();
 
     assertEquals(expected.toString(), out.toString());
   }
@@ -256,7 +259,7 @@ public class ControllerTest {
     expected.append("Bad input: Invalid file. Must include '.--' extension\n");
     expected.append("Program has been quit.\n");
     IController testOne = new Controller(input, out);
-    testOne.go();
+    testOne.dispatchController();
 
     assertEquals(expected.toString(), out.toString());
   }

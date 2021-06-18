@@ -29,7 +29,7 @@ public class Save implements InstagramLayerCommand {
   }
 
   @Override
-  public void go(InstagramLayerModel model) {
+  public void dispatchCommand(InstagramLayerModel model) {
     constructDirectory(this.str);
     // writing to the main file
     File mainText = new File(this.str + "/main.txt");

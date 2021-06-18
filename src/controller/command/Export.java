@@ -30,7 +30,7 @@ public class Export implements InstagramLayerCommand {
    * @throws IllegalStateException    if writing to the file fails
    */
   @Override
-  public void go(InstagramLayerModel model) {
+  public void dispatchCommand(InstagramLayerModel model) {
     String[] fileName = this.str.split("\\.");
     // check that there was a dot in the file path
     if (fileName.length < 2) {
@@ -42,7 +42,6 @@ public class Export implements InstagramLayerCommand {
     } catch (IOException ioe) {
       throw new IllegalStateException("Writing to the file failed.");
     }
-//    model.exportImage(str);
   }
 
 }

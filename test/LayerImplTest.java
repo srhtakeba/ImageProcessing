@@ -1,4 +1,9 @@
-import static org.junit.Assert.*;
+
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import model.image.ImageImpl;
 import model.image.InstaImage;
@@ -24,40 +29,40 @@ public class LayerImplTest {
 
   @Test
   public void testGetImageDefault() {
-    assertEquals(null, layer.getImage());
+    assertNull(layer.getImage());
   }
 
   @Test
   public void testGetImageAfterSetImage() {
     InstaImage checkerBoard = image.makeCheckerBoard(3);
-    assertEquals(null, layer.getImage());
+    assertNull(layer.getImage());
     layer.setImage(checkerBoard);
     assertEquals(checkerBoard.toString(), layer.getImage().toString());
   }
 
   @Test
   public void testGetVisibilityDefault() {
-    assertEquals(true, layer.getVisibility());
+    assertTrue(layer.getVisibility());
   }
 
   @Test
   public void testGetVisibilityAfterMakeInvisible() {
     InstaImage checkerBoard = image.makeCheckerBoard(3);
     layer.setImage(checkerBoard);
-    assertEquals(true, layer.getVisibility());
+    assertTrue(layer.getVisibility());
     layer.makeInvisible();
-    assertEquals(false, layer.getVisibility());
+    assertFalse(layer.getVisibility());
   }
 
   @Test
   public void testGetVisibilityAfterMakeInvisibleThenMakeVisible() {
     InstaImage checkerBoard = image.makeCheckerBoard(3);
     layer.setImage(checkerBoard);
-    assertEquals(true, layer.getVisibility());
+    assertTrue(layer.getVisibility());
     layer.makeInvisible();
-    assertEquals(false, layer.getVisibility());
+    assertFalse(layer.getVisibility());
     layer.makeVisible();
-    assertEquals(true, layer.getVisibility());
+    assertTrue(layer.getVisibility());
   }
 
 

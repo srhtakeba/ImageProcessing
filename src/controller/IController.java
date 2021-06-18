@@ -8,6 +8,6 @@ public interface IController {
   /**
    * Dispatch operations depending on the input from the user.
    */
-  void go();
+  void dispatchController();
 
 }

@@ -20,7 +20,7 @@ public class MainInstagram {
     Readable in = new InputStreamReader(System.in);
     Appendable out = System.out;
     IController controller = new Controller(in, out);
-    controller.go();
+    controller.dispatchController();
   }
 
 }
