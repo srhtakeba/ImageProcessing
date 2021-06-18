@@ -9,10 +9,6 @@ import java.util.TreeMap;
 import javax.imageio.ImageIO;
 import model.InstagramLayerModel;
 import model.InstagramLayerModelImpl;
-import model.InstagramModel;
-import model.InstagramModelImpl;
-import model.image.ImageImpl;
-import model.image.InstaImage;
 import model.layer.Layer;
 import model.layer.LayerImpl;
 import org.junit.Before;
@@ -36,7 +32,7 @@ public class InstagramLayerModelImplTest {
     NavigableMap<String, Layer> expected = new TreeMap<>();
     expected.put("first", new LayerImpl());
     layerModel.addLayer("first");
-    assertEquals(expected.equals(layerModel), layerModel.equals(expected));
+    assertEquals(true, layerModel.getAllLayer().containsKey("first"));
   }
 
   @Test(expected = IllegalArgumentException.class)
