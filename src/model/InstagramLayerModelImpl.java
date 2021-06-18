@@ -138,7 +138,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
         break;
       }
     }
-    if(allNull) {
+    if (allNull) {
       throw new IllegalStateException("No images to be exported.");
     }
     BufferedImage base = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);

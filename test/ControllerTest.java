@@ -123,7 +123,7 @@ public class ControllerTest {
 
   @Test
   public void testMessageInvalidProportions() {
-    Readable input = new StringReader("N\n 2\n scriptInvalidProportions.txt\n");
+    Readable input = new StringReader("N\n 2\n res/scriptInvalidProportions.txt\n");
     StringBuilder expected = new StringBuilder();
     expected.append("Welcome to OOD Instagram.\n");
     expected.append("Would you like to open an existing project?\n");
