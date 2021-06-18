@@ -79,6 +79,22 @@ public class InstagramLayerModelImplTest {
     layerModel.makeLayerInvisible("first");
   }
 
+  @Test
+  public void testGetMainTextStringEmpty() {
+    assertEquals("", layerModel.getMainTextString("test"));
+  }
+
+  @Test
+  public void testGetMainTextString() {
+    layerModel.addLayer("bottom");
+    layerModel.setCurrentLayer("bottom");
+    layerModel.addLayer("middle");
+    layerModel.addLayer("invisibleButExistent");
+    layerModel.makeLayerInvisible("invisibleButExistent");
+    assertEquals("new bottom\ncurrent bottom\nnew invisibleButExistent\ncurrent invisibleButExistent"
+  +"\nnew middle\ncurrent middle\n", layerModel.getMainTextString("test"));
+  }
+
 
 
 }
