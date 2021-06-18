@@ -1,27 +1,84 @@
 
-import model.InstagramModel;
-import model.InstagramModelImpl;
-import model.image.ImageImpl;
-import model.image.InstaImage;
-import org.junit.Before;
+import static org.junit.Assert.assertEquals;
 
+import java.util.NavigableMap;
+import java.util.TreeMap;
+import model.InstagramLayerModel;
+import model.InstagramLayerModelImpl;
+import model.layer.Layer;
+import model.layer.LayerImpl;
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * Class to test {@code InstagramLayerModelImpl} determine the correct functionality of operations
+ * on layers.
+ */
 public class InstagramLayerModelImplTest {
 
-  private InstagramModel modelCheckerBoard;
-
-  private InstagramModel modelRainbow;
-
-  private InstagramModel modelRainbowSingleFile;
+  private InstagramLayerModel layerModel;
 
   @Before
   public void setup() {
-    InstaImage checkerBoard = new ImageImpl().makeCheckerBoard(3);
-    modelCheckerBoard = new InstagramModelImpl(checkerBoard);
-
-    InstaImage rainbow = new ImageImpl().makeRainbow(3, 1);
-    modelRainbow = new InstagramModelImpl(rainbow);
-
-    InstaImage rainbowSingleFile = new ImageImpl().makeRainbow(1, 1);
-    modelRainbowSingleFile = new InstagramModelImpl(rainbowSingleFile);
+    layerModel = new InstagramLayerModelImpl();
   }
+
+  @Test
+  public void testAddLayer() {
+    NavigableMap<String, Layer> expected = new TreeMap<>();
+    expected.put("first", new LayerImpl());
+    layerModel.addLayer("first");
+    assertEquals(expected.equals(layerModel), layerModel.equals(expected));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddLayerAlreadyExist() {
+    layerModel.addLayer("first");
+    layerModel.addLayer("first");
+  }
+
+  @Test
+  public void testRemoveLayer() {
+    NavigableMap<String, Layer> expected = new TreeMap<>();
+    expected.put("first", new LayerImpl());
+    layerModel.addLayer("first");
+    layerModel.addLayer("second");
+    layerModel.removeLayer("second");
+    assertEquals(expected.toString(), layerModel.getAllLayer().toString());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testRemoveDoesNotExist() {
+    layerModel.removeLayer("first");
+  }
+
+  @Test
+  public void testSetCurrentLayer() {
+    NavigableMap<String, Layer> expected = new TreeMap<>();
+    expected.put("first", new LayerImpl());
+    layerModel.addLayer("first");
+    layerModel.setCurrentLayer("first");
+    assertEquals(expected.toString(), layerModel.getAllLayer().toString());
+    assertEquals("first", layerModel.toString());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testSetCurrentLayerDoesNotExist() {
+    layerModel.setCurrentLayer("first");
+  }
+
+  @Test
+  public void testMakeVisible() {
+    layerModel.addLayer("first");
+    layerModel.makeLayerVisible("first");
+  }
+
+  @Test
+  public void testMakeInVisible() {
+    layerModel.addLayer("first");
+    layerModel.makeLayerInvisible("first");
+  }
+
+
+
 }

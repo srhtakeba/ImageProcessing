@@ -36,4 +36,13 @@ public interface Layer {
    */
   void setImage(InstaImage image);
 
+  @Override
+  boolean equals(Object o);
+
+  @Override
+  int hashCode();
+
+  @Override
+  String toString();
+
 }

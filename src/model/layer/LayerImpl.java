@@ -1,5 +1,6 @@
 package model.layer;
 
+import model.InstagramLayerModelImpl;
 import model.image.ImageImpl;
 import model.image.InstaImage;
 
@@ -50,4 +51,28 @@ public class LayerImpl implements Layer {
   public void setImage(InstaImage image) {
     this.image = image;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof LayerImpl)) {
+      return false;
+    }
+    LayerImpl that = (LayerImpl) o;
+    return ((that.isVisible == this.isVisible)
+        && (that.image.equals(this.image)));
+  }
+
+  @Override
+  public int hashCode() {
+    return LayerImpl.class.hashCode();
+  }
+
+  @Override
+  public String toString() {
+    return "" + this.isVisible;
+  }
+
 }

@@ -2,6 +2,7 @@ package model;
 
 import java.awt.image.BufferedImage;
 import java.util.NavigableMap;
+import model.layer.Layer;
 
 /**
  * Interface to represent InstagramLayerModel which holds layer functionality.
@@ -12,6 +13,7 @@ public interface InstagramLayerModel extends InstagramModel {
    * Adds a new layer to this model, with the given name.
    *
    * @param layerName title for the new layer
+   * @throws IllegalArgumentException if the layer of the given title already exist
    */
   void addLayer(String layerName);
 
@@ -83,4 +85,21 @@ public interface InstagramLayerModel extends InstagramModel {
    * @return the map containing all layers and their file paths
    */
   NavigableMap<String, BufferedImage> allLayersSave(String dirName);
+
+  /**
+   * Returns a deep copy of all layers stored in the NavigableMap.
+   *
+   * @return all layers stored in the NavigableMap
+   */
+  NavigableMap<String, Layer> getAllLayer();
+
+  @Override
+  boolean equals(Object o);
+
+  @Override
+  int hashCode();
+
+  @Override
+  String toString();
+
 }

@@ -3,7 +3,11 @@ package model;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NavigableMap;
+import java.util.NavigableSet;
+import java.util.Objects;
 import java.util.TreeMap;
 import model.layer.Layer;
 import model.layer.LayerImpl;
@@ -38,10 +42,16 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    * Adds a new layer to this model, with the given name.
    *
    * @param layerName title for the new layer
+   * @throws IllegalArgumentException if the layer of the given title already exist
    */
   @Override
   public void addLayer(String layerName) {
-    //InstaImage layer = new ImageImpl();
+    NavigableSet keySet = layerMap.navigableKeySet();
+    List<String> strList = new ArrayList<String>(keySet);
+    if (strList.contains(layerName)) {
+      throw new IllegalArgumentException("The layer with the provided name already exist.");
+    }
+
     layerMap.put(layerName, new LayerImpl());
   }
 
@@ -68,7 +78,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void makeLayerInvisible(String layerName) throws IllegalArgumentException {
-    if (!layerMap.containsKey(layerName)) {
+    if (!layerMap.containsKey(layerName) || layerMap.get(layerName) == new LayerImpl()) {
       throw new IllegalArgumentException("The layer with the provided name does not exist.");
     }
     layerMap.get(layerName).makeInvisible();
@@ -83,7 +93,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void makeLayerVisible(String layerName) {
-    if (!layerMap.containsKey(layerName)) {
+    if (!layerMap.containsKey(layerName) || layerMap.get(layerName) == new LayerImpl()) {
       throw new IllegalArgumentException("The layer with the provided name does not exist.");
     }
     layerMap.get(layerName).makeVisible();
@@ -227,52 +237,6 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     this.layerMap.get(currentLayer).setImage(this.image);
   }
 
-//  /**
-//   * Helper method to calcurate the average.
-//   *
-//   * @return a PixelImpl containing the average RGB value.
-//   */
-//  private InstaImage rgbAverage() {
-//    int rVal = 0;
-//    int gVal = 0;
-//    int bVal = 0;
-//    int count = 0;
-//
-////    Pixel rgb;
-//
-////    Channel[][] imageR = new Channel[height][width];
-////    Channel[][] imageG = new Channel[height][width];
-////    Channel[][] imageB = new Channel[height][width];
-//    for (String key: layerMap.keySet()) {
-//      InstaImage imgTemp = layerMap.get(key);
-//      Pixel[][] pixcelGridTemp = imgTemp.getPixelGrid();
-//
-//      for (int i = 0; i < imgTemp.getHeight(); i++) {
-//        for (int j = 0; j < imgTemp.getWidth(); j++) {
-//          rVal += pixcelGridTemp[i][j].getR().getValue();
-//          gVal += pixcelGridTemp[i][j].getG().getValue();
-//          bVal += pixcelGridTemp[i][j].getB().getValue();
-//        }
-//      }
-//      count += 1;
-//    }
-//    Pixel rgbAveraged = new PixelImpl((rVal / count), (gVal / count), (bVal / count));
-//
-//    return new ImageImpl(rgbAveraged, 0, 0);
-
-  @Override
-  public NavigableMap<String, BufferedImage> allLayersSave(String dirName) {
-    NavigableMap<String, BufferedImage> allLayers = new TreeMap<>();
-    // export each layer to the new directory
-    for (String key : layerMap.navigableKeySet()) {
-      if (!(layerMap.get(key).getImage() == null)) {
-        BufferedImage currentImage = convert(layerMap.get(key).getImage());
-        allLayers.put(dirName + "/" + key + ".png", currentImage);
-      }
-    }
-    return allLayers;
-  }
-
   /**
    * Returns the content to be written in the main text file when this project is saved.
    *
@@ -296,4 +260,55 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     }
     return mainSB.toString();
   }
+
+  /**
+   * Returns a navigable map of all layers in this model to be saved as {@code BufferedImage}s and
+   * their corresponding filepaths.
+   *
+   * @param dirName the directory that these files will end up in.
+   * @return the map containing all layers and their file paths
+   */
+  @Override
+  public NavigableMap<String, BufferedImage> allLayersSave(String dirName) {
+    NavigableMap<String, BufferedImage> allLayers = new TreeMap<>();
+    // export each layer to the new directory
+    for (String key : layerMap.navigableKeySet()) {
+      if (!(layerMap.get(key).getImage() == null)) {
+        BufferedImage currentImage = convert(layerMap.get(key).getImage());
+        allLayers.put(dirName + "/" + key + ".png", currentImage);
+      }
+    }
+    return allLayers;
+  }
+
+  @Override
+  public NavigableMap<String, Layer> getAllLayer() {
+    return new TreeMap<>(this.layerMap);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof InstagramLayerModelImpl)) {
+      return false;
+    }
+    InstagramLayerModelImpl that = (InstagramLayerModelImpl) o;
+    return ((that.width == this.width)
+        && (that.height == this.height)
+        && (that.layerMap.equals(this.layerMap))
+        && (that.currentLayer == this.currentLayer));
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.width + this.height, 2);
+  }
+
+  @Override
+  public String toString() {
+    return "" + this.currentLayer;
+  }
+
 }
