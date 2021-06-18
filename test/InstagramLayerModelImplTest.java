@@ -1,5 +1,8 @@
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -9,10 +12,6 @@ import java.util.TreeMap;
 import javax.imageio.ImageIO;
 import model.InstagramLayerModel;
 import model.InstagramLayerModelImpl;
-import model.InstagramModel;
-import model.InstagramModelImpl;
-import model.image.ImageImpl;
-import model.image.InstaImage;
 import model.layer.Layer;
 import model.layer.LayerImpl;
 import org.junit.Before;
@@ -36,7 +35,7 @@ public class InstagramLayerModelImplTest {
     NavigableMap<String, Layer> expected = new TreeMap<>();
     expected.put("first", new LayerImpl());
     layerModel.addLayer("first");
-    assertEquals(expected.equals(layerModel), layerModel.equals(expected));
+    assertTrue(layerModel.getAllLayer().containsKey("first"));
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -52,8 +51,8 @@ public class InstagramLayerModelImplTest {
     layerModel.addLayer("first");
     layerModel.addLayer("second");
     layerModel.removeLayer("second");
-    assertEquals(true, layerModel.getAllLayer().get("first").getVisibility());
-    assertEquals(null, layerModel.getAllLayer().get("second"));
+    assertTrue(layerModel.getAllLayer().get("first").getVisibility());
+    assertNull(layerModel.getAllLayer().get("second"));
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -67,7 +66,7 @@ public class InstagramLayerModelImplTest {
     expected.put("first", new LayerImpl());
     layerModel.addLayer("first");
     layerModel.setCurrentLayer("first");
-    assertEquals(true, layerModel.getAllLayer().get("first").getVisibility());
+    assertTrue(layerModel.getAllLayer().get("first").getVisibility());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -79,18 +78,18 @@ public class InstagramLayerModelImplTest {
   public void testMakeVisible() {
     layerModel.addLayer("first");
     layerModel.makeLayerVisible("first");
-    assertEquals(true, layerModel.getAllLayer().get("first").getVisibility());
+    assertTrue(layerModel.getAllLayer().get("first").getVisibility());
     layerModel.makeLayerInvisible("first");
-    assertEquals(false, layerModel.getAllLayer().get("first").getVisibility());
+    assertFalse(layerModel.getAllLayer().get("first").getVisibility());
   }
 
   @Test
   public void testMakeInVisible() {
     layerModel.addLayer("second");
     layerModel.makeLayerInvisible("second");
-    assertEquals(false, layerModel.getAllLayer().get("second").getVisibility());
+    assertFalse(layerModel.getAllLayer().get("second").getVisibility());
     layerModel.makeLayerVisible("second");
-    assertEquals(true, layerModel.getAllLayer().get("second").getVisibility());
+    assertTrue(layerModel.getAllLayer().get("second").getVisibility());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -110,7 +109,7 @@ public class InstagramLayerModelImplTest {
 
     BufferedImage imported;
     try {
-      imported = ImageIO.read(new File("3x3green.png"));
+      imported = ImageIO.read(new File("res/images/3x3green.png"));
     } catch (IOException ioe) {
       throw new IllegalStateException("Reading from the file failed.");
     }
@@ -186,7 +185,7 @@ public class InstagramLayerModelImplTest {
 
     BufferedImage imported;
     try {
-      imported = ImageIO.read(new File("3x3green.png"));
+      imported = ImageIO.read(new File("res/images/3x3green.png"));
     } catch (IOException ioe) {
       throw new IllegalStateException("Reading from the file failed.");
     }
@@ -227,7 +226,7 @@ public class InstagramLayerModelImplTest {
 
     BufferedImage imported;
     try {
-      imported = ImageIO.read(new File("3x3green.png"));
+      imported = ImageIO.read(new File("res/images/3x3green.png"));
     } catch (IOException ioe) {
       throw new IllegalStateException("Reading from the file failed.");
     }
@@ -261,7 +260,7 @@ public class InstagramLayerModelImplTest {
 
     BufferedImage imported;
     try {
-      imported = ImageIO.read(new File("3x3green.png"));
+      imported = ImageIO.read(new File("res/images/3x3green.png"));
     } catch (IOException ioe) {
       throw new IllegalStateException("Reading from the file failed.");
     }
@@ -302,7 +301,7 @@ public class InstagramLayerModelImplTest {
 
     BufferedImage imported;
     try {
-      imported = ImageIO.read(new File("3x3green.png"));
+      imported = ImageIO.read(new File("res/images/3x3green.png"));
     } catch (IOException ioe) {
       throw new IllegalStateException("Reading from the file failed.");
     }
@@ -324,7 +323,7 @@ public class InstagramLayerModelImplTest {
 
     BufferedImage imported;
     try {
-      imported = ImageIO.read(new File("3x3green.png"));
+      imported = ImageIO.read(new File("res/images/3x3green.png"));
     } catch (IOException ioe) {
       throw new IllegalStateException("Reading from the file failed.");
     }
@@ -378,14 +377,14 @@ public class InstagramLayerModelImplTest {
 
     BufferedImage imported;
     try {
-      imported = ImageIO.read(new File("3x3green.png"));
+      imported = ImageIO.read(new File("res/images/3x3green.png"));
     } catch (IOException ioe) {
       throw new IllegalStateException("Reading from the file failed.");
     }
     layerModel.read(imported);
 
     NavigableMap<String, BufferedImage> result = layerModel.allLayersSave("testSave");
-    assertEquals(null, result.get("first"));
+    assertNull(result.get("first"));
   }
 
   @Test
@@ -395,7 +394,7 @@ public class InstagramLayerModelImplTest {
 
     BufferedImage imported;
     try {
-      imported = ImageIO.read(new File("3x3green.png"));
+      imported = ImageIO.read(new File("res/images/3x3green.png"));
     } catch (IOException ioe) {
       throw new IllegalStateException("Reading from the file failed.");
     }

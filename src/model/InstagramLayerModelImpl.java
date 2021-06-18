@@ -120,7 +120,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
 
   /**
    * Exports the visible image in this model and exports as a BufferedImage. Since only the visible
-   * layers will be included in the 'visible image', this techinically returns the image that
+   * layers will be included in the 'visible image', this technically returns the image that
    * represents the top most visible layer in the model.
    *
    * @return the top most visible layer in this model
@@ -183,7 +183,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void read(BufferedImage imported) throws IllegalArgumentException {
-    if(this.currentLayer == "") {
+    if (this.currentLayer.equals("")) {
       throw new IllegalArgumentException("Select the current layer then read.");
     }
     int width = imported.getWidth();
@@ -219,12 +219,12 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    * InstagramModel's image.
    *
    * @param operation String token to represent operation
-   * @throws IllegalStateException if the model holds no image to be processed.
+   * @throws IllegalStateException    if the model holds no image to be processed.
    * @throws IllegalArgumentException if the current layer is not selected.
    */
   @Override
-  public void filter(String operation) throws IllegalStateException, IllegalArgumentException{
-    if (this.currentLayer == "") {
+  public void filter(String operation) throws IllegalStateException, IllegalArgumentException {
+    if (this.currentLayer.equals("")) {
       throw new IllegalArgumentException("Select a layer to filter");
     }
     super.filter(operation);
@@ -236,12 +236,12 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    * InstagramModel's image.
    *
    * @param operation String token to represent operation
-   * @throws IllegalStateException if the model holds no image to be processed.
+   * @throws IllegalStateException    if the model holds no image to be processed.
    * @throws IllegalArgumentException if the current layer is not selected.
    */
   @Override
   public void transform(String operation) throws IllegalStateException, IllegalArgumentException {
-    if (this.currentLayer == "") {
+    if (this.currentLayer.equals("")) {
       throw new IllegalArgumentException("Select a layer to transform");
     }
     super.transform(operation);
@@ -274,7 +274,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
 
   /**
    * Returns a navigable map of all layers in this model to be saved as {@code BufferedImage}s and
-   * their corresponding filepaths.
+   * their corresponding filepath.
    *
    * @param dirName the directory that these files will end up in.
    * @return the map containing all layers and their file paths
@@ -306,10 +306,10 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
       return false;
     }
     InstagramLayerModelImpl that = (InstagramLayerModelImpl) o;
-    return ((that.width == this.width)
-        && (that.height == this.height)
+    return ((that.width.equals(this.width))
+        && (that.height.equals(this.height))
         && (that.layerMap.equals(this.layerMap))
-        && (that.currentLayer == this.currentLayer));
+        && (that.currentLayer.equals(this.currentLayer)));
   }
 
   @Override
