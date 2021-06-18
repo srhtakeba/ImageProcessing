@@ -244,7 +244,7 @@ public class InstagramLayerModelImplTest {
     layerModel.transform("pink");
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testTransformNoCurrent() {
     layerModel.addLayer("first");
     layerModel.transform("sepia");
@@ -307,7 +307,7 @@ public class InstagramLayerModelImplTest {
     layerModel.filter("mosaic");
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testFilterNoCurrent() {
     layerModel.addLayer("first");
     layerModel.filter("blur");

@@ -1,11 +1,12 @@
 package model.layer;
 
-import model.InstagramLayerModelImpl;
 import model.image.ImageImpl;
 import model.image.InstaImage;
 
 /**
- * Class to represent layer which consist of {@code InstaImage}.
+ * Class to represent layer which consist of {@code InstaImage} and a visibility. A layer can exist
+ * and be invisible/visible without holding an image. A layer without an image can be considered a
+ * 'transparent' layer.
  */
 public class LayerImpl implements Layer {
 
