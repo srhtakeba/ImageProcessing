@@ -40,6 +40,9 @@ If not specified before a command, it will default to the last time `current` wa
 an error message.
 
 ## Example Runs
+Note: Use the scriptRunFromJar.txt and script2RunFromJar.txt versions when running from the jar 
+file since the file paths differ when running from the main method vs running from the jar file in the
+/res folder.
 #### script.txt
 script.txt, which is a file included in this zip folder, shows the following operations in this order.
 - make a new layer called 'first'
