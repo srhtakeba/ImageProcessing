@@ -9,6 +9,10 @@ import java.util.TreeMap;
 import javax.imageio.ImageIO;
 import model.InstagramLayerModel;
 import model.InstagramLayerModelImpl;
+import model.InstagramModel;
+import model.InstagramModelImpl;
+import model.image.ImageImpl;
+import model.image.InstaImage;
 import model.layer.Layer;
 import model.layer.LayerImpl;
 import org.junit.Before;
@@ -48,7 +52,8 @@ public class InstagramLayerModelImplTest {
     layerModel.addLayer("first");
     layerModel.addLayer("second");
     layerModel.removeLayer("second");
-    assertEquals(expected.toString(), layerModel.getAllLayer().toString());
+    assertEquals(true, layerModel.getAllLayer().get("first").getVisibility());
+    assertEquals(null, layerModel.getAllLayer().get("second"));
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -62,8 +67,7 @@ public class InstagramLayerModelImplTest {
     expected.put("first", new LayerImpl());
     layerModel.addLayer("first");
     layerModel.setCurrentLayer("first");
-    assertEquals(expected.toString(), layerModel.getAllLayer().toString());
-    assertEquals("first", layerModel.toString());
+    assertEquals(true, layerModel.getAllLayer().get("first").getVisibility());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -103,14 +107,26 @@ public class InstagramLayerModelImplTest {
   public void testRead() {
     layerModel.addLayer("first");
     layerModel.setCurrentLayer("first");
+
     BufferedImage imported;
     try {
-      imported = ImageIO.read(new File("canyonShouldBeGreyScale.png"));
+      imported = ImageIO.read(new File("3x3green.png"));
     } catch (IOException ioe) {
       throw new IllegalStateException("Reading from the file failed.");
     }
     layerModel.read(imported);
-
+    assertEquals("Width: 3\n"
+            + "Height: 3\n"
+            + "0,0: R: 12 G: 255 B: 0\n"
+            + "0,1: R: 12 G: 255 B: 0\n"
+            + "0,2: R: 12 G: 255 B: 0\n"
+            + "1,0: R: 12 G: 255 B: 0\n"
+            + "1,1: R: 12 G: 255 B: 0\n"
+            + "1,2: R: 12 G: 255 B: 0\n"
+            + "2,0: R: 12 G: 255 B: 0\n"
+            + "2,1: R: 12 G: 255 B: 0\n"
+            + "2,2: R: 12 G: 255 B: 0\n",
+        layerModel.getAllLayer().get("first").toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -158,10 +174,244 @@ public class InstagramLayerModelImplTest {
     layerModel.addLayer("middle");
     layerModel.addLayer("invisibleButExistent");
     layerModel.makeLayerInvisible("invisibleButExistent");
-    assertEquals("new bottom\ncurrent bottom\nnew invisibleButExistent\ncurrent invisibleButExistent"
-  +"\nnew middle\ncurrent middle\n", layerModel.getMainTextString("test"));
+    assertEquals(
+        "new bottom\ncurrent bottom\nnew invisibleButExistent\ncurrent invisibleButExistent"
+            + "\nnew middle\ncurrent middle\n", layerModel.getMainTextString("test"));
   }
 
+  @Test
+  public void testTransform() {
+    layerModel.addLayer("first");
+    layerModel.setCurrentLayer("first");
 
+    BufferedImage imported;
+    try {
+      imported = ImageIO.read(new File("3x3green.png"));
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Reading from the file failed.");
+    }
+    layerModel.read(imported);
+    assertEquals("Width: 3\n"
+            + "Height: 3\n"
+            + "0,0: R: 12 G: 255 B: 0\n"
+            + "0,1: R: 12 G: 255 B: 0\n"
+            + "0,2: R: 12 G: 255 B: 0\n"
+            + "1,0: R: 12 G: 255 B: 0\n"
+            + "1,1: R: 12 G: 255 B: 0\n"
+            + "1,2: R: 12 G: 255 B: 0\n"
+            + "2,0: R: 12 G: 255 B: 0\n"
+            + "2,1: R: 12 G: 255 B: 0\n"
+            + "2,2: R: 12 G: 255 B: 0\n",
+        layerModel.getAllLayer().get("first").toString());
+
+    layerModel.transform("greyscale");
+
+    assertEquals("Width: 3\n"
+            + "Height: 3\n"
+            + "0,0: R: 185 G: 185 B: 185\n"
+            + "0,1: R: 185 G: 185 B: 185\n"
+            + "0,2: R: 185 G: 185 B: 185\n"
+            + "1,0: R: 185 G: 185 B: 185\n"
+            + "1,1: R: 185 G: 185 B: 185\n"
+            + "1,2: R: 185 G: 185 B: 185\n"
+            + "2,0: R: 185 G: 185 B: 185\n"
+            + "2,1: R: 185 G: 185 B: 185\n"
+            + "2,2: R: 185 G: 185 B: 185\n",
+        layerModel.getAllLayer().get("first").toString());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidTransformName() {
+    layerModel.addLayer("first");
+    layerModel.setCurrentLayer("first");
+
+    BufferedImage imported;
+    try {
+      imported = ImageIO.read(new File("3x3green.png"));
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Reading from the file failed.");
+    }
+    layerModel.read(imported);
+    assertEquals("Width: 3\n"
+            + "Height: 3\n"
+            + "0,0: R: 12 G: 255 B: 0\n"
+            + "0,1: R: 12 G: 255 B: 0\n"
+            + "0,2: R: 12 G: 255 B: 0\n"
+            + "1,0: R: 12 G: 255 B: 0\n"
+            + "1,1: R: 12 G: 255 B: 0\n"
+            + "1,2: R: 12 G: 255 B: 0\n"
+            + "2,0: R: 12 G: 255 B: 0\n"
+            + "2,1: R: 12 G: 255 B: 0\n"
+            + "2,2: R: 12 G: 255 B: 0\n",
+        layerModel.getAllLayer().get("first").toString());
+
+    layerModel.transform("pink");
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testTransformNoCurrent() {
+    layerModel.addLayer("first");
+    layerModel.transform("sepia");
+  }
+
+  @Test
+  public void testFilter() {
+    layerModel.addLayer("first");
+    layerModel.setCurrentLayer("first");
+
+    BufferedImage imported;
+    try {
+      imported = ImageIO.read(new File("3x3green.png"));
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Reading from the file failed.");
+    }
+    layerModel.read(imported);
+    assertEquals("Width: 3\n"
+            + "Height: 3\n"
+            + "0,0: R: 12 G: 255 B: 0\n"
+            + "0,1: R: 12 G: 255 B: 0\n"
+            + "0,2: R: 12 G: 255 B: 0\n"
+            + "1,0: R: 12 G: 255 B: 0\n"
+            + "1,1: R: 12 G: 255 B: 0\n"
+            + "1,2: R: 12 G: 255 B: 0\n"
+            + "2,0: R: 12 G: 255 B: 0\n"
+            + "2,1: R: 12 G: 255 B: 0\n"
+            + "2,2: R: 12 G: 255 B: 0\n",
+        layerModel.getAllLayer().get("first").toString());
+
+    layerModel.filter("blur");
+
+    assertEquals("Width: 3\n"
+            + "Height: 3\n"
+            + "0,0: R: 7 G: 143 B: 0\n"
+            + "0,1: R: 9 G: 191 B: 0\n"
+            + "0,2: R: 7 G: 143 B: 0\n"
+            + "1,0: R: 9 G: 191 B: 0\n"
+            + "1,1: R: 12 G: 255 B: 0\n"
+            + "1,2: R: 9 G: 191 B: 0\n"
+            + "2,0: R: 7 G: 143 B: 0\n"
+            + "2,1: R: 9 G: 191 B: 0\n"
+            + "2,2: R: 7 G: 143 B: 0\n",
+        layerModel.getAllLayer().get("first").toString());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testInvalidFilterName() {
+    layerModel.addLayer("first");
+    layerModel.setCurrentLayer("first");
+
+    BufferedImage imported;
+    try {
+      imported = ImageIO.read(new File("3x3green.png"));
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Reading from the file failed.");
+    }
+    layerModel.read(imported);
+
+    layerModel.filter("mosaic");
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testFilterNoCurrent() {
+    layerModel.addLayer("first");
+    layerModel.filter("blur");
+  }
+
+  @Test
+  public void testExportImage() {
+    layerModel.addLayer("first");
+    layerModel.setCurrentLayer("first");
+
+    BufferedImage imported;
+    try {
+      imported = ImageIO.read(new File("3x3green.png"));
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Reading from the file failed.");
+    }
+    layerModel.read(imported);
+    assertEquals("Width: 3\n"
+            + "Height: 3\n"
+            + "0,0: R: 12 G: 255 B: 0\n"
+            + "0,1: R: 12 G: 255 B: 0\n"
+            + "0,2: R: 12 G: 255 B: 0\n"
+            + "1,0: R: 12 G: 255 B: 0\n"
+            + "1,1: R: 12 G: 255 B: 0\n"
+            + "1,2: R: 12 G: 255 B: 0\n"
+            + "2,0: R: 12 G: 255 B: 0\n"
+            + "2,1: R: 12 G: 255 B: 0\n"
+            + "2,2: R: 12 G: 255 B: 0\n",
+        layerModel.getAllLayer().get("first").toString());
+    layerModel.filter("blur");
+
+    BufferedImage exported = layerModel.exportImage();
+
+    InstagramLayerModel layerModelVer2 = new InstagramLayerModelImpl();
+    layerModelVer2.addLayer("first");
+    layerModelVer2.setCurrentLayer("first");
+    layerModelVer2.read(exported);
+
+    assertEquals("Width: 3\n"
+            + "Height: 3\n"
+            + "0,0: R: 7 G: 143 B: 0\n"
+            + "0,1: R: 9 G: 191 B: 0\n"
+            + "0,2: R: 7 G: 143 B: 0\n"
+            + "1,0: R: 9 G: 191 B: 0\n"
+            + "1,1: R: 12 G: 255 B: 0\n"
+            + "1,2: R: 9 G: 191 B: 0\n"
+            + "2,0: R: 7 G: 143 B: 0\n"
+            + "2,1: R: 9 G: 191 B: 0\n"
+            + "2,2: R: 7 G: 143 B: 0\n",
+        layerModelVer2.getAllLayer().get("first").toString());
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void testNothingToExport() {
+    layerModel.addLayer("first");
+    layerModel.setCurrentLayer("first");
+    layerModel.exportImage();
+  }
+
+  @Test
+  public void testAlllayersSave() {
+    layerModel.addLayer("first");
+    layerModel.setCurrentLayer("first");
+
+    BufferedImage imported;
+    try {
+      imported = ImageIO.read(new File("3x3green.png"));
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Reading from the file failed.");
+    }
+    layerModel.read(imported);
+
+    NavigableMap<String, BufferedImage> result = layerModel.allLayersSave("testSave");
+    assertEquals(null, result.get("first"));
+  }
+
+  @Test
+  public void testGetAllLayer() {
+    layerModel.addLayer("first");
+    layerModel.setCurrentLayer("first");
+
+    BufferedImage imported;
+    try {
+      imported = ImageIO.read(new File("3x3green.png"));
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Reading from the file failed.");
+    }
+    layerModel.read(imported);
+    NavigableMap<String, Layer> result = layerModel.getAllLayer();
+    assertEquals("Width: 3\n"
+        + "Height: 3\n"
+        + "0,0: R: 12 G: 255 B: 0\n"
+        + "0,1: R: 12 G: 255 B: 0\n"
+        + "0,2: R: 12 G: 255 B: 0\n"
+        + "1,0: R: 12 G: 255 B: 0\n"
+        + "1,1: R: 12 G: 255 B: 0\n"
+        + "1,2: R: 12 G: 255 B: 0\n"
+        + "2,0: R: 12 G: 255 B: 0\n"
+        + "2,1: R: 12 G: 255 B: 0\n"
+        + "2,2: R: 12 G: 255 B: 0\n", result.get("first").toString());
+  }
 
 }

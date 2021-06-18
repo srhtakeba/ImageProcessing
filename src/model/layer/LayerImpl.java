@@ -72,7 +72,7 @@ public class LayerImpl implements Layer {
 
   @Override
   public String toString() {
-    return "" + this.isVisible;
+    return "" + this.image.toString();
   }
 
 }

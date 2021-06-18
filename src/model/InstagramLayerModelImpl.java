@@ -220,9 +220,13 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    *
    * @param operation String token to represent operation
    * @throws IllegalStateException if the model holds no image to be processed.
+   * @throws IllegalArgumentException if the current layer is not selected.
    */
   @Override
-  public void filter(String operation) throws IllegalStateException {
+  public void filter(String operation) throws IllegalStateException, IllegalArgumentException{
+    if (this.currentLayer == "") {
+      throw new IllegalArgumentException("Select a layer to filter");
+    }
     super.filter(operation);
     this.layerMap.get(currentLayer).setImage(this.image);
   }
@@ -233,9 +237,13 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    *
    * @param operation String token to represent operation
    * @throws IllegalStateException if the model holds no image to be processed.
+   * @throws IllegalArgumentException if the current layer is not selected.
    */
   @Override
-  public void transform(String operation) throws IllegalStateException {
+  public void transform(String operation) throws IllegalStateException, IllegalArgumentException {
+    if (this.currentLayer == "") {
+      throw new IllegalArgumentException("Select a layer to transform");
+    }
     super.transform(operation);
     this.layerMap.get(currentLayer).setImage(this.image);
   }
