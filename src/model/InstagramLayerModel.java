@@ -65,7 +65,7 @@ public interface InstagramLayerModel extends InstagramModel {
    * @param imported the image to be imported
    * @throws IllegalStateException    if reading from the image fails
    * @throws IllegalArgumentException if the proportions of the given image are not compatible with
-   *                                  the current model.
+   *                                  the current model. or current layer is not selected.
    */
   void read(BufferedImage imported) throws IllegalStateException, IllegalArgumentException;
 

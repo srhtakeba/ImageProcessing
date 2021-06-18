@@ -1,8 +1,12 @@
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.NavigableMap;
 import java.util.TreeMap;
+import javax.imageio.ImageIO;
 import model.InstagramLayerModel;
 import model.InstagramLayerModelImpl;
 import model.layer.Layer;
@@ -71,12 +75,75 @@ public class InstagramLayerModelImplTest {
   public void testMakeVisible() {
     layerModel.addLayer("first");
     layerModel.makeLayerVisible("first");
+    assertEquals(true, layerModel.getAllLayer().get("first").getVisibility());
+    layerModel.makeLayerInvisible("first");
+    assertEquals(false, layerModel.getAllLayer().get("first").getVisibility());
   }
 
   @Test
   public void testMakeInVisible() {
+    layerModel.addLayer("second");
+    layerModel.makeLayerInvisible("second");
+    assertEquals(false, layerModel.getAllLayer().get("second").getVisibility());
+    layerModel.makeLayerVisible("second");
+    assertEquals(true, layerModel.getAllLayer().get("second").getVisibility());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testMakeVisibleNoLayer() {
+    layerModel.makeLayerVisible("first");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testMakeInVisibleNoLayer() {
+    layerModel.makeLayerInvisible("second");
+  }
+
+  @Test
+  public void testRead() {
     layerModel.addLayer("first");
-    layerModel.makeLayerInvisible("first");
+    layerModel.setCurrentLayer("first");
+    BufferedImage imported;
+    try {
+      imported = ImageIO.read(new File("canyonShouldBeGreyScale.png"));
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Reading from the file failed.");
+    }
+    layerModel.read(imported);
+
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testReadNoCurrentLayer() {
+    BufferedImage imported;
+    try {
+      imported = ImageIO.read(new File("canyonShouldBeGreyScale.png"));
+    } catch (IOException ioe) {
+      throw new IllegalStateException("Reading from the file failed.");
+    }
+    layerModel.read(imported);
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void testTransformNoImage() {
+    NavigableMap<String, Layer> expected = new TreeMap<>();
+    expected.put("first", new LayerImpl());
+
+    layerModel.addLayer("first");
+    layerModel.addLayer("second");
+    layerModel.setCurrentLayer("first");
+    layerModel.transform("blur");
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void testFilterNoImage() {
+    NavigableMap<String, Layer> expected = new TreeMap<>();
+    expected.put("first", new LayerImpl());
+
+    layerModel.addLayer("first");
+    layerModel.addLayer("second");
+    layerModel.setCurrentLayer("first");
+    layerModel.filter("greyscale");
   }
 
   @Test

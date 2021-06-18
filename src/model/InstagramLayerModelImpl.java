@@ -78,7 +78,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void makeLayerInvisible(String layerName) throws IllegalArgumentException {
-    if (!layerMap.containsKey(layerName) || layerMap.get(layerName) == new LayerImpl()) {
+    if (!layerMap.containsKey(layerName)) {
       throw new IllegalArgumentException("The layer with the provided name does not exist.");
     }
     layerMap.get(layerName).makeInvisible();
@@ -93,7 +93,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    */
   @Override
   public void makeLayerVisible(String layerName) {
-    if (!layerMap.containsKey(layerName) || layerMap.get(layerName) == new LayerImpl()) {
+    if (!layerMap.containsKey(layerName)) {
       throw new IllegalArgumentException("The layer with the provided name does not exist.");
     }
     layerMap.get(layerName).makeVisible();
@@ -179,10 +179,13 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
    *
    * @param imported the image to be imported
    * @throws IllegalArgumentException if the proportions of the given image are not compatible with
-   *                                  the current model.
+   *                                  the current model. or current layer is not selected.
    */
   @Override
   public void read(BufferedImage imported) throws IllegalArgumentException {
+    if(this.currentLayer == "") {
+      throw new IllegalArgumentException("Select the current layer then read.");
+    }
     int width = imported.getWidth();
     int height = imported.getHeight();
     Pixel[][] importedPGrid = new Pixel[height][width];
