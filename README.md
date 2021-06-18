@@ -31,13 +31,13 @@ Source: Katsuhiko Nakanishi (Contributor to the project)\
 Examples of each operation can be seen below using the following image as an original:\
 ![fishLowest.jpg](res/images/originals/fishLowest.jpg)\
 Filter - Blur:\
-![fishBlur.jpg](res/images/jpeg/fishBlur.jpg)\
+![fishBlur.jpg](jpeg/fishBlur.jpg)\
 Filter - Sharpen:\
-![fishSharpen.jpg](res/images/jpeg/fishSharpen.jpg)\
+![fishSharpen.jpg](jpeg/fishSharpen.jpg)\
 Transform - Greyscale:\
-![fishGreyscale.jpg](res/images/jpeg/fishGreyscale.jpg)\
+![fishGreyscale.jpg](jpeg/fishGreyscale.jpg)\
 Transfrom - Sepia:\
-![fishSepia.jpg](res/images/jpeg/fishSepia.jpg)
+![fishSepia.jpg](jpeg/fishSepia.jpg)
  
  #### Saving and Retrieving Images
  With the methods `save()` and `retrieve()`, the client is also able to save their images to a log in the model. Once images are saved to the log, they can be retrieved. Retrieving an image means to return to the last saved image in a log. Once the client has returned to a past image, they can not go back. Note that unless the client explicitly calls the `save()` method, the image will not be saved to the log and can not be retrieved. If there is currently no image to retrieved or no image to be saved, these methods will throw `IllegalStateException`s.
@@ -80,10 +80,10 @@ in pixels. InstaImage can also produce and return algorithmic images such as a r
 `InstaImage` also provides clients with the ability to set their `InstaImage` to a programmatically created image using methods attached to `InstaImage` objects. Mainly clients can create checkerboards and rainbows.
 To create a checkerboard, clients can call `makeCheckerboard(int size)`, pass the desired pixel size of their checkerboard, and the `InstaImage` will be set to a checkerboard of pixel size X size. \
 For example, `new ImageImpl().makeCheckerBoard(20)` produces the following image:\
-![](res/images/jpeg/checkerboard.jpg)\
+![](jpeg/checkerboard.jpg)\
 To create a rainbow, clients can call `makeRainbow(int width, int colorHeight)` where the width is the pixel width of the resulting image, and the colorHeight is the vertical height in pixels of each color in the resulting rainbow image.\
 For example, `new ImageImpl().makeRainbow(30, 70)` produces the following image:\
-![](res/images/jpeg/rainbow.jpg)
+![](jpeg/rainbow.jpg)
 
 ## Pixel
 A `Pixel` holds 3 channels R, G, and B which represent the red, green, and blue components of the resulting color the pixel holds. These channels are represented with `Channel` objects. 
@@ -105,13 +105,13 @@ Using the following image as an original, here are the results of applying certa
 Source: Katsuhiko Nakanishi (Contributor to the project)\
 ![canyonLowest.jpg](res/images/originals/canyonLowest.jpg)\
 Filter - Blur:\
-![canyonBlur.jpg](res/images/jpeg/canyonBlur.jpg)\
+![canyonBlur.jpg](jpeg/canyonBlur.jpg)\
 Transform - Sharpen:\
-![canyonSharpen.jpg](res/images/jpeg/canyonSharpen.jpg)\
+![canyonSharpen.jpg](jpeg/canyonSharpen.jpg)\
 Transfrom - Greyscale:\
-![canyonGreyscale.jpg](res/images/jpeg/canyonGreyscale.jpg)\
+![canyonGreyscale.jpg](jpeg/canyonGreyscale.jpg)\
 Transfrom - Sepia:\
-![canyonSepia.jpg](res/images/jpeg/canyonSepia.jpg)
+![canyonSepia.jpg](jpeg/canyonSepia.jpg)
 
 ## How to run the program
 Instructions on how to run our program through the view and controller is listed and explained
