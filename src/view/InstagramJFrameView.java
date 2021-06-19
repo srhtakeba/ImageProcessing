@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -21,7 +22,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   private JButton saveButton, scriptButton, importButton, exportButton, blurButton, sharpenButton;
   private JButton greyscaleButton, sepiaButton, visibleButton, invisibleButton, newLayerButton;
   private JPanel selectionPanel;
-  private JLabel input;
+  private JLabel newLayerName;
   private static int gridSize = 4;
 
   public InstagramJFrameView() {
@@ -52,11 +53,11 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     exportButton = new JButton("Export");
     blurButton = new JButton("Blur");
     sharpenButton = new JButton("Sharpen");
-    importButton = new JButton("greyscaleButton");
-    exportButton = new JButton("sepiaButton");
-    blurButton = new JButton("visibleButton");
-    sharpenButton = new JButton("invisibleButton");
-    sharpenButton = new JButton("newLayerButton");
+    greyscaleButton = new JButton("greyscaleButton");
+    sepiaButton = new JButton("sepiaButton");
+    visibleButton = new JButton("visibleButton");
+    invisibleButton = new JButton("invisibleButton");
+    newLayerButton = new JButton("newLayerButton");
 
     buttonPanel.add(saveButton);
     buttonPanel.add(scriptButton);
@@ -69,6 +70,14 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     buttonPanel.add(visibleButton);
     buttonPanel.add(invisibleButton);
     buttonPanel.add(newLayerButton);
+
+    selectionPanel = new JPanel();
+    selectionPanel.setBorder(BorderFactory.createTitledBorder("Select layer"));
+    selectionPanel.setLayout(new BoxLayout(selectionPanel, BoxLayout.X_AXIS));
+    pane.add(selectionPanel);
+
+    newLayerName = new JLabel();
+    pane.add(newLayerName);
 
     // pack and make visible
     pack();
