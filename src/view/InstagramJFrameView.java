@@ -40,6 +40,9 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     pane.add(display, Component.LEFT_ALIGNMENT);
     this.add(pane);
 
+    imageScroll = new JScrollPane(pane);
+    add(imageScroll);
+
     saveButton = new JButton("Save");
     scriptButton = new JButton("Script");
     importButton = new JButton("Import");
