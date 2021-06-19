@@ -2,30 +2,42 @@ package view;
 
 import controller.Features;
 import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DebugGraphics;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import model.ROInstagramModel;
 
 public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   private JPanel pane, buttonPanel;
+
   private JLabel display;
+
   private JScrollPane imageScroll;
   private JButton saveButton, scriptButton, importButton, exportButton, blurButton, sharpenButton;
   private JButton greyscaleButton, sepiaButton, visibleButton, invisibleButton, newLayerButton;
   private JPanel selectionPanel;
+
   private JLabel newLayerName;
+  private JTextField newLayerNameInput;
+
   private static int gridSize = 4;
 
-  public InstagramJFrameView() {
+  private ROInstagramModel instaModelRo;
+
+  public InstagramJFrameView(ROInstagramModel instaModelRo) {
     super("Instagram OOD");
 
     setSize(500, 300);
@@ -79,18 +91,27 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     newLayerName = new JLabel();
     pane.add(newLayerName);
 
+    newLayerNameInput = new JTextField(10);
+    pane.add(newLayerNameInput);
+
     // pack and make visible
     pack();
     setVisible(true);
+
+    this.instaModelRo = instaModelRo;
   }
 
   @Override
   public void display() {
+//    Graphics2D graphicToDisplay = instaModelRo.exportImage().createGraphics();
+    Graphics newGraphic = new DebugGraphics();
+    newGraphic.drawImage(instaModelRo.exportImage(), 0, 0, this.display);
 
   }
 
   @Override
   public void addFeatures(Features feature) {
+    saveButton.addActionListener(evt -> feature.saveProject(newLayerNameInput.getText()));
 
   }
 
