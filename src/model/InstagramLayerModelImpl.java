@@ -159,6 +159,20 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     return currentImage;
   }
 
+  @Override
+  public String currentLayer() {
+    return currentLayer;
+  }
+
+  @Override
+  public List<String> getLayerNames() {
+    List<String> result = new ArrayList<>();
+    for(String key: layerMap.navigableKeySet()) {
+      result.add(key);
+    }
+    return result;
+  }
+
   /**
    * Converts the given InstaImage to a BufferedImage.
    *

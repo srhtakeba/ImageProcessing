@@ -2,8 +2,9 @@ package controller;
 
 public interface Features {
   void setCurrent(String layerName);
-  void saveProject();
-  void importScript();
+  void saveProject(String dirName);
+  void openProject(String dirpath);
+  void importScript(String filepath);
   void importImage(String filepath);
   void exportImage(String filepath);
   void blur();

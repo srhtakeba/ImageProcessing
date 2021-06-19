@@ -1,5 +1,7 @@
 package controller.command;
 
+import java.util.Locale;
+
 /**
  * Factory class to create classes which can send commands.
  */
@@ -13,7 +15,7 @@ public class InstagramLayerCommandFactory {
    * @return different classes which can send commands
    */
   public static InstagramLayerCommand create(String cmd, String next) {
-    switch (cmd) {
+    switch (cmd.toLowerCase()) {
       case "new":
         return new CreateLayer(next);
       case "remove":
