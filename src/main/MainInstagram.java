@@ -3,6 +3,7 @@ package main;
 import controller.Controller;
 import controller.IController;
 import java.io.InputStreamReader;
+import view.InstagramJFrameView;
 
 /**
  * Class to represent the OOD Instagram application. It will run the application with {@code
@@ -17,10 +18,12 @@ public class MainInstagram {
    * @param args command line input.
    */
   public static void main(String[] args) {
-    Readable in = new InputStreamReader(System.in);
-    Appendable out = System.out;
-    IController controller = new Controller(in, out);
-    controller.dispatchController();
+//    Readable in = new InputStreamReader(System.in);
+//    Appendable out = System.out;
+//    IController controller = new Controller(in, out);
+//    controller.dispatchController();
+    //IController controller = new
+    //InstagramJFrameView view = new InstagramJFrameView();
   }
 
 }

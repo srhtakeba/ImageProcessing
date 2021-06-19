@@ -7,7 +7,7 @@ import model.layer.Layer;
 /**
  * Interface to represent InstagramLayerModel which holds layer functionality.
  */
-public interface InstagramLayerModel extends InstagramModel {
+public interface InstagramLayerModel extends InstagramModel, ROInstagramModel {
 
   /**
    * Adds a new layer to this model, with the given name.
