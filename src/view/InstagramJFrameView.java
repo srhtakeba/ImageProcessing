@@ -3,13 +3,16 @@ package view;
 import controller.Features;
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.io.File;
 import java.io.IOException;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   private JPanel pane, buttonPanel;
@@ -97,6 +100,42 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
   }
 
+  /**
+   * Asks the user to write a new file and then returns the string representing
+   * the absolute path of the new file
+   *
+   * @return the absolute path of the new file
+   */
+  private String saveWindow() {
+    String resultPath = "";
+    final JFileChooser fchooser = new JFileChooser(".");
+    int retvalue = fchooser.showSaveDialog(InstagramJFrameView.this);
+    if (retvalue == JFileChooser.APPROVE_OPTION) {
+      File f = fchooser.getSelectedFile();
+      resultPath = f.getAbsolutePath();
+    }
+    return resultPath;
+  }
+
+  /**
+   * Asks the user to choose a file from a file choose screen, and then returns the absolute
+   * path of that file
+   *
+   * @return the absolute path of the selected file
+   */
+  private String importWindow() {
+    String resultPath = "";
+    final JFileChooser fchooser = new JFileChooser(".");
+    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+        "JPG, PNG, & PPM Images", "jpg", "gif", "ppm");
+    fchooser.setFileFilter(filter);
+    int retvalue = fchooser.showOpenDialog(InstagramJFrameView.this);
+    if (retvalue == JFileChooser.APPROVE_OPTION) {
+      File f = fchooser.getSelectedFile();
+      resultPath = f.getAbsolutePath();
+    }
+    return resultPath;
+  }
 
 
 }
