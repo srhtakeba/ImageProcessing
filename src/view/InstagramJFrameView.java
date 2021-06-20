@@ -170,8 +170,8 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     visibleButton.addActionListener(evt -> feature.makeVisible((String)layerSelection.getSelectedItem()));
     invisibleButton.addActionListener(evt -> feature.makeInvisible((String)layerSelection.getSelectedItem()));
 
-    newLayerButton.addActionListener(evt -> feature.addLayer(newLayerNameInput.getText()));
-    removeLayerButton.addActionListener(evt -> feature.removeLayer(newLayerNameInput.getText()));
+    newLayerButton.addActionListener(evt -> addLayer(feature));
+    removeLayerButton.addActionListener(evt -> removeLayer(feature));
 
     setCurrentButton.addActionListener(evt -> feature.setCurrent(((String)layerSelection.getSelectedItem())));
     layerSelection.addActionListener(evt -> feature.setCurrent(
@@ -189,6 +189,16 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   @Override
   public void clearInput() {
 
+  }
+
+  private void addLayer(Features feature) {
+    feature.addLayer(newLayerNameInput.getText());
+    resetLayers();
+  }
+
+  private void removeLayer(Features feature) {
+    feature.removeLayer(newLayerNameInput.getText());
+    resetLayers();
   }
 
   private void resetLayers() {
