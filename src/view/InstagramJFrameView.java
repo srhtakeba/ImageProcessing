@@ -85,7 +85,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     image = new ImageIcon();
     display = new JLabel(image);
     imageScroll = new JScrollPane(display);
-    imageScroll.setPreferredSize(new Dimension(500, 400));
+    imageScroll.setPreferredSize(new Dimension(200, 150));
     imageScroll.createVerticalScrollBar();
     imageScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     imagePanel.add(imageScroll);
