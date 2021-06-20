@@ -29,13 +29,13 @@ public class GUIController implements Features, IController {
   @Override
   public void setCurrent(String layerName) {
     cmd = InstagramLayerCommandFactory.create("current", layerName);
-    cmd.dispatchCommand(model);
+    dispatchOrSendMessage(cmd);
   }
 
   @Override
   public void saveProject(String dirName) {
     cmd = InstagramLayerCommandFactory.create("save", dirName);
-    cmd.dispatchCommand(model);
+    dispatchOrSendMessage(cmd);
   }
 
   @Override
@@ -53,75 +53,63 @@ public class GUIController implements Features, IController {
     } catch (FileNotFoundException e) {
       sendMessage("The given file was not found.");
     }
+
+
     view.display();
   }
 
   @Override
   public void importImage(String filepath) {
     cmd = InstagramLayerCommandFactory.create("read", filepath);
-    try {
-      cmd.dispatchCommand(model);
-      view.display();
-    }
-    catch (Exception e) {
-      sendMessage(e.getMessage());
-    }
+    dispatchOrSendMessage(cmd);
   }
 
   @Override
   public void exportImage(String filepath) {
     cmd = InstagramLayerCommandFactory.create("save", filepath);
-    cmd.dispatchCommand(model);
-    view.display();
+    dispatchOrSendMessage(cmd);
   }
 
   @Override
   public void blur() {
     cmd = InstagramLayerCommandFactory.create("filter", "blur");
-    cmd.dispatchCommand(model);
-    view.display();
+    dispatchOrSendMessage(cmd);
   }
 
   @Override
   public void sharpen() {
     cmd = InstagramLayerCommandFactory.create("filter", "sharpen");
-    cmd.dispatchCommand(model);
-    view.display();
+    dispatchOrSendMessage(cmd);
   }
 
   @Override
   public void greyscale() {
     cmd = InstagramLayerCommandFactory.create("transform", "greyscale");
-    cmd.dispatchCommand(model);
-    view.display();
+    dispatchOrSendMessage(cmd);
   }
 
   @Override
   public void sepia() {
     cmd = InstagramLayerCommandFactory.create("transform", "sepia");
-    cmd.dispatchCommand(model);
-    view.display();
+    dispatchOrSendMessage(cmd);
   }
 
   @Override
   public void makeVisible() {
     cmd = InstagramLayerCommandFactory.create("visible", model.currentLayer());
-    cmd.dispatchCommand(model);
-    view.display();
+    dispatchOrSendMessage(cmd);
   }
 
   @Override
   public void makeInvisible() {
     cmd = InstagramLayerCommandFactory.create("invisible", model.currentLayer());
-    cmd.dispatchCommand(model);
-    view.display();
+    dispatchOrSendMessage(cmd);
   }
 
   @Override
   public void addLayer(String layerName) {
     cmd = InstagramLayerCommandFactory.create("new", layerName);
-    cmd.dispatchCommand(model);
-    view.display();
+    dispatchOrSendMessage(cmd);
   }
 
   @Override
@@ -178,6 +166,16 @@ public class GUIController implements Features, IController {
     }
     catch (IOException ioe) {
       throw new IllegalStateException("Failed to send to the view.");
+    }
+  }
+
+  private void dispatchOrSendMessage(InstagramLayerCommand cmd) {
+    try {
+      cmd.dispatchCommand(model);
+      view.display();
+    }
+    catch (Exception e) {
+      sendMessage(e.getMessage());
     }
   }
 }
