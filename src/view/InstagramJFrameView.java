@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -38,6 +39,8 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   private JPanel rightTopPanel;
   private JPanel rightMidPanel;
   private JPanel rightBottomPanel;
+  private JPanel rightBottomPanelTop;
+  private JPanel rightBottomPanelBottom;
 
   private JLabel display, layerLabel;
   private ImageIcon image;
@@ -61,8 +64,9 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   public InstagramJFrameView(ROInstagramModel instaModelRo) {
     super("Instagram OOD");
 
-    setSize(500, 300);
-    setLocation(500, 500);
+    //setSize(700, 700);
+    setPreferredSize(new Dimension(700,500));
+    setLocation(250, 250);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     mainPanel = new JPanel();
@@ -77,16 +81,22 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightBottomPanel.setLayout(new BoxLayout(rightBottomPanel, BoxLayout.PAGE_AXIS));
     //rightBottomPanel.setLayout(new GridLayout());
     rightBottomPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+    rightBottomPanelTop = new JPanel();
+    rightBottomPanelTop.setLayout(new GridLayout());
+    rightBottomPanelBottom = new JPanel();
+    rightBottomPanelBottom.setLayout(new GridLayout());
     // This is the xy in the window
     // rightPanel.setPreferredSize(new Dimension(150, 100));
 
     imagePanel = new JPanel();
+    imagePanel.setLayout(new GridBagLayout());
 
     image = new ImageIcon();
     display = new JLabel(image);
     imageScroll = new JScrollPane(display);
     imageScroll.setPreferredSize(new Dimension(200, 150));
     imageScroll.createVerticalScrollBar();
+    imageScroll.createHorizontalScrollBar();
     imageScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     imagePanel.add(imageScroll);
 
@@ -121,25 +131,25 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightMidPanel.add(setCurrentButton);
 
     // right bottom panel set up
-    rightBottomPanel.add(saveButton);
-    rightBottomPanel.add(scriptButton);
-    rightBottomPanel.add(importButton);
-    rightBottomPanel.add(exportButton);
-    rightBottomPanel.add(blurButton);
-    rightBottomPanel.add(sharpenButton);
-    rightBottomPanel.add(greyscaleButton);
-    rightBottomPanel.add(sepiaButton);
+    rightBottomPanelTop.add(saveButton);
+    rightBottomPanelTop.add(scriptButton);
+    rightBottomPanelTop.add(importButton);
+    rightBottomPanelTop.add(exportButton);
+    rightBottomPanelBottom.add(blurButton);
+    rightBottomPanelBottom.add(sharpenButton);
+    rightBottomPanelBottom.add(greyscaleButton);
+    rightBottomPanelBottom.add(sepiaButton);
 
     rightPanel.add(rightTopPanel);
     rightPanel.add(rightMidPanel);
+    rightBottomPanel.add(rightBottomPanelTop);
+    rightBottomPanel.add(rightBottomPanelBottom);
     rightPanel.add(rightBottomPanel);
 
     mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
     mainPanel.add(imagePanel, Component.LEFT_ALIGNMENT);
     mainPanel.add(rightPanel, Component.RIGHT_ALIGNMENT);
     this.add(mainPanel);
-
-
 
     // pack and make visible
     pack();
