@@ -5,6 +5,7 @@ import controller.command.InstagramLayerCommandFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -21,7 +22,7 @@ public class GUIController implements Features, IController {
 
   public GUIController() {
     model = new InstagramLayerModelImpl();
-    view = new InstagramJFrameView();
+    view = new InstagramJFrameView(model);
   }
 
   @Override
@@ -48,7 +49,7 @@ public class GUIController implements Features, IController {
       InputStream inStream = new FileInputStream(script);
       Scanner scan = new Scanner(inStream);
     } catch (FileNotFoundException e) {
-      view.renderMessage("The given file was not found.");
+      sendMessage("The given file was not found.");
     }
   }
 
@@ -101,6 +102,12 @@ public class GUIController implements Features, IController {
   }
 
   @Override
+  public void addLayer(String layerName) {
+    cmd = InstagramLayerCommandFactory.create("new", layerName);
+    cmd.dispatchCommand(model);
+  }
+
+  @Override
   public void dispatchController() {
 
   }
@@ -113,7 +120,7 @@ public class GUIController implements Features, IController {
       Scanner project = new Scanner(inStream);
       readCommands(project);
     } catch (FileNotFoundException e) {
-      view.renderMessage("The given file was not found. A new project will be created.\n");
+      sendMessage("The given file was not found. A new project will be created.\n");
     }
   }
 
@@ -139,12 +146,21 @@ public class GUIController implements Features, IController {
           cmd.dispatchCommand(model);
         }
       } catch (InputMismatchException ime) {
-        view.renderMessage("Bad length to " + curr + "\n");
+        sendMessage("Bad length to " + curr + "\n");
       } catch (IllegalArgumentException iae) {
-        view.renderMessage("Bad input: " + iae.getMessage() + "\n");
+        sendMessage("Bad input: " + iae.getMessage() + "\n");
       } catch (IllegalStateException ise) {
-        view.renderMessage("System error: " + ise.getMessage() + "\n");
+        sendMessage("System error: " + ise.getMessage() + "\n");
       }
+    }
+  }
+
+  private void sendMessage(String message) {
+    try {
+      view.renderMessage(message);
+    }
+    catch (IOException ioe) {
+      throw new IllegalStateException("Failed to send to the view.");
     }
   }
 }

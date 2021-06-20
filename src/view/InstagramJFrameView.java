@@ -11,9 +11,11 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DebugGraphics;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -111,8 +113,17 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
   @Override
   public void addFeatures(Features feature) {
-    saveButton.addActionListener(evt -> feature.saveProject(newLayerNameInput.getText()));
-
+    saveButton.addActionListener(evt -> feature.saveProject(saveWindow()));
+    scriptButton.addActionListener(evt -> feature.importScript(importWindow()));
+    importButton.addActionListener(evt -> feature.importImage(importWindow()));
+    exportButton.addActionListener(evt -> feature.exportImage(saveWindow()));
+    blurButton.addActionListener(evt -> feature.blur());
+    sharpenButton.addActionListener(evt -> feature.sharpen());
+    greyscaleButton.addActionListener(evt -> feature.greyscale());
+    sepiaButton.addActionListener(evt -> feature.sepia());
+    visibleButton.addActionListener(evt -> feature.makeVisible());
+    invisibleButton.addActionListener(evt -> feature.makeInvisible());
+    newLayerButton.addActionListener(evt -> feature.addLayer(newLayerNameInput.getText()));
   }
 
   @Override
@@ -125,9 +136,13 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
   }
 
+  /**
+   * Shows a message in the form of a pop-up dialog window.
+   * @param message the message to be transmitted
+   */
   @Override
-  public void renderMessage(String message) throws IOException {
-
+  public void renderMessage(String message) {
+    JOptionPane.showMessageDialog(this, message);
   }
 
   /**

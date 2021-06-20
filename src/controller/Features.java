@@ -13,4 +13,5 @@ public interface Features {
   void sepia();
   void makeVisible();
   void makeInvisible();
+  void addLayer(String layerName);
 }
