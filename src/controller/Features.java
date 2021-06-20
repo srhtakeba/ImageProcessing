@@ -11,7 +11,8 @@ public interface Features {
   void sharpen();
   void greyscale();
   void sepia();
-  void makeVisible();
-  void makeInvisible();
+  void makeVisible(String layerName);
+  void makeInvisible(String layerName);
   void addLayer(String layerName);
+  void removeLayer(String layerName);
 }

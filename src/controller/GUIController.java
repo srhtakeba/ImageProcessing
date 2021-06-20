@@ -95,20 +95,31 @@ public class GUIController implements Features, IController {
   }
 
   @Override
-  public void makeVisible() {
-    cmd = InstagramLayerCommandFactory.create("visible", model.currentLayer());
+  public void makeVisible(String layerName) {
+    cmd = InstagramLayerCommandFactory.create("visible", layerName);
     dispatchOrSendMessage(cmd);
   }
 
   @Override
-  public void makeInvisible() {
-    cmd = InstagramLayerCommandFactory.create("invisible", model.currentLayer());
+  public void makeInvisible(String layerName) {
+    cmd = InstagramLayerCommandFactory.create("invisible", layerName);
     dispatchOrSendMessage(cmd);
   }
 
   @Override
   public void addLayer(String layerName) {
     cmd = InstagramLayerCommandFactory.create("new", layerName);
+    try {
+      cmd.dispatchCommand(model);
+    }
+    catch (Exception e) {
+      sendMessage(e.getMessage());
+    }
+  }
+
+  @Override
+  public void removeLayer(String layerName) {
+    cmd = InstagramLayerCommandFactory.create("remove", layerName);
     dispatchOrSendMessage(cmd);
   }
 

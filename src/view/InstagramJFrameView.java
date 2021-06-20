@@ -8,6 +8,10 @@ import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DebugGraphics;
@@ -17,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -26,16 +31,21 @@ import model.ROInstagramModel;
 public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   private JPanel mainPanel;
   private JPanel imagePanel;
-  private JPanel rightPanel;
 
-  private JLabel display;
+  private JPanel rightPanel;
+  private JPanel rightTopPanel;
+  private JPanel rightMidPanel;
+  private JPanel rightBottomPanel;
+
+  private JLabel display, layerLabel;
   private ImageIcon image;
   private JScrollPane imageScroll;
 
-  private JButton saveButton, scriptButton, importButton, exportButton, blurButton, sharpenButton;
-  private JButton greyscaleButton, sepiaButton, visibleButton, invisibleButton, newLayerButton;
+  private JButton saveButton, scriptButton, importButton, exportButton, blurButton, sharpenButton, setCurrentButton;
+  private JButton greyscaleButton, sepiaButton, visibleButton, invisibleButton, newLayerButton, removeLayerButton;
 
   private JComboBox layerSelection;
+  private String[] allLayers;
 
   private JLabel newLayerName;
   private JTextField newLayerNameInput;
@@ -56,6 +66,11 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     mainPanel = new JPanel();
 
     rightPanel = new JPanel();
+    rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
+    rightTopPanel = new JPanel();
+    rightMidPanel = new JPanel();
+    rightBottomPanel = new JPanel();
+    rightBottomPanel.setLayout(new BoxLayout(rightBottomPanel, BoxLayout.PAGE_AXIS));
     // This is the xy in the window
     // rightPanel.setPreferredSize(new Dimension(150, 100));
 
@@ -67,48 +82,54 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     display.add(imageScroll);
 
 
-    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
-    mainPanel.add(rightPanel, Component.RIGHT_ALIGNMENT);
-    mainPanel.add(display, Component.LEFT_ALIGNMENT);
-    this.add(mainPanel);
-
     saveButton = new JButton("Save");
     scriptButton = new JButton("Script");
     importButton = new JButton("Import");
     exportButton = new JButton("Export");
     blurButton = new JButton("Blur");
     sharpenButton = new JButton("Sharpen");
-    greyscaleButton = new JButton("greyscaleButton");
-    sepiaButton = new JButton("sepiaButton");
-    visibleButton = new JButton("visibleButton");
-    invisibleButton = new JButton("invisibleButton");
-    newLayerButton = new JButton("newLayerButton");
+    greyscaleButton = new JButton("Greyscale");
+    sepiaButton = new JButton("Sepia");
+    visibleButton = new JButton("Visible");
+    invisibleButton = new JButton("Invisible");
+    setCurrentButton = new JButton("Set Current.");
+    newLayerButton = new JButton("Add Layer");
+    removeLayerButton = new JButton("Remove layer");
 
-    rightPanel.add(saveButton);
-    rightPanel.add(scriptButton);
-    rightPanel.add(importButton);
-    rightPanel.add(exportButton);
-    rightPanel.add(blurButton);
-    rightPanel.add(sharpenButton);
-    rightPanel.add(greyscaleButton);
-    rightPanel.add(sepiaButton);
-    rightPanel.add(visibleButton);
-    rightPanel.add(invisibleButton);
-    rightPanel.add(newLayerButton);
-
-//    selectionPanel = new JPanel();
-//    selectionPanel.setBorder(BorderFactory.createTitledBorder("Select layer"));
-//    selectionPanel.setLayout(new BoxLayout(selectionPanel, BoxLayout.X_AXIS));
-//    pane.add(selectionPanel);
-
-    newLayerName = new JLabel();
-    rightPanel.add(newLayerName);
-
+    // right top panel set up
+    layerLabel = new JLabel("Please input layer name:");
     newLayerNameInput = new JTextField(10);
-    rightPanel.add(newLayerNameInput);
+    rightTopPanel.add(newLayerNameInput);
+    rightTopPanel.add(newLayerButton);
+    rightTopPanel.add(removeLayerButton);
 
-    layerSelection = new JComboBox();
-    rightPanel.add(layerSelection);
+    // right middle panel set up
+    List<String> allLayersTemp = instaModelRo.getLayerNames();
+    allLayers = allLayersTemp.toArray(new String[0]);
+    layerSelection = new JComboBox(allLayers);
+    rightMidPanel.add(layerSelection);
+    rightMidPanel.add(visibleButton);
+    rightMidPanel.add(invisibleButton);
+    rightMidPanel.add(setCurrentButton);
+
+    // right bottom panel set up
+    rightBottomPanel.add(saveButton);
+    rightBottomPanel.add(scriptButton);
+    rightBottomPanel.add(importButton);
+    rightBottomPanel.add(exportButton);
+    rightBottomPanel.add(blurButton);
+    rightBottomPanel.add(sharpenButton);
+    rightBottomPanel.add(greyscaleButton);
+    rightBottomPanel.add(sepiaButton);
+
+    rightPanel.add(rightTopPanel);
+    rightPanel.add(rightMidPanel);
+    rightPanel.add(rightBottomPanel);
+
+    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+    mainPanel.add(rightPanel, Component.RIGHT_ALIGNMENT);
+    mainPanel.add(display, Component.LEFT_ALIGNMENT);
+    this.add(mainPanel);
 
     // pack and make visible
     pack();
@@ -145,12 +166,16 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     sharpenButton.addActionListener(evt -> feature.sharpen());
     greyscaleButton.addActionListener(evt -> feature.greyscale());
     sepiaButton.addActionListener(evt -> feature.sepia());
-    visibleButton.addActionListener(evt -> feature.makeVisible());
-    invisibleButton.addActionListener(evt -> feature.makeInvisible());
+
+    visibleButton.addActionListener(evt -> feature.makeVisible((String)layerSelection.getSelectedItem()));
+    invisibleButton.addActionListener(evt -> feature.makeInvisible((String)layerSelection.getSelectedItem()));
+
     newLayerButton.addActionListener(evt -> feature.addLayer(newLayerNameInput.getText()));
-//    newLayerButton.addActionListener(evt -> feature.exportImage();
+    removeLayerButton.addActionListener(evt -> feature.removeLayer(newLayerNameInput.getText()));
 
-
+    setCurrentButton.addActionListener(evt -> feature.setCurrent(((String)layerSelection.getSelectedItem())));
+    layerSelection.addActionListener(evt -> feature.setCurrent(
+        (String) layerSelection.getSelectedItem()));
   }
 
   @Override
@@ -166,9 +191,14 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
   }
 
+  private void resetLayers() {
+    List<String> allLayersTemp = instaModelRo.getLayerNames();
+    allLayers = allLayersTemp.toArray(new String[0]);
+  }
+
   @Override
   public void renderMessage(String message) throws IOException {
-
+    JOptionPane.showMessageDialog(this, message);
   }
 
   /**
@@ -198,7 +228,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     String resultPath = "";
     final JFileChooser fchooser = new JFileChooser(".");
     FileNameExtensionFilter filter = new FileNameExtensionFilter(
-        "JPG, PNG, & PPM Images", "jpg", "gif", "ppm");
+        "JPG, PNG, & PPM Images", "jpg", "png", "ppm");
     fchooser.setFileFilter(filter);
     int retvalue = fchooser.showOpenDialog(InstagramJFrameView.this);
     if (retvalue == JFileChooser.APPROVE_OPTION) {
