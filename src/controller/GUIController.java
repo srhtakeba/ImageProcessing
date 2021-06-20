@@ -107,7 +107,7 @@ public class GUIController implements Features, IController {
   }
 
   @Override
-  public void addLayer(String layerName) {
+  public boolean addLayer(String layerName) {
     cmd = InstagramLayerCommandFactory.create("new", layerName);
     try {
       cmd.dispatchCommand(model);
@@ -115,12 +115,20 @@ public class GUIController implements Features, IController {
     catch (Exception e) {
       sendMessage(e.getMessage());
     }
+
+    return model.getLayerNames().contains(layerName);
   }
 
   @Override
-  public void removeLayer(String layerName) {
+  public boolean removeLayer(String layerName) {
     cmd = InstagramLayerCommandFactory.create("remove", layerName);
-    dispatchOrSendMessage(cmd);
+    try {
+      cmd.dispatchCommand(model);
+    }
+    catch (Exception e) {
+      sendMessage(e.getMessage());
+    }
+    return !model.getLayerNames().contains(layerName);
   }
 
   @Override

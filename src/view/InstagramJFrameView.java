@@ -192,18 +192,19 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   }
 
   private void addLayer(Features feature) {
-    feature.addLayer(newLayerNameInput.getText());
-    resetLayers();
+    boolean success = feature.addLayer(newLayerNameInput.getText());
+    if(success) {
+      layerSelection.addItem(newLayerNameInput.getText());
+    }
+    newLayerNameInput.setText("");
   }
 
   private void removeLayer(Features feature) {
-    feature.removeLayer(newLayerNameInput.getText());
-    resetLayers();
-  }
-
-  private void resetLayers() {
-    List<String> allLayersTemp = instaModelRo.getLayerNames();
-    allLayers = allLayersTemp.toArray(new String[0]);
+    boolean success = feature.removeLayer(newLayerNameInput.getText());
+    if(success) {
+      layerSelection.removeItem(newLayerNameInput.getText());
+    }
+    newLayerNameInput.setText("");
   }
 
   @Override

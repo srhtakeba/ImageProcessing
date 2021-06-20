@@ -13,6 +13,6 @@ public interface Features {
   void sepia();
   void makeVisible(String layerName);
   void makeInvisible(String layerName);
-  void addLayer(String layerName);
-  void removeLayer(String layerName);
+  boolean addLayer(String layerName);
+  boolean removeLayer(String layerName);
 }
