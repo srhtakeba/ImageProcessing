@@ -2,6 +2,7 @@ package view;
 
 import controller.Features;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -50,7 +51,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   private JLabel newLayerName;
   private JTextField newLayerNameInput;
 
-  private JFileChooser textFile;
+//  private JFileChooser textFile;
 
   private static int gridSize = 4;
 
@@ -74,13 +75,15 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     // This is the xy in the window
     // rightPanel.setPreferredSize(new Dimension(150, 100));
 
+    imagePanel = new JPanel();
+
     image = new ImageIcon();
     display = new JLabel(image);
-    imageScroll = new JScrollPane();
+    imageScroll = new JScrollPane(display);
+    imageScroll.setPreferredSize(new Dimension(500, 400));
     imageScroll.createVerticalScrollBar();
     imageScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-    display.add(imageScroll);
-
+    imagePanel.add(imageScroll);
 
     saveButton = new JButton("Save");
     scriptButton = new JButton("Script");
@@ -127,9 +130,11 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightPanel.add(rightBottomPanel);
 
     mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+    mainPanel.add(imagePanel, Component.LEFT_ALIGNMENT);
     mainPanel.add(rightPanel, Component.RIGHT_ALIGNMENT);
-    mainPanel.add(display, Component.LEFT_ALIGNMENT);
     this.add(mainPanel);
+
+
 
     // pack and make visible
     pack();
