@@ -23,6 +23,7 @@ public class GUIController implements Features, IController {
   public GUIController() {
     model = new InstagramLayerModelImpl();
     view = new InstagramJFrameView(model);
+    view.addFeatures(this);
   }
 
   @Override
@@ -40,6 +41,7 @@ public class GUIController implements Features, IController {
   @Override
   public void openProject(String dirpath) {
     this.openProject(dirpath);
+    view.display();
   }
 
   @Override
@@ -51,60 +53,75 @@ public class GUIController implements Features, IController {
     } catch (FileNotFoundException e) {
       sendMessage("The given file was not found.");
     }
+    view.display();
   }
 
   @Override
   public void importImage(String filepath) {
-    cmd = InstagramLayerCommandFactory.create("import", filepath);
-    cmd.dispatchCommand(model);
+    cmd = InstagramLayerCommandFactory.create("read", filepath);
+    try {
+      cmd.dispatchCommand(model);
+      view.display();
+    }
+    catch (Exception e) {
+      sendMessage(e.getMessage());
+    }
   }
 
   @Override
   public void exportImage(String filepath) {
     cmd = InstagramLayerCommandFactory.create("save", filepath);
     cmd.dispatchCommand(model);
+    view.display();
   }
 
   @Override
   public void blur() {
     cmd = InstagramLayerCommandFactory.create("filter", "blur");
     cmd.dispatchCommand(model);
+    view.display();
   }
 
   @Override
   public void sharpen() {
     cmd = InstagramLayerCommandFactory.create("filter", "sharpen");
     cmd.dispatchCommand(model);
+    view.display();
   }
 
   @Override
   public void greyscale() {
     cmd = InstagramLayerCommandFactory.create("transform", "greyscale");
     cmd.dispatchCommand(model);
+    view.display();
   }
 
   @Override
   public void sepia() {
     cmd = InstagramLayerCommandFactory.create("transform", "sepia");
     cmd.dispatchCommand(model);
+    view.display();
   }
 
   @Override
   public void makeVisible() {
     cmd = InstagramLayerCommandFactory.create("visible", model.currentLayer());
     cmd.dispatchCommand(model);
+    view.display();
   }
 
   @Override
   public void makeInvisible() {
     cmd = InstagramLayerCommandFactory.create("invisible", model.currentLayer());
     cmd.dispatchCommand(model);
+    view.display();
   }
 
   @Override
   public void addLayer(String layerName) {
     cmd = InstagramLayerCommandFactory.create("new", layerName);
     cmd.dispatchCommand(model);
+    view.display();
   }
 
   @Override

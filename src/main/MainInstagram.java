@@ -1,6 +1,7 @@
 package main;
 
 import controller.Controller;
+import controller.GUIController;
 import controller.IController;
 import java.io.InputStreamReader;
 import view.InstagramJFrameView;
@@ -24,6 +25,7 @@ public class MainInstagram {
 //    controller.dispatchController();
     //IController controller = new
     //InstagramJFrameView view = new InstagramJFrameView();
+    IController controller = new GUIController();
   }
 
 }

@@ -108,7 +108,6 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 //    Graphics2D graphicToDisplay = instaModelRo.exportImage().createGraphics();
     Graphics newGraphic = new DebugGraphics();
     newGraphic.drawImage(instaModelRo.exportImage(), 0, 0, this.display);
-
   }
 
   @Override
@@ -171,10 +170,10 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   private String importWindow() {
     String resultPath = "";
     final JFileChooser fchooser = new JFileChooser(".");
-    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-        "JPG, PNG, & PPM Images", "jpg", "gif", "ppm");
-    fchooser.setFileFilter(filter);
-    int retvalue = fchooser.showOpenDialog(InstagramJFrameView.this);
+//    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+//        "JPG, PNG, & PPM Images", "jpg", "gif", "ppm");
+//    fchooser.setFileFilter(filter);
+    int retvalue = fchooser.showOpenDialog(this);
     if (retvalue == JFileChooser.APPROVE_OPTION) {
       File f = fchooser.getSelectedFile();
       resultPath = f.getAbsolutePath();
