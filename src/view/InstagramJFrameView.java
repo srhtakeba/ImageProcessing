@@ -73,10 +73,15 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
     rightPanel = new JPanel();
     rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
+
     rightTopPanel = new JPanel();
     rightTopPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+    rightTopPanel.setLayout(new GridLayout());
+
     rightMidPanel = new JPanel();
     rightMidPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+    rightMidPanel.setLayout(new GridLayout());
+
     rightBottomPanel = new JPanel();
     rightBottomPanel.setLayout(new BoxLayout(rightBottomPanel, BoxLayout.PAGE_AXIS));
     //rightBottomPanel.setLayout(new GridLayout());
@@ -139,6 +144,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightBottomPanelBottom.add(sharpenButton);
     rightBottomPanelBottom.add(greyscaleButton);
     rightBottomPanelBottom.add(sepiaButton);
+
 
     rightPanel.add(rightTopPanel);
     rightPanel.add(rightMidPanel);
