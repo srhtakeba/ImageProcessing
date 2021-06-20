@@ -159,17 +159,8 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
   @Override
   public void addFeatures(Features feature) {
-
-    // JUST A FEATURE REFF
-//    void setCurrent(String layerName);
-//    void saveProject(String dirName);
-//    void openProject(String dirpath);
-//    void importScript(String filepath);
-//    void importImage(String filepath);
-//    void exportImage(String filepath);
-
     saveButton.addActionListener(evt -> feature.saveProject(saveWindow()));
-    scriptButton.addActionListener(evt -> feature.importScript(importWindow()));
+    scriptButton.addActionListener(evt -> importScript(feature));
     importButton.addActionListener(evt -> feature.importImage(importWindow()));
     exportButton.addActionListener(evt -> feature.exportImage(saveWindow()));
     blurButton.addActionListener(evt -> feature.blur());
@@ -254,6 +245,30 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
       resultPath = f.getAbsolutePath();
     }
     return resultPath;
+  }
+
+  /**
+   * Asks the user to choose a txt file from a file choose screen, and then returns the absolute
+   * path of that file
+   *
+   * @return the absolute path of the selected file
+   */
+  private void importScript(Features feature) {
+    String resultPath = "";
+    final JFileChooser fchooser = new JFileChooser(".");
+    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+        "txt files", "txt");
+    fchooser.setFileFilter(filter);
+    int retvalue = fchooser.showOpenDialog(InstagramJFrameView.this);
+    if (retvalue == JFileChooser.APPROVE_OPTION) {
+      File f = fchooser.getSelectedFile();
+      resultPath = f.getAbsolutePath();
+    }
+    feature.importScript(resultPath);
+    layerSelection.removeAllItems();
+    for(String s : instaModelRo.getLayerNames()) {
+      layerSelection.addItem(s);
+    }
   }
 
 

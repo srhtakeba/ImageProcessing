@@ -55,10 +55,10 @@ public class GUIController implements Features, IController {
     try {
       InputStream inStream = new FileInputStream(script);
       Scanner scan = new Scanner(inStream);
+      readCommands(scan);
     } catch (FileNotFoundException e) {
       sendMessage("The given file was not found.");
     }
-
 
     view.display();
   }
