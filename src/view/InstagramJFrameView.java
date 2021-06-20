@@ -1,6 +1,7 @@
 package view;
 
 import controller.Features;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -69,9 +70,13 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightPanel = new JPanel();
     rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
     rightTopPanel = new JPanel();
+    rightTopPanel.setBorder(BorderFactory.createLineBorder(Color.black));
     rightMidPanel = new JPanel();
+    rightMidPanel.setBorder(BorderFactory.createLineBorder(Color.black));
     rightBottomPanel = new JPanel();
     rightBottomPanel.setLayout(new BoxLayout(rightBottomPanel, BoxLayout.PAGE_AXIS));
+    //rightBottomPanel.setLayout(new GridLayout());
+    rightBottomPanel.setBorder(BorderFactory.createLineBorder(Color.black));
     // This is the xy in the window
     // rightPanel.setPreferredSize(new Dimension(150, 100));
 
@@ -187,9 +192,6 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   public String receiveInput() {
     return null;
   }
-
-  // receiveTextInput
-  // receiveImageInput
 
   @Override
   public void clearInput() {

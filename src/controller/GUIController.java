@@ -29,7 +29,12 @@ public class GUIController implements Features, IController {
   @Override
   public void setCurrent(String layerName) {
     cmd = InstagramLayerCommandFactory.create("current", layerName);
-    dispatchOrSendMessage(cmd);
+    try {
+      cmd.dispatchCommand(model);
+    }
+    catch (Exception e) {
+      sendMessage(e.getMessage());
+    }
   }
 
   @Override
