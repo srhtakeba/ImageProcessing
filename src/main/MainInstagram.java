@@ -4,6 +4,7 @@ import controller.Controller;
 import controller.GUIController;
 import controller.IController;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import view.InstagramJFrameView;
 
 /**
@@ -25,7 +26,28 @@ public class MainInstagram {
 //    controller.dispatchController();
     //IController controller = new
     //InstagramJFrameView view = new InstagramJFrameView();
-    IController controller = new GUIController();
+    if(args[0].equals("-interactive")) {
+      IController GUIController = new GUIController();
+    }
+    else if(args[0].equals("-text")) {
+      Readable in = new InputStreamReader(System.in);
+      Appendable out = System.out;
+      IController controller = new Controller(in, out);
+      controller.dispatchController();
+    }
+    else if(args[0].equals("-script")) {
+      StringBuilder sb = new StringBuilder();
+      sb.append("N\n2\n");
+      String filePath = args[1].substring(1);
+      sb.append(args[1]);
+      Readable in = new StringReader(sb.toString());
+      Appendable out = System.out;
+      IController controller = new Controller(in, out);
+      controller.dispatchController();
+    }
+    else {
+      throw new IllegalArgumentException("Please type -interactive, -text, or -script.");
+    }
   }
 
 }
