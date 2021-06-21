@@ -1,9 +1,9 @@
-#Starting the Application
+# Starting the Application
 The user will first be invited to our 'OOD Instagram' and then be prompted if they would like
 to open an existing project. If you have an existing project, answer `Y`/`y` to the question
 'Would you like to load an existing project?'. Otherwise, press `N`.
 
-##Opening an existing project
+## Opening an existing project
 To open an existing `InstagramLayerModelImpl` projects, input the name of the directory when prompted,
 and the application will re-open your project. All the layers will be reconstructed with the images
 previously saved in the project. When you re-open a project, all layers will be made visible regardless
