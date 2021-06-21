@@ -141,6 +141,10 @@ public class GUIController implements Features, IController {
 
   }
 
+  /**
+   * Read a previous project and open it in the current model.
+   * @param dirPath the path to the previous project.
+   */
   private void loadPreviousProject(String dirPath) {
     String projectPath = dirPath + "/main.txt";
     File script = new File(projectPath);
@@ -184,6 +188,10 @@ public class GUIController implements Features, IController {
     }
   }
 
+  /**
+   * Send a message to the view
+   * @param message the message to be sent
+   */
   private void sendMessage(String message) {
     try {
       view.renderMessage(message);
@@ -193,6 +201,11 @@ public class GUIController implements Features, IController {
     }
   }
 
+  /**
+   * Dispatch the given command, catching any errors along the way and
+   * sending them to the view. Update the view once the command has been dispatched.
+   * @param cmd the command to be dispatched.
+   */
   private void dispatchOrSendMessage(InstagramLayerCommand cmd) {
     try {
       cmd.dispatchCommand(model);

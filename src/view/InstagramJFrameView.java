@@ -4,20 +4,14 @@ import controller.Features;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.DebugGraphics;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -164,6 +158,9 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     this.instaModelRo = instaModelRo;
   }
 
+  /**
+   * Update the image in the display of this view.
+   */
   @Override
   public void display() {
     BufferedImage currImage = instaModelRo.exportImage();
@@ -173,6 +170,10 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   }
 
 
+  /**
+   * Add interactive features to this view's elements
+   * @param feature an {@code Features} object that holds the commands for action listeners.
+   */
   @Override
   public void addFeatures(Features feature) {
     saveButton.addActionListener(evt -> feature.saveProject(saveWindow()));
@@ -195,16 +196,10 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
         (String) layerSelection.getSelectedItem()));
   }
 
-  @Override
-  public String receiveInput() {
-    return null;
-  }
-
-  @Override
-  public void clearInput() {
-
-  }
-
+  /**
+   * Add a layer to the current model, adjusting the combo box appropriately.
+   * @param feature the {@code Features} object to dispatch the addition in the model.
+   */
   private void addLayer(Features feature) {
     boolean success = feature.addLayer(newLayerNameInput.getText());
     if(success) {
@@ -213,6 +208,10 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     newLayerNameInput.setText("");
   }
 
+  /**
+   * Remove a layer to the current model, adjusting the combo box appropriately.
+   * @param feature the {@code Features} object to dispatch the removal in the model.
+   */
   private void removeLayer(Features feature) {
     boolean success = feature.removeLayer(newLayerNameInput.getText());
     if(success) {
@@ -221,6 +220,11 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     newLayerNameInput.setText("");
   }
 
+  /**
+   * Send a message to the user.
+   * @param message the message to be transmitted
+   * @throws IOException if showing the message fails
+   */
   @Override
   public void renderMessage(String message) throws IOException {
     JOptionPane.showMessageDialog(this, message);
@@ -286,6 +290,4 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
       layerSelection.addItem(s);
     }
   }
-
-
 }
