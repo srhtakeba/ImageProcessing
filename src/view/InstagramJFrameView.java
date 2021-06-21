@@ -1,9 +1,11 @@
 package view;
 
 import controller.Features;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
@@ -71,6 +73,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightTopPanel = new JPanel();
     rightTopPanel.setBorder(BorderFactory.createLineBorder(Color.black));
     rightTopPanel.setLayout(new GridLayout());
+    //rightTopPanel.setLayout(new GridBagLayout());
 
     rightMidPanel = new JPanel();
     rightMidPanel.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -93,7 +96,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     image = new ImageIcon();
     display = new JLabel(image);
     imageScroll = new JScrollPane(display);
-    imageScroll.setPreferredSize(new Dimension(200, 150));
+    imageScroll.setPreferredSize(new Dimension(300, 180));
     imageScroll.createVerticalScrollBar();
     imageScroll.createHorizontalScrollBar();
     imageScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -119,6 +122,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightTopPanel.add(newLayerNameInput);
     rightTopPanel.add(newLayerButton);
     rightTopPanel.add(removeLayerButton);
+    rightTopPanel.setPreferredSize(new Dimension(400,100));
 
     // right middle panel set up
     List<String> allLayersTemp = instaModelRo.getLayerNames();
@@ -128,6 +132,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightMidPanel.add(visibleButton);
     rightMidPanel.add(invisibleButton);
     rightMidPanel.add(setCurrentButton);
+    rightMidPanel.setPreferredSize(new Dimension(400,130));
 
     // right bottom panel set up
     rightBottomPanelTop.add(saveButton);
@@ -138,6 +143,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightBottomPanelBottom.add(sharpenButton);
     rightBottomPanelBottom.add(greyscaleButton);
     rightBottomPanelBottom.add(sepiaButton);
+    rightBottomPanel.setPreferredSize(new Dimension(400,270));
 
 
     rightPanel.add(rightTopPanel);
