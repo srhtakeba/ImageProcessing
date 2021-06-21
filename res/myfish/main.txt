@@ -1,6 +1,0 @@
-new first
-current first
-read myfish/first.png
-new second
-current second
-read myfish/second.png
