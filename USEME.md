@@ -1,16 +1,17 @@
-# Starting the Application
+# The Textual View + Interactive Text View
+## Starting the Application
 The user will first be invited to our 'OOD Instagram' and then be prompted if they would like
 to open an existing project. If you have an existing project, answer `Y`/`y` to the question
 'Would you like to load an existing project?'. Otherwise, press `N`.
 
-## Opening an existing project
+### Opening an existing project
 To open an existing `InstagramLayerModelImpl` projects, input the name of the directory when prompted,
 and the application will re-open your project. All the layers will be reconstructed with the images
 previously saved in the project. When you re-open a project, all layers will be made visible regardless
 of the state you left it at before saving previously. The top most layer of the project will be opened
 as the 'current' layer of the project. 
 
-#Commands
+## Commands
 `new` + `layer_name` = creates a new layer with the name `layer_name`
 
 `current` + `layer_name` = sets the current working layer to the layer with the name `layer_name`
@@ -34,12 +35,12 @@ to reconstruct this project in a new folder with the name `directory_name`. If t
 the model will override that directory, deleting it and replacing its contents with the contents of 
 this model currently.
 
-##Order of Operations
+### Order of Operations
 In order to use these commands, `current` must be used to specify which layer to be working on. 
 If not specified before a command, it will default to the last time `current` was called or will send 
 an error message.
 
-## Example Runs
+### Example Runs
 Note: Use the scriptRunFromJar.txt and script2RunFromJar.txt versions when running from the jar 
 file since the file paths differ when running from the main method vs running from the jar file in the
 /res folder.
@@ -85,3 +86,17 @@ script.txt, which is a file included in this zip folder, shows the following ope
 - remove the layer 'third'
 - export the top most visible layer as a png called 'withBlurMyFish.png'
 - override and re-save this project in a directory called 'myfish'
+
+# The GUI View
+## Starting the Application
+### New Project
+First thing to do is to *add* a layer. Do this by typing a desired layer title in the text box, and selecting `Add layer`. Once your layer is added, it should appear in the combo box in the panel below. Before importing an image to your layer, you must *select it to be the current working layer*. To do this, select your layer title in the ComboBox, and then click on `Set Current`. You can then `import` an image from your files. Note that once you have imported an image o certain proportions, only images of the same proportions can be imported in this model again. 
+Once you have created your layer, you can also *set it to be visible/invisible*. To do this, select your layer from the ComboBox, and click on `visible` or `invisible`. 
+At any time after you have imported an image for the first time in the model, you can *export the top most visible layer* with the `export` button. This will export the image with your desired file type and name, the exported image is what you see on the view. 
+To transform an image on a layer, select the layer name with the image with `Set Current`, and use the `blur`, `sharpen`, `greyscale`, and `sepia` buttons. Note that if you are working on a layer that is underneath a visible layer, even by pressing the buttons you may not see the transformations in the view. To see the transformations on the view, make sure the current working layer is also the top most visible layer. 
+To remove a layer at any time, type the layer name you would like to remove in the text box and click `Remove layer`.
+### Importing a script / Opening an old project.
+You also have the option to *import a script* for `Instagram OOD` applications. To do this, click on `Script` on the bottom most panel, and select the file containing your script. Only .txt files may be imported. 
+To open an old project that you created with this GUI application, select the `main.txt` script file from the project directory from when you saved the project last, and import that into the application, your project should reopen where you left it off.
+### Saving your project
+Click on `save` at any time to *save your `Instagram OOD` as a project*. Choose a directory and a directory name for your saved project. This project will include `.png` files of all visible layers in the project, as well as a `main.txt` script file that can be used to re-open your project later on. 
