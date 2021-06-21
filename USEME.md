@@ -90,15 +90,15 @@ script.txt, which is a file included in this zip folder, shows the following ope
 # The GUI View
 ## Starting the Application
 ### New Project
-First thing to do is to **add a layer**. Do this by typing a desired layer title in the text box, and selecting `Add layer`. Once your layer is added, it should appear in the combo box in the panel below.\
-Before importing an image to your layer, you must **select it to be the current working layer**. To do this, select your layer title in the ComboBox, and then click on `Set Current`.\ 
-You can then **`import` an image from your files**. Note that once you have imported an image of certain proportions, only images of the same proportions can be imported in this model again. \
-Once you have created your layer, you can also **set it to be visible/invisible**. To do this, select your layer from the ComboBox, and click on `visible` or `invisible`. \
-At any time after you have imported an image for the first time in the model, you can **export the top most visible layer** with the `export` button. This will export the image with your desired file type and name, the exported image is what you see on the view. \
-To **transform an image on a layer**, select the layer name with the image with `Set Current`, and use the `blur`, `sharpen`, `greyscale`, and `sepia` buttons. Note that if you are working on a layer that is underneath a visible layer, even by pressing the buttons you may not see the transformations in the view. To see the transformations on the view, make sure the current working layer is also the top most visible layer. \
+First thing to do is to **add a layer**. Do this by typing a desired layer title in the text box, and selecting `Add layer`. Once your layer is added, it should appear in the combo box in the panel below. <br><br>
+Before importing an image to your layer, you must **select it to be the current working layer**. To do this, select your layer title in the ComboBox, and then click on `Set Current`. <br><br> 
+You can then **`import` an image from your files**. Note that once you have imported an image of certain proportions, only images of the same proportions can be imported in this model again. <br><br>
+Once you have created your layer, you can also **set it to be visible/invisible**. To do this, select your layer from the ComboBox, and click on `visible` or `invisible`. <br><br>
+At any time after you have imported an image for the first time in the model, you can **export the top most visible layer** with the `export` button. This will export the image with your desired file type and name, the exported image is what you see on the view. <br><br>
+To **transform an image on a layer**, select the layer name with the image with `Set Current`, and use the `blur`, `sharpen`, `greyscale`, and `sepia` buttons. Note that if you are working on a layer that is underneath a visible layer, even by pressing the buttons you may not see the transformations in the view. To see the transformations on the view, make sure the current working layer is also the top most visible layer. <br><br>
 To **remove a layer** at any time, type the layer name you would like to remove in the text box and click `Remove layer`. 
 ### Importing a script / Opening an old project.
-You also have the option to **import a script** for `Instagram OOD` applications. To do this, click on `Script` on the bottom most panel, and select the file containing your script. Only .txt files may be imported. \
+You also have the option to **import a script** for `Instagram OOD` applications. To do this, click on `Script` on the bottom most panel, and select the file containing your script. Only .txt files may be imported. <br><br>
 To **open an old project** that you created with this GUI application, select the `main.txt` script file from the project directory from when you saved the project last, and import that into the application, your project should reopen where you left it off.
 ### Saving your project
 Click on `save` at any time to **save your `Instagram OOD` as a project**. Choose a directory and a directory name for your saved project. This project will include `.png` files of all visible layers in the project, as well as a `main.txt` script file that can be used to re-open your project later on. 
