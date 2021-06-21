@@ -71,6 +71,8 @@ model as a 'multi-layered image'. Essentially, the model will create a new direc
 and save each layer of the model in there (if it has an image) as a png image file. It will also build
 a main.txt text file that can be used to re-open the Instagram project. 
 
+### ROInstagramModel
+This interface includes the ability to get the string name of the current layer, the list of all the layers in the model, and a `BufferedImage` object that represents the top most visible layer of the model. In our implementation, since this `ROInstagramModel` includes observer methods for Multi-layer implementations of the InstagramModel, only the `InstagramLayerModel` interface extends this interface. 
 
 ## InstaImage
 InstaImage is an object type that holds the important information of an image. It holds the grid of `Pixel`s to represent the image, as well as a height and width
@@ -118,10 +120,14 @@ Instructions on how to run our program through the view and controller is listed
 in the USEME.md. Please refer to that file. 
 
 ## Design / Model Changes
+###### From assignment 5 to 6:
 We moved exporting and reading external images and files from the model to the controller.
 We figured this was necessary to keep all I/O operations completely separate from the model.
+###### From assignment 6 to 7:
+We added an additional interface layer called `ROInstagramModel` which has within it public observer methods that may be necessary for a view class to accurately represent the model. We pass the an `ROInstagramModel` object to the view in its constructor, which allows it to show the current state of the model as an ImageIcon as well as accurately represent what layers are in the model through a ComboBox.
 
 ## Assumptions
+### Assignment 6 - the Textual View / Controller 
 We assume that people will initially interact with the model before sending in a script. Therefore,
 even when sending in a script of commands, the user must tell the controller that it will be doing that.
 We also assume that the user understands that the file paths sent to the controller must be sent with 
@@ -136,6 +142,8 @@ If the above is not followed:
 find the project directory, since the main.txt that will do the reopening of the project is built
 based on the old directory path.  
 
+### Assignment 7 - the GUI View / Controller
+Assuming that they also saved the project through the GUI version of this application, all sorts of scripts can be imported and the scripts can be moved. However, the pictures that will be reloaded into the application as a part of the project can not be moved between the last save and re-open. 
 
 ## Limitations
 Although not included in the requirements, it was hinted at in the beginning of the assignment. This
