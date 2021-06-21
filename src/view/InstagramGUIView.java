@@ -2,7 +2,11 @@ package view;
 
 import controller.Features;
 
+/**
+ * Interface to hold GUI functionality which connects to {@code ROInstagramImpl}.
+ */
 public interface InstagramGUIView extends InstagramView {
+
   /**
    * Update the image displayed on this view.
    */

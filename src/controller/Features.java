@@ -1,5 +1,8 @@
 package controller;
 
+/**
+ * Interface to represent features and receive user input from the Interactive mode.
+ */
 public interface Features {
 
   /**

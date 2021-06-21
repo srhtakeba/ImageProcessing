@@ -14,12 +14,18 @@ import model.InstagramLayerModelImpl;
 import view.InstagramGUIView;
 import view.InstagramJFrameView;
 
+/**
+ * Class to represent controller which receives data from the interactive mode.
+ */
 public class GUIController implements Features, IController {
 
   private final InstagramLayerModel model;
   private final InstagramGUIView view;
   private InstagramLayerCommand cmd;
 
+  /**
+   * Constructs {@code GUIController} object.
+   */
   public GUIController() {
     model = new InstagramLayerModelImpl();
     view = new InstagramJFrameView(model);

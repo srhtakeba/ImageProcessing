@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,7 +28,11 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import model.ROInstagramModel;
 
+/**
+ * Class to represent Graphic User Interface for our Image Processing application.
+ */
 public class InstagramJFrameView extends JFrame implements InstagramGUIView {
+
   private JPanel mainPanel;
   private JPanel imagePanel;
 
@@ -48,10 +53,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   private JComboBox layerSelection;
   private String[] allLayers;
 
-  private JLabel newLayerName;
   private JTextField newLayerNameInput;
-
-//  private JFileChooser textFile;
 
   private static int gridSize = 4;
 
@@ -60,8 +62,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   public InstagramJFrameView(ROInstagramModel instaModelRo) {
     super("Instagram OOD");
 
-    //setSize(700, 700);
-    setPreferredSize(new Dimension(700,500));
+    setPreferredSize(new Dimension(700, 500));
     setLocation(250, 250);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -73,22 +74,19 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightTopPanel = new JPanel();
     rightTopPanel.setBorder(BorderFactory.createLineBorder(Color.black));
     rightTopPanel.setLayout(new GridLayout());
-    //rightTopPanel.setLayout(new GridBagLayout());
 
     rightMidPanel = new JPanel();
     rightMidPanel.setBorder(BorderFactory.createLineBorder(Color.black));
     rightMidPanel.setLayout(new GridLayout());
 
     rightBottomPanel = new JPanel();
+    rightBottomPanel.setLayout(new GridBagLayout());
     rightBottomPanel.setLayout(new BoxLayout(rightBottomPanel, BoxLayout.PAGE_AXIS));
-    //rightBottomPanel.setLayout(new GridLayout());
     rightBottomPanel.setBorder(BorderFactory.createLineBorder(Color.black));
     rightBottomPanelTop = new JPanel();
     rightBottomPanelTop.setLayout(new GridLayout());
     rightBottomPanelBottom = new JPanel();
     rightBottomPanelBottom.setLayout(new GridLayout());
-    // This is the xy in the window
-    // rightPanel.setPreferredSize(new Dimension(150, 100));
 
     imagePanel = new JPanel();
     imagePanel.setLayout(new GridBagLayout());
@@ -122,7 +120,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightTopPanel.add(newLayerNameInput);
     rightTopPanel.add(newLayerButton);
     rightTopPanel.add(removeLayerButton);
-    rightTopPanel.setPreferredSize(new Dimension(400,100));
+    rightTopPanel.setPreferredSize(new Dimension(400, 100));
 
     // right middle panel set up
     List<String> allLayersTemp = instaModelRo.getLayerNames();
@@ -132,7 +130,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightMidPanel.add(visibleButton);
     rightMidPanel.add(invisibleButton);
     rightMidPanel.add(setCurrentButton);
-    rightMidPanel.setPreferredSize(new Dimension(400,130));
+    rightMidPanel.setPreferredSize(new Dimension(400, 130));
 
     // right bottom panel set up
     rightBottomPanelTop.add(saveButton);
@@ -143,8 +141,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightBottomPanelBottom.add(sharpenButton);
     rightBottomPanelBottom.add(greyscaleButton);
     rightBottomPanelBottom.add(sepiaButton);
-    rightBottomPanel.setPreferredSize(new Dimension(400,270));
-
+    rightBottomPanel.setPreferredSize(new Dimension(400, 270));
 
     rightPanel.add(rightTopPanel);
     rightPanel.add(rightMidPanel);
@@ -178,6 +175,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
   /**
    * Add interactive features to this view's elements
+   *
    * @param feature an {@code Features} object that holds the commands for action listeners.
    */
   @Override
@@ -191,24 +189,30 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     greyscaleButton.addActionListener(evt -> feature.greyscale());
     sepiaButton.addActionListener(evt -> feature.sepia());
 
-    visibleButton.addActionListener(evt -> feature.makeVisible((String)layerSelection.getSelectedItem()));
-    invisibleButton.addActionListener(evt -> feature.makeInvisible((String)layerSelection.getSelectedItem()));
+    visibleButton
+        .addActionListener(evt -> feature.makeVisible((String) layerSelection.getSelectedItem()));
+    invisibleButton
+        .addActionListener(evt -> feature.makeInvisible((String) layerSelection.getSelectedItem()));
 
     newLayerButton.addActionListener(evt -> addLayer(feature));
     removeLayerButton.addActionListener(evt -> removeLayer(feature));
 
-    setCurrentButton.addActionListener(evt -> feature.setCurrent(((String)layerSelection.getSelectedItem())));
+    setCurrentButton
+        .addActionListener(evt -> feature.setCurrent(((String) layerSelection.getSelectedItem())));
     layerSelection.addActionListener(evt -> feature.setCurrent(
         (String) layerSelection.getSelectedItem()));
   }
 
   /**
    * Add a layer to the current model, adjusting the combo box appropriately.
+   *
    * @param feature the {@code Features} object to dispatch the addition in the model.
    */
   private void addLayer(Features feature) {
     boolean success = feature.addLayer(newLayerNameInput.getText());
-    if(success) {
+    if (success
+        && ((DefaultComboBoxModel) layerSelection.getModel()).getIndexOf
+        (newLayerNameInput.getText()) == -1) {
       layerSelection.addItem(newLayerNameInput.getText());
     }
     newLayerNameInput.setText("");
@@ -216,11 +220,12 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
   /**
    * Remove a layer to the current model, adjusting the combo box appropriately.
+   *
    * @param feature the {@code Features} object to dispatch the removal in the model.
    */
   private void removeLayer(Features feature) {
     boolean success = feature.removeLayer(newLayerNameInput.getText());
-    if(success) {
+    if (success) {
       layerSelection.removeItem(newLayerNameInput.getText());
     }
     newLayerNameInput.setText("");
@@ -228,6 +233,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
   /**
    * Send a message to the user.
+   *
    * @param message the message to be transmitted
    * @throws IOException if showing the message fails
    */
@@ -237,8 +243,8 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   }
 
   /**
-   * Asks the user to write a new file and then returns the string representing
-   * the absolute path of the new file
+   * Asks the user to write a new file and then returns the string representing the absolute path of
+   * the new file
    *
    * @return the absolute path of the new file
    */
@@ -254,8 +260,8 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   }
 
   /**
-   * Asks the user to choose a file from a file choose screen, and then returns the absolute
-   * path of that file
+   * Asks the user to choose a file from a file choose screen, and then returns the absolute path of
+   * that file
    *
    * @return the absolute path of the selected file
    */
@@ -292,7 +298,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     }
     feature.importScript(resultPath);
     layerSelection.removeAllItems();
-    for(String s : instaModelRo.getLayerNames()) {
+    for (String s : instaModelRo.getLayerNames()) {
       layerSelection.addItem(s);
     }
   }

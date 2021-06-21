@@ -3,6 +3,9 @@ package model;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+/**
+ * Interface to represent Read Only model.
+ */
 public interface ROInstagramModel {
 
   /**
