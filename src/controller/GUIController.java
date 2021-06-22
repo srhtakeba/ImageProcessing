@@ -106,6 +106,18 @@ public class GUIController implements Features, IController {
   }
 
   @Override
+  public void mosaic(String seed) {
+    try {
+      int seedConvert = Integer.valueOf(seed);
+    }
+    catch (Exception e) {
+      sendMessage("invalid seed value. Please enter an integer.");
+    }
+    cmd = InstagramLayerCommandFactory.create("mosaic", seed);
+    dispatchOrSendMessage(cmd);
+  }
+
+  @Override
   public void makeVisible(String layerName) {
     cmd = InstagramLayerCommandFactory.create("visible", layerName);
     dispatchOrSendMessage(cmd);

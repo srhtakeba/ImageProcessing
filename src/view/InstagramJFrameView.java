@@ -50,6 +50,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
   private final JButton saveButton, scriptButton, importButton, exportButton, blurButton, sharpenButton, setCurrentButton;
   private final JButton greyscaleButton, sepiaButton, visibleButton, invisibleButton, newLayerButton, removeLayerButton;
+  private final JButton mosaicButton;
 
   private final JComboBox layerSelection;
   private String[] allLayers;
@@ -123,6 +124,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     setCurrentButton = new JButton("Set Current");
     newLayerButton = new JButton("Add Layer");
     removeLayerButton = new JButton("Remove Layer");
+    mosaicButton = new JButton("Mosaic");
 
     // right top panel set up
     layerLabel = new JLabel("Please input layer name:");
@@ -151,6 +153,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     rightBottomPanelBottom.add(sharpenButton);
     rightBottomPanelBottom.add(greyscaleButton);
     rightBottomPanelBottom.add(sepiaButton);
+    rightBottomPanelBottom.add(mosaicButton);
     rightBottomPanel.setPreferredSize(new Dimension(400, 270));
 
     rightPanel.add(rightTopPanel);
@@ -233,6 +236,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     sharpenButton.addActionListener(evt -> feature.sharpen());
     greyscaleButton.addActionListener(evt -> feature.greyscale());
     sepiaButton.addActionListener(evt -> feature.sepia());
+    mosaicButton.addActionListener(evt -> feature.mosaic(JOptionPane.showInputDialog("Enter the seed value.")));
 
     visibleButton
         .addActionListener(evt -> feature.makeVisible((String) layerSelection.getSelectedItem()));

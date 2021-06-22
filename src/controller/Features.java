@@ -68,6 +68,11 @@ public interface Features {
   void sepia();
 
   /**
+   * Mosaic the image on the current layer by a certain seed
+   */
+  void mosaic(String seed);
+
+  /**
    * Make the given layer visible. If already visible, no change is made.
    *
    * @param layerName the name of the layer

@@ -13,6 +13,8 @@ import model.layer.Layer;
 import model.layer.LayerImpl;
 import model.image.ImageImpl;
 import model.image.InstaImage;
+import model.mosaic.Mosaic;
+import model.mosaic.MosaicImpl;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 
@@ -344,4 +346,19 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     return "" + this.currentLayer;
   }
 
+  /**
+   * Perform a mosaic transformation on this InstagramModel's image.
+   *
+   * @param seed the random seed of the mosaic operation.
+   * @throws IllegalStateException if the model holds no image to be processed.
+   */
+  @Override
+  public void mosaic(int seed) throws IllegalStateException {
+    if (this.image == null) {
+      throw new IllegalStateException("There is no image to be filtered.");
+    }
+    Mosaic m = new MosaicImpl();
+    this.image = m.apply(this.image, seed);
+    this.layerMap.get(currentLayer).setImage(this.image);
+  }
 }

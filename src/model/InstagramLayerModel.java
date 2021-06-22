@@ -102,4 +102,12 @@ public interface InstagramLayerModel extends InstagramModel, ROInstagramModel {
   @Override
   String toString();
 
+  /**
+   * Perform a mosaic transformation on this InstagramModel's image.
+   *
+   * @param seed the random seed of the mosaic operation.
+   * @throws IllegalStateException if the model holds no image to be processed.
+   */
+  void mosaic(int seed) throws IllegalStateException;
+
 }

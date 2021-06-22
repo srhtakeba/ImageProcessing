@@ -36,6 +36,8 @@ public class InstagramLayerCommandFactory {
         return new Visible(next);
       case "invisible":
         return new Invisible(next);
+      case "mosaic":
+        return new Mosaic(next);
       default:
         return null;
     }

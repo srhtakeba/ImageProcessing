@@ -5,14 +5,10 @@ import controller.command.InstagramLayerCommandFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import model.InstagramLayerModel;
-import model.InstagramLayerModelImpl;
-import view.InstagramGUIView;
-import view.InstagramJFrameView;
 
 public class MockGUIController implements Features, IController {
 
@@ -98,6 +94,18 @@ public class MockGUIController implements Features, IController {
   @Override
   public void sepia() {
     cmd = InstagramLayerCommandFactory.create("transform", "sepia");
+    dispatchOrSendMessage(cmd);
+  }
+
+  @Override
+  public void mosaic(String seed) {
+    try {
+      int seedConvert = Integer.valueOf(seed);
+    }
+    catch (Exception e) {
+      sendMessage("invalid seed value. Please enter an integer.");
+    }
+    cmd = InstagramLayerCommandFactory.create("mosaic", seed);
     dispatchOrSendMessage(cmd);
   }
 
