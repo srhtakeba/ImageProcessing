@@ -32,6 +32,9 @@ public class Read implements InstagramLayerCommand {
   @Override
   public void dispatchCommand(InstagramLayerModel model) throws IllegalStateException {
     String[] fileParts = this.str.split("\\.");
+    if (fileParts.length <= 1) {
+      throw new IllegalStateException("Reading from the file failed.");
+    }
     if (fileParts[1].equals("ppm")) {
       model.readPPM(this.str);
       return;

@@ -52,7 +52,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
     NavigableSet keySet = layerMap.navigableKeySet();
     List<String> strList = new ArrayList<String>(keySet);
     if (strList.contains(layerName)) {
-      throw new IllegalArgumentException("The layer with the provided name already exist.");
+      throw new IllegalArgumentException("The layer with the provided name already exists.");
     }
 
     layerMap.put(layerName, new LayerImpl());
