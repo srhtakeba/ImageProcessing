@@ -1,11 +1,9 @@
 package view;
 
 import controller.Features;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
@@ -36,37 +34,37 @@ import model.ROInstagramModel;
  */
 public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
-  private JPanel mainPanel;
-  private JPanel imagePanel;
+  private final JPanel mainPanel;
+  private final JPanel imagePanel;
 
-  private JPanel rightPanel;
-  private JPanel rightTopPanel;
-  private JPanel rightMidPanel;
-  private JPanel rightBottomPanel;
-  private JPanel rightBottomPanelTop;
-  private JPanel rightBottomPanelBottom;
+  private final JPanel rightPanel;
+  private final JPanel rightTopPanel;
+  private final JPanel rightMidPanel;
+  private final JPanel rightBottomPanel;
+  private final JPanel rightBottomPanelTop;
+  private final JPanel rightBottomPanelBottom;
 
-  private JLabel display, layerLabel;
+  private final JLabel display, layerLabel;
   private ImageIcon image;
-  private JScrollPane imageScroll;
+  private final JScrollPane imageScroll;
 
-  private JButton saveButton, scriptButton, importButton, exportButton, blurButton, sharpenButton, setCurrentButton;
-  private JButton greyscaleButton, sepiaButton, visibleButton, invisibleButton, newLayerButton, removeLayerButton;
+  private final JButton saveButton, scriptButton, importButton, exportButton, blurButton, sharpenButton, setCurrentButton;
+  private final JButton greyscaleButton, sepiaButton, visibleButton, invisibleButton, newLayerButton, removeLayerButton;
 
-  private JComboBox layerSelection;
+  private final JComboBox layerSelection;
   private String[] allLayers;
 
   // menu item
-  private JMenuBar menuBar;
-  private JMenu menu;
-  private JMenuItem saveMenu, scriptMenu, importMenu, exportMenu, blurMenu, sharpenMenu, currentMenu;
-  private JMenuItem greyscaleMenu, sepiaMenu, visibleMenu, invisibleMenu, newLayerMenu, removeLayerMenu;
+  private final JMenuBar menuBar;
+  private final JMenu menu;
+  private final JMenuItem saveMenu, scriptMenu, importMenu, exportMenu, blurMenu, sharpenMenu, currentMenu;
+  private final JMenuItem greyscaleMenu, sepiaMenu, visibleMenu, invisibleMenu, newLayerMenu, removeLayerMenu;
 
-  private JTextField newLayerNameInput;
+  private final JTextField newLayerNameInput;
 
   private static int gridSize = 4;
 
-  private ROInstagramModel instaModelRo;
+  private final ROInstagramModel instaModelRo;
 
   public InstagramJFrameView(ROInstagramModel instaModelRo) {
     super("Instagram OOD");
