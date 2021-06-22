@@ -60,6 +60,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   private final JMenu menu;
   private final JMenuItem saveMenu, scriptMenu, importMenu, exportMenu, blurMenu, sharpenMenu, currentMenu;
   private final JMenuItem greyscaleMenu, sepiaMenu, visibleMenu, invisibleMenu, newLayerMenu, removeLayerMenu;
+  private final JMenuItem mosaicMenu;
 
   private final JTextField newLayerNameInput;
 
@@ -198,6 +199,8 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     menu.add(newLayerMenu);
     removeLayerMenu = new JMenuItem("Remove Current Layer");
     menu.add(removeLayerMenu);
+    mosaicMenu = new JMenuItem("Mosaic");
+    menu.add(mosaicMenu);
 
     this.setJMenuBar(menuBar);
 
@@ -260,6 +263,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     sharpenMenu.addActionListener(evt -> feature.sharpen());
     greyscaleMenu.addActionListener(evt -> feature.greyscale());
     sepiaMenu.addActionListener(evt -> feature.sepia());
+    mosaicMenu.addActionListener(evt -> feature.mosaic(JOptionPane.showInputDialog("Enter the seed value.")));
 
     visibleMenu
         .addActionListener(evt -> feature.makeVisible(instaModelRo.currentLayer()));
