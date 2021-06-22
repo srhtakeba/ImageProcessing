@@ -21,6 +21,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -53,6 +56,12 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   private JComboBox layerSelection;
   private String[] allLayers;
 
+  // menu item
+  private JMenuBar menuBar;
+  private JMenu menu;
+  private JMenuItem saveMenu, scriptMenu, importMenu, exportMenu, blurMenu, sharpenMenu, currentMenu;
+  private JMenuItem greyscaleMenu, sepiaMenu, visibleMenu, invisibleMenu, newLayerMenu, removeLayerMenu;
+
   private JTextField newLayerNameInput;
 
   private static int gridSize = 4;
@@ -66,6 +75,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     setLocation(250, 250);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+    // building panels and their layouts
     mainPanel = new JPanel();
 
     rightPanel = new JPanel();
@@ -91,6 +101,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     imagePanel = new JPanel();
     imagePanel.setLayout(new GridBagLayout());
 
+    // making image screen
     image = new ImageIcon();
     display = new JLabel(image);
     imageScroll = new JScrollPane(display);
@@ -100,6 +111,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     imageScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     imagePanel.add(imageScroll);
 
+    // making buttons
     saveButton = new JButton("Save");
     scriptButton = new JButton("Script");
     importButton = new JButton("Import");
@@ -110,9 +122,9 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     sepiaButton = new JButton("Sepia");
     visibleButton = new JButton("Visible");
     invisibleButton = new JButton("Invisible");
-    setCurrentButton = new JButton("Set Current.");
+    setCurrentButton = new JButton("Set Current");
     newLayerButton = new JButton("Add Layer");
-    removeLayerButton = new JButton("Remove layer");
+    removeLayerButton = new JButton("Remove Layer");
 
     // right top panel set up
     layerLabel = new JLabel("Please input layer name:");
@@ -153,6 +165,40 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     mainPanel.add(imagePanel, Component.LEFT_ALIGNMENT);
     mainPanel.add(rightPanel, Component.RIGHT_ALIGNMENT);
     this.add(mainPanel);
+
+    // making the menu
+    menuBar = new JMenuBar();
+    menu = new JMenu("Tools");
+    menuBar.add(menu);
+
+    saveMenu = new JMenuItem("Save");
+    menu.add(saveMenu);
+    scriptMenu = new JMenuItem("Script");
+    menu.add(scriptMenu);
+    importMenu = new JMenuItem("Import");
+    menu.add(importMenu);
+    exportMenu = new JMenuItem("Export");
+    menu.add(exportMenu);
+    blurMenu = new JMenuItem("Blur");
+    menu.add(blurMenu);
+    sharpenMenu = new JMenuItem("Sharpen");
+    menu.add(sharpenMenu);
+    greyscaleMenu = new JMenuItem("Greyscale");
+    menu.add(greyscaleMenu);
+    sepiaMenu = new JMenuItem("Sepia");
+    menu.add(sepiaMenu);
+    visibleMenu = new JMenuItem("Visible Current Layer");
+    menu.add(visibleMenu);
+    invisibleMenu = new JMenuItem("Invisible current Layer");
+    menu.add(invisibleMenu);
+    currentMenu = new JMenuItem("Set Current");
+    menu.add(currentMenu);
+    newLayerMenu = new JMenuItem("Add Layer");
+    menu.add(newLayerMenu);
+    removeLayerMenu = new JMenuItem("Remove Current Layer");
+    menu.add(removeLayerMenu);
+
+    this.setJMenuBar(menuBar);
 
     // pack and make visible
     pack();
@@ -201,6 +247,26 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
         .addActionListener(evt -> feature.setCurrent(((String) layerSelection.getSelectedItem())));
     layerSelection.addActionListener(evt -> feature.setCurrent(
         (String) layerSelection.getSelectedItem()));
+
+    saveMenu.addActionListener(evt -> feature.saveProject(saveWindow()));
+    scriptMenu.addActionListener(evt -> importScript(feature));
+    importMenu.addActionListener(evt -> feature.importImage(importWindow()));
+    exportMenu.addActionListener(evt -> feature.exportImage(saveWindow()));
+    blurMenu.addActionListener(evt -> feature.blur());
+    sharpenMenu.addActionListener(evt -> feature.sharpen());
+    greyscaleMenu.addActionListener(evt -> feature.greyscale());
+    sepiaMenu.addActionListener(evt -> feature.sepia());
+
+    visibleMenu
+        .addActionListener(evt -> feature.makeVisible(instaModelRo.currentLayer()));
+    invisibleMenu
+        .addActionListener(evt -> feature.makeInvisible(instaModelRo.currentLayer()));
+
+    newLayerMenu.addActionListener(evt -> addLayer(feature));
+    removeLayerMenu.addActionListener(evt -> removeLayer(feature));
+
+    currentMenu
+        .addActionListener(evt -> feature.setCurrent((instaModelRo.currentLayer())));
   }
 
   /**
