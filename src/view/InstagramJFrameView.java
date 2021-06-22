@@ -226,6 +226,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
    */
   @Override
   public void addFeatures(Features feature) {
+    // button action listeners
     saveButton.addActionListener(evt -> feature.saveProject(saveWindow()));
     scriptButton.addActionListener(evt -> importScript(feature));
     importButton.addActionListener(evt -> feature.importImage(importWindow()));
@@ -248,6 +249,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     layerSelection.addActionListener(evt -> feature.setCurrent(
         (String) layerSelection.getSelectedItem()));
 
+    // menu item action listeners
     saveMenu.addActionListener(evt -> feature.saveProject(saveWindow()));
     scriptMenu.addActionListener(evt -> importScript(feature));
     importMenu.addActionListener(evt -> feature.importImage(importWindow()));
@@ -266,7 +268,19 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     removeLayerMenu.addActionListener(evt -> removeLayer(feature));
 
     currentMenu
-        .addActionListener(evt -> feature.setCurrent((instaModelRo.currentLayer())));
+        .addActionListener(evt -> setCurrentFromInput(feature));
+  }
+
+  /**
+   * Sets the current layer by showing a pop-up prompting for a layer name. Also adjusts the selection
+   * box appropriately.
+   *
+   * @param feature the {@code Features} object to dispatch the addition in the model.
+   */
+  private void setCurrentFromInput(Features feature) {
+    String layer = JOptionPane.showInputDialog("Enter the layer name.");
+    feature.setCurrent(layer);
+    layerSelection.setSelectedItem(layer);
   }
 
   /**
