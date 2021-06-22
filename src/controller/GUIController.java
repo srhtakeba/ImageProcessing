@@ -77,7 +77,7 @@ public class GUIController implements Features, IController {
 
   @Override
   public void exportImage(String filepath) {
-    cmd = InstagramLayerCommandFactory.create("save", filepath);
+    cmd = InstagramLayerCommandFactory.create("export", filepath);
     dispatchOrSendMessage(cmd);
   }
 
