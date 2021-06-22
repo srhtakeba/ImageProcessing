@@ -117,6 +117,9 @@ public class MosaicImpl implements Mosaic {
       if (this == o) {
         return true;
       }
+      if (this == null) {
+        return o == null;
+      }
       if (!(o instanceof PosnXY) || o == null) {
         return false;
       }
