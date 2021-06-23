@@ -215,4 +215,5 @@ public class MosaicImpl implements Mosaic {
       return Objects.hash(this.x, this.y);
     }
   }
+
 }

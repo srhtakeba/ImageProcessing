@@ -16,7 +16,6 @@ import org.junit.Test;
  */
 public class TransformOperationTest {
 
-  //
   private TransformOperation greyscale;
   private TransformOperation sepia;
   private Pixel[][] grid;

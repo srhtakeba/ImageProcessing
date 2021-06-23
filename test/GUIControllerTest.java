@@ -1,14 +1,14 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import controller.Features;
-import controller.GUIController;
 import model.InstagramLayerModel;
 import model.InstagramLayerModelImpl;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Class to test {@code GUIController} by using MockGUIController.
+ */
 public class GUIControllerTest {
 
   private MockGUIController controller;

@@ -10,6 +10,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import model.InstagramLayerModel;
 
+/**
+ * Class to represent {@code MockGUIController}, which is a mock of
+ * {@code GUIController} for test purposes.
+ */
 public class MockGUIController implements Features, IController {
 
   private final InstagramLayerModel model;

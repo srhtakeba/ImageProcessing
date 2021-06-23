@@ -9,7 +9,6 @@ import model.pixel.PixelImpl;
 import org.junit.Before;
 import org.junit.Test;
 
-
 /**
  * Test class for Pixel: unit tests to ensure that Pixel which consist of Red, Blue, and Green's
  * value correctly represents the expected values.
