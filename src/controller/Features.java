@@ -34,7 +34,7 @@ public interface Features {
   void importScript(String filepath);
 
   /**
-   * Import an image into the current working layer of this model
+   * Import an image into the current working layer of this model.
    *
    * @param filepath the path of the image to be imported.
    */
@@ -68,7 +68,7 @@ public interface Features {
   void sepia();
 
   /**
-   * Mosaic the image on the current layer by a certain seed
+   * Mosaic the image on the current layer by a certain seed.
    */
   void mosaic(String seed);
 

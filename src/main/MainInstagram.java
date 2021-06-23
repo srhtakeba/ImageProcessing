@@ -20,7 +20,7 @@ public class MainInstagram {
    */
   public static void main(String[] args) {
     if (args[0].equals("-interactive")) {
-      IController GUIController = new GUIController();
+      IController guiController = new GUIController();
     } else if (args[0].equals("-text")) {
       Readable in = new InputStreamReader(System.in);
       Appendable out = System.out;

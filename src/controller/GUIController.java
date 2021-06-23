@@ -204,7 +204,7 @@ public class GUIController implements Features, IController {
   }
 
   /**
-   * Send a message to the view
+   * Send a message to the view.
    *
    * @param message the message to be sent
    */

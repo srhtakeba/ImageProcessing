@@ -30,27 +30,53 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import model.ROInstagramModel;
 
 /**
- * Class to represent Graphic User Interface for our Image Processing application.
+ * Class to represent Graphic User Interface for our Image Processing application using JFrame.
  */
 public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
   private final JLabel display;
   private ImageIcon image;
 
-  private final JButton saveButton, scriptButton, importButton, exportButton, blurButton;
-  private final JButton greyscaleButton, sepiaButton, visibleButton, invisibleButton, newLayerButton;
-  private final JButton mosaicButton, sharpenButton, setCurrentButton, removeLayerButton;
+  private final JButton saveButton;
+  private final JButton scriptButton;
+  private final JButton importButton;
+  private final JButton exportButton;
+  private final JButton blurButton;
+  private final JButton greyscaleButton;
+  private final JButton sepiaButton;
+  private final JButton visibleButton;
+  private final JButton invisibleButton;
+  private final JButton newLayerButton;
+  private final JButton mosaicButton;
+  private final JButton sharpenButton;
+  private final JButton setCurrentButton;
+  private final JButton removeLayerButton;
 
   private final JComboBox layerSelection;
 
-  private final JMenuItem saveMenu, scriptMenu, importMenu, exportMenu, blurMenu, sharpenMenu;
-  private final JMenuItem greyscaleMenu, sepiaMenu, visibleMenu, invisibleMenu, newLayerMenu;
-  private final JMenuItem mosaicMenu, currentMenu, removeLayerMenu;
+  private final JMenuItem saveMenu;
+  private final JMenuItem scriptMenu;
+  private final JMenuItem importMenu;
+  private final JMenuItem exportMenu;
+  private final JMenuItem blurMenu;
+  private final JMenuItem sharpenMenu;
+  private final JMenuItem greyscaleMenu;
+  private final JMenuItem sepiaMenu;
+  private final JMenuItem visibleMenu;
+  private final JMenuItem invisibleMenu;
+  private final JMenuItem newLayerMenu;
+  private final JMenuItem mosaicMenu;
+  private final JMenuItem currentMenu;
+  private final JMenuItem removeLayerMenu;
 
   private final JTextField newLayerNameInput;
 
   private final ROInstagramModel instaModelRo;
 
+  /**
+   * Constructs a new {@code InstagramJFramView} GUI-style object.
+   * @param instaModelRo the model to be represented with this view.
+   */
   public InstagramJFrameView(ROInstagramModel instaModelRo) {
     super("Instagram OOD");
 
@@ -207,7 +233,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
 
   /**
-   * Add interactive features to this view's elements
+   * Add interactive features to this view's elements.
    *
    * @param feature an {@code Features} object that holds the commands for action listeners.
    */
@@ -282,8 +308,8 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   private void addLayer(Features feature) {
     boolean success = feature.addLayer(newLayerNameInput.getText());
     if (success
-        && ((DefaultComboBoxModel) layerSelection.getModel()).getIndexOf
-        (newLayerNameInput.getText()) == -1) {
+        && ((DefaultComboBoxModel) layerSelection.getModel()).getIndexOf(
+        newLayerNameInput.getText()) == -1) {
       layerSelection.addItem(newLayerNameInput.getText());
     }
     newLayerNameInput.setText("");
@@ -311,8 +337,8 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     String layer = JOptionPane.showInputDialog("Enter the layer name.");
     boolean success = feature.addLayer(layer);
     if (success
-        && ((DefaultComboBoxModel) layerSelection.getModel()).getIndexOf
-        (layer) == -1) {
+        && ((DefaultComboBoxModel) layerSelection.getModel()).getIndexOf(
+        layer) == -1) {
       layerSelection.addItem(layer);
     }
   }
@@ -343,7 +369,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
   /**
    * Asks the user to write a new file and then returns the string representing the absolute path of
-   * the new file
+   * the new file.
    *
    * @return the absolute path of the new file
    */
@@ -360,7 +386,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
   /**
    * Asks the user to choose a file from a file choose screen, and then returns the absolute path of
-   * that file
+   * that file.
    *
    * @return the absolute path of the selected file
    */
@@ -380,7 +406,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
   /**
    * Asks the user to choose a txt file from a file choose screen, and then returns the absolute
-   * path of that file
+   * path of that file.
    *
    */
   private void importScript(Features feature) {
