@@ -40,10 +40,10 @@ public class MosaicImpl implements Mosaic {
    */
   @Override
   public InstaImage apply(InstaImage image, int seed) {
-    if(image == null) {
+    if (image == null) {
       throw new IllegalArgumentException("Given image is null.");
     }
-    if(seed < 0) {
+    if (seed < 0) {
       throw new IllegalArgumentException("Can not operate with negative seed value.");
     }
     if (seed > image.getHeight() * image.getWidth()) {

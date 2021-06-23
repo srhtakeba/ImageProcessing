@@ -31,7 +31,8 @@ public class Controller implements IController {
 
   /**
    * Creates a {@code Controller} object.
-   * @param in the input stream for this controller
+   *
+   * @param in  the input stream for this controller
    * @param out the output stream that the view will render to.
    */
   public Controller(Readable in, Appendable out) {

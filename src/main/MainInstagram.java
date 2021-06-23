@@ -5,7 +5,6 @@ import controller.GUIController;
 import controller.IController;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-import view.InstagramJFrameView;
 
 /**
  * Class to represent the OOD Instagram application. It will run the application with {@code
@@ -26,16 +25,14 @@ public class MainInstagram {
 //    controller.dispatchController();
     //IController controller = new
     //InstagramJFrameView view = new InstagramJFrameView();
-    if(args[0].equals("-interactive")) {
+    if (args[0].equals("-interactive")) {
       IController GUIController = new GUIController();
-    }
-    else if(args[0].equals("-text")) {
+    } else if (args[0].equals("-text")) {
       Readable in = new InputStreamReader(System.in);
       Appendable out = System.out;
       IController controller = new Controller(in, out);
       controller.dispatchController();
-    }
-    else if(args[0].equals("-script")) {
+    } else if (args[0].equals("-script")) {
       StringBuilder sb = new StringBuilder();
       sb.append("N\n2\n");
       String filePath = args[1].substring(1);
@@ -44,8 +41,7 @@ public class MainInstagram {
       Appendable out = System.out;
       IController controller = new Controller(in, out);
       controller.dispatchController();
-    }
-    else {
+    } else {
       throw new IllegalArgumentException("Please type -interactive, -text, or -script.");
     }
   }

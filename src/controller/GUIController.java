@@ -37,8 +37,7 @@ public class GUIController implements Features, IController {
     cmd = InstagramLayerCommandFactory.create("current", layerName);
     try {
       cmd.dispatchCommand(model);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       sendMessage(e.getMessage());
     }
   }
@@ -108,8 +107,7 @@ public class GUIController implements Features, IController {
   public void mosaic(String seed) {
     try {
       int seedConvert = Integer.valueOf(seed);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       sendMessage("Invalid seed value. Please enter an integer.");
       return;
     }
@@ -134,8 +132,7 @@ public class GUIController implements Features, IController {
     cmd = InstagramLayerCommandFactory.create("new", layerName);
     try {
       cmd.dispatchCommand(model);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       sendMessage(e.getMessage());
     }
 
@@ -147,8 +144,7 @@ public class GUIController implements Features, IController {
     cmd = InstagramLayerCommandFactory.create("remove", layerName);
     try {
       cmd.dispatchCommand(model);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       sendMessage(e.getMessage());
     }
     return !model.getLayerNames().contains(layerName);
@@ -161,6 +157,7 @@ public class GUIController implements Features, IController {
 
   /**
    * Read a previous project and open it in the current model.
+   *
    * @param dirPath the path to the previous project.
    */
   private void loadPreviousProject(String dirPath) {
@@ -208,28 +205,28 @@ public class GUIController implements Features, IController {
 
   /**
    * Send a message to the view
+   *
    * @param message the message to be sent
    */
   private void sendMessage(String message) {
     try {
       view.renderMessage(message);
-    }
-    catch (IOException ioe) {
+    } catch (IOException ioe) {
       throw new IllegalStateException("Failed to send to the view.");
     }
   }
 
   /**
-   * Dispatch the given command, catching any errors along the way and
-   * sending them to the view. Update the view once the command has been dispatched.
+   * Dispatch the given command, catching any errors along the way and sending them to the view.
+   * Update the view once the command has been dispatched.
+   *
    * @param cmd the command to be dispatched.
    */
   private void dispatchOrSendMessage(InstagramLayerCommand cmd) {
     try {
       cmd.dispatchCommand(model);
       view.display();
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       sendMessage(e.getMessage());
     }
   }

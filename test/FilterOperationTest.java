@@ -1,5 +1,3 @@
-
-
 import static org.junit.Assert.assertArrayEquals;
 
 import model.filter.BlurOperation;

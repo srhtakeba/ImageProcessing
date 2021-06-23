@@ -11,8 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Class to test {@code LayerImpl} functionality,
- * testing if a layer state becomes visible and invisible.
+ * Class to test {@code LayerImpl} functionality, testing if a layer state becomes visible and
+ * invisible.
  */
 public class LayerImplTest {
 

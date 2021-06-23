@@ -1,9 +1,9 @@
 import static org.junit.Assert.assertEquals;
 
-import model.image.ImageImpl;
-import model.image.InstaImage;
 import model.InstagramModel;
 import model.InstagramModelImpl;
+import model.image.ImageImpl;
+import model.image.InstaImage;
 import model.pixel.Pixel;
 import model.pixel.PixelImpl;
 import org.junit.Before;

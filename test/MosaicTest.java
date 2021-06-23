@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- *  Class to test {@code MosaicImpl} functionality.
+ * Class to test {@code MosaicImpl} functionality.
  */
 public class MosaicTest {
 

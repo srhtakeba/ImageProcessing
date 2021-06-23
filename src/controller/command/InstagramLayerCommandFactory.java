@@ -1,7 +1,5 @@
 package controller.command;
 
-import java.util.Locale;
-
 /**
  * Factory class to create classes which can send commands.
  */

@@ -9,10 +9,10 @@ import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.TreeMap;
-import model.layer.Layer;
-import model.layer.LayerImpl;
 import model.image.ImageImpl;
 import model.image.InstaImage;
+import model.layer.Layer;
+import model.layer.LayerImpl;
 import model.mosaic.Mosaic;
 import model.mosaic.MosaicImpl;
 import model.pixel.Pixel;
@@ -169,7 +169,7 @@ public class InstagramLayerModelImpl extends InstagramModelImpl implements Insta
   @Override
   public List<String> getLayerNames() {
     List<String> result = new ArrayList<>();
-    for(String key: layerMap.navigableKeySet()) {
+    for (String key : layerMap.navigableKeySet()) {
       result.add(key);
     }
     return result;

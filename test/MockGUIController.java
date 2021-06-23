@@ -11,8 +11,8 @@ import java.util.Scanner;
 import model.InstagramLayerModel;
 
 /**
- * Class to represent {@code MockGUIController}, which is a mock of
- * {@code GUIController} for test purposes.
+ * Class to represent {@code MockGUIController}, which is a mock of {@code GUIController} for test
+ * purposes.
  */
 public class MockGUIController implements Features, IController {
 
@@ -105,8 +105,7 @@ public class MockGUIController implements Features, IController {
   public void mosaic(String seed) {
     try {
       int seedConvert = Integer.valueOf(seed);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       sendMessage("Invalid seed value. Please enter an integer.");
       return;
     }

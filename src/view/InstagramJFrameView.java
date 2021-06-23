@@ -1,11 +1,9 @@
 package view;
 
 import controller.Features;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
@@ -239,7 +237,8 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     sharpenButton.addActionListener(evt -> feature.sharpen());
     greyscaleButton.addActionListener(evt -> feature.greyscale());
     sepiaButton.addActionListener(evt -> feature.sepia());
-    mosaicButton.addActionListener(evt -> feature.mosaic(JOptionPane.showInputDialog("Enter the seed value.")));
+    mosaicButton.addActionListener(
+        evt -> feature.mosaic(JOptionPane.showInputDialog("Enter the seed value.")));
 
     visibleButton
         .addActionListener(evt -> feature.makeVisible((String) layerSelection.getSelectedItem()));
@@ -263,7 +262,8 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     sharpenMenu.addActionListener(evt -> feature.sharpen());
     greyscaleMenu.addActionListener(evt -> feature.greyscale());
     sepiaMenu.addActionListener(evt -> feature.sepia());
-    mosaicMenu.addActionListener(evt -> feature.mosaic(JOptionPane.showInputDialog("Enter the seed value.")));
+    mosaicMenu.addActionListener(
+        evt -> feature.mosaic(JOptionPane.showInputDialog("Enter the seed value.")));
 
     visibleMenu
         .addActionListener(evt -> feature.makeVisible(instaModelRo.currentLayer()));
@@ -278,8 +278,8 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
   }
 
   /**
-   * Sets the current layer by showing a pop-up prompting for a layer name. Also adjusts the selection
-   * box appropriately.
+   * Sets the current layer by showing a pop-up prompting for a layer name. Also adjusts the
+   * selection box appropriately.
    *
    * @param feature the {@code Features} object to dispatch the addition in the model.
    */

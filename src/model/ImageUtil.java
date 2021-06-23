@@ -1,8 +1,8 @@
 package model;
 
-import java.util.Scanner;
-import java.io.FileNotFoundException;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import model.image.ImageImpl;
 import model.image.InstaImage;
 import model.pixel.Pixel;
