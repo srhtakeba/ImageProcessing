@@ -91,7 +91,7 @@ public interface Features {
    *
    * @param layerName the name of the new layer
    * @return whether the addition was successful. If a layer with the name already exists, this
-   * layer can not be added.
+   *         layer can not be added.
    */
   boolean addLayer(String layerName);
 
@@ -100,7 +100,7 @@ public interface Features {
    *
    * @param layerName the name of the layer to be removed.
    * @return whether the removal was successful. If a layer with the given name does not exist, this
-   * layer can not be removed.
+   *         layer can not be removed.
    */
   boolean removeLayer(String layerName);
 }

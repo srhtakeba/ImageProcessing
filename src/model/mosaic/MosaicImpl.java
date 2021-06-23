@@ -167,7 +167,7 @@ public class MosaicImpl implements Mosaic {
     }
 
     /**
-     * Getter method for the x position
+     * Getter method for the x position.
      *
      * @return the x position
      */
@@ -176,7 +176,7 @@ public class MosaicImpl implements Mosaic {
     }
 
     /**
-     * Getter method for the y position
+     * Getter method for the y position.
      *
      * @return the y position
      */
@@ -198,7 +198,7 @@ public class MosaicImpl implements Mosaic {
       if (this == null) {
         return o == null;
       }
-      if (!(o instanceof PosnXY) || o == null) {
+      if (!(o instanceof PosnXY)) {
         return false;
       }
       PosnXY that = (PosnXY) o;

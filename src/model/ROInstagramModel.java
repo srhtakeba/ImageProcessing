@@ -25,7 +25,7 @@ public interface ROInstagramModel {
   String currentLayer();
 
   /**
-   * Returns the names of all layers in the model
+   * Returns the names of all layers in the model.
    *
    * @return a list containing the names of all layers in this model, in order
    */

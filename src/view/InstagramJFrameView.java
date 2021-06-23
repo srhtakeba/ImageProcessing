@@ -34,37 +34,22 @@ import model.ROInstagramModel;
  */
 public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
-  private JPanel mainPanel;
-  private JPanel imagePanel;
-
-  private JPanel rightPanel;
-  private JPanel rightTopPanel;
-  private JPanel rightMidPanel;
-  private JPanel rightBottomPanel;
-  private JPanel rightBottomPanelTop;
-  private JPanel rightBottomPanelBottom;
-
-  private JLabel display, layerLabel;
+  private final JLabel display;
   private ImageIcon image;
-  private JScrollPane imageScroll;
 
-  private JButton saveButton, scriptButton, importButton, exportButton, blurButton, sharpenButton, setCurrentButton;
-  private JButton greyscaleButton, sepiaButton, visibleButton, invisibleButton, newLayerButton, removeLayerButton;
-  private final JButton mosaicButton;
+  private final JButton saveButton, scriptButton, importButton, exportButton, blurButton;
+  private final JButton greyscaleButton, sepiaButton, visibleButton, invisibleButton, newLayerButton;
+  private final JButton mosaicButton, sharpenButton, setCurrentButton, removeLayerButton;
 
-  private JComboBox layerSelection;
-  private String[] allLayers;
+  private final JComboBox layerSelection;
 
-  // menu item
-  private JMenuBar menuBar;
-  private JMenu menu;
-  private JMenuItem saveMenu, scriptMenu, importMenu, exportMenu, blurMenu, sharpenMenu, currentMenu;
-  private JMenuItem greyscaleMenu, sepiaMenu, visibleMenu, invisibleMenu, newLayerMenu, removeLayerMenu;
-  private final JMenuItem mosaicMenu;
+  private final JMenuItem saveMenu, scriptMenu, importMenu, exportMenu, blurMenu, sharpenMenu;
+  private final JMenuItem greyscaleMenu, sepiaMenu, visibleMenu, invisibleMenu, newLayerMenu;
+  private final JMenuItem mosaicMenu, currentMenu, removeLayerMenu;
 
-  private JTextField newLayerNameInput;
+  private final JTextField newLayerNameInput;
 
-  private ROInstagramModel instaModelRo;
+  private final ROInstagramModel instaModelRo;
 
   public InstagramJFrameView(ROInstagramModel instaModelRo) {
     super("Instagram OOD");
@@ -74,35 +59,35 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     // building panels and their layouts
-    mainPanel = new JPanel();
+    JPanel mainPanel = new JPanel();
 
-    rightPanel = new JPanel();
+    JPanel rightPanel = new JPanel();
     rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
 
-    rightTopPanel = new JPanel();
+    JPanel rightTopPanel = new JPanel();
     rightTopPanel.setBorder(BorderFactory.createLineBorder(Color.black));
     rightTopPanel.setLayout(new GridLayout());
 
-    rightMidPanel = new JPanel();
+    JPanel rightMidPanel = new JPanel();
     rightMidPanel.setBorder(BorderFactory.createLineBorder(Color.black));
     rightMidPanel.setLayout(new GridLayout());
 
-    rightBottomPanel = new JPanel();
+    JPanel rightBottomPanel = new JPanel();
     rightBottomPanel.setLayout(new GridBagLayout());
     rightBottomPanel.setLayout(new BoxLayout(rightBottomPanel, BoxLayout.PAGE_AXIS));
     rightBottomPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-    rightBottomPanelTop = new JPanel();
+    JPanel rightBottomPanelTop = new JPanel();
     rightBottomPanelTop.setLayout(new GridLayout());
-    rightBottomPanelBottom = new JPanel();
+    JPanel rightBottomPanelBottom = new JPanel();
     rightBottomPanelBottom.setLayout(new GridLayout());
 
-    imagePanel = new JPanel();
+    JPanel imagePanel = new JPanel();
     imagePanel.setLayout(new GridBagLayout());
 
     // making image screen
     image = new ImageIcon();
     display = new JLabel(image);
-    imageScroll = new JScrollPane(display);
+    JScrollPane imageScroll = new JScrollPane(display);
     imageScroll.setPreferredSize(new Dimension(300, 180));
     imageScroll.createVerticalScrollBar();
     imageScroll.createHorizontalScrollBar();
@@ -126,7 +111,6 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     mosaicButton = new JButton("Mosaic");
 
     // right top panel set up
-    layerLabel = new JLabel("Please input layer name:");
     newLayerNameInput = new JTextField(10);
     rightTopPanel.add(newLayerNameInput);
     rightTopPanel.add(newLayerButton);
@@ -135,7 +119,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
 
     // right middle panel set up
     List<String> allLayersTemp = instaModelRo.getLayerNames();
-    allLayers = allLayersTemp.toArray(new String[0]);
+    String[] allLayers = allLayersTemp.toArray(new String[0]);
     layerSelection = new JComboBox(allLayers);
     rightMidPanel.add(layerSelection);
     rightMidPanel.add(visibleButton);
@@ -167,8 +151,9 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     this.add(mainPanel);
 
     // making the menu
-    menuBar = new JMenuBar();
-    menu = new JMenu("Tools");
+    // menu item
+    JMenuBar menuBar = new JMenuBar();
+    JMenu menu = new JMenu("Tools");
     menuBar.add(menu);
 
     saveMenu = new JMenuItem("Save");
@@ -397,7 +382,6 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
    * Asks the user to choose a txt file from a file choose screen, and then returns the absolute
    * path of that file
    *
-   * @return the absolute path of the selected file
    */
   private void importScript(Features feature) {
     String resultPath = "";

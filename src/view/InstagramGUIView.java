@@ -13,7 +13,7 @@ public interface InstagramGUIView extends InstagramView {
   void display();
 
   /**
-   * Add interactive features to this view's elements
+   * Add interactive features to this view's elements.
    *
    * @param feature an {@code Features} object that holds the commands for action listeners.
    */

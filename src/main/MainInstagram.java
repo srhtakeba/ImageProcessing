@@ -19,12 +19,6 @@ public class MainInstagram {
    * @param args command line input.
    */
   public static void main(String[] args) {
-//    Readable in = new InputStreamReader(System.in);
-//    Appendable out = System.out;
-//    IController controller = new Controller(in, out);
-//    controller.dispatchController();
-    //IController controller = new
-    //InstagramJFrameView view = new InstagramJFrameView();
     if (args[0].equals("-interactive")) {
       IController GUIController = new GUIController();
     } else if (args[0].equals("-text")) {

@@ -150,7 +150,7 @@ public class MockGUIController implements Features, IController {
 
   @Override
   public void dispatchController() {
-
+    // do nothing
   }
 
   /**

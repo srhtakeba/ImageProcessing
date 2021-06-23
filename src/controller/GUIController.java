@@ -152,7 +152,7 @@ public class GUIController implements Features, IController {
 
   @Override
   public void dispatchController() {
-
+    // do nothing
   }
 
   /**
