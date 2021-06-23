@@ -377,6 +377,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     FileNameExtensionFilter filter = new FileNameExtensionFilter(
         "txt files", "txt");
     fchooser.setFileFilter(filter);
+    fchooser.setDialogTitle("Select the .txt file containing the script for the project.");
     int retvalue = fchooser.showOpenDialog(InstagramJFrameView.this);
     if (retvalue == JFileChooser.APPROVE_OPTION) {
       File f = fchooser.getSelectedFile();
