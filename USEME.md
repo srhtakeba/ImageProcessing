@@ -89,7 +89,7 @@ script.txt, which is a file included in this zip folder, shows the following ope
 
 # The GUI View
 ## Example Screen
-![](res/ExampleScreenshot.png)
+![](res/exampleScreenshot.png)
 ## Starting the Application
 ### New Project
 First thing to do is to **add a layer**. Do this by typing a desired layer title in the text box, and selecting `Add layer`. Once your layer is added, it should appear in the combo box in the panel below. <br><br>
