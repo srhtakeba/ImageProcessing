@@ -16,6 +16,7 @@ import model.pixel.PixelImpl;
  * pixels by the nearest seed cluster.
  */
 public class MosaicImpl implements Mosaic {
+
   // map representing the seeds as keys and a list of posns that have the key as the closest seed
   private Map<PosnXY, List<PosnXY>> mosaicMap;
   // the list of posns to represent the randomly chosen seeds
@@ -31,35 +32,38 @@ public class MosaicImpl implements Mosaic {
 
   /**
    * Applies this random seed mosaic operation to the given image.
+   *
    * @param image the {@code InstaImage} image to be mosaic-ed.
-   * @param seed the random seed to be used for the mosaic process.
+   * @param seed  the random seed to be used for the mosaic process.
    * @return the given {@code InstaImage} image, but mosaic-ed.
    */
   @Override
   public InstaImage apply(InstaImage image, int seed) {
-    if(seed > image.getHeight()*image.getWidth()) {
+    if (seed > image.getHeight() * image.getWidth()) {
       return image;
     }
     Pixel[][] gridToBeModified = image.getPixelGrid();
-    getSeeds(gridToBeModified, seed, image.getWidth(), image.getHeight());
+    getSeeds(gridToBeModified, seed, gridToBeModified.length, gridToBeModified[0].length);
     cluster(gridToBeModified);
-    return new ImageImpl(averageOut(gridToBeModified), image.getWidth(), image.getHeight());
+    return new ImageImpl(averageOut(gridToBeModified), image.getWidth(),
+        image.getHeight());
   }
 
   /**
    * Select a random set of X Y positions in the given pixel grid.
+   *
    * @param pixelGrid the pixel grid to choose random seed XY positions from
-   * @param seed the number of random selections to be made
-   * @param width the width of the pixel grid
-   * @param height the height of the pixel grid
+   * @param seed      the number of random selections to be made
+   * @param width     the width of the pixel grid
+   * @param height    the height of the pixel grid
    */
   private void getSeeds(Pixel[][] pixelGrid, int seed, int width, int height) {
     Random r = new Random();
     for (int i = 0; i < seed; i++) {
-      PosnXY seedChoice = new PosnXY(width+1, height+1);
-      while(!seeds.contains(seedChoice)) {
+      PosnXY seedChoice = new PosnXY(width + 1, height + 1);
+      while (!seeds.contains(seedChoice)) {
         seedChoice = new PosnXY(r.nextInt(width), r.nextInt(height));
-        if(!seeds.contains(seedChoice)) {
+        if (!seeds.contains(seedChoice)) {
           seeds.add(seedChoice);
         }
       }
@@ -68,25 +72,27 @@ public class MosaicImpl implements Mosaic {
   }
 
   /**
-   * For each pixel in the given pixel grid, find the closest random seed selected position, and
-   * add that pixels position to this function objects map to keep track of the clusters.
+   * For each pixel in the given pixel grid, find the closest random seed selected position, and add
+   * that pixels position to this function objects map to keep track of the clusters.
+   *
    * @param pixelGrid the pixel grid to be clustered by closest random seed selection
    */
   private void cluster(Pixel[][] pixelGrid) {
-    for(int i=0;i< pixelGrid.length;i++) {
-      for(int j=0;j<pixelGrid[i].length;j++) {
+    for (int i = 0; i < pixelGrid.length; i++) {
+      for (int j = 0; j < pixelGrid[i].length; j++) {
         // for each pixel in the pixelGrid, find it's closest seed pixel
         PosnXY closest = seeds.get(0);
-        double minDistance = Math.sqrt(Math.pow(i-closest.x, 2) + Math.pow(j-closest.y, 2));
-        for(PosnXY seedPosn : seeds) {
-          double tempDistance = Math.sqrt(Math.pow(i-seedPosn.x, 2) + Math.pow(j-seedPosn.y, 2));
-          if(tempDistance < minDistance) {
+        double minDistance = Math.sqrt(Math.pow(i - closest.x, 2) + Math.pow(j - closest.y, 2));
+        for (PosnXY seedPosn : seeds) {
+          double tempDistance = Math
+              .sqrt(Math.pow(i - seedPosn.x, 2) + Math.pow(j - seedPosn.y, 2));
+          if (tempDistance < minDistance) {
             closest = seedPosn;
             minDistance = tempDistance;
           }
         }
         // add the pixel to its corresponding closest seed pixel in the map
-        mosaicMap.get(closest).add(new PosnXY(i,j));
+        mosaicMap.get(closest).add(new PosnXY(i, j));
       }
     }
   }
@@ -94,17 +100,18 @@ public class MosaicImpl implements Mosaic {
   /**
    * Set all the pixel rgb values of the given pixel grid to the average values of the cluster they
    * reside in.
+   *
    * @param pixelGrid the pixel grid to be modified
    * @return the pixel grid, but modified by averaging out rgb values by cluster.
    */
   private Pixel[][] averageOut(Pixel[][] pixelGrid) {
     Pixel[][] result = new Pixel[pixelGrid.length][pixelGrid[0].length];
-    for(PosnXY seedPosn : seeds) {
+    for (PosnXY seedPosn : seeds) {
       List<PosnXY> clusterPosnList = mosaicMap.get(seedPosn);
       int totalR = 0;
       int totalG = 0;
       int totalB = 0;
-      for(PosnXY posnXY : clusterPosnList) {
+      for (PosnXY posnXY : clusterPosnList) {
         int x = posnXY.getX();
         int y = posnXY.getY();
         totalR += pixelGrid[x][y].getR().getValue();
@@ -112,13 +119,13 @@ public class MosaicImpl implements Mosaic {
         totalB += pixelGrid[x][y].getB().getValue();
       }
       int sum = clusterPosnList.size();
-      if(sum == 0) {
+      if (sum == 0) {
         sum = 1;
       }
-      int averageR = (int)(totalR/sum);
-      int averageG = (int)(totalG/sum);
-      int averageB = (int)(totalB/sum);
-      for(PosnXY posnXY : clusterPosnList) {
+      int averageR = (int) (totalR / sum);
+      int averageG = (int) (totalG / sum);
+      int averageB = (int) (totalB / sum);
+      for (PosnXY posnXY : clusterPosnList) {
         result[posnXY.getX()][posnXY.getY()] = new PixelImpl(averageR, averageG, averageB);
       }
     }
@@ -129,11 +136,13 @@ public class MosaicImpl implements Mosaic {
    * Inner class to represent an x and y Cartesian position.
    */
   class PosnXY {
+
     Integer x;
     Integer y;
 
     /**
      * Creates a new {@code PosnXY} object.
+     *
      * @param x int position of x
      * @param y int position y
      */
@@ -141,6 +150,7 @@ public class MosaicImpl implements Mosaic {
       this.x = x;
       this.y = y;
     }
+
     /**
      * Creates a new empty {@code PosnXY} object.
      */
@@ -151,6 +161,7 @@ public class MosaicImpl implements Mosaic {
 
     /**
      * Getter method for the x position
+     *
      * @return the x position
      */
     int getX() {
@@ -159,6 +170,7 @@ public class MosaicImpl implements Mosaic {
 
     /**
      * Getter method for the y position
+     *
      * @return the y position
      */
     int getY() {
@@ -167,6 +179,7 @@ public class MosaicImpl implements Mosaic {
 
     /**
      * Check if this {@code PosnXY} is the same as the given object.
+     *
      * @param o the object to be compared for equality
      * @return is the given object the same as this object?
      */
@@ -187,6 +200,7 @@ public class MosaicImpl implements Mosaic {
 
     /**
      * Gets the hash code for this {@code PosnXY} object.
+     *
      * @return the hash code for this object.
      */
     @Override
