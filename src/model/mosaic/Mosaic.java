@@ -2,6 +2,9 @@ package model.mosaic;
 
 import model.image.InstaImage;
 
+/**
+ * Interface to represent {code Mosaic}.
+ */
 public interface Mosaic {
 
   /**
