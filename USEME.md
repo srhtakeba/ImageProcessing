@@ -99,6 +99,7 @@ Once you have created your layer, you can also **set it to be visible/invisible*
 At any time after you have imported an image for the first time in the model, you can **export the top most visible layer** with the `export` button. This will export the image with your desired file type and name, the exported image is what you see on the view. <br><br>
 To **transform an image on a layer**, select the layer name with the image with `Set Current`, and use the `blur`, `sharpen`, `greyscale`, and `sepia` buttons. Note that if you are working on a layer that is underneath a visible layer, even by pressing the buttons you may not see the transformations in the view. To see the transformations on the view, make sure the current working layer is also the top most visible layer. <br><br>
 To **remove a layer** at any time, type the layer name you would like to remove in the text box and click `Remove layer`. 
+To **mosaic an image on a layer**, click on `Mosaic` and enter the desired mosaic seed in the pop-up window before pressing `ok`.
 ### Importing a script / Opening an old project.
 You also have the option to **import a script** for `Instagram OOD` applications. To do this, click on `Script` on the bottom most panel, and select the file containing your script. Only .txt files may be imported. <br><br>
 To **open an old project** that you created with this GUI application, select the `main.txt` script file from the project directory from when you saved the project last, and import that into the application, your project should reopen where you left it off.
