@@ -123,8 +123,20 @@ in the USEME.md. Please refer to that file.
 ###### From assignment 5 to 6:
 We moved exporting and reading external images and files from the model to the controller.
 We figured this was necessary to keep all I/O operations completely separate from the model.
-###### From assignment 6 to 7:
+###### From assignment 6 to 7 (Including Extra Credit):
 We added an additional interface layer called `ROInstagramModel` which has within it public observer methods that may be necessary for a view class to accurately represent the model. We pass the an `ROInstagramModel` object to the view in its constructor, which allows it to show the current state of the model as an ImageIcon as well as accurately represent what layers are in the model through a ComboBox.
+We added `Mosaic` functionality to InstagramLayerModel. This meant adding a new `mosaic(InstaImage image, int seed)` function
+to our InstagramLayerModel interface, and also a `Command` object that allows this functionality to be intergrated
+appropriately in the controller. We added a `Mosaic` interface to our model package, whose objects
+do all the calculations for the random seed mosaic-ing of the given image. <br>
+Mosaic original:<br>
+![](res/images/originals/fishLowest.jpg) <br>
+Mosaic by seed of 10:<br>
+![](res/images/mosaic/fishMosaic10.png)<br>
+Mosaic by seed of 100:<br>
+![](res/images/mosaic/fishMosaic100.png)<br>
+Mosaic by seed of 1000:<br>
+![](res/images/mosaic/fishMosaic1000.png)<br>
 
 ## Assumptions
 ### Assignment 6 - the Textual View / Controller 
@@ -144,6 +156,7 @@ based on the old directory path.
 
 ### Assignment 7 - the GUI View / Controller
 Assuming that they also saved the project through the GUI version of this application, all sorts of scripts can be imported and the scripts can be moved. However, the pictures that will be reloaded into the application as a part of the project can not be moved between the last save and re-open. 
+
 
 ## Limitations
 Although not included in the requirements, it was hinted at in the beginning of the assignment. This
