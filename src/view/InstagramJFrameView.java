@@ -197,7 +197,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     menu.add(currentMenu);
     newLayerMenu = new JMenuItem("Add Layer");
     menu.add(newLayerMenu);
-    removeLayerMenu = new JMenuItem("Remove Current Layer");
+    removeLayerMenu = new JMenuItem("Remove Layer");
     menu.add(removeLayerMenu);
     mosaicMenu = new JMenuItem("Mosaic");
     menu.add(mosaicMenu);
@@ -270,8 +270,8 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     invisibleMenu
         .addActionListener(evt -> feature.makeInvisible(instaModelRo.currentLayer()));
 
-    newLayerMenu.addActionListener(evt -> addLayer(feature));
-    removeLayerMenu.addActionListener(evt -> removeLayer(feature));
+    newLayerMenu.addActionListener(evt -> addLayerFromInput(feature));
+    removeLayerMenu.addActionListener(evt -> removeLayerFromInput(feature));
 
     currentMenu
         .addActionListener(evt -> setCurrentFromInput(feature));
@@ -315,6 +315,34 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
       layerSelection.removeItem(newLayerNameInput.getText());
     }
     newLayerNameInput.setText("");
+  }
+
+  /**
+   * Add a layer to the current model, adjusting the combo box appropriately.
+   *
+   * @param feature the {@code Features} object to dispatch the addition in the model.
+   */
+  private void addLayerFromInput(Features feature) {
+    String layer = JOptionPane.showInputDialog("Enter the layer name.");
+    boolean success = feature.addLayer(layer);
+    if (success
+        && ((DefaultComboBoxModel) layerSelection.getModel()).getIndexOf
+        (layer) == -1) {
+      layerSelection.addItem(layer);
+    }
+  }
+
+  /**
+   * Remove a layer to the current model, adjusting the combo box appropriately.
+   *
+   * @param feature the {@code Features} object to dispatch the removal in the model.
+   */
+  private void removeLayerFromInput(Features feature) {
+    String layer = JOptionPane.showInputDialog("Enter the layer name.");
+    boolean success = feature.removeLayer(layer);
+    if (success) {
+      layerSelection.removeItem(layer);
+    }
   }
 
   /**
