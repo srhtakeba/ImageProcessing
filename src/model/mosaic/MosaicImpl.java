@@ -36,9 +36,16 @@ public class MosaicImpl implements Mosaic {
    * @param image the {@code InstaImage} image to be mosaic-ed.
    * @param seed  the random seed to be used for the mosaic process.
    * @return the given {@code InstaImage} image, but mosaic-ed.
+   * @throws IllegalArgumentException if the given seed is negative or the given image is null
    */
   @Override
   public InstaImage apply(InstaImage image, int seed) {
+    if(image == null) {
+      throw new IllegalArgumentException("Given image is null.");
+    }
+    if(seed < 0) {
+      throw new IllegalArgumentException("Can not operate with negative seed value.");
+    }
     if (seed > image.getHeight() * image.getWidth()) {
       return image;
     }

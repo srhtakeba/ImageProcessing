@@ -117,4 +117,29 @@ public class GUIControllerTest {
     assertEquals("", controller.getViewOutput());
   }
 
+  @Test
+  public void testMosaicInvalidValueDouble() {
+    model.addLayer("first");
+    model.setCurrentLayer("first");
+    controller.importImage("res/images/originals/canyonLowest.jpg");
+    controller.mosaic("0.1");
+    assertEquals("Invalid seed value. Please enter an integer.", controller.getViewOutput());
+  }
+
+  @Test
+  public void testMosaicInvalidValueNegative() {
+    model.addLayer("first");
+    model.setCurrentLayer("first");
+    controller.importImage("res/images/originals/canyonLowest.jpg");
+    controller.mosaic("-5");
+    assertEquals("Can not operate with negative seed value.", controller.getViewOutput());
+  }
+
+  @Test
+  public void testMosaicInvalidNoImage() {
+    model.addLayer("first");
+    model.setCurrentLayer("first");
+    controller.mosaic("5");
+    assertEquals("There is no image to be mosaic-ed.", controller.getViewOutput());
+  }
 }

@@ -103,7 +103,8 @@ public class MockGUIController implements Features, IController {
       int seedConvert = Integer.valueOf(seed);
     }
     catch (Exception e) {
-      sendMessage("invalid seed value. Please enter an integer.");
+      sendMessage("Invalid seed value. Please enter an integer.");
+      return;
     }
     cmd = InstagramLayerCommandFactory.create("mosaic", seed);
     dispatchOrSendMessage(cmd);

@@ -383,7 +383,7 @@ public class InstagramJFrameView extends JFrame implements InstagramGUIView {
     String resultPath = "";
     final JFileChooser fchooser = new JFileChooser(".");
     FileNameExtensionFilter filter = new FileNameExtensionFilter(
-        "JPG, PNG, & PPM Images", "jpg", "png", "ppm");
+        "JPG, JPEG, PNG, & PPM Images", "jpg", "png", "ppm", "jpeg");
     fchooser.setFileFilter(filter);
     int retvalue = fchooser.showOpenDialog(InstagramJFrameView.this);
     if (retvalue == JFileChooser.APPROVE_OPTION) {
