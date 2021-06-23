@@ -1,0 +1,6 @@
+new first
+current first
+read /Users/sarahtakeda-byrne/Desktop/mosaic/first.png
+new second
+current second
+read /Users/sarahtakeda-byrne/Desktop/mosaic/second.png
