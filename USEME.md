@@ -149,10 +149,10 @@ bar on the top of the view window. Simply click on these options to get to a cer
 operation. `Add layer` and `Remove layer` will no longer use the text input box for the name of the
 layer, and rather prompt the user with a pop-up box in order to ask for the layer name.
 
-### Importing a script / Opening an old project.
+### Importing a script / Opening (Loading) an old project
 
 You also have the option to **import a script** for `Instagram OOD` applications. To do this, click
-on `Script` on the bottom most panel, and select the file containing your script. Only .txt files
+on `Script` on the bottom most panel, and select the file containing your script. Only `.txt` files
 may be imported. <br><br>
 To **open an old project** that you created with this GUI application, select the `main.txt` script
 file from the project directory from when you saved the project last, and import that into the

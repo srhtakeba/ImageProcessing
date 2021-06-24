@@ -7,7 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Class to test {@code GUIController} by using MockGUIController.
+ * Class to test {@code GUIController} by using MockGUIController. Testing that the {@code
+ * GUIController} works appropriately as action listeners.
  */
 public class GUIControllerTest {
 
